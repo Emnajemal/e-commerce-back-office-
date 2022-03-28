@@ -1,0 +1,620 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- account setting page -->
+    <section id="page-account-settings">
+      <div class="row nav-vertical d-flex">
+        <div class="col-md-3 mb-2 mb-md-0">
+          <ul ngbNav #navVertical="ngbNav" class="nav nav-pills flex-column nav-left">
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="account-pill-general"
+                data-toggle="pill"
+                href="#account-vertical-general"
+                aria-expanded="true"
+              >
+                <i data-feather="user" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">General</span>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <!-- header media -->
+                    <div class="media">
+                      <a href="javascript:void(0);" class="mr-25">
+                        <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
+                      </a>
+                      <!-- upload and reset button -->
+                      <div class="media-body mt-75 ml-1">
+                        <button
+                          (click)="file.click()"
+                          for="account-upload"
+                          class="btn btn-sm btn-primary mb-75 mr-75"
+                          rippleEffect
+                        >
+                          Upload
+                        </button>
+                        <input
+                          type="file"
+                          #file
+                          id="account-upload"
+                          hidden
+                          accept="image/*"
+                          (change)="uploadImage($event)"
+                        />
+                        <button class="btn btn-sm btn-outline-secondary mb-75" rippleEffect>Reset</button>
+                        <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                      </div>
+                      <!--/ upload and reset button -->
+                    </div>
+                    <!--/ header media -->
+
+                    <!-- form -->
+                    <form class="validate-form mt-2">
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-username">Username</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.general.username"
+                              class="form-control"
+                              id="account-username"
+                              name="username"
+                              placeholder="Username"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-name">Name</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.general.fullName"
+                              class="form-control"
+                              id="account-name"
+                              name="name"
+                              placeholder="Name"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-e-mail">E-mail</label>
+                            <input
+                              type="email"
+                              [(ngModel)]="data.accountSetting.general.email"
+                              class="form-control"
+                              id="account-e-mail"
+                              name="email"
+                              placeholder="Email"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-company">Company</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.general.company"
+                              class="form-control"
+                              id="account-company"
+                              name="company"
+                              placeholder="Company name"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-12 mt-75">
+                          <div class="alert alert-warning mb-50" role="alert">
+                            <h4 class="alert-heading">Your email is not confirmed. Please check your inbox.</h4>
+                            <div class="alert-body">
+                              <a href="javascript: void(0);" class="alert-link">Resend confirmation</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary mt-2 mr-1" rippleEffect>Save changes</button>
+                          <button type="reset" class="btn btn-outline-secondary mt-2" rippleEffect>Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                    <!--/ form -->
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="account-pill-password"
+                data-toggle="pill"
+                href="#account-vertical-password"
+                aria-expanded="false"
+              >
+                <i data-feather="lock" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">Change Password</span>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <!-- form -->
+                    <form class="validate-form">
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-old-password">Old Password</label>
+                            <div class="input-group form-password-toggle input-group-merge">
+                              <input
+                                [type]="passwordTextTypeOld ? 'text' : 'password'"
+                                class="form-control"
+                                id="account-old-password"
+                                name="password"
+                                placeholder="Old Password"
+                              />
+                              <div class="input-group-append">
+                                <span class="input-group-text cursor-pointer"
+                                  ><i
+                                    class="feather font-small-4"
+                                    [ngClass]="{
+                                      'icon-eye-off': passwordTextTypeOld,
+                                      'icon-eye': !passwordTextTypeOld
+                                    }"
+                                    (click)="togglePasswordTextTypeOld()"
+                                  ></i
+                                ></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-new-password">New Password</label>
+                            <div class="input-group form-password-toggle input-group-merge">
+                              <input
+                                [type]="passwordTextTypeNew ? 'text' : 'password'"
+                                id="account-new-password"
+                                name="new-password"
+                                class="form-control"
+                                placeholder="New Password"
+                              />
+                              <div class="input-group-append">
+                                <span class="input-group-text cursor-pointer"
+                                  ><i
+                                    class="feather font-small-4"
+                                    [ngClass]="{
+                                      'icon-eye-off': passwordTextTypeNew,
+                                      'icon-eye': !passwordTextTypeNew
+                                    }"
+                                    (click)="togglePasswordTextTypeNew()"
+                                  ></i
+                                ></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-retype-new-password">Retype New Password</label>
+                            <div class="input-group form-password-toggle input-group-merge">
+                              <input
+                                [type]="passwordTextTypeRetype ? 'text' : 'password'"
+                                class="form-control"
+                                id="account-retype-new-password"
+                                name="confirm-new-password"
+                                placeholder="New Password"
+                              />
+                              <div class="input-group-append">
+                                <span class="input-group-text cursor-pointer"
+                                  ><i
+                                    class="feather font-small-4"
+                                    [ngClass]="{
+                                      'icon-eye-off': passwordTextTypeRetype,
+                                      'icon-eye': !passwordTextTypeRetype
+                                    }"
+                                    (click)="togglePasswordTextTypeRetype()"
+                                  ></i
+                                ></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
+                          <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                    <!--/ form -->
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="account-pill-info"
+                data-toggle="pill"
+                href="#account-vertical-info"
+                aria-expanded="false"
+              >
+                <i data-feather="info" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">Information</span>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <!-- form -->
+                    <form class="validate-form">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="accountTextarea">Bio</label>
+                            <textarea
+                              [(ngModel)]="data.accountSetting.info.bio"
+                              class="form-control"
+                              id="accountTextarea"
+                              name="accountTextarea"
+                              rows="4"
+                              placeholder="Your Bio data here..."
+                            ></textarea>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-birth-date">Birth date</label>
+                            <ng2-flatpickr
+                              [config]="birthDateOptions"
+                              [(ngModel)]="data.accountSetting.info.dob"
+                              id="account-birth-date"
+                              name="account-birth-date"
+                              placeholder="June 18, 2021"
+                            ></ng2-flatpickr>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="accountSelect">Country</label>
+                            <select
+                              class="form-control"
+                              [(ngModel)]="data.accountSetting.info.country"
+                              id="accountSelect"
+                              name="accountSelect"
+                            >
+                              <option>USA</option>
+                              <option>India</option>
+                              <option>Canada</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-website">Website</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.info.website"
+                              class="form-control"
+                              name="website"
+                              id="account-website"
+                              placeholder="Website address"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-phone">Phone</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.info.phone"
+                              class="form-control"
+                              id="account-phone"
+                              placeholder="Phone number"
+                              name="phone"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-primary mt-1 mr-1" rippleEffect>Save changes</button>
+                          <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                    <!--/ form -->
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="account-pill-social"
+                data-toggle="pill"
+                href="#account-vertical-social"
+                aria-expanded="false"
+              >
+                <i data-feather="link" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">Social</span>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <!-- form -->
+                    <form class="validate-form">
+                      <div class="row">
+                        <!-- social header -->
+                        <div class="col-12">
+                          <div class="d-flex align-items-center mb-2">
+                            <i data-feather="link" class="font-medium-3"></i>
+                            <h4 class="mb-0 ml-75">Social Links</h4>
+                          </div>
+                        </div>
+                        <!-- twitter link input -->
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-twitter">Twitter</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.social.socialLinks.twitter"
+                              id="account-twitter"
+                              name="account-twitter"
+                              class="form-control"
+                              placeholder="Add link"
+                            />
+                          </div>
+                        </div>
+                        <!-- facebook link input -->
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-facebook">Facebook</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.social.socialLinks.facebook"
+                              id="account-facebook"
+                              name="account-facebook"
+                              class="form-control"
+                              placeholder="Add link"
+                            />
+                          </div>
+                        </div>
+                        <!-- google plus input -->
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-google">Google+</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.social.socialLinks.google"
+                              id="account-google"
+                              name="account-google"
+                              class="form-control"
+                              placeholder="Add link"
+                            />
+                          </div>
+                        </div>
+                        <!-- linkedin link input -->
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-linkedin">LinkedIn</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.social.socialLinks.linkedIn"
+                              id="account-linkedin"
+                              name="account-linkedin"
+                              class="form-control"
+                              placeholder="Add link"
+                            />
+                          </div>
+                        </div>
+                        <!-- instagram link input -->
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-instagram">Instagram</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.social.socialLinks.instagram"
+                              id="account-instagram"
+                              name="account-instagram"
+                              class="form-control"
+                              placeholder="Add link"
+                            />
+                          </div>
+                        </div>
+                        <!-- Quora link input -->
+                        <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-quora">Quora</label>
+                            <input
+                              type="text"
+                              [(ngModel)]="data.accountSetting.social.socialLinks.quora"
+                              id="account-quora"
+                              name="account-quora"
+                              class="form-control"
+                              placeholder="Add link"
+                            />
+                          </div>
+                        </div>
+
+                        <!-- divider -->
+                        <div class="col-12">
+                          <hr class="my-2" />
+                        </div>
+
+                        <div class="col-12 mt-1">
+                          <!-- profile connection header -->
+                          <div class="d-flex align-items-center mb-3">
+                            <i data-feather="user" class="font-medium-3"></i>
+                            <h4 class="mb-0 ml-75">Profile Connections</h4>
+                          </div>
+
+                          <div class="row">
+                            <!-- twitter user -->
+                            <div class="col-6 col-md-3 text-center mb-1">
+                              <p class="font-weight-bold">Your Twitter</p>
+                              <div class="avatar mb-1">
+                                <span class="avatar-content">
+                                  <img
+                                    [src]="data.accountSetting.social.connections.twitter.profileImg"
+                                    alt="avatar img"
+                                    width="40"
+                                    height="40"
+                                  />
+                                </span>
+                              </div>
+                              <p class="mb-0">{{ data.accountSetting.social.connections.twitter.id }}</p>
+                              <a href="javascript:void(0)">Disconnect</a>
+                            </div>
+                            <!-- facebook button -->
+                            <div class="col-6 col-md-3 text-center mb-1">
+                              <p class="font-weight-bold mb-2">Your Facebook</p>
+                              <button class="btn btn-outline-primary" rippleEffect>Connect</button>
+                            </div>
+                            <!-- google user -->
+                            <div class="col-6 col-md-3 text-center mb-1">
+                              <p class="font-weight-bold">Your Google</p>
+                              <div class="avatar mb-1">
+                                <span class="avatar-content">
+                                  <img
+                                    [src]="data.accountSetting.social.connections.google.profileImg"
+                                    alt="avatar img"
+                                    width="40"
+                                    height="40"
+                                  />
+                                </span>
+                              </div>
+                              <p class="mb-0">{{ data.accountSetting.social.connections.google.id }}</p>
+                              <a href="javascript:void(0)">Disconnect</a>
+                            </div>
+                            <!-- github button -->
+                            <div class="col-6 col-md-3 text-center mb-2">
+                              <p class="font-weight-bold mb-1">Your GitHub</p>
+                              <button class="btn btn-outline-primary" rippleEffect>Connect</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <!-- submit and cancel button -->
+                          <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
+                          <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
+                        </div>
+                      </div>
+                    </form>
+                    <!--/ form -->
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="account-pill-notifications"
+                data-toggle="pill"
+                href="#account-vertical-notifications"
+                aria-expanded="false"
+              >
+                <i data-feather="bell" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">Notifications</span>
+              </a>
+              <ng-template ngbNavContent>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <h6 class="section-label mx-1 mb-2">Activity</h6>
+                      <div class="col-12 mb-2">
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [checked]="data.accountSetting.notification.commentOnArticle"
+                            id="accountSwitch1"
+                          />
+                          <label class="custom-control-label" for="accountSwitch1">
+                            Email me when someone comments onmy article
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-12 mb-2">
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [checked]="data.accountSetting.notification.AnswerOnForm"
+                            id="accountSwitch2"
+                          />
+                          <label class="custom-control-label" for="accountSwitch2">
+                            Email me when someone answers on my form
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-12 mb-2">
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [checked]="data.accountSetting.notification.followMe"
+                            id="accountSwitch3"
+                          />
+                          <label class="custom-control-label" for="accountSwitch3"
+                            >Email me hen someone follows me</label
+                          >
+                        </div>
+                      </div>
+                      <h6 class="section-label mx-1 mt-2">Application</h6>
+                      <div class="col-12 mt-1 mb-2">
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [checked]="data.accountSetting.notification.newAnnouncements"
+                            id="accountSwitch4"
+                          />
+                          <label class="custom-control-label" for="accountSwitch4">News and announcements</label>
+                        </div>
+                      </div>
+                      <div class="col-12 mb-2">
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [checked]="data.accountSetting.notification.productUpdates"
+                            id="accountSwitch6"
+                          />
+                          <label class="custom-control-label" for="accountSwitch6">Weekly product updates</label>
+                        </div>
+                      </div>
+                      <div class="col-12 mb-75">
+                        <div class="custom-control custom-switch">
+                          <input
+                            type="checkbox"
+                            class="custom-control-input"
+                            [checked]="data.accountSetting.notification.blogDigest"
+                            id="accountSwitch5"
+                          />
+                          <label class="custom-control-label" for="accountSwitch5">Weekly blog digest</label>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary mt-2 mr-1" rippleEffect>Save changes</button>
+                        <button type="reset" class="btn btn-outline-secondary mt-2" rippleEffect>Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+        <div [ngbNavOutlet]="navVertical" class="col-12 col-md-9"></div>
+      </div>
+    </section>
+    <!--/ account setting page -->
+  </div>
+</div>

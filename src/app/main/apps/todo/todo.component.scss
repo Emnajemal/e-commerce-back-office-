@@ -1,0 +1,57 @@
+@import '@core/scss/base/pages/app-todo';
+@import '@core/scss/angular/libs/quill-editor.component';
+@import '@core/scss/angular/libs/select.component';
+@import '@core/scss/angular/libs/drag-drop.component';
+@import '@core/scss/angular/libs/flatpickr.component';
+
+// Todo Application
+.todo-application {
+  .sidebar-toggle {
+    z-index: 3;
+  }
+
+  .content-area-wrapper {
+    height: calc(var(--vh, 1vh) * 100 - calc(calc(2rem * 1) + 4.45rem + 3.35rem + 1.3rem + 0rem));
+  }
+
+  .todo-checkbox {
+    z-index: 1;
+  }
+
+  .todo-app-list {
+    height: 100% !important;
+  }
+
+  .ql-toolbar {
+    border-top: none !important;
+  }
+
+  .ql-container {
+    border-bottom: none;
+  }
+
+  .todo-task-list-wrapper {
+    .todo-task-list {
+      app-todo-list-item {
+        &:not(:first-child) {
+          li {
+            border-top: 1px solid $border-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dark Layout
+.dark-layout {
+  .todo-task-list {
+    app-todo-list-item {
+      &:not(:first-child) {
+        li {
+          border-top: 1px solid $theme-dark-border-color !important;
+        }
+      }
+    }
+  }
+}

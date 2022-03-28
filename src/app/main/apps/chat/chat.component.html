@@ -1,0 +1,53 @@
+<div class="content-area-wrapper container-xxl p-0">
+  <!-- sidebar Left -->
+
+  <!-- chat-sidebar -->
+  <div class="sidebar-left">
+    <div class="sidebar">
+      <core-sidebar
+        class="sidebar-content"
+        name="chat-sidebar"
+        overlayClass="body-content-overlay"
+        collapsibleSidebar="bs-gt-lg"
+      >
+        <app-chat-sidebar class="chat-sidebar-wrapper"></app-chat-sidebar>
+      </core-sidebar>
+
+      <!--/ chat-sidebar -->
+
+      <!-- chat-user-sidebar -->
+
+      <core-sidebar
+        class="chat-profile-sidebar"
+        name="chat-user-sidebar"
+        overlayClass="body-content-overlay"
+        hideOnEsc="true"
+      >
+        <app-chat-user-sidebar></app-chat-user-sidebar>
+      </core-sidebar>
+    </div>
+  </div>
+  <!--/ chat-user-sidebar -->
+
+  <!--/ sidebar Left -->
+
+  <!-- content-right -->
+  <div class="content-right">
+    <!-- chat-active-sidebar -->
+    <core-sidebar
+      class="user-profile-sidebar"
+      name="chat-active-sidebar"
+      overlayClass="body-content-overlay"
+      hideOnEsc="true"
+    >
+      <app-chat-active-sidebar></app-chat-active-sidebar>
+    </core-sidebar>
+    <!--/ chat-active-sidebar -->
+    <div class="content-wrapper container-xxl p-0">
+      <div class="content-body">
+        <app-chat-content></app-chat-content>
+      </div>
+    </div>
+  </div>
+  <!--/ content-right -->
+</div>

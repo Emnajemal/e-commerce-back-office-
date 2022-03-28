@@ -1,0 +1,12 @@
+@import '@core/scss/base/pages/page-knowledge-base';
+
+// Dark Layout
+.dark-layout {
+  .kb-search-content-info {
+    .kb-search-content {
+      .card-img-top {
+        background-color: #3f4860 !important;
+      }
+    }
+  }
+}

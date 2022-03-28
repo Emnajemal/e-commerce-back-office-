@@ -1,0 +1,44 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Knowledge base question Content  -->
+    <section id="knowledge-base-question">
+      <div class="row">
+        <div class="col-lg-3 col-md-5 col-12 order-2 order-md-1">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="kb-title">
+                <i data-feather="info" class="font-medium-4 mr-50"></i><span>Related Questions</span>
+              </h6>
+
+              <div class="list-group list-group-circle mt-1">
+                <a
+                  href="javascript:void(0)"
+                  class="list-group-item text-body"
+                  *ngFor="let relatedQuestionsRef of data.questionData.relatedQuestions"
+                >
+                  {{ relatedQuestionsRef.question }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-7 col-12 order-1 order-md-2">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title mb-1">
+                <i data-feather="smartphone" class="font-medium-5 mr-50"></i>
+                <span>{{ data.questionData.title }}</span>
+              </h4>
+              <p class="mb-2">Last updated on {{ data.questionData.lastUpdated }}</p>
+              <div [innerHTML]="data.questionData.content | safe: 'SafeHtml'"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Knowledge base question Content ends -->
+  </div>
+</div>

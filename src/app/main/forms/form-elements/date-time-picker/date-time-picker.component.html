@@ -1,0 +1,477 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <section class="basic-disabled-DP">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeBasicDP">
+            <h4 class="card-title">Basic Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>ngbDatepicker</code> along with <code>input</code> element to create basic date picker.
+              </p>
+              <!-- Basic Date Picker -->
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="Basic Date Picker"
+                      [(ngModel)]="basicDPdata"
+                      ngbDatepicker
+                      #basicDP="ngbDatepicker"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="basicDP.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <pre class="mt-2 p-1">Model: {{ basicDPdata | json }}</pre>
+              <!--/ Basic Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeDisabledDP">
+            <h4 class="card-title">Disabled Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Bind <code>[disabled]</code> by passing <code>true</code> to disable date picker & <code>false</code> to
+                enable date picker.
+              </p>
+              <!-- Disabled Date Picker -->
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="Disabled Date Picker"
+                      ngbDatepicker
+                      #disabledDP="ngbDatepicker"
+                      [disabled]="disabled"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="disabledDP.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <button
+                class="btn btn-sm btn-outline-{{ disabled ? 'danger' : 'success' }} my-1"
+                (click)="disabled = !disabled"
+                rippleEffect
+              >
+                {{ disabled ? 'D I S A B L E D' : 'E N A B L E D' }}
+              </button>
+              <!--/ Disabled Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section class="min-max-custom-footer-DP">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeMinMaxDP">
+            <h4 class="card-title">Min-Max Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>[maxDate]</code> & <code>[minDate]</code> input properties to set upper limit and lower limit
+                of date picker.
+              </p>
+              <!-- Min-Max Date Picker -->
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="Min-Max Date Picker"
+                      [(ngModel)]="MinMaxDPdata"
+                      ngbDatepicker
+                      #MinMaxDP="ngbDatepicker"
+                      [minDate]="{ year: 2019, month: 1, day: 1 }"
+                      [maxDate]="{ year: 2020, month: 2, day: 15 }"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="MinMaxDP.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <pre class="mt-2 p-1">Model: {{ MinMaxDPdata | json }}</pre>
+              <!--/ Min-Max Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeCustomFooterDP">
+            <h4 class="card-title">Custom Footer Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>[footerTemplate]</code> input property to create custom footer date picker.
+              </p>
+              <!-- Custom Footer Date Picker -->
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="Custom Footer Date Picker"
+                      [(ngModel)]="customFooterDPdata"
+                      ngbDatepicker
+                      #customFooterDP="ngbDatepicker"
+                      [footerTemplate]="footerTemplate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="customFooterDP.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <ng-template #footerTemplate>
+                <hr class="my-0" />
+                <button
+                  class="btn btn-primary btn-sm m-2 float-left"
+                  (click)="customFooterDPdata = today; customFooterDP.close()"
+                  rippleEffect
+                >
+                  Today
+                </button>
+                <button class="btn btn-secondary btn-sm m-2 float-right" (click)="customFooterDP.close()" rippleEffect>
+                  Close
+                </button>
+              </ng-template>
+              <!--/ Custom Footer Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section class="i18n-custom-day-DP">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeI18n">
+            <h4 class="card-title">i18n Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>NgbDatepickerI18n</code> extended component of ng-bootstrap to create i18n component. Read the
+                official ngb-datepicker
+                <a href="https://ng-bootstrap.github.io/#/components/datepicker/examples#i18n">Documentation</a> for a
+                full list of instructions and other options.
+              </p>
+              <!-- i18n Date Picker -->
+              <date-picker-i18n></date-picker-i18n>
+              <!--/ i18n Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeCustomDay">
+            <h4 class="card-title">Custom Day Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>[dayTemplate]</code> input property to create custom day date picker.</p>
+              <!-- Custom Day Date Picker -->
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="Custom Day Date Picker"
+                      [(ngModel)]="CustomDayDPdata"
+                      ngbDatepicker
+                      [dayTemplate]="customDay"
+                      [markDisabled]="isDisabled"
+                      #CustomDayDP="ngbDatepicker"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="CustomDayDP.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <ng-template
+                #customDay
+                let-date
+                let-currentMonth="currentMonth"
+                let-selected="selected"
+                let-disabled="disabled"
+                let-focused="focused"
+              >
+                <span
+                  class="custom-day"
+                  [class.weekend]="isWeekend(date)"
+                  [class.focused]="focused"
+                  [class.bg-primary]="selected"
+                  [class.hidden]="date.month !== currentMonth"
+                  [class.text-muted]="disabled"
+                >
+                  {{ date.day }}
+                </span>
+              </ng-template>
+              <!--/ Custom Day Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section class="range-selection-DP">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeRangeSelectionDP">
+            <h4 class="card-title">Range selection Date Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                To select range of dates use two <code>input</code> elements along with <code>[dayTemplate]</code> &
+                <code>[displayMonths]</code> input properties for lower limit & upper limit respectively.
+              </p>
+              <!-- Range selection Date Picker -->
+
+              <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group w-0">
+                    <input
+                      name="datepicker"
+                      class="form-control"
+                      ngbDatepicker
+                      #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'"
+                      (dateSelect)="onDateSelection($event)"
+                      [displayMonths]="2"
+                      [dayTemplate]="rangeSelectionDP"
+                      outsideDays="hidden"
+                      [startDate]="fromDate!"
+                    />
+                    <ng-template #rangeSelectionDP let-date let-focused="focused">
+                      <span
+                        class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null"
+                      >
+                        {{ date.day }}
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      #dpFromDate
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dpFromDate"
+                      [value]="formatter.format(fromDate)"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="datepicker.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group ml-sm-2">
+                  <div class="input-group">
+                    <input
+                      #dpToDate
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dpToDate"
+                      [value]="formatter.format(toDate)"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline-secondary feather icon-calendar"
+                        (click)="datepicker.toggle()"
+                        type="button"
+                        rippleEffect
+                      ></button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <hr />
+              <pre class="mt-2 p-1">From date model: {{ fromDate | json }}</pre>
+              <pre class="mt-2 p-1">To date model: {{ toDate | json }}</pre>
+              <!--/ Range selection Date Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section class="basic-meridian-time-picker">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeBasicTP">
+            <h4 class="card-title">Basic Time Picker</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>ngb-timepicker</code> to create basic Time Picker with spinner.</p>
+              <!-- Basic Time Picker -->
+              <ngb-timepicker [(ngModel)]="basicTP"></ngb-timepicker>
+              <hr />
+              <pre class="p-1">Selected time: {{ basicTP | json }}</pre>
+              <!--/ Basic Time Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeMeridianTP">
+            <h4 class="card-title">Meridian Time Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>[meridian]="true"</code> along with <code>ngb-timepicker</code> to show meridian time.
+              </p>
+              <!-- Meridian Time Picker -->
+              <ngb-timepicker [(ngModel)]="meridianTPdata" [meridian]="meridianTP"></ngb-timepicker>
+              <button
+                class="btn btn-sm btn-outline-{{ meridianTP ? 'success' : 'danger' }}"
+                (click)="meridianTPtoggle()"
+                rippleEffect
+              >
+                Meridian - {{ meridianTP ? 'ON' : 'OFF' }}
+              </button>
+              <hr />
+              <pre class="p-1">Selected time: {{ meridianTPdata | json }}</pre>
+              <!--/ Meridian Time Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <section class="custom-spinner-time-picker">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeCustomTP">
+            <h4 class="card-title">Custom Time Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>[seconds]="true"</code> along with <code>ngb-timepicker</code> to show seconds.
+              </p>
+              <!-- Custom Time Picker -->
+              <ngb-timepicker [(ngModel)]="customTPtime" [seconds]="customTPseconds"></ngb-timepicker>
+              <button
+                class="btn btn-sm btn-outline-{{ customTPseconds ? 'success' : 'danger' }}"
+                (click)="customTPtoggleSeconds()"
+                rippleEffect
+              >
+                Seconds - {{ customTPseconds ? 'ON' : 'OFF' }}
+              </button>
+              <hr />
+              <pre class="p-1">Selected time: {{ customTPtime | json }}</pre>
+              <!--/ Custom Time Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeSpinnerTP">
+            <h4 class="card-title">Spinner Time Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>[spinners]="false"</code> along with <code>ngb-timepicker</code> to hide spinners.
+              </p>
+              <!-- Spinner Time Picker -->
+              <ngb-timepicker [(ngModel)]="spinnerTPtime" [spinners]="spinnerTP"></ngb-timepicker>
+
+              <hr />
+
+              <button
+                class="m-t-1 btn btn-sm btn-outline-{{ spinnerTP ? 'success' : 'danger' }}"
+                (click)="spinnerTPtoggle()"
+                rippleEffect
+              >
+                Spinners - {{ spinnerTP ? 'ON' : 'OFF' }}
+              </button>
+              <!--/ Spinner Time Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <section class="validation-i18n-time-picker">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeCustomValidationTP">
+            <h4 class="card-title">Custom Validation Time Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>[formControl]</code> along with <code>ngb-timepicker</code> to create custom validation.
+              </p>
+              <!-- Custom Validation Time Picker -->
+              <div class="form-group">
+                <ngb-timepicker [formControl]="customValidationTP" required></ngb-timepicker>
+                <div *ngIf="customValidationTP.valid" class="small form-text text-success">Great choice</div>
+                <div *ngIf="customValidationTP.errors" class="small form-text text-danger">
+                  <div *ngIf="customValidationTP.errors['required']">Select some time during lunchtime</div>
+                  <div *ngIf="customValidationTP.errors['tooLate']">Oh no, it's way too late</div>
+                  <div *ngIf="customValidationTP.errors['tooEarly']">It's a bit too early</div>
+                </div>
+              </div>
+
+              <hr />
+              <pre class="p-1">Selected time: {{ customValidationTP.value | json }}</pre>
+              <!--/ Custom Validation Time Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodei18nTP">
+            <h4 class="card-title">i18n Time Picker</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>NgbTimepickerI18n</code> extended component of ng-bootstrap to create i18n component. Read the
+                official ngb-timepicker
+                <a href="https://ng-bootstrap.github.io/#/components/timepicker/examples#i18n">Documentation</a> for a
+                full list of instructions and other options.
+              </p>
+              <!-- i18n Time Picker -->
+              <time-picker-i18n></time-picker-i18n>
+              <!--/ i18n Time Picker -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

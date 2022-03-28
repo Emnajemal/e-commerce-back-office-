@@ -1,0 +1,248 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Basic Alerts start -->
+    <section id="basic-alerts">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <core-card-snippet [snippetCode]="_snippetCodeDefault">
+            <h4 class="card-title">Default</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Alerts are available for any length of text, as well as an optional dismiss button. Add
+                <code>&lt;ngb-alert&gt;&lt;/ngb-alert&gt;</code> component along with
+                <code>[type] = "'ColorName'"</code> directive to change the color of alert. Default color of alert is
+                <strong> "warning".</strong>
+              </p>
+              <p class="card-text">
+                <strong>Note:</strong> By default dismissible button in alert is on. To turn of the dismissable button
+                add <code>[dismissible]="false"</code> directive to ngb-alert.
+              </p>
+              <div class="demo-spacing-0">
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'primary'" [dismissible]="false">
+                  <div class="alert-body"><strong>Good Morning!</strong> Start your day with some alerts.</div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Basic Alerts end -->
+
+    <!-- Alerts with Title start -->
+    <section id="alerts-with-title">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTitle">
+            <h4 class="card-title">Title</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Add a title to the alert use <code>.alert-heading</code> inside
+                <code>&lt;ngb-alert&gt;&lt;/ngb-alert&gt;</code> component.
+              </p>
+              <div class="demo-spacing-0">
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'warning'" [dismissible]="false">
+                  <h4 class="alert-heading">Lorem ipsum dolor sit amet</h4>
+                  <div class="alert-body">
+                    Lorem ipsum dolor sit amet
+                    <a href="javascript:void(0)" class="alert-link">consectetur</a> adipisicing elit. Ducimus, laborum!.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Alerts with Title end -->
+
+    <!-- Alert Colors start -->
+    <section id="alert-colors">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeColors">
+            <h4 class="card-title">Colors</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Add
+                <code>&lt;ngb-alert&gt;&lt;/ngb-alert&gt;</code> component along with <code>[type]="'ColorName'"</code>
+                directive to change the color of alert with all theme colors.
+              </p>
+              <div class="demo-spacing-0">
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'primary'" [dismissible]="false">
+                  <h4 class="alert-heading">Primary</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'secondary'" [dismissible]="false">
+                  <h4 class="alert-heading">Secondary</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'success'" [dismissible]="false">
+                  <h4 class="alert-heading">Success</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'danger'" [dismissible]="false">
+                  <h4 class="alert-heading">Danger</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'warning'" [dismissible]="false">
+                  <h4 class="alert-heading">Warning</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'info'" [dismissible]="false">
+                  <h4 class="alert-heading">Info</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'dark'" [dismissible]="false">
+                  <h4 class="alert-heading">Dark</h4>
+                  <div class="alert-body">
+                    Tootsie roll lollipop lollipop icing. Wafer cookie danish macaroon. Liquorice fruitcake apple pie I
+                    love cupcake cupcake.
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Alert Colors End -->
+
+    <!--Closable Alerts start -->
+    <section id="alerts-closable">
+      <div class="row">
+        <div class="col-md-12">
+          <core-card-snippet [snippetCode]="_snippetCodeClosableAlerts">
+            <h4 class="card-title">Closable Alerts</h4>
+            <div class="card-body">
+              <p class="card-text">
+                To dismiss the alert on click of dismissable button in alert, use
+                <code>(close)='alertClose = !alertClose'</code> with <code>*ngIf="!alertClose"</code> and assign
+                <code>public alertClose = false;</code> variable inside typescript file.
+              </p>
+              <div class="demo-spacing-0">
+                <!-- ngb-alert component -->
+                <div *ngIf="!alertClose">
+                  <ngb-alert [type]="'primary'" (closed)="alertClose = !alertClose">
+                    <div class="alert-body">
+                      Chupa chups topping bonbon. Jelly-o toffee I love. Sweet I love wafer I love wafer.
+                      <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  </ngb-alert>
+                </div>
+                <!--/ ngb-alert component -->
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--Closable Alerts end -->
+
+    <!-- Alert With Icon start -->
+    <section id="alerts-with-icons">
+      <div class="row">
+        <div class="col-md-12">
+          <core-card-snippet [snippetCode]="_snippetCodeIcon">
+            <h4 class="card-title">Icon</h4>
+            <div class="card-body">
+              <p class="card-text">Alert With Icon</p>
+              <div class="demo-spacing-0">
+                <!-- ngb-alert component -->
+                <ngb-alert [dismissible]="false" [type]="'primary'">
+                  <div class="alert-body">
+                    <span [data-feather]="'star'" [class]="'mr-25 align-middle'"></span>
+                    <span> Chupa chups topping bonbon. Jelly-o toffee I love. Sweet I love wafer I love wafer.</span>
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Alert With Icon end -->
+
+    <!-- Example Alert start -->
+    <section id="alert-example">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeExample">
+            <h4 class="card-title">Example</h4>
+            <div class="card-body">
+              <p class="card-text">An example would be to have an input and when a condition is met, show the alert.</p>
+              <form>
+                <label for="numbers">Enter Only Numbers*</label>
+                <input
+                  required
+                  id="numbers"
+                  ngModel
+                  name="inputNumber"
+                  #inputNumber="ngModel"
+                  class="form-control w-25 h-25 pl-1"
+                  [class.error]="!inputNumber.valid"
+                  type="text"
+                  pattern="[0-9]*"
+                  placeholder="0123456789"
+                />
+              </form>
+              <div class="demo-spacing-0">
+                <!-- ngb-alert component -->
+                <ngb-alert [type]="'danger'" *ngIf="!inputNumber.valid" class="mt-1" [dismissible]="false">
+                  <div class="alert-body">
+                    <span [data-feather]="'info'" [class]="'mr-50 align-middle'"></span>
+                    <span>The value is <strong>invalid</strong> you can only enter numbers</span>
+                  </div>
+                </ngb-alert>
+                <!--/ ngb-alert component -->
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Example Alert end -->
+  </div>
+</div>

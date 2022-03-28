@@ -1,0 +1,75 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Default Breadcrumb Starts -->
+    <section id="default-breadcrumb">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeDefault">
+            <h4 class="card-title">Default</h4>
+            <div class="card-body">
+              <!-- app-breadcrumb component -->
+              <app-breadcrumb [breadcrumb]="breadcrumbDefault"></app-breadcrumb>
+              <!--/ app-breadcrumb component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Default Breadcrumb Ends -->
+
+    <!-- Breadcrumb Styles Starts -->
+    <section id="component-breadcrumbs">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeStyles">
+            <h4 class="card-title">Styles</h4>
+            <div class="card-body">
+              <p class="card-text">
+                These breadcrumbs are only for demo purpose. You can change breadcrumb separator by changing to
+                <code> 'slash | dots | dashes | pipes | chevron'</code>one of this values for
+                <code>type:</code> property of breadcrumb.
+              </p>
+              <!-- app-breadcrumbs component -->
+              <app-breadcrumb [breadcrumb]="breadcrumbSlash"></app-breadcrumb>
+              <app-breadcrumb [breadcrumb]="breadcrumbDots"></app-breadcrumb>
+              <app-breadcrumb [breadcrumb]="breadcrumbDashes"></app-breadcrumb>
+              <app-breadcrumb [breadcrumb]="breadcrumbPipes"></app-breadcrumb>
+              <app-breadcrumb [breadcrumb]="breadcrumbChevron"></app-breadcrumb>
+              <!--/ app-breadcrumbs component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Breadcrumb Styles Ends -->
+
+    <!-- Breadcrumb Alignment Starts -->
+    <section id="breadcrumb-alignment">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeAlignment">
+            <h4 class="card-title">Alignment</h4>
+            <div class="card-body">
+              <p class="card-text">
+                You can change breadcrumb's horizontal Alignment by changing to <code>'center | right'</code> one of
+                this values for <code>alignment: </code> property of breadcrumb.
+              </p>
+              <p class="card-text"><strong>Note:</strong> by default horizontal alignment of breadcrumb is left.</p>
+              <!-- app-breadcrumbs component -->
+              <app-breadcrumb [breadcrumb]="breadcrumbLeft"></app-breadcrumb>
+              <div class="my-1">
+                <app-breadcrumb [breadcrumb]="breadcrumbCenter"></app-breadcrumb>
+              </div>
+              <app-breadcrumb [breadcrumb]="breadcrumbRight"></app-breadcrumb>
+              <!--/ app-breadcrumbs component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Breadcrumb Alignment Ends -->
+  </div>
+</div>

@@ -1,0 +1,402 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <section id="faq-search-filter">
+      <div class="card faq-search" style="background-image: url('assets/images/banner/banner.png')">
+        <div class="card-body text-center">
+          <!-- main title -->
+          <h2 class="text-primary">Let's answer some questions</h2>
+
+          <!-- subtitle -->
+          <p class="card-text mb-2">or choose a category to quickly find the help you need</p>
+
+          <!-- search input -->
+          <form class="faq-search-input">
+            <div class="input-group input-group-merge">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i data-feather="search"></i>
+                </div>
+              </div>
+              <input
+                type="text"
+                [(ngModel)]="searchText"
+                name="searchbar"
+                class="form-control"
+                placeholder="Search faq..."
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- account setting page -->
+    <section id="faq">
+      <div class="row nav-vertical d-flex">
+        <div class="col-md-3 mb-2 mb-md-0">
+          <ul ngbNav #navVertical="ngbNav" class="nav nav-pills flex-column nav-left">
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="payment"
+                data-toggle="pill"
+                href="#faq-payment"
+                aria-expanded="true"
+                role="tab"
+              >
+                <i [data-feather]="data.payment.icon" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">{{ data.payment.title }}</span>
+              </a>
+
+              <ng-template ngbNavContent>
+                <!-- payment panel -->
+                <div
+                  role="tabpanel"
+                  class="tab-pane active collapse-icon"
+                  id="faq-payment"
+                  aria-labelledby="payment"
+                  aria-expanded="true"
+                >
+                  <!-- icon and header -->
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-tag bg-light-primary mr-1">
+                      <i [data-feather]="data.payment.icon" class="font-medium-4"></i>
+                    </div>
+                    <div>
+                      <h4 class="mb-0">{{ data.payment.title }}</h4>
+                      <span>{{ data.payment.subtitle }}</span>
+                    </div>
+                  </div>
+
+                  <!-- frequent answer and question  collapse  -->
+                  <div class="accordion collapse-margin mt-2">
+                    <ng-container *ngIf="(data.payment.qandA | filter: searchText:'question').length; else noResults">
+                      <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="paymentId1">
+                        <ngb-panel
+                          id="paymentId{{ i }}"
+                          [cardClass]="'collapse-margin'"
+                          *ngFor="let paymentRef of data.payment.qandA | filter: searchText:'question'; let i = index"
+                        >
+                          <ng-template ngbPanelTitle>
+                            <span>{{ paymentRef.question }}</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            {{ paymentRef.ans }}
+                          </ng-template>
+                        </ngb-panel>
+                      </ngb-accordion>
+                    </ng-container>
+                    <ng-template #noResults>
+                      <div class="p-5 text-center">
+                        <h5 class="p-1"><i data-feather="info" size="19" class="mr-25"></i> No Results found</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="delivery"
+                data-toggle="pill"
+                href="#faq-delivery"
+                aria-expanded="false"
+                role="tab"
+              >
+                <i [data-feather]="data.delivery.icon" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">{{ data.delivery.title }}</span>
+              </a>
+              <ng-template ngbNavContent>
+                <!-- delivery panel -->
+                <div
+                  class="tab-pane collapse-icon"
+                  id="faq-delivery"
+                  role="tabpanel"
+                  aria-labelledby="delivery"
+                  aria-expanded="false"
+                >
+                  <!-- icon and header -->
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-tag bg-light-primary mr-1">
+                      <i data-feather="shopping-bag" class="font-medium-4"></i>
+                    </div>
+                    <div>
+                      <h4 class="mb-0">{{ data.delivery.title }}</h4>
+                      <span>{{ data.delivery.title }}</span>
+                    </div>
+                  </div>
+
+                  <!-- frequent answer and question  collapse  -->
+                  <div class="accordion collapse-margin mt-2">
+                    <ng-container *ngIf="(data.delivery.qandA | filter: searchText:'question').length; else noResults">
+                      <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="deliveryId1">
+                        <ngb-panel
+                          id="deliveryId{{ i }}"
+                          [cardClass]="'collapse-margin'"
+                          *ngFor="let deliveryRef of data.delivery.qandA | filter: searchText:'question'; let i = index"
+                        >
+                          <ng-template ngbPanelTitle>
+                            <span>{{ deliveryRef.question }}</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            {{ deliveryRef.ans }}
+                          </ng-template>
+                        </ngb-panel>
+                      </ngb-accordion>
+                    </ng-container>
+                    <ng-template #noResults>
+                      <div class="p-5 text-center">
+                        <h5 class="p-1"><i data-feather="info" size="19" class="mr-25"></i> No Results found</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="cancellation-return"
+                data-toggle="pill"
+                href="#faq-cancellation-return"
+                aria-expanded="false"
+                role="tab"
+              >
+                <i [data-feather]="data.cancellationReturn.icon" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">{{ data.cancellationReturn.title }}</span>
+              </a>
+
+              <ng-template ngbNavContent>
+                <!-- cancellation return  -->
+                <div
+                  class="tab-pane collapse-icon"
+                  id="faq-cancellation-return"
+                  role="tabpanel"
+                  aria-labelledby="cancellation-return"
+                  aria-expanded="false"
+                >
+                  <!-- icon and header -->
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-tag bg-light-primary mr-1">
+                      <i data-feather="refresh-cw" class="font-medium-4"></i>
+                    </div>
+                    <div>
+                      <h4 class="mb-0">{{ data.cancellationReturn.title }}</h4>
+                      <span>{{ data.cancellationReturn.subtitle }}</span>
+                    </div>
+                  </div>
+
+                  <!-- frequent answer and question  collapse  -->
+                  <div class="accordion collapse-margin mt-2">
+                    <ng-container
+                      *ngIf="(data.cancellationReturn.qandA | filter: searchText:'question').length; else noResults"
+                    >
+                      <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="cancellationReturnId1">
+                        <ngb-panel
+                          id="cancellationReturnId{{ i }}"
+                          [cardClass]="'collapse-margin'"
+                          *ngFor="
+                            let cancellationReturnRef of data.cancellationReturn.qandA | filter: searchText:'question';
+                            let i = index
+                          "
+                        >
+                          <ng-template ngbPanelTitle>
+                            <span>{{ cancellationReturnRef.question }}</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            {{ cancellationReturnRef.ans }}
+                          </ng-template>
+                        </ngb-panel>
+                      </ngb-accordion>
+                    </ng-container>
+                    <ng-template #noResults>
+                      <div class="p-5 text-center">
+                        <h5 class="p-1"><i data-feather="info" size="19" class="mr-25"></i> No Results found</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="my-order"
+                data-toggle="pill"
+                href="#faq-my-order"
+                aria-expanded="false"
+                role="tab"
+              >
+                <i [data-feather]="data.myOrders.icon" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">{{ data.myOrders.title }}</span>
+              </a>
+              <ng-template ngbNavContent>
+                <!-- my order -->
+                <div
+                  class="tab-pane collapse-icon"
+                  id="faq-my-order"
+                  role="tabpanel"
+                  aria-labelledby="my-order"
+                  aria-expanded="false"
+                >
+                  <!-- icon and header -->
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-tag bg-light-primary mr-1">
+                      <i [data-feather]="data.myOrders.icon" class="font-medium-4"></i>
+                    </div>
+                    <div>
+                      <h4 class="mb-0">{{ data.myOrders.title }}</h4>
+                      <span>{{ data.myOrders.subtitle }}</span>
+                    </div>
+                  </div>
+
+                  <!-- frequent answer and question  collapse  -->
+                  <div class="accordion collapse-margin mt-2">
+                    <ng-container *ngIf="(data.myOrders.qandA | filter: searchText:'question').length; else noResults">
+                      <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="myOrdersId1">
+                        <ngb-panel
+                          id="myOrdersId{{ i }}"
+                          [cardClass]="'collapse-margin'"
+                          *ngFor="let myOrdersRef of data.myOrders.qandA | filter: searchText:'question'; let i = index"
+                        >
+                          <ng-template ngbPanelTitle>
+                            <span>{{ myOrdersRef.question }}</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            {{ myOrdersRef.ans }}
+                          </ng-template>
+                        </ngb-panel>
+                      </ngb-accordion>
+                    </ng-container>
+                    <ng-template #noResults>
+                      <div class="p-5 text-center">
+                        <h5 class="p-1"><i data-feather="info" size="19" class="mr-25"></i> No Results found</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+
+            <li class="nav-item" ngbNavItem>
+              <a
+                ngbNavLink
+                class="nav-link d-flex py-75"
+                id="product-services"
+                data-toggle="pill"
+                href="#faq-product-services"
+                aria-expanded="false"
+                role="tab"
+              >
+                <i [data-feather]="data.productServices.icon" class="font-medium-3 mr-1"></i>
+                <span class="font-weight-bold">{{ data.productServices.title }}</span>
+              </a>
+
+              <ng-template ngbNavContent>
+                <!-- product services -->
+                <div
+                  class="tab-pane collapse-icon"
+                  id="faq-product-services"
+                  role="tabpanel"
+                  aria-labelledby="product-services"
+                  aria-expanded="false"
+                >
+                  <!-- icon and header -->
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-tag bg-light-primary mr-1">
+                      <i [data-feather]="data.productServices.icon" class="font-medium-4"></i>
+                    </div>
+                    <div>
+                      <h4 class="mb-0">{{ data.productServices.title }}</h4>
+                      <span>{{ data.productServices.subtitle }}</span>
+                    </div>
+                  </div>
+
+                  <!-- frequent answer and question  collapse  -->
+                  <div class="accordion collapse-margin mt-2">
+                    <ng-container
+                      *ngIf="(data.productServices.qandA | filter: searchText:'question').length; else noResults"
+                    >
+                      <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="productServicesId1">
+                        <ngb-panel
+                          id="productServicesId{{ i }}"
+                          [cardClass]="'collapse-margin'"
+                          *ngFor="
+                            let productServicesRef of data.productServices.qandA | filter: searchText:'question';
+                            let i = index
+                          "
+                        >
+                          <ng-template ngbPanelTitle>
+                            <span>{{ productServicesRef.question }}</span>
+                          </ng-template>
+                          <ng-template ngbPanelContent>
+                            {{ productServicesRef.ans }}
+                          </ng-template>
+                        </ngb-panel>
+                      </ngb-accordion>
+                    </ng-container>
+                    <ng-template #noResults>
+                      <div class="p-5 text-center">
+                        <h5 class="p-1"><i data-feather="info" size="19" class="mr-25"></i> No Results found</h5>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <!-- FAQ image -->
+            <img
+              src="assets/images/illustration/faq-illustrations.svg"
+              class="img-fluid d-none d-md-block pt-5"
+              alt="demand img"
+            />
+          </ul>
+        </div>
+        <div [ngbNavOutlet]="navVertical" class="col-12 col-md-9"></div>
+      </div>
+    </section>
+    <!--/ account setting page -->
+
+    <!-- contact us -->
+    <section class="faq-contact">
+      <div class="row mt-5 pt-75">
+        <div class="col-12 text-center">
+          <h2>You still have a question?</h2>
+          <p class="mb-3">
+            If you cannot find a question in our FAQ, you can always contact us. We will answer to you shortly!
+          </p>
+        </div>
+        <div class="col-sm-6">
+          <div class="card text-center faq-contact-card shadow-none py-1">
+            <div class="card-body">
+              <div class="avatar avatar-tag bg-light-primary mb-2 mx-auto">
+                <i data-feather="phone-call" class="font-medium-3"></i>
+              </div>
+              <h4>+ (810) 2548 2568</h4>
+              <span class="text-body">We are always happy to help!</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card text-center faq-contact-card shadow-none py-1">
+            <div class="card-body">
+              <div class="avatar avatar-tag bg-light-primary mb-2 mx-auto">
+                <i data-feather="mail" class="font-medium-3"></i>
+              </div>
+              <h4>hello@help.com</h4>
+              <span class="text-body">Best way to get answer faster!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ contact us -->
+  </div>
+</div>

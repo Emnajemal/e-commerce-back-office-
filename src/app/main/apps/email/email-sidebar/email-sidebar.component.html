@@ -1,0 +1,56 @@
+<!-- email-sidebar -->
+<div class="sidebar">
+  <div class="sidebar-content email-app-sidebar" [perfectScrollbar]>
+    <div class="email-app-menu">
+      <div class="form-group-compose text-center compose-btn">
+        <button
+          type="button"
+          class="compose-email btn btn-primary btn-block"
+          data-target="#compose-mail"
+          (click)="openCompose()"
+          rippleEffect
+        >
+          Compose
+        </button>
+      </div>
+      <div class="sidebar-menu-list">
+        <div class="list-group list-group-messages">
+          <a
+            *ngFor="let folder of folders"
+            [routerLink]="'/apps/email/' + folder.handle"
+            [routerLinkActive]="'active'"
+            class="list-group-item list-group-item-action"
+            (click)="toggleSidebar('email-sidebar')"
+          >
+            <i [data-feather]="folder.icon" [size]="18" class="mr-75"></i>
+            <span class="align-middle">{{ folder.title }}</span>
+            <span
+              *ngIf="folder.handle === 'draft' || folder.handle === 'inbox'"
+              class="badge badge-pill float-right"
+              [ngClass]="{
+                'badge-light-warning': folder.handle === 'draft',
+                'badge-light-primary': folder.handle === 'inbox'
+              }"
+              >{{
+                folder.handle === 'draft' ? draftCount : folder.handle === 'inbox' ? unReadInboxCount : unReadInboxCount
+              }}</span
+            >
+          </a>
+        </div>
+        <!-- <hr /> -->
+        <h6 class="section-label mt-3 mb-1 px-2">Labels</h6>
+        <div class="list-group list-group-labels">
+          <a
+            *ngFor="let label of labels"
+            [routerLink]="'/apps/email/label/' + label.handle"
+            [routerLinkActive]="'active'"
+            class="list-group-item list-group-item-action"
+            (click)="toggleSidebar('email-sidebar')"
+            ><span class="bullet bullet-sm mr-1 {{ label.color }}"></span>{{ label.title }}</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ email-sidebar -->

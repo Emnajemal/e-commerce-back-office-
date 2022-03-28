@@ -1,0 +1,24 @@
+<!-- ngb-toast component -->
+<ngb-toast
+  *ngFor="let toast of toastService.toasts"
+  [class]="toast.classname"
+  [autohide]="toast.autohide"
+  [delay]="toast.delay || 5000"
+  (hide)="toastService.remove(toast)"
+>
+  <!-- toast header -->
+  <ng-template ngbToastHeader>
+    <img src="assets/images/logo/logo.png" class="mr-2" height="18" width="25" alt="Toast image" />
+    <strong class="mr-auto toast-title">Vuexy Admin</strong>
+    <small class="text-muted toast-time ml-5 mr-1 pl-3">11 mins ago</small>
+  </ng-template>
+  <!--/ toast header -->
+
+  <!-- toast body -->
+  <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
+    <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+  </ng-template>
+  <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+  <!--/ toast body -->
+</ngb-toast>
+<!--/ ngb-toast component -->

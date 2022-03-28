@@ -1,0 +1,363 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Default Pagination Starts -->
+    <section id="default-pagination">
+      <div class="row match-height">
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeBasic">
+            <h4 class="card-title">Basic</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                To create basic pagination use
+                <code>[collectionSize]="itemsNumber"</code> where itemsNumber are the number of items in your paginated
+                collection. Use this directive along with <code>ngb-pagination</code> ngb element.
+              </p>
+              <ngb-pagination
+                [collectionSize]="70"
+                [(page)]="pageBasic"
+                [directionLinks]="false"
+                aria-label="Default pagination"
+              ></ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeIconText">
+            <h4 class="card-title">Pagination With icon and text</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                To customize pagination's previous & next button use directive
+                <code>ngbPaginationPrevious</code> for previous button & <code>ngbPaginationNext</code> for next button
+                along with <code>ng-template</code> angular element inside <code>ngb-pagination</code> ngb element.
+              </p>
+              <ngb-pagination [collectionSize]="50" [(page)]="pageBasicText" aria-label="Custom pagination">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeOnlyIcons">
+            <h4 class="card-title">Only icons</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                To customize pagination's previous & next button use directive
+                <code>ngbPaginationPrevious</code> for previous button & <code>ngbPaginationNext</code> for next button
+                along with <code>ng-template</code> angular element.
+              </p>
+              <strong class="bg-danger"></strong>
+              <ngb-pagination [collectionSize]="70" [(page)]="pageBasic" aria-label="Default pagination">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [size]="18" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  ><span [data-feather]="'chevron-right'" [size]="18" [class]="'font-weight-bolder'"></span
+                ></ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Default Pagination Ends -->
+
+    <!-- Contextual Pagination Starts -->
+    <section id="themed-pagination">
+      <div class="row">
+        <div class="col-12 mt-3 mb-1">
+          <h4 class="text-uppercase">Pagination Contextual</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeSuccess">
+            <h4 class="card-title">Success</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>.pagination-success</code> along with <code>ngb-pagination</code> ngb element.
+              </p>
+              <ngb-pagination class="pagination-success" [collectionSize]="70" [(page)]="pageColor">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [size]="18" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  ><span [data-feather]="'chevron-right'" [size]="18" [class]="'font-weight-bolder'"></span
+                ></ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeDanger">
+            <h4 class="card-title">Danger</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>.pagination-danger</code> along with <code>ngb-pagination</code> ngb element.
+              </p>
+              <ngb-pagination class="pagination-danger" [collectionSize]="70" [(page)]="pageColor">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [size]="18" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  ><span [data-feather]="'chevron-right'" [size]="18" [class]="'font-weight-bolder'"></span
+                ></ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeInfo">
+            <h4 class="card-title">Info</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>.pagination-info</code> along with <code>ngb-pagination</code> ngb element.
+              </p>
+              <ngb-pagination class="pagination-info" [collectionSize]="70" [(page)]="pageColor">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [size]="18" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  ><span [data-feather]="'chevron-right'" [size]="18" [class]="'font-weight-bolder'"></span
+                ></ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeWarning">
+            <h4 class="card-title">Warning</h4>
+
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>.pagination-warning</code> along with <code>ngb-pagination</code> ngb element.
+              </p>
+              <ngb-pagination class="pagination-warning" [collectionSize]="70" [(page)]="pageColor">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [size]="18" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  ><span [data-feather]="'chevron-right'" [size]="18" [class]="'font-weight-bolder'"></span
+                ></ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Contextual Pagination Ends -->
+
+    <!-- Pagination Positions start -->
+    <section id="pagination-positions">
+      <div class="row">
+        <div class="col-12 mt-3 mb-1">
+          <h4 class="text-uppercase">Pagination Positions</h4>
+          <p>
+            Use <code>.d-flex.justify-content- start | center | end</code> along with <code>ngb-pagination</code> ngb
+            element to align your pagination
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <core-card-snippet [snippetCode]="_snippetCodePositions">
+            <h4 class="card-title">Positions</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-4 col-lg-12">
+                  <h5 class="text-left mb-1">Left Aligned</h5>
+                  <ngb-pagination
+                    class="d-flex justify-content-start"
+                    [directionLinks]="false"
+                    [collectionSize]="50"
+                    [(page)]="pagePosition"
+                  >
+                  </ngb-pagination>
+                </div>
+                <div class="col-xl-4 col-lg-12">
+                  <h5 class="text-center mb-1">Center Aligned</h5>
+                  <ngb-pagination
+                    class="d-flex justify-content-center"
+                    [directionLinks]="false"
+                    [collectionSize]="50"
+                    [(page)]="pagePosition"
+                  >
+                  </ngb-pagination>
+                </div>
+                <div class="col-xl-4 col-lg-12">
+                  <h5 class="text-right mb-1">Right Aligned</h5>
+                  <ngb-pagination
+                    class="d-flex justify-content-end"
+                    [directionLinks]="false"
+                    [collectionSize]="50"
+                    [(page)]="pagePosition"
+                  >
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Pagination Positions end -->
+
+    <!-- Pagination Sizes start -->
+    <section id="pagination-sizes">
+      <div class="row">
+        <div class="col-12 mt-3 mb-1">
+          <h4 class="text-uppercase">Pagination Sizes</h4>
+          <p>
+            Use <code>size="lg | sm"</code> for large & small size pagination. <strong>Note:</strong> Default size of
+            pagination is medium.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <core-card-snippet [snippetCode]="_snippetCodeSizes">
+            <h4 class="card-title">Pagination Sizes</h4>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-4">
+                  <ngb-pagination [directionLinks]="false" [collectionSize]="50" [(page)]="pageSizes" size="lg">
+                  </ngb-pagination>
+                </div>
+                <div class="col-lg-4">
+                  <ngb-pagination [directionLinks]="false" [collectionSize]="50" [(page)]="pageSizes"> </ngb-pagination>
+                </div>
+                <div class="col-lg-4">
+                  <ngb-pagination [directionLinks]="false" [collectionSize]="50" [(page)]="pageSizes" size="sm">
+                  </ngb-pagination>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Pagination Sizes end -->
+
+    <!-- Advanced Pagination start -->
+    <section id="Advanced-pagination">
+      <div class="row">
+        <div class="col-12 mt-3 mb-1">
+          <h4 class="text-uppercase">Advanced Pagination</h4>
+        </div>
+      </div>
+      <div class="row match-height">
+        <div class="col-lg-6 col-md-12">
+          <core-card-snippet [snippetCode]="_snippetCodeAdvanceDefault">
+            <h4 class="card-title">Default Pagination</h4>
+
+            <div class="card-body">
+              <div id="page1-content" class="border-grey border-lighten-2 p-1 mb-1">
+                You are on page {{ pageAdvanced }}
+              </div>
+              <ngb-pagination [collectionSize]="50" [(page)]="pageAdvanced">
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <core-card-snippet [snippetCode]="_snippetCodeDefaultlLastFirst">
+            <h4 class="card-title">Default Pagination with last &amp; first</h4>
+
+            <div class="card-body">
+              <div id="firstLast1-content" class="border-grey border-lighten-2 p-1 mb-1">
+                You are on page {{ pageAdvancedLink }}
+              </div>
+              <ngb-pagination [collectionSize]="30" [(page)]="pageAdvancedLink" [boundaryLinks]="true">
+                <ng-template ngbPaginationFirst>First</ng-template>
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationLast>Last</ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-lg-6 col-md-12 pagination-overflow-auto">
+          <core-card-snippet [snippetCode]="_snippetCodeEllipsesRotation">
+            <h4 class="card-title">Pagination ellipses & rotation</h4>
+
+            <div class="card-body">
+              <div id="url1-content" class="border-grey border-lighten-2 p-1 mb-1">
+                You are on page
+                {{ pageAdvancedEllipses }}
+              </div>
+              <ngb-pagination
+                [collectionSize]="120"
+                [(page)]="pageAdvancedEllipses"
+                [maxSize]="5"
+                [rotate]="true"
+                [boundaryLinks]="true"
+              >
+                <ng-template ngbPaginationFirst>First</ng-template>
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationLast>Last</ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-lg-6 col-md-12 pagination-overflow-auto">
+          <core-card-snippet [snippetCode]="_snippetCodeRotatioNoEllipses">
+            <h4 class="card-title">Pagination rotation & no ellipses</h4>
+
+            <div class="card-body">
+              <div id="start-content" class="border-grey border-lighten-2 p-1 mb-1">
+                Your start Page {{ pageAdvancedNoEllipses }}
+              </div>
+              <ngb-pagination
+                [collectionSize]="120"
+                [(page)]="pageAdvancedNoEllipses"
+                [maxSize]="5"
+                [rotate]="true"
+                [ellipses]="false"
+                [boundaryLinks]="true"
+              >
+                <ng-template ngbPaginationFirst>First</ng-template>
+                <ng-template ngbPaginationPrevious
+                  ><span [data-feather]="'chevron-left'" [class]="'font-weight-bolder'"></span>Prev
+                </ng-template>
+                <ng-template ngbPaginationNext
+                  >Next<span [data-feather]="'chevron-right'" [class]="'font-weight-bolder'"></span>
+                </ng-template>
+                <ng-template ngbPaginationLast>Last</ng-template>
+              </ngb-pagination>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Advanced Pagination end -->
+  </div>
+</div>

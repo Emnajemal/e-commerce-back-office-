@@ -1,0 +1,416 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- Basic Carousel And Optional Carousel start -->
+    <section id="basic-carousel">
+      <div class="row">
+        <!-- Basic carousel start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeBasicExample">
+            <h4 class="card-title">Basic Example</h4>
+            <div class="card-body">
+              <!-- ngb-carousel component -->
+              <ngb-carousel *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.one" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.two" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Basic carousel end -->
+        <!-- Optional captions start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeOptionalCaptions">
+            <h4 class="card-title">Optional Captions</h4>
+            <div class="card-body">
+              <!-- ngb-carousel component -->
+              <ngb-carousel [pauseOnHover]="false" *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.six" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption">
+                    <h3 class="text-white">First slide label</h3>
+                    <p class="truncate text-white">
+                      Donut jujubes I love topping I love sweet. Jujubes I love brownie gummi bears I love donut sweet
+                      chocolate. Tart chocolate marshmallow.Tart carrot cake muffin.
+                    </p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.five" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption">
+                    <h3 class="text-white">Second slide label</h3>
+                    <p class="truncate text-white">
+                      Tart macaroon marzipan I love soufflé apple pie wafer. Chocolate bar jelly caramels jujubes
+                      chocolate cake gummies. Cupcake cake I love cake danish carrot cake
+                    </p>
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.four" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption">
+                    <h3 class="text-white">Third slide label</h3>
+                    <p class="truncate text-white">
+                      Pudding sweet pie gummies. Chocolate bar sweet tiramisu cheesecake chocolate cotton candy pastry
+                      muffin. Marshmallow cake powder icing.
+                    </p>
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Optional captions end -->
+      </div>
+    </section>
+    <!-- Basic Carousel And Optional Carousel end -->
+
+    <!-- Carousel Options start -->
+    <section id="carousel-options">
+      <div class="row match-height">
+        <!-- Interval Options start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeIntervalOption">
+            <h4 class="card-title">Interval Option</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Time in milliseconds before the next slide is shown. You can change the time of interval by adding
+                <code>[interval]='TimeMilliSeconds'</code> directive to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component, where <strong>TimeMilliSeconds</strong> is set to milliseconds. By default, an interval is
+                set to 5000 ie. <strong>5sec</strong>.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel [interval]="2000" [pauseOnHover]="false" *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.five" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.two" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Interval Options end -->
+        <!-- Pause Options start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodePauseOption">
+            <h4 class="card-title">Pause Option</h4>
+            <div class="card-body">
+              <p class="card-text">
+                If true, will pause slide switching when mouse cursor hovers the slide. By default is
+                <strong>true</strong>. You can set it to false by adding <code>[pauseOnHover]='false'</code> directive
+                to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel [interval]="3000" *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.four" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.one" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Pause Options end -->
+      </div>
+      <div class="row">
+        <!-- Wrap Options start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeWrapOption">
+            <h4 class="card-title">Wrap Option</h4>
+            <div class="card-body">
+              <p class="card-text">
+                If true, will 'wrap' the carousel by switching from the last slide back to the first. By default is
+                <strong>true</strong>. You can set it to false by adding <code>[wrap]='false'</code> directive to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel [wrap]="false" [pauseOnHover]="false" *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.two" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.six" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Wrap Options end -->
+        <!-- keyboard Options start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeKeyboardOption">
+            <h4 class="card-title">Keyboard Option</h4>
+            <div class="card-body">
+              <p class="card-text">
+                If true, allows to interact with carousel using keyboard 'arrow left' and 'arrow right'. By default is
+                <strong>true</strong>. You can set it to false by adding <code>[keyboard]='false'</code> directive to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.two" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.five" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- keyboard Options end -->
+      </div>
+    </section>
+    <!-- Carousel Options end -->
+
+    <!-- Navigation Carousel Start -->
+    <section id="carousel-Arrow">
+      <div class="row">
+        <!-- Navigation Arrow Carousel Start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeNavigationArrow">
+            <h4 class="card-title">Navigation Arrow</h4>
+            <div class="card-body">
+              <p class="card-text">
+                If true, 'previous' and 'next' navigation arrows will be visible on the slide. By default is
+                <strong>true</strong>. You can set it to false by adding
+                <code>[showNavigationArrows]='false'</code> directive to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel [showNavigationIndicators]="false" *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.five" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.two" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Navigation Indicators Carousel End -->
+        <!-- Navigation Indicators Carousel Start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeNavigationIndicators">
+            <h4 class="card-title">Navigation Indicators</h4>
+            <div class="card-body">
+              <p class="card-text">
+                If true, navigation indicators at the bottom of the slide will be visible. By default is
+                <strong>true</strong>. You can set it to false by adding
+                <code>[showNavigationIndicators]='false'</code> directive to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel [showNavigationArrows]="false" *ngIf="carouselImages">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.six" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.five" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.one" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- Navigation Indicators Carousel End -->
+      </div>
+    </section>
+    <!-- Navigation Carousel end -->
+
+    <!-- Navigation Arrow Carousel start -->
+    <section id="carousel-crossfade">
+      <div class="row match-height">
+        <!-- CrossFade Carousel Start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeCrossfade">
+            <h4 class="card-title">Crossfade</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Add <code>.carousel-fade</code> to <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code> component to
+                animate slides with a fade transition instead of a slide.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel *ngIf="carouselImages" class="carousel-fade">
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.three" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.four" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.six" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- CrossFade Carousel End -->
+        <!-- activeId Carousel Start -->
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeActiveId">
+            <h4 class="card-title">Active Id</h4>
+            <div class="card-body">
+              <p class="card-text">
+                The slide id that should be displayed initially. By default initial slide is
+                <strong>first</strong> slide. You can set initial slide by adding
+                <code>[activeId]="'idName'"</code>
+                directive to
+                <code>&lt;ngb-carousel&gt;&lt;/ngb-carousel&gt;</code>
+                component, and by adding unique <code>[id]="'idName'"</code> to individual
+                <code>ngbSlide</code> directive.
+              </p>
+              <!-- ngb-carousel component -->
+              <ngb-carousel *ngIf="carouselImages" [activeId]="'two'" [interval]="10000">
+                <ng-template ngbSlide [id]="'one'">
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.four" class="img-fluid" alt="Random first slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide [id]="'two'">
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.six" class="img-fluid" alt="Random second slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+                <ng-template ngbSlide [id]="'three'">
+                  <div class="carousel-img-wrapper">
+                    <img [src]="carouselImages.one" class="img-fluid" alt="Random third slide" />
+                  </div>
+                  <div class="carousel-caption"></div>
+                </ng-template>
+              </ngb-carousel>
+              <!-- ngb-carousel component -->
+            </div>
+          </core-card-snippet>
+        </div>
+        <!-- activeId Carousel End -->
+      </div>
+    </section>
+    <!-- CrossFade Carousel End -->
+  </div>
+</div>

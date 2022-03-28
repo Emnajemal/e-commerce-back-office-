@@ -1,0 +1,232 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- Start Of Bootstrap Spinners -->
+    <section id="bootstrap-spinners">
+      <div class="row match-height">
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeBorder">
+            <h4 class="card-title">Border Spinners</h4>
+            <div class="card-body">
+              <p class="card-text">Use class <code>.spinner-border</code> for a lightweight loading indicator.</p>
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeColored">
+            <h4 class="card-title">Colored Spinners</h4>
+            <div class="card-body">
+              <p class="card-text">
+                You can customize the color with text color utilities. You can use any of our text color utilities on
+                the standard spinner. Use
+                <code>.text-&#123;color&#125;</code>
+              </p>
+              <div class="demo-inline-spacing">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-secondary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-success" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-danger" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-warning" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-info" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-border text-dark" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+      <div class="row match-height">
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeGrowing">
+            <h4 class="card-title">Growing Spinner</h4>
+            <div class="card-body">
+              <p class="card-text">Use class <code>.spinner-grow</code> for a growing spinner.</p>
+              <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeColoredGrowing">
+            <h4 class="card-title">Colored Growing Spinners</h4>
+            <div class="card-body">
+              <p class="card-text">
+                You can customize the color with text color utilities. You can use any of our text color utilities on
+                the standard spinner. Use
+                <code>.text-&#123;color&#125;</code>
+              </p>
+              <div class="demo-inline-spacing">
+                <div class="spinner-grow text-primary mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-secondary mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-success mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-danger mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-warning mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-info mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-light mr-1" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-dark" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+      <div class="row match-height">
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeFlex">
+            <h4 class="card-title">Flex</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use Flexbox utilities to place spinners.Use
+                <code>.d-flex</code> and
+                <code>.align-items-&#123;side&#125;</code>
+              </p>
+              <div class="d-flex justify-content-center my-1">
+                <div class="spinner-border" role="status" aria-hidden="true"></div>
+              </div>
+              <div class="d-flex align-items-center">
+                <strong>Loading...</strong>
+                <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeFloat">
+            <h4 class="card-title">Float</h4>
+            <div class="card-body">
+              <p class="card-text">
+                You can also use Float to place your spinner
+                <code>.float-&#123;side&#125;</code>
+              </p>
+              <div class="clearfix">
+                <div class="spinner-border float-right" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+      <div class="row match-height">
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTextAlignment">
+            <h4 class="card-title">Text Alignment</h4>
+            <div class="card-body">
+              <p class="card-text">You can also use <code>.text-&#123;side&#125;</code> for your spinner's placement</p>
+              <div class="text-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeSizes">
+            <h4 class="card-title">Sizes</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>.spinner-border-&#123;sm/lg&#125; </code> and <code>.spinner-grow-&#123;sm/lg&#125;</code> for
+                Small or Large spinner
+              </p>
+              <div class="demo-inline-spacing">
+                <div>
+                  <div class="spinner-border spinner-border-sm mr-50" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow spinner-grow-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="spinner-border mr-50" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="spinner-border mr-50" style="width: 3rem; height: 3rem" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow" style="width: 3rem; height: 3rem" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+      <div class="row match-height">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeButtons">
+            <h4 class="card-title">Buttons</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>.spinner-border</code> or <code>.spinner-grow</code> inside buttons to indicate an action is
+                currently processing or taking place
+              </p>
+              <div class="demo-inline-spacing">
+                <button class="btn btn-outline-primary" type="button" disabled rippleEffect>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span class="sr-only">Loading...</span>
+                </button>
+                <button class="btn btn-outline-primary" type="button" disabled rippleEffect>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span class="ml-25 align-middle">Loading...</span>
+                </button>
+                <button class="btn btn-outline-primary" type="button" disabled rippleEffect>
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                  <span class="sr-only">Loading...</span>
+                </button>
+                <button class="btn btn-outline-primary" type="button" disabled rippleEffect>
+                  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                  <span class="ml-25 align-middle">Loading...</span>
+                </button>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- End Of Bootstrap Spinners -->
+  </div>
+</div>

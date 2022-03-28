@@ -1,0 +1,192 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Default Divider Starts -->
+    <section id="default-divider">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeDefault">
+            <h4 class="card-title">Default</h4>
+
+            <div class="card-body">
+              <p class="card-text mb-0">You can add a line to divide your section using <code>&lt;hr&gt;</code></p>
+              <p class="card-text mb-0">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                id est laborum.
+              </p>
+              <hr />
+              <p class="card-text mb-0">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Default Divider Ends -->
+
+    <!-- Basic Divider Starts -->
+    <section id="basic-divider">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeText">
+            <h4 class="card-title">Text</h4>
+
+            <div class="card-body">
+              <p class="card-text mb-0">
+                Use class <code>.divider</code> as wrapper for <code>.divider-text</code> to create a divider text
+              </p>
+              <div class="divider">
+                <div class="divider-text">My Text</div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Basic Divider Ends -->
+
+    <!-- Divider Text Position Starts -->
+    <section id="divider-text-position">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTextPosition">
+            <h4 class="card-title">Text Position</h4>
+
+            <div class="card-body">
+              <p class="card-text mb-0">
+                Use class <code>.divider-&#123;left | left-center | right | right-center&#125;</code> with
+                <code>.divider</code>
+                to set text position.
+              </p>
+              <div class="divider divider-left">
+                <div class="divider-text">Left</div>
+              </div>
+              <div class="divider divider-left-center">
+                <div class="divider-text">Left Center</div>
+              </div>
+              <div class="divider">
+                <div class="divider-text">Center(Default)</div>
+              </div>
+              <div class="divider divider-right-center">
+                <div class="divider-text">Right Center</div>
+              </div>
+              <div class="divider divider-right">
+                <div class="divider-text">Right</div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Divider Text Position Ends -->
+
+    <!-- Divider Colors Starts -->
+    <section id="divider-colors">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeColors">
+            <h4 class="card-title">Colors</h4>
+
+            <div class="card-body">
+              <p class="card-text mb-0">
+                Use class <code>.divider-&#123;color-name&#125;</code> to change color of divider
+              </p>
+              <div class="divider">
+                <div class="divider-text">Default</div>
+              </div>
+              <div class="divider divider-primary">
+                <div class="divider-text">Primary</div>
+              </div>
+              <div class="divider divider-secondary">
+                <div class="divider-text">Secondary</div>
+              </div>
+              <div class="divider divider-success">
+                <div class="divider-text">Success</div>
+              </div>
+              <div class="divider divider-danger">
+                <div class="divider-text">Danger</div>
+              </div>
+              <div class="divider divider-warning">
+                <div class="divider-text">Warning</div>
+              </div>
+              <div class="divider divider-info">
+                <div class="divider-text">Info</div>
+              </div>
+              <div class="divider divider-dark">
+                <div class="divider-text">Dark</div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Divider Colors Ends -->
+
+    <!-- Divider Icons Starts -->
+    <section id="divider-icons">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeIcons">
+            <h4 class="card-title">Icons</h4>
+
+            <div class="card-body">
+              <div class="divider divider-left">
+                <div class="divider-text"><span [data-feather]="'arrow-down'"></span></div>
+              </div>
+              <div class="divider divider-left-center">
+                <div class="divider-text"><span [data-feather]="'star'"></span></div>
+              </div>
+              <div class="divider">
+                <div class="divider-text"><span [data-feather]="'check'"></span></div>
+              </div>
+              <div class="divider divider-right-center">
+                <div class="divider-text"><span [data-feather]="'x-circle'"></span></div>
+              </div>
+              <div class="divider divider-right">
+                <div class="divider-text"><span [data-feather]="'clock'"></span></div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Divider Icons Ends -->
+
+    <!-- Divider Style Starts -->
+    <section id="divider-style">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeStyle">
+            <h4 class="card-title">Style</h4>
+
+            <div class="card-body">
+              <p class="card-text mb-0">
+                use class
+                <code>.divider-&#123;dotted | dashed&#125;</code> to change divider style. solid is default style you
+                don't have to add any class for it.
+              </p>
+              <div class="divider divider-dotted">
+                <div class="divider-text">Dotted</div>
+              </div>
+
+              <div class="divider divider-dashed">
+                <div class="divider-text">Dashed</div>
+              </div>
+
+              <div class="divider">
+                <div class="divider-text">Solid</div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Divider Style Ends -->
+  </div>
+</div>

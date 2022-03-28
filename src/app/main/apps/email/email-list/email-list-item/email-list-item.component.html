@@ -1,0 +1,54 @@
+<li class="media" [ngClass]="{ 'mail-read': email.isRead === true, 'selected-row-bg': selected === true }">
+  <div class="media-left pr-50">
+    <div class="avatar">
+      <img [src]="email.from.avatar" alt="avatar img holder" />
+    </div>
+    <div class="user-action">
+      <div class="custom-control custom-checkbox">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="customCheck{{ email.id }}"
+          name="customCheck{{ email.id }}"
+          [(ngModel)]="selected"
+          (ngModelChange)="onSelectedChange()"
+          (click)="$event.stopPropagation()"
+        />
+        <label class="custom-control-label" for="customCheck{{ email.id }}"></label>
+      </div>
+      <button class="email-favorite btn p-0" (click)="toggleStarred(); $event.stopPropagation()">
+        <i
+          class="fa"
+          [ngClass]="{ 'fa-star text-warning': email.isStarred === true, 'fa-star-o': email.isStarred === false }"
+        ></i>
+      </button>
+    </div>
+  </div>
+  <div class="media-body">
+    <div class="mail-details">
+      <div class="mail-items">
+        <h5 class="mb-25">{{ email.from.name }}</h5>
+        <span class="text-truncate">{{ email.subject }}</span>
+      </div>
+      <div class="mail-meta-item">
+        <ng-container *ngIf="email.attachments.length > 0">
+          <i data-feather="paperclip"></i>
+        </ng-container>
+        <span
+          class="mx-50 bullet bullet-sm"
+          *ngFor="let label of email.labels"
+          [ngClass]="{
+            'bullet-success': label === 'personal',
+            'bullet-primary': label === 'company',
+            'bullet-warning': label === 'important',
+            'bullet-danger': label === 'private'
+          }"
+        ></span>
+        <span class="mail-date">{{ email.time | date: 'short':'UTC' }}</span>
+      </div>
+    </div>
+    <div class="mail-message">
+      <p class="text-truncate mb-0">{{ email.message | striphtml }}</p>
+    </div>
+  </div>
+</li>

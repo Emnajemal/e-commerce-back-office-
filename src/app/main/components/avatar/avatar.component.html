@@ -1,0 +1,340 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- Default & Sizes Avatar Starts -->
+    <section id="default-sizes-avatar">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeSizes">
+            <h4 class="card-title">Sizes</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">
+                For default avatar, You have to use inline <code>attributes</code> to set height and width of image. Use
+                class <code>.avatar-&#123;sm|lg|xl&#125;</code> to modify size of your avatar.
+              </p>
+              <div class="demo-inline-spacing">
+                <div class="avatar avatar-sm">
+                  <span class="avatar-content">
+                    <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" />
+                  </span>
+                </div>
+                <div class="avatar">
+                  <span class="avatar-content">
+                    <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" width="32" height="32" />
+                  </span>
+                </div>
+                <div class="avatar avatar-lg">
+                  <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" />
+                </div>
+                <div class="avatar avatar-xl">
+                  <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" />
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeInitials">
+            <h4 class="card-title">Initials</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">
+                Wrap your content with <code>.avatar</code> class and wrap your text in <code>.avatar-content</code> to
+                create a avatar with initials. You can also use solid color initials.
+              </p>
+              <div class="demo-inline-spacing">
+                <div class="avatar bg-light-primary avatar-sm">
+                  <span class="avatar-content">PI</span>
+                </div>
+                <div class="avatar bg-light-secondary">
+                  <span class="avatar-content">PI</span>
+                </div>
+                <div class="avatar bg-light-success avatar-lg">
+                  <span class="avatar-content">PI</span>
+                </div>
+                <div class="avatar bg-light-danger avatar-xl">
+                  <span class="avatar-content">PI</span>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Default & Sizes Avatar Ends -->
+
+    <!-- Colors & Light Colors Avatar Starts-->
+    <section id="colors-light-colors-avatar">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeColors">
+            <h4 class="card-title">Colors</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">
+                use class <code>bg-&#123;color-name&#125;</code> to change background color of your avatar
+              </p>
+              <div class="demo-inline-spacing">
+                <div class="avatar bg-primary">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-secondary">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-success">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-danger">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-warning">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-info">
+                  <div class="avatar-content">PI</div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeLightColors">
+            <h4 class="card-title">Light Colors</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">
+                use class <code>bg-light-&#123;color-name&#125;</code> to change background color of your avatar
+              </p>
+              <div class="demo-inline-spacing">
+                <div class="avatar bg-light-primary">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-light-secondary">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-light-success">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-light-danger">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-light-warning">
+                  <div class="avatar-content">PI</div>
+                </div>
+                <div class="avatar bg-light-info">
+                  <div class="avatar-content">PI</div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Colors & Light Colors Avatar Ends -->
+
+    <!-- Icons & Status Avatar  Starts -->
+    <section id="icons-status-avatar">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeIcons">
+            <h4 class="card-title">Icons</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">Avatar Icon variant to use only Icons</p>
+              <div class="demo-inline-spacing">
+                <div class="avatar bg-primary">
+                  <div class="avatar-content">
+                    <span [data-feather]="'calendar'" [class]="'avatar-icon'"></span>
+                  </div>
+                </div>
+                <div class="avatar bg-secondary">
+                  <div class="avatar-content">
+                    <span [data-feather]="'github'" [class]="'avatar-icon'"></span>
+                  </div>
+                </div>
+                <div class="avatar bg-success">
+                  <div class="avatar-content">
+                    <span [data-feather]="'inbox'" [class]="'avatar-icon'"></span>
+                  </div>
+                </div>
+                <div class="avatar bg-light-danger">
+                  <div class="avatar-content">
+                    <span [data-feather]="'camera'" [class]="'avatar-icon'"></span>
+                  </div>
+                </div>
+                <div class="avatar bg-light-warning">
+                  <div class="avatar-content">
+                    <span [data-feather]="'award'" [class]="'avatar-icon'"></span>
+                  </div>
+                </div>
+                <div class="avatar bg-light-info">
+                  <div class="avatar-content">
+                    <span [data-feather]="'star'" [class]="'avatar-icon'"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeStatus">
+            <h4 class="card-title">Status</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">
+                use class <code>.avatar-status-&#123;online | offline | away | busy&#125;</code> after
+                <code>.avatar-content</code>
+                to create avatar with status
+              </p>
+
+              <div class="demo-inline-spacing">
+                <div class="avatar">
+                  <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="avatar" width="32" height="32" />
+                  <span class="avatar-status-offline"></span>
+                </div>
+                <div class="avatar bg-info">
+                  <span class="avatar-content">BV</span>
+                  <span class="avatar-status-busy"></span>
+                </div>
+                <div class="avatar bg-light-primary">
+                  <span class="avatar-content"><span [data-feather]="'github'" [class]="'avatar-icon'"></span></span>
+                  <span class="avatar-status-away"></span>
+                </div>
+                <div class="avatar bg-light-success">
+                  <span class="avatar-content">AB</span>
+                  <span class="avatar-status-online"></span>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Icons & Status Avatar  Ends -->
+
+    <!-- Colors & Light Colors Avatar Starts-->
+    <section id="colors-light-colors-avatar">
+      <div class="row match-height">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeGroup">
+            <h4 class="card-title">Avatar Group</h4>
+            <div class="card-body">
+              <p class="card-text">Wrap bunch of avatars with <code>.avatar-group</code> class</p>
+              <div class="avatar-group">
+                <div class="avatar pull-up">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-5.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div class="avatar pull-up">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-7.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div class="avatar pull-up">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-10.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div class="avatar pull-up">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-8.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div class="avatar pull-up">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-20.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeGroupTooltip">
+            <h4 class="card-title">Avatar Group with tooltip</h4>
+            <div class="card-body">
+              <p class="card-text">Avatar info inside tooltip variant</p>
+              <div class="avatar-group">
+                <div
+                  placement="top"
+                  class="avatar pull-up"
+                  ngbTooltip="Vinnie Mostowy"
+                  placement="top"
+                  container="body"
+                >
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-5.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div placement="top" class="avatar pull-up" ngbTooltip="Elicia Rieske" placement="top" container="body">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-7.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div
+                  placement="top"
+                  class="avatar pull-up"
+                  ngbTooltip="Julee Rossignol"
+                  placement="top"
+                  container="body"
+                >
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-10.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div placement="top" class="avatar pull-up" ngbTooltip="Darcey Nooner" placement="top" container="body">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-8.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+                <div placement="top" class="avatar pull-up" ngbTooltip="Jenny Looper" placement="top" container="body">
+                  <img
+                    class="media-object"
+                    src="assets/images/portrait/small/avatar-s-20.jpg"
+                    alt="Avatar"
+                    height="32"
+                    width="32"
+                  />
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Colors & Light Colors Avatar Ends -->
+  </div>
+</div>

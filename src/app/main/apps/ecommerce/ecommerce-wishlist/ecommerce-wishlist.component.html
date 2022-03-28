@@ -1,0 +1,17 @@
+<!-- Ecommerce Wishlist -->
+<div class="content-wrapper container-xxl p-0">
+  <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  <div class="content-body">
+    <section id="wishlist" class="grid-view wishlist-items">
+      <ng-container *ngFor="let product of products">
+        <app-ecommerce-item
+          class="card ecommerce-card"
+          [product]="product"
+          [isWishlistOpen]="true"
+          *ngIf="product.isInWishlist === true"
+        ></app-ecommerce-item>
+      </ng-container>
+    </section>
+  </div>
+</div>
+<!--/ Ecommerce Wishlist -->

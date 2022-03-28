@@ -1,0 +1,731 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Bootstrap Select start -->
+    <section class="bootstrap-select">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Bootstrap Select</h4>
+            </div>
+            <div class="card-body">
+              <!-- Basic Select -->
+              <div class="form-group">
+                <label for="basicSelect">Basic Select</label>
+                <select class="form-control" id="basicSelect">
+                  <option>IT</option>
+                  <option>Blade Runner</option>
+                  <option>Thor Ragnarok</option>
+                </select>
+              </div>
+
+              <!-- Custom Select -->
+              <div class="form-group">
+                <label for="customSelect">Custom Select</label>
+                <select class="custom-select" id="customSelect">
+                  <option selected>Open this menu</option>
+                  <option value="IT">IT</option>
+                  <option value="Blade Runner">Blade Runner</option>
+                  <option value="Thor Ragnarok">Thor Ragnarok</option>
+                </select>
+              </div>
+
+              <!-- Disabled Select -->
+              <div class="form-group">
+                <label for="disabledSelect">Disabled Select</label>
+                <select class="form-control" disabled="disabled" id="disabledSelect">
+                  <option>Green</option>
+                  <option>Red</option>
+                  <option>Blue</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Bootstrap Select Sizing</h4>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="selectLarge">Select Large</label>
+                <select class="form-control form-control-lg mb-1" id="selectLarge">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="selectDefault">Default</label>
+                <select class="form-control mb-1" id="selectDefault">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="selectSmall">Select Small</label>
+                <select class="form-control form-control-sm" id="selectSmall">
+                  <option selected>Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Bootstrap Multi Select</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- Multiple Select -->
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="normalMultiSelect">Multiple Select</label>
+                    <select class="form-control" id="normalMultiSelect" multiple="multiple">
+                      <option selected="selected">Square</option>
+                      <option>Rectangle</option>
+                      <option selected="selected">Rombo</option>
+                      <option>Romboid</option>
+                      <option>Trapeze</option>
+                      <option>Triangle</option>
+                      <option selected="selected">Polygon</option>
+                      <option>Regular polygon</option>
+                      <option>Circumference</option>
+                      <option>Circle</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="customSelectMulti">Custom Multiple Select</label>
+                    <select class="custom-select" id="customSelectMulti" multiple>
+                      <option selected="selected">Square</option>
+                      <option>Rectangle</option>
+                      <option selected="selected">Rombo</option>
+                      <option>Romboid</option>
+                      <option>Trapeze</option>
+                      <option>Triangle</option>
+                      <option selected="selected">Polygon</option>
+                      <option>Regular polygon</option>
+                      <option>Circumference</option>
+                      <option>Circle</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="customSelectSize">Custom Select Size</label>
+                    <select class="custom-select" id="customSelectSize" size="4">
+                      <option selected="selected">Square</option>
+                      <option>Rectangle</option>
+                      <option selected="selected">Rombo</option>
+                      <option>Romboid</option>
+                      <option>Trapeze</option>
+                      <option>Triangle</option>
+                      <option selected="selected">Polygon</option>
+                      <option>Regular polygon</option>
+                      <option>Circumference</option>
+                      <option>Circle</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Bootstrap Select end -->
+
+    <!-- Basic Select start -->
+    <section class="basic-select">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Ng-Select</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 mb-2">
+                  <a href="https://github.com/ng-select/ng-select" target="_blank"
+                    >For more information on ng-select.</a
+                  >
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Basic Select with Search</label>
+                  <div class="form-group">
+                    <!-- Basic Select with Search -->
+                    <ng-select [items]="selectBasic" bindLabel="name" [loading]="selectBasicLoading"> </ng-select>
+                    <!--/ Basic Select with Search -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select Group by item</label>
+
+                  <div class="form-group">
+                    <!-- Select Group by item -->
+                    <ng-select
+                      [items]="selectGroup"
+                      bindLabel="name"
+                      bindValue="name"
+                      groupBy="country"
+                      [(ngModel)]="selectGroupselected"
+                    >
+                      <ng-template ng-optgroup-tmp let-item="item">
+                        {{ item.country || 'Unnamed group' }}
+                      </ng-template>
+                    </ng-select>
+                    <br />
+                    <small>Selected: {{ selectGroupselected | json }}</small>
+                    <!--/ Select Group by item -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select With Icon</label>
+
+                  <div class="form-group">
+                    <!-- Select With Icon -->
+                    <ng-select [items]="selectIcon" [(ngModel)]="selectIconSelected" bindLabel="name" bindValue="name">
+                      <ng-template ng-option-tmp ng-label-tmp let-item="item">
+                        <i [class]="item.icon"></i>
+                        {{ item.name }}
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Select With Icon -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select with custom Option</label>
+
+                  <div class="form-group">
+                    <!-- Select with custom Option -->
+                    <ng-select
+                      [items]="selectIcon"
+                      [(ngModel)]="selectCustomSelected"
+                      bindLabel="name"
+                      bindValue="name"
+                    >
+                      <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                        <div *ngIf="item.name === 'Firefox'">{{ item.name }}</div>
+                        <div style="margin: 10px 0" class="card" *ngIf="item.name !== 'Safari'">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">
+                              <i [class]="item.icon"></i>
+                              Some quick example text to build
+                            </p>
+                            <div *ngIf="item.name === 'Opera'">
+                              <a href="#" class="card-link">Card link</a>
+                              <a href="#" class="card-link">Another link</a>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Select with custom Option -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Basic Select end -->
+
+    <!-- Multiple Select start -->
+    <section class="multiple-select">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Multiple Select</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6 col-12">
+                  <label>Basic Multi select</label>
+
+                  <div class="form-group">
+                    <!-- Basic Multi select -->
+                    <ng-select
+                      [items]="selectMulti | async"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [searchable]="false"
+                      bindLabel="name"
+                      placeholder="Select people"
+                      [(ngModel)]="selectMultiSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Basic Multi select -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select Multi with Group</label>
+
+                  <div class="form-group">
+                    <!-- Select Multi with group -->
+                    <ng-select
+                      [items]="selectMulti | async"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      groupBy="gender"
+                      [searchable]="false"
+                      bindLabel="name"
+                      placeholder="Select people"
+                      [(ngModel)]="selectMultiGroupSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Select Multi with group -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Add custom Tag</label>
+
+                  <div class="form-group">
+                    <!-- Add custom Tag -->
+                    <ng-select
+                      [items]="customTag"
+                      [addTag]="true"
+                      multiple="true"
+                      bindLabel="name"
+                      placeholder="Select tag"
+                      [(ngModel)]="SelectTag"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Add custom Tag -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select Custom Tag</label>
+
+                  <div class="form-group">
+                    <!-- Select Custom Tag -->
+                    <ng-select
+                      [items]="customTag"
+                      [addTag]="selectAddTagMethod"
+                      [hideSelected]="true"
+                      multiple="true"
+                      bindLabel="name"
+                      [(ngModel)]="customTagselected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+
+                    <br />
+                    Selected value: {{ customTagselected | json }}
+                    <!--/ Select Custom Tag -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Multiple Select end -->
+
+    <!-- Select Advance Options start -->
+    <section class="select-advance">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Advance Options</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6 col-12">
+                  <label>Select Multi with Icon</label>
+
+                  <div class="form-group">
+                    <!-- Select Multi with Icon -->
+                    <ng-select
+                      [items]="multiIconGithubUsers | async"
+                      [multiple]="true"
+                      bindLabel="login"
+                      bindValue="login"
+                      [(ngModel)]="multiIconGithubUsersSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"
+                          ><img [src]="item.avatar_url" width="20px" height="20px" /> {{ item.login }}</span
+                        >
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+
+                      <ng-template ng-option-tmp let-item="item">
+                        <img [src]="item.avatar_url" width="20px" height="20px" /> {{ item.login }}
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Select Multi with Icon -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select Multi Custom</label>
+
+                  <div class="form-group">
+                    <!-- Select Multi Custom -->
+                    <ng-select
+                      [items]="multiIconGithubUsers | async"
+                      [multiple]="true"
+                      bindLabel="login"
+                      bindValue="login"
+                      placeholder="Select items"
+                      [(ngModel)]="multiCustomGithubUsersSelected"
+                    >
+                      <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                        <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                          <span class="ng-value-label"
+                            ><img [src]="item.avatar_url" width="20px" height="20px" /> {{ item.login }}</span
+                          >
+                          <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </div>
+                        <div class="ng-value" *ngIf="items.length > 2">
+                          <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Select Multi Custom -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Multi select with limited number of selections</label>
+
+                  <div class="form-group">
+                    <!-- Multi select with limited number of selections -->
+                    <ngb-alert
+                      [type]="'warning'"
+                      [dismissible]="false"
+                      class="mb-2"
+                      *ngIf="selectMultiLimitedSelected.length === 3"
+                    >
+                      <div class="alert-body">
+                        <small>Max selection reached</small>
+                      </div>
+                    </ngb-alert>
+
+                    <ng-select
+                      #selectMultiLimited
+                      [items]="selectMulti | async"
+                      [multiple]="true"
+                      [maxSelectedItems]="3"
+                      bindLabel="name"
+                      [(ngModel)]="selectMultiLimitedSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+
+                    <div class="mt-1">
+                      Selected value: <br />
+                      <ul>
+                        <li *ngFor="let item of selectMultiLimitedSelected">{{ item.name }}</li>
+                      </ul>
+                      <button (click)="multiLimitedClearModel()" class="btn btn-secondary btn-sm" rippleEffect>
+                        Clear model
+                      </button>
+                    </div>
+                    <!-- Multi select with limited number of selections -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <label>Select Custom header footer template</label>
+
+                  <div class="form-group">
+                    <!-- Select Custom header footer template -->
+                    <ng-select
+                      [multiple]="true"
+                      [items]="selectCustomHeaderFooter"
+                      [(ngModel)]="selectCustomHeaderFooterSelected"
+                      placeholder="Select people"
+                      bindLabel="name"
+                      bindValue="name"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                      <ng-template ng-header-tmp>
+                        <button
+                          (click)="customHeaderFooterSelectAll()"
+                          class="btn btn-sm btn-secondary mr-1"
+                          rippleEffect
+                        >
+                          Select all
+                        </button>
+                        <button (click)="customHeaderFooterUnselectAll()" class="btn btn-sm btn-secondary" rippleEffect>
+                          Unselect all
+                        </button>
+                      </ng-template>
+                      <ng-template ng-footer-tmp>
+                        Selected count: {{ selectCustomHeaderFooterSelected.length }}
+                      </ng-template>
+                    </ng-select>
+                    <br />
+
+                    Selected people: {{ selectCustomHeaderFooterSelected }}
+                    <!--/ Select Custom header footer template -->
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    (click)="modalSelectOpen(modalSelect)"
+                    class="btn btn-outline-primary btn-block"
+                    rippleEffect
+                  >
+                    Ng-Select in Modal
+                  </button>
+
+                  <!-- Modal -->
+                  <ng-template #modalSelect let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel1">ng-select in Modal</h4>
+                      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" tabindex="0" ngbAutofocus>
+                      <p>This is <code>ng-select</code> example in Modal.</p>
+                      <ng-select [items]="selectBasic" bindLabel="name" [loading]="selectBasicLoading"> </ng-select>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
+                        Accept
+                      </button>
+                    </div>
+                  </ng-template>
+                  <!-- / Modal -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Select Advance Options end -->
+
+    <!-- Select Sizing start -->
+    <section class="select-sizing">
+      <div class="row match-height">
+        <div class="col-md-6 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Size</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text mb-1">
+                    For different sizes of select, Use classes like <code>.ng-select-size-lg</code> &amp;
+                    <code>.ng-select-size-sm</code> for Large &amp; Small Select respectively.
+                  </p>
+                </div>
+                <div class="col-12">
+                  <label>Large</label>
+                  <div class="form-group">
+                    <!-- select size large -->
+                    <ng-select
+                      class="ng-select-size-lg"
+                      #SelectSizeLarge
+                      [items]="selectGroup"
+                      [searchable]="false"
+                      [(ngModel)]="SelectSizeLargeSelected"
+                      bindLabel="name"
+                      bindValue="name"
+                    >
+                      <ng-template ng-header-tmp>
+                        <input
+                          class="form-control w-100"
+                          type="text"
+                          (input)="SelectSizeLarge.filter($event.target.value)"
+                        />
+                      </ng-template>
+                      <!--/ select size large -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label>Default</label>
+                  <div class="form-group">
+                    <!-- Select Size default -->
+                    <ng-select
+                      #SelectSizeDefault
+                      [items]="selectGroup"
+                      [searchable]="false"
+                      [(ngModel)]="SelectSizeDefaultSelected"
+                      bindLabel="name"
+                      bindValue="name"
+                    >
+                      <ng-template ng-header-tmp>
+                        <input
+                          class="form-control w-100"
+                          type="text"
+                          (input)="SelectSizeDefault.filter($event.target.value)"
+                        />
+                      </ng-template>
+                      <!--/ Select Size default -->
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label>Small</label>
+                  <div class="form-group">
+                    <!-- Select Size small -->
+                    <ng-select
+                      class="ng-select-size-sm"
+                      #SelectSizeSmall
+                      [items]="selectGroup"
+                      [searchable]="false"
+                      [(ngModel)]="SelectSizeSmallSelected"
+                      bindLabel="name"
+                      bindValue="name"
+                    >
+                      <ng-template ng-header-tmp>
+                        <input
+                          class="form-control w-100"
+                          type="text"
+                          (input)="SelectSizeSmall.filter($event.target.value)"
+                        />
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Select Size small -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Multi Select Size</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text mb-1">
+                    For different sizes of select, Use classes like <code>.ng-select-size-lg</code> &amp;
+                    <code>.ng-select-size-sm</code> for Large &amp; Small Select respectively.
+                  </p>
+                </div>
+                <div class="col-12">
+                  <label>Large</label>
+                  <div class="form-group">
+                    <!-- Multi Select Size large -->
+                    <ng-select
+                      class="ng-select-size-lg"
+                      [items]="MultiLarge | async"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [searchable]="false"
+                      bindLabel="name"
+                      placeholder="Select people"
+                      [(ngModel)]="MultiLargeSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Multi Select Size large -->
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label>Default</label>
+                  <div class="form-group">
+                    <!-- Multi Select Size default -->
+                    <ng-select
+                      [items]="MultiDefault | async"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [searchable]="false"
+                      bindLabel="name"
+                      placeholder="Select people"
+                      [(ngModel)]="MultiDefaultSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Multi Select Size default -->
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label>Small</label>
+                  <div class="form-group">
+                    <!-- Multi Select Size small -->
+                    <ng-select
+                      class="ng-select-size-sm"
+                      [items]="MultiSmall | async"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [searchable]="false"
+                      bindLabel="name"
+                      placeholder="Select people"
+                      [(ngModel)]="MultiSmallSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                    <!--/ Multi Select Size small -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Select Sizing end -->
+  </div>
+</div>

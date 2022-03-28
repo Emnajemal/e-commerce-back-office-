@@ -1,0 +1,166 @@
+<div class="blog-wrapper">
+  <div class="content-wrapper container-xxl p-0">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <div class="content-detached content-left">
+      <div class="content-body">
+        <!-- Blog List -->
+        <div class="blog-list-wrapper">
+          <!-- Blog List Items -->
+          <div class="row">
+            <div class="col-md-6 col-12" *ngFor="let blogListRef of data.blogList">
+              <div class="card">
+                <a routerLink="/pages/blog-details/{{ blogListRef.id }}">
+                  <img class="card-img-top img-fluid" [src]="blogListRef.img" alt="Blog Post pic" />
+                </a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a
+                      routerLink="/pages/blog-details/{{ blogListRef.id }}"
+                      class="blog-title-truncate text-body-heading"
+                      >{{ blogListRef.title }}</a
+                    >
+                  </h4>
+                  <div class="media">
+                    <div class="avatar mr-50">
+                      <img [src]="blogListRef.avatar" alt="Avatar" width="24" height="24" />
+                    </div>
+                    <div class="media-body">
+                      <small class="text-muted mr-25">by</small>
+                      <small
+                        ><a href="javascript:void(0);" class="text-body">{{ blogListRef.username }}</a></small
+                      >
+                      <span class="text-muted ml-50 mr-25">|</span>
+                      <small class="text-muted">{{ blogListRef.blogPosted }}</small>
+                    </div>
+                  </div>
+                  <div class="my-1 py-25">
+                    <a href="javascript:void(0);" *ngFor="let tagsRef of blogListRef.tags">
+                      <div
+                        class="badge badge-pill mr-50"
+                        [ngClass]="{
+                          'bg-light-info': tagsRef === 'Quote',
+                          'bg-light-primary': tagsRef === 'Fashion',
+                          'bg-light-danger': tagsRef === 'Gaming',
+                          'bg-light-warning': tagsRef === 'Video',
+                          'bg-light-success': tagsRef === 'Food'
+                        }"
+                      >
+                        {{ tagsRef }}
+                      </div>
+                    </a>
+                  </div>
+                  <p class="card-text blog-content-truncate">{{ blogListRef.blogText }}</p>
+                  <hr />
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a routerLink="/pages/blog-details/{{ blogListRef.id }}">
+                      <div class="d-flex align-items-center">
+                        <i data-feather="message-square" class="font-medium-1 text-body mr-50"></i>
+                        <span class="text-body font-weight-bold">{{ blogListRef.comment }} Comments</span>
+                      </div>
+                    </a>
+                    <a routerLink="/pages/blog-details/{{ blogListRef.id }}" class="font-weight-bold">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/ Blog List Items -->
+
+          <!-- Pagination -->
+          <div class="row">
+            <div class="col-12">
+              <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mt-2">
+                  <li class="page-item prev-item"><a class="page-link" href="javascript:void(0);"></a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="javascript:void(0);">4</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0);">6</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0);">7</a></li>
+                  <li class="page-item next-item"><a class="page-link" href="javascript:void(0);"></a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!--/ Pagination -->
+        </div>
+        <!--/ Blog List -->
+      </div>
+    </div>
+    <div class="sidebar-detached sidebar-right">
+      <div class="sidebar">
+        <div class="blog-sidebar my-2 my-lg-0">
+          <!-- Search bar -->
+          <div class="blog-search">
+            <div class="input-group input-group-merge">
+              <input type="text" class="form-control" placeholder="Search here" />
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer">
+                  <i data-feather="search"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!--/ Search bar -->
+
+          <!-- Recent Posts -->
+          <div class="blog-recent-posts mt-3">
+            <h6 class="section-label">Recent Posts</h6>
+            <div class="mt-75">
+              <div class="media mb-2" *ngFor="let recentPostsRef of data.blogSidebar.recentPosts">
+                <a routerLink="/pages/blog-details/{{ recentPostsRef.id }}" class="mr-2">
+                  <img class="rounded" [src]="recentPostsRef.img" width="100" height="70" alt="Recent Post Pic" />
+                </a>
+                <div class="media-body">
+                  <h6 class="blog-recent-post-title">
+                    <a routerLink="/pages/blog-details/{{ recentPostsRef.id }}" class="text-body-heading">{{
+                      recentPostsRef.title
+                    }}</a>
+                  </h6>
+                  <div class="text-muted mb-0">{{ recentPostsRef.postedAt }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/ Recent Posts -->
+
+          <!-- Categories -->
+          <div class="blog-categories mt-3">
+            <h6 class="section-label">Categories</h6>
+            <div class="mt-1" *ngFor="let categoriesRef of data.blogSidebar.categories">
+              <div class="d-flex justify-content-start align-items-center mb-75">
+                <a href="javascript:void(0);" class="mr-75">
+                  <div
+                    class="avatar bg-light-primary rounded"
+                    class="avatar bg-light-primary rounded"
+                    [ngClass]="{
+                      'bg-light-primary': categoriesRef.icon === 'watch',
+                      'bg-light-success': categoriesRef.icon === 'shopping-cart',
+                      'bg-light-danger': categoriesRef.icon === 'command',
+                      'bg-light-info': categoriesRef.icon === 'hash',
+                      'bg-light-warning': categoriesRef.icon === 'video'
+                    }"
+                  >
+                    <div class="avatar-content">
+                      <i [data-feather]="categoriesRef.icon" class="avatar-icon font-medium-1"></i>
+                    </div>
+                  </div>
+                </a>
+                <a href="javascript:void(0);">
+                  <div class="blog-category-title text-body">{{ categoriesRef.category }}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!--/ Categories -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

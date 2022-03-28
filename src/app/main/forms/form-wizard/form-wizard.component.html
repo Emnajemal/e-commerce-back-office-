@@ -1,0 +1,1170 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- Horizontal Wizard -->
+    <section class="horizontal-wizard">
+      <div id="stepper1" class="bs-stepper horizontal-wizard-example">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#account-details">
+            <button class="step-trigger">
+              <span class="bs-stepper-box">1</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Account Details</span>
+                <span class="bs-stepper-subtitle">Setup Account Details</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+          <div class="step" data-target="#personal-info">
+            <button class="step-trigger">
+              <span class="bs-stepper-box">2</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Personal Info</span>
+                <span class="bs-stepper-subtitle">Add Personal Info</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+          <div class="step" data-target="#address">
+            <button class="step-trigger">
+              <span class="bs-stepper-box">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Address</span>
+                <span class="bs-stepper-subtitle">Add Address</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+          <div class="step" data-target="#social-links">
+            <button class="step-trigger">
+              <span class="bs-stepper-box">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Social Links</span>
+                <span class="bs-stepper-subtitle">Add Social Links</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="bs-stepper-content">
+          <form (ngSubmit)="(HWForm.form.valid)" #HWForm="ngForm">
+            <div id="account-details" class="content">
+              <form #accountDetailsForm="ngForm">
+                <div class="content-header">
+                  <h5 class="mb-0">Account Details</h5>
+                  <small class="text-muted">Enter Your Account Details.</small>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="username">Username</label>
+                    <input
+                      [(ngModel)]="TDNameVar"
+                      #TDNameRef="ngModel"
+                      required
+                      type="text"
+                      name="username"
+                      id="username"
+                      class="form-control"
+                      [class.error]="!TDNameRef.valid && accountDetailsForm.submitted"
+                      placeholder="johndoe"
+                    />
+                    <span *ngIf="accountDetailsForm.submitted && TDNameRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="TDNameRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input
+                      [(ngModel)]="TDEmailVar"
+                      #TDEmailRef="ngModel"
+                      required
+                      email
+                      type="email"
+                      name="email"
+                      id="email"
+                      class="form-control"
+                      [class.error]="!TDEmailRef.valid && accountDetailsForm.submitted"
+                      placeholder="john.doe@email.com"
+                      aria-label="john.doe"
+                    />
+                    <span *ngIf="accountDetailsForm.submitted" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="!TDEmailRef.valid">Email must be valid!</small>
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group form-password-toggle col-md-6">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      [class.error]="!TDPasswordOnlyRef.valid && accountDetailsForm.submitted"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      ngModel
+                      #TDPasswordOnlyRef="ngModel"
+                      required
+                      minlength="6"
+                      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    />
+                    <div
+                      *ngIf="TDPasswordOnlyRef.invalid && accountDetailsForm.submitted"
+                      class="form-text text-danger"
+                    >
+                      <small *ngIf="TDPasswordOnlyRef.errors.required"> Password is required. </small>
+                      <small *ngIf="TDPasswordOnlyRef.errors.pattern">
+                        Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more
+                        characters.</small
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group form-password-toggle col-md-6">
+                    <label class="form-label" for="confirm-password">Confirm Password</label>
+                    <input
+                      type="password"
+                      name="confirm-password"
+                      id="confirm-password"
+                      class="form-control"
+                      [class.error]="!TDRepeatPasswordRef.valid && accountDetailsForm.submitted"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      required
+                      ngModel
+                      #TDRepeatPasswordRef="ngModel"
+                      pattern="{{ TDPasswordOnlyRef.value }}"
+                      minlength="6"
+                    />
+                    <div
+                      *ngIf="TDRepeatPasswordRef.invalid && accountDetailsForm.submitted"
+                      class="form-text text-danger"
+                    >
+                      <small *ngIf="TDRepeatPasswordRef.errors.required"> Confirm password is required. </small>
+                      <small *ngIf="TDRepeatPasswordRef.errors.pattern">
+                        Password & Confirm Password does not match.</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <button
+                    (click)="horizontalWizardStepperPrevious()"
+                    class="btn btn-outline-secondary btn-prev"
+                    disabled
+                    rippleEffect
+                  >
+                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                  </button>
+                  <button
+                    (click)="horizontalWizardStepperNext(accountDetailsForm)"
+                    type="submit"
+                    class="btn btn-primary btn-next"
+                    rippleEffect
+                  >
+                    <span class="align-middle d-sm-inline-block d-none">Next</span>
+                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div id="personal-info" class="content">
+              <form #personalInfoForm="ngForm">
+                <div class="content-header">
+                  <h5 class="mb-0">Personal Info</h5>
+                  <small>Enter Your Personal Info.</small>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="first-name">First Name</label>
+                    <input
+                      [(ngModel)]="TDFirstNameVar"
+                      #TDFirstNameRef="ngModel"
+                      required
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      class="form-control"
+                      [class.error]="personalInfoForm.submitted && TDFirstNameRef.invalid"
+                      placeholder="John"
+                    />
+                    <span *ngIf="personalInfoForm.submitted && TDFirstNameRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="TDFirstNameRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="last-name">Last Name</label>
+                    <input
+                      [(ngModel)]="TDLastNameVar"
+                      #TDLastNameRef="ngModel"
+                      required
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      class="form-control"
+                      [class.error]="personalInfoForm.submitted && TDLastNameRef.invalid"
+                      placeholder="Doe"
+                    />
+                    <span *ngIf="personalInfoForm.submitted && TDLastNameRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="TDLastNameRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="country">Country</label>
+                    <ng-select [items]="selectBasic" bindLabel="name"> </ng-select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="language">Language</label>
+                    <ng-select
+                      [items]="selectMulti"
+                      [multiple]="true"
+                      [closeOnSelect]="false"
+                      [searchable]="false"
+                      bindLabel="name"
+                      name="selectLanguage"
+                      placeholder="Select people"
+                      [(ngModel)]="selectMultiSelected"
+                    >
+                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                        <span class="ng-value-label"> {{ item.name }}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <button
+                    type="button"
+                    (click)="horizontalWizardStepperPrevious()"
+                    class="btn btn-primary btn-prev"
+                    rippleEffect
+                  >
+                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                  </button>
+                  <button
+                    (click)="horizontalWizardStepperNext(personalInfoForm)"
+                    class="btn btn-primary btn-next"
+                    rippleEffect
+                  >
+                    <span class="align-middle d-sm-inline-block d-none">Next</span>
+                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div id="address" class="content">
+              <form #addressForm="ngForm">
+                <div class="content-header">
+                  <h5 class="mb-0">Address</h5>
+                  <small>Enter Your Address.</small>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="address">Address</label>
+                    <input
+                      [(ngModel)]="addressVar"
+                      #addressRef="ngModel"
+                      required
+                      type="text"
+                      id="address"
+                      name="address"
+                      class="form-control"
+                      [class.error]="addressForm.submitted && addressRef.invalid"
+                      placeholder="98  Borough bridge Road, Birmingham"
+                    />
+                    <span *ngIf="addressForm.submitted && addressRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="addressRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="landmark">Landmark</label>
+                    <input
+                      [(ngModel)]="landmarkVar"
+                      #landmarkRef="ngModel"
+                      required
+                      type="text"
+                      name="landmark"
+                      id="landmark"
+                      class="form-control"
+                      [class.error]="addressForm.submitted && landmarkRef.invalid"
+                      placeholder="Borough bridge"
+                    />
+                    <span *ngIf="addressForm.submitted && landmarkRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="landmarkRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="pincode1">Pincode</label>
+                    <input type="text" id="pincode1" class="form-control" placeholder="658921" />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="city1">City</label>
+                    <input type="text" id="city1" class="form-control" placeholder="Birmingham" />
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <button
+                    type="button"
+                    (click)="horizontalWizardStepperPrevious()"
+                    class="btn btn-primary btn-prev"
+                    rippleEffect
+                  >
+                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                  </button>
+                  <button
+                    (click)="horizontalWizardStepperNext(addressForm)"
+                    class="btn btn-primary btn-next"
+                    rippleEffect
+                  >
+                    <span class="align-middle d-sm-inline-block d-none">Next</span>
+                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div id="social-links" class="content">
+              <form #socialLinkForm="ngForm">
+                <div class="content-header">
+                  <h5 class="mb-0">Social Links</h5>
+                  <small>Enter Your Social Links.</small>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="twitter">Twitter</label>
+                    <input
+                      [(ngModel)]="twitterVar"
+                      #twitterkRef="ngModel"
+                      required
+                      type="text"
+                      id="twitter"
+                      name="twitter"
+                      class="form-control"
+                      [class.error]="socialLinkForm.submitted && twitterkRef.invalid"
+                      placeholder="https://twitter.com/abc"
+                    />
+                    <span *ngIf="socialLinkForm.submitted && twitterkRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="twitterkRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="facebook">Facebook</label>
+                    <input
+                      [(ngModel)]="facebookVar"
+                      #facebookRef="ngModel"
+                      required
+                      type="text"
+                      id="facebook"
+                      name="facebook"
+                      class="form-control"
+                      [class.error]="socialLinkForm.submitted && facebookRef.invalid"
+                      placeholder="https://facebook.com/abc"
+                    />
+                    <span *ngIf="socialLinkForm.submitted && facebookRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="facebookRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="google">Google+</label>
+                    <input
+                      [(ngModel)]="googleVar"
+                      #googleRef="ngModel"
+                      required
+                      type="text"
+                      id="google"
+                      name="google"
+                      class="form-control"
+                      [class.error]="socialLinkForm.submitted && googleRef.invalid"
+                      placeholder="https://plus.google.com/abc"
+                    />
+                    <span *ngIf="socialLinkForm.submitted && googleRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="googleRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="form-label" for="linkedin">Linkedin</label>
+                    <input
+                      [(ngModel)]="linkedinVar"
+                      #linkedinRef="ngModel"
+                      required
+                      type="text"
+                      id="linkedin"
+                      name="linkedin"
+                      class="form-control"
+                      [class.error]="socialLinkForm.submitted && linkedinRef.invalid"
+                      placeholder="https://linkedin.com/abc"
+                    />
+                    <span *ngIf="socialLinkForm.submitted && linkedinRef.invalid" class="invalid-form">
+                      <small class="form-text text-danger" *ngIf="linkedinRef.errors.required"
+                        >This field is required!</small
+                      >
+                    </span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button
+                    type="button"
+                    (click)="horizontalWizardStepperPrevious()"
+                    class="btn btn-primary btn-prev"
+                    rippleEffect
+                  >
+                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                  </button>
+                  <button class="btn btn-success btn-submit" rippleEffect (click)="onSubmit()">Submit</button>
+                </div>
+              </form>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!--/ Horizontal Wizard -->
+
+    <!-- Vertical Wizard -->
+    <section class="vertical-wizard">
+      <div id="stepper2" class="bs-stepper vertical vertical-wizard-example">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#account-details-vertical">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">1</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Account Details</span>
+                <span class="bs-stepper-subtitle">Setup Account Details</span>
+              </span>
+            </button>
+          </div>
+          <div class="step" data-target="#personal-info-vertical">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">2</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Personal Info</span>
+                <span class="bs-stepper-subtitle">Add Personal Info</span>
+              </span>
+            </button>
+          </div>
+          <div class="step" data-target="#address-step-vertical">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Address</span>
+                <span class="bs-stepper-subtitle">Add Address</span>
+              </span>
+            </button>
+          </div>
+          <div class="step" data-target="#social-links-vertical">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">4</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Social Links</span>
+                <span class="bs-stepper-subtitle">Add Social Links</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="bs-stepper-content">
+          <div id="account-details-vertical" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Account Details</h5>
+              <small class="text-muted">Enter Your Account Details.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-username">Username</label>
+                <input type="text" id="vertical-username" class="form-control" placeholder="johndoe" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-email">Email</label>
+                <input
+                  type="email"
+                  id="vertical-email"
+                  class="form-control"
+                  placeholder="john.doe@email.com"
+                  aria-label="john.doe"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group form-password-toggle col-md-6">
+                <label class="form-label" for="vertical-password">Password</label>
+                <input
+                  type="password"
+                  id="vertical-password"
+                  class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                />
+              </div>
+              <div class="form-group form-password-toggle col-md-6">
+                <label class="form-label" for="vertical-confirm-password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="vertical-confirm-password"
+                  class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-outline-secondary btn-prev" disabled rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="verticalWizardNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="personal-info-vertical" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Personal Info</h5>
+              <small>Enter Your Personal Info.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-first-name">First Name</label>
+                <input type="text" id="vertical-first-name" class="form-control" placeholder="John" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-last-name">Last Name</label>
+                <input type="text" id="vertical-last-name" class="form-control" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-country">Country</label>
+                <ng-select [items]="selectBasic" bindLabel="name"> </ng-select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-language">Language</label>
+                <ng-select
+                  [items]="selectMulti"
+                  [multiple]="true"
+                  [closeOnSelect]="false"
+                  [searchable]="false"
+                  bindLabel="name"
+                  name="selectLanguage"
+                  placeholder="Select people"
+                  [(ngModel)]="selectMultiSelected"
+                >
+                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                    <span class="ng-value-label"> {{ item.name }}</span>
+                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="verticalWizardPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="verticalWizardNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="address-step-vertical" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Address</h5>
+              <small>Enter Your Address.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-address">Address</label>
+                <input
+                  type="text"
+                  id="vertical-address"
+                  class="form-control"
+                  placeholder="98  Borough bridge Road, Birmingham"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-landmark">Landmark</label>
+                <input type="text" id="vertical-landmark" class="form-control" placeholder="Borough bridge" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="pincode2">Pincode</label>
+                <input type="text" id="pincode2" class="form-control" placeholder="658921" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="city2">City</label>
+                <input type="text" id="city2" class="form-control" placeholder="Birmingham" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="verticalWizardPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="verticalWizardNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="social-links-vertical" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Social Links</h5>
+              <small>Enter Your Social Links.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-twitter">Twitter</label>
+                <input type="text" id="vertical-twitter" class="form-control" placeholder="https://twitter.com/abc" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-facebook">Facebook</label>
+                <input type="text" id="vertical-facebook" class="form-control" placeholder="https://facebook.com/abc" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-google">Google+</label>
+                <input
+                  type="text"
+                  id="vertical-google"
+                  class="form-control"
+                  placeholder="https://plus.google.com/abc"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-linkedin">Linkedin</label>
+                <input type="text" id="vertical-linkedin" class="form-control" placeholder="https://linkedin.com/abc" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="verticalWizardPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-success btn-submit" rippleEffect (click)="onSubmit()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Vertical Wizard -->
+
+    <!-- Modern Horizontal Wizard -->
+    <section class="modern-horizontal-wizard">
+      <div id="stepper3" class="bs-stepper wizard-modern modern-wizard-example">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#account-details-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="file-text" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Account Details</span>
+                <span class="bs-stepper-subtitle">Setup Account Details</span>
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#personal-info-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="user" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Personal Info</span>
+                <span class="bs-stepper-subtitle">Add Personal Info</span>
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#address-step-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="map-pin" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Address</span>
+                <span class="bs-stepper-subtitle">Add Address</span>
+              </span>
+            </button>
+          </div>
+          <div class="line">
+            <i data-feather="chevron-right" class="font-medium-2"></i>
+          </div>
+          <div class="step" data-target="#social-links-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="link" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Social Links</span>
+                <span class="bs-stepper-subtitle">Add Social Links</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="bs-stepper-content">
+          <div id="account-details-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Account Details</h5>
+              <small class="text-muted">Enter Your Account Details.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-username">Username</label>
+                <input type="text" id="modern-username" class="form-control" placeholder="johndoe" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-email">Email</label>
+                <input
+                  type="email"
+                  id="modern-email"
+                  class="form-control"
+                  placeholder="john.doe@email.com"
+                  aria-label="john.doe"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group form-password-toggle col-md-6">
+                <label class="form-label" for="modern-password">Password</label>
+                <input
+                  type="password"
+                  id="modern-password"
+                  class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                />
+              </div>
+              <div class="form-group form-password-toggle col-md-6">
+                <label class="form-label" for="modern-confirm-password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="modern-confirm-password"
+                  class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-outline-secondary btn-prev" disabled rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="modernHorizontalNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="personal-info-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Personal Info</h5>
+              <small>Enter Your Personal Info.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-first-name">First Name</label>
+                <input type="text" id="modern-first-name" class="form-control" placeholder="John" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-last-name">Last Name</label>
+                <input type="text" id="modern-last-name" class="form-control" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-country">Country</label>
+                <ng-select [items]="selectBasic" bindLabel="name"> </ng-select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-language">Language</label>
+                <ng-select
+                  [items]="selectMulti"
+                  [multiple]="true"
+                  [closeOnSelect]="false"
+                  [searchable]="false"
+                  bindLabel="name"
+                  name="selectLanguage"
+                  placeholder="Select people"
+                  [(ngModel)]="selectMultiSelected"
+                >
+                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                    <span class="ng-value-label"> {{ item.name }}</span>
+                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="modernHorizontalPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="modernHorizontalNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="address-step-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Address</h5>
+              <small>Enter Your Address.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-address">Address</label>
+                <input
+                  type="text"
+                  id="modern-address"
+                  class="form-control"
+                  placeholder="98  Borough bridge Road, Birmingham"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-landmark">Landmark</label>
+                <input type="text" id="modern-landmark" class="form-control" placeholder="Borough bridge" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="pincode3">Pincode</label>
+                <input type="text" id="pincode3" class="form-control" placeholder="658921" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="city3">City</label>
+                <input type="text" id="city3" class="form-control" placeholder="Birmingham" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="modernHorizontalPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="modernHorizontalNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="social-links-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Social Links</h5>
+              <small>Enter Your Social Links.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-twitter">Twitter</label>
+                <input type="text" id="modern-twitter" class="form-control" placeholder="https://twitter.com/abc" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-facebook">Facebook</label>
+                <input type="text" id="modern-facebook" class="form-control" placeholder="https://facebook.com/abc" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-google">Google+</label>
+                <input type="text" id="modern-google" class="form-control" placeholder="https://plus.google.com/abc" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="modern-linkedin">Linkedin</label>
+                <input type="text" id="modern-linkedin" class="form-control" placeholder="https://linkedin.com/abc" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="modernHorizontalPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-success btn-submit" rippleEffect (click)="onSubmit()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Modern Horizontal Wizard -->
+
+    <!-- Modern Vertical Wizard -->
+    <section class="modern-vertical-wizard">
+      <div id="stepper4" class="bs-stepper vertical wizard-modern modern-vertical-wizard-example">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#account-details-vertical-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="file-text" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Account Details</span>
+                <span class="bs-stepper-subtitle">Setup Account Details</span>
+              </span>
+            </button>
+          </div>
+          <div class="step" data-target="#personal-info-vertical-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="user" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Personal Info</span>
+                <span class="bs-stepper-subtitle">Add Personal Info</span>
+              </span>
+            </button>
+          </div>
+          <div class="step" data-target="#address-step-vertical-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="map-pin" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Address</span>
+                <span class="bs-stepper-subtitle">Add Address</span>
+              </span>
+            </button>
+          </div>
+          <div class="step" data-target="#social-links-vertical-modern">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-box">
+                <i data-feather="link" class="font-medium-3"></i>
+              </span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">Social Links</span>
+                <span class="bs-stepper-subtitle">Add Social Links</span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="bs-stepper-content">
+          <div id="account-details-vertical-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Account Details</h5>
+              <small class="text-muted">Enter Your Account Details.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-username">Username</label>
+                <input type="text" id="vertical-modern-username" class="form-control" placeholder="johndoe" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-email">Email</label>
+                <input
+                  type="email"
+                  id="vertical-modern-email"
+                  class="form-control"
+                  placeholder="john.doe@email.com"
+                  aria-label="john.doe"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group form-password-toggle col-md-6">
+                <label class="form-label" for="vertical-modern-password">Password</label>
+                <input
+                  type="password"
+                  id="vertical-modern-password"
+                  class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                />
+              </div>
+              <div class="form-group form-password-toggle col-md-6">
+                <label class="form-label" for="vertical-modern-confirm-password">Confirm Password</label>
+                <input
+                  type="password"
+                  id="vertical-modern-confirm-password"
+                  class="form-control"
+                  placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-outline-secondary btn-prev" disabled rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="modernVerticalNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="personal-info-vertical-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Personal Info</h5>
+              <small>Enter Your Personal Info.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-first-name">First Name</label>
+                <input type="text" id="vertical-modern-first-name" class="form-control" placeholder="John" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-last-name">Last Name</label>
+                <input type="text" id="vertical-modern-last-name" class="form-control" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-country">Country</label>
+                <ng-select [items]="selectBasic" bindLabel="name"> </ng-select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-language">Language</label>
+                <ng-select
+                  [items]="selectMulti"
+                  [multiple]="true"
+                  [closeOnSelect]="false"
+                  [searchable]="false"
+                  bindLabel="name"
+                  name="selectLanguage"
+                  placeholder="Select people"
+                  [(ngModel)]="selectMultiSelected"
+                >
+                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                    <span class="ng-value-label"> {{ item.name }}</span>
+                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                  </ng-template>
+                </ng-select>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="modernVerticalPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="modernVerticalNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="address-step-vertical-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Address</h5>
+              <small>Enter Your Address.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-address">Address</label>
+                <input
+                  type="text"
+                  id="vertical-modern-address"
+                  class="form-control"
+                  placeholder="98  Borough bridge Road, Birmingham"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-landmark">Landmark</label>
+                <input type="text" id="vertical-modern-landmark" class="form-control" placeholder="Borough bridge" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="pincode4">Pincode</label>
+                <input type="text" id="pincode4" class="form-control" placeholder="658921" />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="city4">City</label>
+                <input type="text" id="city4" class="form-control" placeholder="Birmingham" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="modernVerticalPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-primary btn-next" (click)="modernVerticalNext()" rippleEffect>
+                <span class="align-middle d-sm-inline-block d-none">Next</span>
+                <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+            </div>
+          </div>
+          <div id="social-links-vertical-modern" class="content">
+            <div class="content-header">
+              <h5 class="mb-0">Social Links</h5>
+              <small>Enter Your Social Links.</small>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-twitter">Twitter</label>
+                <input
+                  type="text"
+                  id="vertical-modern-twitter"
+                  class="form-control"
+                  placeholder="https://twitter.com/abc"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-facebook">Facebook</label>
+                <input
+                  type="text"
+                  id="vertical-modern-facebook"
+                  class="form-control"
+                  placeholder="https://facebook.com/abc"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-google">Google+</label>
+                <input
+                  type="text"
+                  id="vertical-modern-google"
+                  class="form-control"
+                  placeholder="https://plus.google.com/abc"
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label" for="vertical-modern-linkedin">Linkedin</label>
+                <input
+                  type="text"
+                  id="vertical-modern-linkedin"
+                  class="form-control"
+                  placeholder="https://linkedin.com/abc"
+                />
+              </div>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-primary btn-prev" (click)="modernVerticalPrevious()" rippleEffect>
+                <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+              </button>
+              <button class="btn btn-success btn-submit" rippleEffect (click)="onSubmit()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Modern Vertical Wizard -->
+  </div>
+</div>

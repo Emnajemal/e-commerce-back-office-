@@ -1,0 +1,201 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- Invoice List -->
+    <section class="invoice-list-wrapper">
+      <div class="card">
+        <!-- Invoice List Header -->
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <div class="d-flex align-items-center">
+                <label class="d-flex align-items-center"
+                  >Show
+                  <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </label>
+                <button class="btn btn-primary ml-2" routerLink="/apps/invoice/add" rippleEffect>Add Record</button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              col-md-6 col-lg-4 col-12
+              d-flex
+              justify-content-start justify-content-md-end
+              align-items-center
+              offset-lg-2
+            "
+          >
+            <div class="row pr-1 pb-1 pb-md-0 align-items-center w-100">
+              <div class="col-10 col-md-6 pr-0">
+                <label class="d-flex align-items-center mb-0 ml-1 ml-md-0"
+                  ><input
+                    [(ngModel)]="searchValue"
+                    name="searchValue"
+                    type="search"
+                    class="form-control"
+                    placeholder="Search..."
+                    (keyup)="filterUpdate($event)"
+                    (search)="filterUpdate($event)"
+                /></label>
+              </div>
+              <div class="col-10 col-md-6 mt-2 ml-1 ml-md-0 mt-md-0">
+                <fieldset class="form-group mb-0">
+                  <ng-select
+                    [items]="selectStatus"
+                    [(ngModel)]="selectedStatus"
+                    bindLabel="name"
+                    placeholder="Select Status"
+                    (change)="filterByStatus($event)"
+                  ></ng-select>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/ Invoice List Header -->
+
+        <!-- Invoice List Table -->
+        <ngx-datatable
+          [rows]="rows"
+          [rowHeight]="50"
+          class="bootstrap core-bootstrap"
+          [limit]="selectedOption"
+          [columnMode]="ColumnMode.force"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [scrollbarH]="true"
+        >
+          <ngx-datatable-column name="#" prop="id" [width]="50">
+            <ng-template let-id="value" ngx-datatable-cell-template>
+              <a routerLink="/apps/invoice/preview/{{ id }}" class="font-weight-bold">#{{ id }}</a>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="status" prop="invoiceStatus" [width]="50">
+            <ng-template let-row="row" let-invoiceStatus="value" ngx-datatable-cell-template>
+              <!-- <a class="font-weight-bold">{{ invoiceStatus }}</a> -->
+              <div
+                class="avatar avatar-status"
+                [ngClass]="{
+                  'bg-light-secondary': row.invoiceStatus == 'Sent',
+                  'bg-light-success': row.invoiceStatus == 'Paid',
+                  'bg-light-primary': row.invoiceStatus == 'Draft',
+                  'bg-light-warning': row.invoiceStatus == 'Partial Payment',
+                  'bg-light-info': row.invoiceStatus == 'Downloaded',
+                  'bg-light-danger': row.invoiceStatus == 'Past Due'
+                }"
+              >
+                <ng-template #tipContent
+                  ><span
+                    >{{ row.invoiceStatus }}<br />
+                    <span class="font-weight-bold">Balance:</span> {{ row.balance }}<br />
+                    <span class="font-weight-bold">Due Date:</span> {{ row.dueDate }}</span
+                  ></ng-template
+                >
+                <span class="avatar-content" placement="top" [ngbTooltip]="tipContent" container="body">
+                  <i
+                    class="feather avatar-icon font-medium-1"
+                    [ngClass]="{
+                      'icon-send': row.invoiceStatus == 'Sent',
+                      'icon-check-circle': row.invoiceStatus == 'Paid',
+                      'icon-save': row.invoiceStatus == 'Draft',
+                      'icon-pie-chart': row.invoiceStatus == 'Partial Payment',
+                      'icon-arrow-down-circle': row.invoiceStatus == 'Downloaded',
+                      'icon-info': row.invoiceStatus == 'Past Due'
+                    }"
+                  ></i
+                ></span>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="client" prop="client.name" [width]="250">
+            <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+              <div class="d-flex align-items-center">
+                <div *ngIf="row.avatar.length > 0; else customAvatar">
+                  <img
+                    class="rounded-circle mr-1"
+                    src="{{ row.avatar }}"
+                    height="32"
+                    width="32"
+                    alt="datatable-avatar"
+                  />
+                </div>
+                <ng-template #customAvatar>
+                  <div
+                    class="avatar mr-1 ml-0"
+                    [ngClass]="{
+                      'bg-light-secondary': row.invoiceStatus == 'Sent',
+                      'bg-light-success': row.invoiceStatus == 'Paid',
+                      'bg-light-primary': row.invoiceStatus == 'Draft',
+                      'bg-light-warning': row.invoiceStatus == 'Partial Payment',
+                      'bg-light-info': row.invoiceStatus == 'Downloaded',
+                      'bg-light-danger': row.invoiceStatus == 'Past Due'
+                    }"
+                  >
+                    <div class="avatar-content">{{ name | initials }}</div>
+                  </div>
+                </ng-template>
+                <div class="cell-line-height">
+                  <span class="font-weight-bold d-block text-nowrap font-medium-1">{{ name }}</span>
+                  <span class="text-muted font-small-2"> @{{ row.client.companyEmail }}</span>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Total" prop="total" [width]="50">
+            <ng-template let-total="value" ngx-datatable-cell-template>
+              <div>
+                $
+                {{ total }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Issued Date" prop="issuedDate" [width]="100"> </ngx-datatable-column>
+          <ngx-datatable-column name="Balance" prop="balance" [width]="40">
+            <ng-template let-balance="value" ngx-datatable-cell-template>
+              <div class="" [ngClass]="balance == 0 ? 'badge badge-pill badge-light-success' : ' '">
+                {{ balance == 0 ? 'paid' : balance }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
+            <ng-template ngx-datatable-cell-template let-row="row">
+              <div class="d-flex align-items-center col-actions">
+                <a class="mr-1" href="javascript:void(0);" container="body" placement="top" ngbTooltip="Send Mail"
+                  ><i size="18" data-feather="send"></i
+                ></a>
+                <a
+                  class="mr-1"
+                  routerLink="/apps/invoice/preview/{{ row.id }}"
+                  container="body"
+                  placement="top"
+                  ngbTooltip="Preview Invoice"
+                  ><i size="18" data-feather="eye"></i
+                ></a>
+                <div ngbDropdown container="body">
+                  <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow px-0" rippleEffect>
+                    <i data-feather="more-vertical" size="18" class="cursor-pointer"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <a href="javascript:void(0)" ngbDropdownItem><i data-feather="download" class="mr-1"></i>Download</a
+                    ><a routerLink="/apps/invoice/edit/{{ row.id }}" ngbDropdownItem
+                      ><i data-feather="edit" class="mr-1"></i>Edit</a
+                    ><a href="javascript:void(0)" ngbDropdownItem><i data-feather="trash" class="mr-1"></i>Delete</a
+                    ><a href="javascript:void(0)" ngbDropdownItem><i data-feather="copy" class="mr-1"></i>Duplicate</a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        <!--/ Invoice List Table -->
+      </div>
+    </section>
+    <!--/ Invoice List -->
+  </div>
+</div>

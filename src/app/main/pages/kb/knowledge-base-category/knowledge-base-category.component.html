@@ -1,0 +1,82 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Knowledge base Jumbotron -->
+    <section id="kb-category-search">
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="card knowledge-base-bg text-center"
+            style="background-image: url('assets/images/banner/banner.png')"
+          >
+            <div class="card-body">
+              <h2 class="text-primary">Dedicated Source Used on Website</h2>
+              <p class="card-text mb-2">
+                <span>Popular searches: </span><span class="font-weight-bolder">Sales automation, Email marketing</span>
+              </p>
+              <form class="kb-search-input">
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i data-feather="search"></i></span>
+                  </div>
+                  <input
+                    type="text"
+                    [(ngModel)]="searchText"
+                    name="searchbar"
+                    class="form-control"
+                    id="searchbar"
+                    placeholder="Ask a question..."
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Knowledge base Jumbotron -->
+
+    <!-- Knowledge base category Content  -->
+    <section id="knowledge-base-category">
+      <div class="row kb-search-content-info match-height">
+        <div
+          class="col-md-4 col-sm-6 col-12 kb-search-content"
+          *ngFor="let categoryDataRef of data.categoryData | filter: searchText:'title'"
+        >
+          <!-- api card -->
+          <div class="card">
+            <div class="card-body">
+              <!-- api header -->
+              <h6 class="kb-title">
+                <i
+                  [data-feather]="categoryDataRef.icon"
+                  class="font-medium-4 {{ categoryDataRef.iconColor }} mr-50"
+                ></i>
+                <span>{{ categoryDataRef.title }} ({{ categoryDataRef.questions.length }})</span>
+              </h6>
+              <div class="list-group list-group-circle mt-2">
+                <a
+                  routerLink="{{ url }}/{{ categoryDataQuestionsRef.slug }}"
+                  class="list-group-item text-body"
+                  *ngFor="let categoryDataQuestionsRef of categoryDataRef.questions"
+                  >{{ categoryDataQuestionsRef.question }}</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- no result -->
+        <ng-container *ngIf="(data.categoryData | filter: searchText:'title').length; else noResults"></ng-container>
+        <ng-template #noResults>
+          <div class="col-12 text-center no-result">
+            <h4 class="mt-4">Search result not found!!</h4>
+          </div>
+        </ng-template>
+      </div>
+    </section>
+    <!--/ Knowledge base category Content -->
+  </div>
+</div>

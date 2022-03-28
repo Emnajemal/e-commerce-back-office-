@@ -1,0 +1,140 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <section id="google-maps-basic">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeBasic">
+            <h4 class="card-title">Basic</h4>
+            <div class="card-body">
+              <!-- Google Maps Basic Component -->
+              <google-map height="400px" width="'100%'"></google-map>
+              <!--/ Google Maps Basic Component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section id="google-maps-marker-circle-polygon">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeMarkerCirclePolygon">
+            <h4 class="card-title">Marker Circle & Polygon</h4>
+            <div class="card-body">
+              <!-- Google Maps Marker Circle Polygon Component -->
+              <google-map
+                height="400px"
+                width="'100%'"
+                [center]="markerCirclePolygonCenter"
+                [zoom]="markerCirclePolygonZoom"
+              >
+                <map-circle [options]="mapCircleOptions" [center]="mapCircleCenter"></map-circle>
+                <map-polygon [options]="mapPolygonOptions" [paths]="mapPolygonPaths"></map-polygon>
+              </google-map>
+              <!--/ Google Maps Marker Circle Polygon Component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section id="google-maps-advance">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeAdvance">
+            <h4 class="card-title">Advance</h4>
+            <div class="card-body">
+              <!-- Google Maps Advance Component -->
+              <google-map
+                [zoom]="advanceZoom"
+                height="400px"
+                width="100%"
+                [center]="advanceCenter"
+                [options]="advanceOptions"
+              >
+                <map-rectangle [bounds]="advanceRectangleBounds" [options]="advanceRectangleOptions"></map-rectangle>
+              </google-map>
+              <!-- Use custom zoom buttons -->
+              <div class="mt-1">
+                <button class="btn btn-primary" (click)="zoomIn()" rippleEffect>Zoom in</button>
+                <button class="btn btn-primary ml-1" (click)="zoomOut()" rippleEffect>Zoom out</button>
+              </div>
+              <!--/ Google Maps Advance Component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section id="google-maps-user-location">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeUserLocation">
+            <h4 class="card-title">User Location</h4>
+            <div class="card-body">
+              <p class="card-text">
+                <strong>Note :</strong> To see your location you need to give your location access in your respective
+                browser.
+              </p>
+              <!-- Google Maps User geo-location Component -->
+              <google-map [zoom]="userLocationZoom" height="400px" width="100%" [center]="userLocationCenter">
+                <map-marker [position]="userLocationCenter"></map-marker>
+              </google-map>
+              <!--/ Google Maps User geo-location Component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section id="google-maps-custom-icon">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeCustomIcon">
+            <h4 class="card-title">Custom Icons</h4>
+            <div class="card-body">
+              <!-- Google Maps User Custom Icons Component -->
+              <google-map [zoom]="customIconZoom" height="400px" width="100%" [center]="customIconCenter">
+                <map-marker [position]="customIconCenter" [options]="customIconOptions"></map-marker>
+                <map-marker [position]="customIcon2Center" [options]="customIcon2Options"></map-marker>
+              </google-map>
+              <!--/ Google Maps User Custom Icons Component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+
+    <section id="google-maps-marker">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeMarkerWithTooltip">
+            <h4 class="card-title">Marker with Tooltip</h4>
+            <div class="card-body">
+              <!-- Google Maps Marker with Tooltip Component -->
+              <google-map [zoom]="markerZoom" height="400px" width="100%" [center]="markerCenter">
+                <!-- [title]="marker.title" -->
+                <map-marker
+                  #markerElem="mapMarker"
+                  *ngFor="let marker of markers"
+                  [label]="marker.label"
+                  [position]="marker.position"
+                  [options]="marker.options"
+                  (mapClick)="openInfo(markerElem, marker.info)"
+                >
+                </map-marker>
+                <map-info-window *ngFor="let marker of markers" [position]="marker.position"
+                  >Hello Google Maps</map-info-window
+                >
+              </google-map>
+              <!--/ Google Maps Marker with Tooltip Component -->
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

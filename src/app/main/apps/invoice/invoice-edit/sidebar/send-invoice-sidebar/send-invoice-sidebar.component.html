@@ -1,0 +1,102 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+    <div class="modal-dialog sidebar-lg">
+      <div class="modal-content p-0">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="toggleSidebar('invoice-sidebar')"
+        >
+          ×
+        </button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">
+            <span class="align-middle">Send Invoice</span>
+          </h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <form>
+            <div class="form-group">
+              <label for="invoice-from" class="form-label">From</label>
+              <input
+                type="text"
+                class="form-control"
+                id="invoice-from"
+                value="shelbyComapny@email.com"
+                placeholder="company@email.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="invoice-to" class="form-label">To</label>
+              <input
+                type="text"
+                class="form-control"
+                id="invoice-to"
+                value="qConsolidated@email.com"
+                placeholder="company@email.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="invoice-subject" class="form-label">Subject</label>
+              <input
+                type="text"
+                class="form-control"
+                id="invoice-subject"
+                value="Invoice of purchased Admin Templates"
+                placeholder="Invoice regarding goods"
+              />
+            </div>
+            <div class="form-group">
+              <label for="invoice-message" class="form-label">Message</label>
+              <textarea
+                class="form-control"
+                name="invoice-message"
+                id="invoice-message"
+                cols="3"
+                rows="11"
+                placeholder="Message..."
+              >
+Dear Queen Consolidated,
+
+Thank you for your business, always a pleasure to work with you!
+
+We have generated a new invoice in the amount of $95.59
+
+We would appreciate payment of this invoice by 05/11/2019</textarea
+              >
+            </div>
+            <div class="form-group">
+              <span class="badge badge-light-primary">
+                <i data-feather="link" class="mr-25"></i>
+                <span class="align-middle">Invoice Attached</span>
+              </span>
+            </div>
+            <div class="form-group d-flex flex-wrap mt-2">
+              <button
+                type="button"
+                class="btn btn-primary mr-1"
+                (click)="toggleSidebar('invoice-sidebar')"
+                rippleEffect
+              >
+                Send
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                data-dismiss="modal"
+                (click)="toggleSidebar('invoice-sidebar')"
+                rippleEffect
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>

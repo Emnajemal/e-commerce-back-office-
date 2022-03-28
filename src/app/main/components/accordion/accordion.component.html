@@ -1,0 +1,293 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Accordion Basic start -->
+    <section id="accordion">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="accordionWrapa1" role="tablist" aria-multiselectable="true">
+            <core-card-snippet [snippetCode]="_snippetCodeAccordion">
+              <h4 class="card-title">Accordion</h4>
+              <div class="card-body collapse-icon">
+                <p class="card-text mb-0">
+                  Use class <code>.accordion-default.collapse-default</code> along with <code>.accordion</code> to the
+                  wrapper of <code>ngb-accordion</code> selector to get accordion with border bottom.
+                </p>
+                <div class="collapse-default">
+                  <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="panelBorderBottom1">
+                    <ngb-panel id="panelBorderBottom1">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 1 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Donut caramels sweet roll bonbon toffee sugar plum. Jelly marzipan cotton candy marshmallow
+                        gummy bears gummiest wafer. Cotton candy cotton candy pie icing gummier chufas chums powder
+                        candy canes cake. Biscuit gingerbread lollipop danish oat cake pudding apple pie cheesecake
+                        powder. Sweet rol
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelBorderBottom2">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 2 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelBorderBottom3">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 3 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelBorderBottom4" [disabled]="true">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 4 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Sweet bear claw brownie jelly-o wafer. Lollipop pudding gummi bears brownie jujubes. Bear claw
+                        cake ice cream sugar plum jujubes croissant icing. Bear claw icing chocolate cake toffee ice
+                        cream dessert cake. Lollipop cupcake gummi bears jujubes cotton candy cake marshmallow. Tart
+                        cake danish dessert
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                </div>
+              </div>
+            </core-card-snippet>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Accordion Basic end -->
+
+    <!-- Accordion with shadow start -->
+    <section id="accordion-with-shadow">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="accordionWrapa10" role="tablist" aria-multiselectable="true">
+            <core-card-snippet [snippetCode]="_snippetCodeShadow">
+              <h4 class="card-title">Shadow</h4>
+              <div class="card-body collapse-icon">
+                <p class="card-text mb-0">
+                  use class <code>.collapse-shadow</code> along with <code>.accordion</code> to the wrapper of
+                  <code>ngb-accordion</code> selector to get accordion with shadow and border bottom.
+                </p>
+                <div class="accordion collapse-shadow">
+                  <ngb-accordion
+                    [destroyOnHide]="false"
+                    activeIds="panelShadow2"
+                    (panelChange)="onPanelChange($event, panelShadow)"
+                    #panelShadow
+                    [closeOthers]="true"
+                  >
+                    <ngb-panel id="panelShadow1">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 1 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Donut caramels sweet roll bonbon toffee sugar plum. Jelly marzipan cotton candy marshmallow
+                        gummy bears gummiest wafer. Cotton candy cotton candy pie icing gummier chufas chums powder
+                        candy canes cake. Biscuit gingerbread lollipop danish oat cake pudding apple pie cheesecake
+                        powder. Sweet rol
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelShadow2" [cardClass]="'open'">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 2 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelShadow3">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 3 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelShadow4">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 4 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelShadow5" [disabled]="true">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 5 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Sweet bear claw brownie jelly-o wafer. Lollipop pudding gummi bears brownie jujubes. Bear claw
+                        cake ice cream sugar plum jujubes croissant icing. Bear claw icing chocolate cake toffee ice
+                        cream dessert cake. Lollipop cupcake gummi bears jujubes cotton candy cake marshmallow. Tart
+                        cake danish dessert
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                </div>
+              </div>
+            </core-card-snippet>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Accordion with Shadow end -->
+
+    <!-- Accordion with border start -->
+    <section id="accordion-with-border">
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="accordionWrapa50" role="tablist" aria-multiselectable="true">
+            <core-card-snippet [snippetCode]="_snippetCodeBorder">
+              <h4 class="card-title">Border</h4>
+              <div class="card-body collapse-icon">
+                <p class="card-text mb-0">
+                  use class directive <code>[cardClass]="'collapse-border-item'"></code> along with each
+                  <code>ngb-panel</code> selector to get accordion with border.
+                </p>
+                <div class="accordion collapse-border">
+                  <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="panelBorder3">
+                    <ngb-panel id="panelBorder1" [cardClass]="'collapse-border-item'">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 1 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Donut caramels sweet roll bonbon toffee sugar plum. Jelly marzipan cotton candy marshmallow
+                        gummy bears gummiest wafer. Cotton candy cotton candy pie icing gummier chufas chums powder
+                        candy canes cake. Biscuit gingerbread lollipop danish oat cake pudding apple pie cheesecake
+                        powder. Sweet rol
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelBorder2" [cardClass]="'collapse-border-item'">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 2 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelBorder3" [cardClass]="'collapse-border-item'">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 3 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie.
+                        Pudding pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping
+                        pastry marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake
+                        tootsie roll sweet gummi bears chocolate bar.
+                      </ng-template>
+                    </ngb-panel>
+                    <ngb-panel id="panelBorder4" [cardClass]="'collapse-border-item'">
+                      <ng-template ngbPanelTitle>
+                        <span>Accordion Item 4 </span>
+                      </ng-template>
+                      <ng-template ngbPanelContent>
+                        Sweet bear claw brownie jelly-o wafer. Lollipop pudding gummi bears brownie jujubes. Bear claw
+                        cake ice cream sugar plum jujubes croissant icing. Bear claw icing chocolate cake toffee ice
+                        cream dessert cake. Lollipop cupcake gummi bears jujubes cotton candy cake marshmallow. Tart
+                        cake danish dessert
+                      </ng-template>
+                    </ngb-panel>
+                  </ngb-accordion>
+                </div>
+              </div>
+            </core-card-snippet>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Accordion with border end -->
+
+    <!-- Accordion with margin start -->
+    <section id="accordion-with-margin">
+      <div class="row">
+        <div class="col-sm-12">
+          <core-card-snippet [snippetCode]="_snippetCodeMargin">
+            <h4 class="card-title">Margin</h4>
+            <div class="card-body collapse-icon">
+              <p class="card-text mb-0">
+                To create a accordion with margin use class directive
+                <code>[cardClass]="'collapse-margin'"</code> along with each <code>ngb-panel</code> to get accordion
+                with margin.
+              </p>
+              <div class="accordion collapse-margin">
+                <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" activeIds="panelMargin1">
+                  <ngb-panel id="panelMargin1" [cardClass]="'collapse-margin'">
+                    <ng-template ngbPanelTitle>
+                      <span>Accordion Item 1 </span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      Donut caramels sweet roll bonbon toffee sugar plum. Jelly marzipan cotton candy marshmallow gummy
+                      bears gummiest wafer. Cotton candy cotton candy pie icing gummier chufas chums powder candy canes
+                      cake. Biscuit gingerbread lollipop danish oat cake pudding apple pie cheesecake powder. Sweet rol
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="panelMargin2" [cardClass]="'collapse-margin'">
+                    <ng-template ngbPanelTitle>
+                      <span>Accordion Item 2 </span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie. Pudding
+                      pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping pastry
+                      marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake tootsie
+                      roll sweet gummi bears chocolate bar.
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="panelMargin3" [cardClass]="'collapse-margin'">
+                    <ng-template ngbPanelTitle>
+                      <span>Accordion Item 3 </span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      Gummies sugar plum tiramisu. Gingerbread sugar plum caramels pudding. Danish jelly cookie. Pudding
+                      pie cookie oat cake caramels gingerbread toffee pie jelly beans. Candy canes topping pastry
+                      marshmallow apple pie bear claw donut donut. Jelly-o jelly-o sweet roll ice cream cupcake tootsie
+                      roll sweet gummi bears chocolate bar.
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="panelMargin4" [cardClass]="'collapse-margin'">
+                    <ng-template ngbPanelTitle>
+                      <span>Accordion Item 4 </span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      Sweet bear claw brownie jelly-o wafer. Lollipop pudding gummi bears brownie jujubes. Bear claw
+                      cake ice cream sugar plum jujubes croissant icing. Bear claw icing chocolate cake toffee ice cream
+                      dessert cake. Lollipop cupcake gummi bears jujubes cotton candy cake marshmallow. Tart cake danish
+                      dessert
+                    </ng-template>
+                  </ngb-panel>
+                </ngb-accordion>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Accordion with margin end -->
+  </div>
+</div>

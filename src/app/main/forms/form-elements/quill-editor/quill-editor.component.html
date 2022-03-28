@@ -1,0 +1,123 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- quill snow  -->
+    <core-card-snippet [snippetCode]="_snippetCodeSnowEditor">
+      <h4 class="card-title">Snow Editor</h4>
+      <div class="card-body">
+        <p class="card-text">
+          By default <strong>Snow Editor</strong> is custom editor. Here we have customized the toolbar with
+          <code>quill-editor-toolbar</code> directive.
+        </p>
+        <quill-editor [(ngModel)]="snowEditorRef" [modules]="{ syntax: true, toolbar: [['code-block']] }">
+          <div quill-editor-toolbar>
+            <span class="ql-formats">
+              <button class="ql-bold" [title]="'Bold'"></button>
+              <button class="ql-italic" [title]="'italic'"></button>
+              <button class="ql-underline" [title]="'underline'"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-align" [title]="'Alignment'">
+                <option selected></option>
+                <option value="center"></option>
+                <option value="right"></option>
+                <option value="justify"></option>
+              </select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-list" value="ordered" type="button"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-link" value="ordered" type="button"></button>
+              <button class="ql-image" value="ordered" type="button"></button>
+              <button class="ql-video" value="ordered" type="button"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-formula" value="ordered" type="button"></button>
+              <button class="ql-code-block" value="ordered" type="button"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-clean" value="ordered" type="button"></button>
+            </span>
+          </div>
+        </quill-editor>
+      </div>
+    </core-card-snippet>
+    <!--/ quill snow  -->
+
+    <!-- quill Bubble  -->
+    <core-card-snippet [snippetCode]="_snippetCodeBubbleEditor">
+      <h4 class="card-title">Bubble Editor</h4>
+      <div class="card-body">
+        <p class="card-text">
+          To get <strong>Bubble Editor</strong> use <code>theme="bubble"</code>. Here we have customized the bubble
+          toolbar with <code>quill-editor-toolbar</code> directive.
+        </p>
+        <quill-editor
+          theme="bubble"
+          [(ngModel)]="bubbleEditorRef"
+          [modules]="{ syntax: true, toolbar: [['code-block']] }"
+        >
+          <div quill-editor-toolbar>
+            <span class="ql-formats">
+              <button class="ql-bold" [title]="'Bold'"></button>
+              <button class="ql-italic" [title]="'italic'"></button>
+              <button class="ql-underline" [title]="'underline'"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-align" [title]="'Aligment'">
+                <option selected></option>
+                <option value="center"></option>
+                <option value="right"></option>
+                <option value="justify"></option>
+              </select>
+            </span>
+          </div>
+        </quill-editor>
+      </div>
+    </core-card-snippet>
+    <!--/ quill Bubble  -->
+
+    <!-- quill Full  -->
+    <core-card-snippet [snippetCode]="_snippetCodeFullEditor">
+      <h4 class="card-title">Full Editor</h4>
+      <div class="card-body">
+        <quill-editor [(ngModel)]="fullEditorRef" [modules]="{ syntax: true, toolbar: [['code-block']] }"
+          ><div quill-editor-toolbar>
+            <span class="ql-formats">
+              <button class="ql-bold" [title]="'Bold'"></button>
+              <button class="ql-italic" [title]="'italic'"></button>
+              <button class="ql-underline" [title]="'underline'"></button>
+            </span>
+            <span class="ql-formats">
+              <select class="ql-align" [title]="'Alignment'">
+                <option selected></option>
+                <option value="center"></option>
+                <option value="right"></option>
+                <option value="justify"></option>
+              </select>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-list" value="ordered" type="button"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-link" value="ordered" type="button"></button>
+              <button class="ql-image" value="ordered" type="button"></button>
+              <button class="ql-video" value="ordered" type="button"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-formula" value="ordered" type="button"></button>
+              <button class="ql-code-block" value="ordered" type="button"></button>
+            </span>
+            <span class="ql-formats">
+              <button class="ql-clean" value="ordered" type="button"></button>
+            </span>
+          </div>
+        </quill-editor>
+      </div>
+    </core-card-snippet>
+    <!--/ quill Full  -->
+  </div>
+</div>

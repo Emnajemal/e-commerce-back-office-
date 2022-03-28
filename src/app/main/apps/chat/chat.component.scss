@@ -1,0 +1,38 @@
+@import '@core/scss/base/pages/app-chat.scss';
+@import '@core/scss/base/pages/app-chat-list.scss';
+@import '@core/scss/base/components/include'; // Components includes
+
+// Chat Application
+.chat-application {
+  .chat-sidebar,
+  .sidebar-content,
+  .chat-user-sidebar,
+  .active-user-profile-sidebar,
+  .chat-sidebar-wrapper {
+    height: 100%;
+  }
+  .chat-sidebar {
+    border-right: 1px solid $border-color;
+  }
+
+  .sidebar-content {
+    min-width: auto;
+  }
+  .chat-profile-sidebar {
+    top: 0;
+    left: 0;
+  }
+  .sidebar {
+    position: unset;
+  }
+}
+
+// Dark Layout
+.dark-layout {
+  .chat-application {
+    .chat-sidebar {
+      background-color: $theme-dark-card-bg !important;
+      border-right: 1px solid $theme-dark-border-color;
+    }
+  }
+}

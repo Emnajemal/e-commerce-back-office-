@@ -1,0 +1,536 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- Card Advance -->
+    <div class="row match-height">
+      <!-- Congratulations Card -->
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <div class="card card-congratulations">
+          <div class="card-body text-center">
+            <img src="assets/images/elements/decore-left.png" class="congratulations-img-left" alt="card-img-left" />
+            <img src="assets/images/elements/decore-right.png" class="congratulations-img-right" alt="card-img-right" />
+            <div class="avatar avatar-xl bg-primary shadow">
+              <div class="avatar-content">
+                <i data-feather="award" class="font-large-1"></i>
+              </div>
+            </div>
+            <div class="text-center">
+              <h1 class="mb-1 text-white">Congratulations {{ currentUser?.firstName }},</h1>
+              <p class="card-text m-auto w-75">This page can be accessed <strong>only by administrators</strong>.</p>
+
+              <p class="card-text m-auto w-75">
+                All users from secure (admin only) api end point.
+                <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+                <ng-container *ngIf="users">
+                  <span *ngFor="let user of users">{{ user.firstName }} {{ user.lastName }} ({{ user.role }}), </span>
+                </ng-container>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Congratulations Card -->
+
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="card">
+          <div class="card-header d-flex flex-column align-items-start pb-0">
+            <div class="avatar bg-light-primary p-50 m-0">
+              <div class="avatar-content">
+                <i data-feather="users" class="font-medium-5"></i>
+              </div>
+            </div>
+            <h2 class="font-weight-bolder mt-1">{{ data.subscribers_gained.analyticsData.subscribers }}</h2>
+            <p class="mb-0">Subscribers Gained</p>
+          </div>
+
+          <!-- Apexchart component-->
+          <div id="gainedChartoptions" #gainedChartRef>
+            <apx-chart
+              [series]="data.subscribers_gained.series"
+              [chart]="{
+                height: 100,
+                width: isMenuToggled === true ? gainedChartRef.offsetWidth : gainedChartoptions.chart.width,
+                type: 'area',
+                toolbar: {
+                  show: false
+                },
+                sparkline: {
+                  enabled: true
+                }
+              }"
+              [stroke]="gainedChartoptions.stroke"
+              [fill]="gainedChartoptions.fill"
+              [tooltip]="gainedChartoptions.tooltip"
+              [colors]="gainedChartoptions.colors"
+              [dataLabels]="gainedChartoptions.dataLabels"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 col-12">
+        <div class="card">
+          <div class="card-header d-flex flex-column align-items-start pb-0">
+            <div class="avatar bg-light-warning p-50 m-0">
+              <div class="avatar-content">
+                <i data-feather="package" class="font-medium-5"></i>
+              </div>
+            </div>
+            <h2 class="font-weight-bolder mt-1">{{ data.ordersRecevied.analyticsData.orders }}</h2>
+            <p class="mb-0">Orders Received</p>
+          </div>
+
+          <!-- Apexchart component-->
+          <div id="orderChartoptions" #orderChartRef>
+            <apx-chart
+              [series]="data.ordersRecevied.series"
+              [chart]="{
+                height: 100,
+                width: isMenuToggled === true ? orderChartRef.offsetWidth : orderChartoptions.chart.width,
+                type: 'area',
+                toolbar: {
+                  show: false
+                },
+                sparkline: {
+                  enabled: true
+                }
+              }"
+              [stroke]="orderChartoptions.stroke"
+              [fill]="orderChartoptions.fill"
+              [tooltip]="orderChartoptions.tooltip"
+              [colors]="orderChartoptions.colors"
+              [dataLabels]="orderChartoptions.dataLabels"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row match-height">
+      <!-- Average Sessions Card -->
+      <div class="col-lg-6 col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row pb-50">
+              <div class="col-lg-6 col-12 d-flex justify-content-between flex-column order-lg-1 order-2 mt-1 mt-lg-0">
+                <div class="mb-1 mb-lg-0">
+                  <h2 class="font-weight-bolder mb-25">{{ data.avgSessions.analyticsData.avgSessions }}</h2>
+                  <p class="card-text font-weight-bold mb-2">Avg Sessions</p>
+                  <div class="font-medium-2">
+                    <span class="text-success mr-25">{{ data.avgSessions.analyticsData.vsLastSevenDays }}</span>
+                    <span>vs last 7 days</span>
+                  </div>
+                </div>
+                <button type="button" rippleEffect class="btn btn-primary">View Details</button>
+              </div>
+              <div class="col-lg-6 col-12 d-flex justify-content-between flex-column text-right order-lg-2 order-1">
+                <div ngbDropdown class="chart-dropdown">
+                  <button
+                    rippleEffect
+                    class="btn btn-sm border-0 p-50"
+                    ngbDropdownToggle
+                    type="button"
+                    id="dropdownItem5"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Last 7 Days
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownItem5">
+                    <a ngbDropdownItem href="javascript:void(0);">Last 28 Days</a>
+                    <a ngbDropdownItem href="javascript:void(0);">Last Month</a>
+                    <a ngbDropdownItem href="javascript:void(0);">Last Year</a>
+                  </div>
+                </div>
+                <div id="avgsessionChartoptions" #avgSessionChartRef>
+                  <!-- Apexchart component-->
+                  <apx-chart
+                    [chart]="{
+                      type: 'bar',
+                      height: 200,
+                      width:
+                        isMenuToggled === true ? avgSessionChartRef.offsetWidth : avgsessionChartoptions.chart.width,
+                      sparkline: { enabled: true },
+                      toolbar: { show: false }
+                    }"
+                    [states]="avgsessionChartoptions.states"
+                    [colors]="avgsessionChartoptions.colors"
+                    [series]="data.avgSessions.series"
+                    [plotOptions]="avgsessionChartoptions.plotOptions"
+                    [tooltip]="avgsessionChartoptions.tooltip"
+                  ></apx-chart>
+                  <!-- / Apexchart component-->
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row avg-sessions pt-50">
+              <div class="col-6 mb-2">
+                <p class="mb-50">Goal: {{ data.avgSessions.analyticsData.goal }}</p>
+
+                <ngb-progressbar
+                  type="primary"
+                  [height]="'6px'"
+                  [value]="data.avgSessions.analyticsData.goalProgressbar"
+                ></ngb-progressbar>
+              </div>
+              <div class="col-6 mb-2">
+                <p class="mb-50">Users: {{ data.avgSessions.analyticsData.users }}</p>
+
+                <ngb-progressbar
+                  type="warning"
+                  [height]="'6px'"
+                  [value]="data.avgSessions.analyticsData.retentionProgressbar"
+                ></ngb-progressbar>
+              </div>
+              <div class="col-6">
+                <p class="mb-50">Retention: {{ data.avgSessions.analyticsData.retention }}</p>
+
+                <ngb-progressbar
+                  type="danger"
+                  [height]="'6px'"
+                  [value]="data.avgSessions.analyticsData.usersProgressbar"
+                ></ngb-progressbar>
+              </div>
+              <div class="col-6">
+                <p class="mb-50">Duration: {{ data.avgSessions.analyticsData.duration }}</p>
+
+                <ngb-progressbar
+                  type="success"
+                  [height]="'6px'"
+                  [value]="data.avgSessions.analyticsData.durationProgressbar"
+                ></ngb-progressbar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Average Sessions Card -->
+
+      <!-- Support Tracker Card -->
+      <div class="col-lg-6 col-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between pb-0">
+            <h4 class="card-title">Support Tracker</h4>
+            <div ngbDropdown class="chart-dropdown">
+              <button
+                rippleEffect
+                class="btn btn-sm border-0 p-50"
+                ngbDropdownToggle
+                type="button"
+                id="dropdownItem4"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Last 7 Days
+              </button>
+              <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="dropdownItem4">
+                <a ngbDropdownItem href="javascript:void(0);">Last 28 Days</a>
+                <a ngbDropdownItem href="javascript:void(0);">Last Month</a>
+                <a ngbDropdownItem href="javascript:void(0);">Last Year</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-2 col-12 d-flex flex-column flex-wrap text-center">
+                <h1 class="font-large-2 font-weight-bolder mt-2 mb-0">
+                  {{ data.supportTracker.analyticsData.tickets }}
+                </h1>
+                <p class="card-text">Tickets</p>
+              </div>
+              <div class="col-sm-10 col-12 d-flex justify-content-center" #supportChartRef>
+                <div id="supportChartoptions">
+                  <!-- Apexchart component-->
+                  <apx-chart
+                    [series]="data.supportTracker.series"
+                    [chart]="{
+                      height: 290,
+                      width: isMenuToggled === true ? supportChartRef.offsetWidth : supportChartoptions.chart.width,
+                      type: 'radialBar',
+                      sparkline: {
+                        enabled: false
+                      }
+                    }"
+                    [plotOptions]="supportChartoptions.plotOptions"
+                    [colors]="supportChartoptions.colors"
+                    [fill]="supportChartoptions.fill"
+                    [stroke]="supportChartoptions.stroke"
+                    [labels]="supportChartoptions.labels"
+                  ></apx-chart>
+                  <!-- / Apexchart component-->
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mt-1">
+              <div class="text-center">
+                <p class="card-text mb-50">New Tickets</p>
+                <span class="font-large-1 font-weight-bold">{{ data.supportTracker.analyticsData.newTickets }}</span>
+              </div>
+              <div class="text-center">
+                <p class="card-text mb-50">Open Tickets</p>
+                <span class="font-large-1 font-weight-bold">{{ data.supportTracker.analyticsData.openTickets }}</span>
+              </div>
+              <div class="text-center">
+                <p class="card-text mb-50">Response Time</p>
+                <span class="font-large-1 font-weight-bold">{{ data.supportTracker.analyticsData.responseTime }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Support Tracker Card -->
+    </div>
+
+    <div class="row match-height">
+      <!-- User Timeline -->
+      <div class="col-lg-4 col-12">
+        <div class="card card-user-timeline">
+          <div class="card-header">
+            <div class="d-flex align-items-center">
+              <i data-feather="list" class="user-timeline-title-icon"></i>
+              <h4 class="card-title">User Timeline</h4>
+            </div>
+            <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i>
+          </div>
+          <div class="card-body">
+            <ul class="timeline ml-50 mb-0">
+              <li class="timeline-item">
+                <span class="timeline-point timeline-point-indicator"></span>
+                <div class="timeline-event">
+                  <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                    <h6>12 Invoices have been paid</h6>
+                    <span class="timeline-event-time mr-1">12 min ago</span>
+                  </div>
+                  <p>Invoices have been paid to the company.</p>
+                  <div class="media align-items-center">
+                    <img class="mr-1" src="assets/images/icons/json.png" alt="data.json" height="23" />
+                    <h6 class="media-body mb-0">data.json</h6>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                <div class="timeline-event">
+                  <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                    <h6>Client Meeting</h6>
+                    <span class="timeline-event-time mr-1">45 min ago</span>
+                  </div>
+                  <p>Project meeting with john @10:15am</p>
+                  <div class="media align-items-center">
+                    <div class="avatar mr-50">
+                      <img src="assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar" width="38" height="38" />
+                    </div>
+                    <div class="media-body">
+                      <h6 class="mb-0">John Doe (Client)</h6>
+                      <p class="mb-0">CEO of Infibeam</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-point timeline-point-info timeline-point-indicator"></span>
+                <div class="timeline-event">
+                  <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                    <h6>Create a new project for client</h6>
+                    <span class="timeline-event-time mr-1">2 day ago</span>
+                  </div>
+                  <p>Add files to new design folder</p>
+                  <div class="avatar-group">
+                    <div
+                      data-toggle="tooltip"
+                      data-popup="tooltip-custom"
+                      data-placement="bottom"
+                      data-original-title="Billy Hopkins"
+                      class="avatar pull-up"
+                    >
+                      <img src="assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                    <div
+                      data-toggle="tooltip"
+                      data-popup="tooltip-custom"
+                      data-placement="bottom"
+                      data-original-title="Amy Carson"
+                      class="avatar pull-up"
+                    >
+                      <img src="assets/images/portrait/small/avatar-s-6.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                    <div
+                      data-toggle="tooltip"
+                      data-popup="tooltip-custom"
+                      data-placement="bottom"
+                      data-original-title="Brandon Miles"
+                      class="avatar pull-up"
+                    >
+                      <img src="assets/images/portrait/small/avatar-s-8.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                    <div
+                      data-toggle="tooltip"
+                      data-popup="tooltip-custom"
+                      data-placement="bottom"
+                      data-original-title="Daisy Weber"
+                      class="avatar pull-up"
+                    >
+                      <img src="assets/images/portrait/small/avatar-s-7.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                    <div
+                      data-toggle="tooltip"
+                      data-popup="tooltip-custom"
+                      data-placement="bottom"
+                      data-original-title="Jenny Looper"
+                      class="avatar pull-up"
+                    >
+                      <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="Avatar" width="33" height="33" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-point timeline-point-danger timeline-point-indicator"></span>
+                <div class="timeline-event">
+                  <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                    <h6>Create a new project for client</h6>
+                    <span class="timeline-event-time mr-1">5 day ago</span>
+                  </div>
+                  <p class="mb-0">Add files to new design folder</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/ User Timeline -->
+      <!-- Sales Polygon Chart Card -->
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-start pb-1">
+            <div>
+              <h4 class="card-title mb-25">Sales</h4>
+              <p class="card-text">Last 6 months</p>
+            </div>
+            <div ngbDropdown>
+              <button
+                rippleEffect
+                class="btn btn-sm border-0 p-0 hide-arrow"
+                ngbDropdownToggle
+                type="button"
+                id="dropdownItem4"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i>
+              </button>
+              <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="dropdownItem4">
+                <a ngbDropdownItem href="javascript:void(0);">Last 28 Days</a>
+                <a ngbDropdownItem href="javascript:void(0);">Last Month</a>
+                <a ngbDropdownItem href="javascript:void(0);">Last Year</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-inline-block mr-1">
+              <div class="d-flex align-items-center">
+                <i data-feather="circle" class="font-small-3 text-primary mr-50"></i>
+                <h6 class="mb-0">Sales</h6>
+              </div>
+            </div>
+            <div class="d-inline-block">
+              <div class="d-flex align-items-center">
+                <i data-feather="circle" class="font-small-3 text-info mr-50"></i>
+                <h6 class="mb-0">Visits</h6>
+              </div>
+            </div>
+            <div id="salesChartoptions" #salesChartRef>
+              <!-- Apexchart component-->
+              <apx-chart
+                [chart]="{
+                  height: 330,
+                  width: isMenuToggled === true ? salesChartRef.offsetWidth : salesChartoptions.chart.width,
+                  type: 'radar',
+                  dropShadow: {
+                    enabled: true,
+                    blur: 8,
+                    left: 1,
+                    top: 1,
+                    opacity: 0.2
+                  },
+                  toolbar: {
+                    show: false
+                  }
+                }"
+                [series]="data.salesLastSixMonths.series"
+                [stroke]="salesChartoptions.stroke"
+                [colors]="salesChartoptions.colors"
+                [plotOptions]="salesChartoptions.plotOptions"
+                [fill]="salesChartoptions.fill"
+                [markers]="salesChartoptions.markers"
+                [legend]="salesChartoptions.legend"
+                [labels]="salesChartoptions.labels"
+                [dataLabels]="salesChartoptions.dataLabels"
+                [dataLabels]="salesChartoptions.dataLabels"
+                [yaxis]="salesChartoptions.yaxis"
+              ></apx-chart>
+              <!-- / Apexchart component-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Sales Polygon Chart Card -->
+
+      <!-- App Design Card -->
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card card-app-design">
+          <div class="card-body">
+            <div class="badge badge-light-primary">03 Sep, 20</div>
+            <h4 class="card-title mt-1 mb-75 pt-25">App design</h4>
+            <p class="card-text font-small-2 mb-2">
+              You can Find Only Post and Quotes Related to IOS like ipad app design, iphone app design
+            </p>
+            <div class="design-group mb-2 pt-50">
+              <h6 class="section-label">Team</h6>
+              <div class="badge badge-light-warning mr-1">Figma</div>
+              <div class="badge badge-light-primary">Wireframe</div>
+            </div>
+            <div class="design-group pt-25">
+              <h6 class="section-label">Members</h6>
+              <div class="avatar">
+                <img src="assets/images/portrait/small/avatar-s-9.jpg" width="34" height="34" alt="Avatar" />
+              </div>
+              <div class="avatar bg-light-danger">
+                <div class="avatar-content">PI</div>
+              </div>
+              <div class="avatar">
+                <img src="assets/images/portrait/small/avatar-s-14.jpg" width="34" height="34" alt="Avatar" />
+              </div>
+              <div class="avatar">
+                <img src="assets/images/portrait/small/avatar-s-7.jpg" width="34" height="34" alt="Avatar" />
+              </div>
+              <div class="avatar bg-light-secondary">
+                <div class="avatar-content">AL</div>
+              </div>
+            </div>
+            <div class="design-planning-wrapper mb-2 py-75">
+              <div class="design-planning">
+                <p class="card-text mb-25">Due Date</p>
+                <h6 class="mb-0">12 Apr, 21</h6>
+              </div>
+              <div class="design-planning">
+                <p class="card-text mb-25">Budget</p>
+                <h6 class="mb-0">$49251.91</h6>
+              </div>
+              <div class="design-planning">
+                <p class="card-text mb-25">Cost</p>
+                <h6 class="mb-0">$840.99</h6>
+              </div>
+            </div>
+            <button type="button" rippleEffect class="btn btn-primary btn-block">Join Team</button>
+          </div>
+        </div>
+      </div>
+      <!--/ App Design Card -->
+    </div>
+
+    <app-invoice-list></app-invoice-list>
+  </div>
+</div>

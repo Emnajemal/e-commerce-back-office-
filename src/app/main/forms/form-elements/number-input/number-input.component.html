@@ -1,0 +1,158 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- core TouchSpin Spinners start -->
+    <section id="basic-touchspin">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTouchspin">
+            <h4 class="card-title">Touchspin</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text mb-0">
+                    Use <code>core-touchspin</code> component to get default touchspin. To disable touchspin use
+                    <code>[disable]="true"</code> & to get touchspin with chevron icon use
+                    <code>[iconChevron]="true"</code>.
+                  </p>
+
+                  <div class="demo-inline-spacing">
+                    <!-- touchspin default -->
+                    <core-touchspin [numberValue]="50" (onChange)="countChange($event)"></core-touchspin>
+
+                    <!-- touchspin disabled -->
+                    <core-touchspin [disable]="true"></core-touchspin>
+
+                    <!-- touchspin wih icon chevron  -->
+                    <core-touchspin [iconChevron]="true"></core-touchspin>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- core TouchSpin Spinners end -->
+
+    <!-- core TouchSpin Spinners Size start -->
+    <section id="touchspin-size">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeSize">
+            <h4 class="card-title">Size</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text mb-0">
+                    Use input property <code>[size]</code> add pass <code>'sm' | 'lg'</code> to get small and large
+                    touchspin respectively. <strong>Default</strong> is Medium size.
+                  </p>
+
+                  <div class="demo-inline-spacing">
+                    <!-- touchspin size large -->
+                    <core-touchspin [size]="'lg'"></core-touchspin>
+
+                    <!-- touchspin size default -->
+                    <core-touchspin></core-touchspin>
+
+                    <!-- touchspin size small -->
+                    <core-touchspin [size]="'sm'"></core-touchspin>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- core TouchSpin Spinners end -->
+
+    <!-- core TouchSpin Spinners Min-max start -->
+    <section id="touchspin-min-max">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeMinMax">
+            <h4 class="card-title">Min - Max</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text">
+                    Use input property <code>[minValue]</code> & <code>[maxValue]</code> to set lower-limit and
+                    upper-limit of input number respectively.
+                  </p>
+
+                  <!-- touchspin min-max -->
+                  <core-touchspin [numberValue]="50" [stepValue]="5" [minValue]="40" [maxValue]="60"></core-touchspin>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- core TouchSpin Spinners Min - Max end -->
+
+    <!-- core TouchSpin Spinners Step start -->
+    <section id="touchspin-step">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeStep">
+            <h4 class="card-title">Step</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text">Use input property <code>[numberValue]</code> to set value of input number.</p>
+
+                  <!-- touchspin steps -->
+                  <core-touchspin [numberValue]="50" [stepValue]="5"></core-touchspin>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- core TouchSpin Spinners Min - Max end -->
+
+    <!-- core TouchSpin Spinners Colors start -->
+    <section id="touchspin-colors">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeColors">
+            <h4 class="card-title">Colors Variation</h4>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <p class="card-text mb-0">
+                    Use input property <code>[color]="'colorName'"</code> to get your desired color variation.
+                  </p>
+
+                  <div class="demo-inline-spacing">
+                    <!-- touchspin color default primary -->
+                    <core-touchspin></core-touchspin>
+
+                    <!-- touchspin color success -->
+                    <core-touchspin [color]="'success'"></core-touchspin>
+
+                    <!-- touchspin color warning -->
+                    <core-touchspin [color]="'warning'"></core-touchspin>
+
+                    <!-- touchspin color info -->
+                    <core-touchspin [color]="'info'"></core-touchspin>
+
+                    <!-- touchspin color danger -->
+                    <core-touchspin [color]="'danger'"></core-touchspin>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- core TouchSpin Spinners Decimal end -->
+  </div>
+</div>

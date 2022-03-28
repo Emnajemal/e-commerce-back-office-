@@ -1,0 +1,185 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <section id="pricing-plan">
+      <!-- title text and switch button -->
+      <div class="text-center">
+        <h1 class="mt-5">Pricing Plans</h1>
+        <p class="mb-2 pb-75">
+          All plans include 40+ advanced tools and features to boost your product. Choose the best plan to fit your
+          needs.
+        </p>
+        <div class="d-flex align-items-center justify-content-center mb-5 pb-50">
+          <h6 class="mr-1 mb-0">Monthly</h6>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              [checked]="Monthly"
+              [(ngModel)]="Monthly"
+              class="custom-control-input"
+              id="priceSwitch"
+              name="priceSwitch"
+            />
+            <label class="custom-control-label" for="priceSwitch"></label>
+          </div>
+          <h6 class="ml-50 mb-0">Annually</h6>
+        </div>
+      </div>
+      <!--/ title text and switch button -->
+
+      <!-- pricing plan cards -->
+      <div class="row pricing-card">
+        <div class="col-12 col-sm-offset-2 col-sm-10 col-md-12 col-lg-offset-2 col-lg-10 mx-auto">
+          <div class="row">
+            <!-- basic plan -->
+            <div class="col-12 col-md-4">
+              <div class="card basic-pricing text-center">
+                <div class="card-body">
+                  <img src="{{ data.pricing.basicPlan.img }}" class="mb-2 mt-5" alt="svg img" />
+                  <h3>{{ data.pricing.basicPlan.title }}</h3>
+                  <p class="card-text">{{ data.pricing.basicPlan.subtitle }}</p>
+                  <div class="annual-plan">
+                    <div class="plan-price mt-2">
+                      <sup class="font-medium-1 font-weight-bold text-primary">$ </sup>
+                      <span class="pricing-basic-value font-weight-bolder text-primary">0</span>
+                      <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/month</sub>
+                    </div>
+                    <small class="annual-pricing d-none text-muted"></small>
+                  </div>
+                  <ul class="list-group list-group-circle text-left">
+                    <li class="list-group-item" *ngFor="let planBenefitsRef of data.pricing.basicPlan.planBenefits">
+                      {{ planBenefitsRef }}
+                    </li>
+                  </ul>
+                  <button class="btn btn-block btn-outline-success mt-2" rippleEffect>Your current plan</button>
+                </div>
+              </div>
+            </div>
+            <!--/ basic plan -->
+
+            <!-- standard plan -->
+            <div class="col-12 col-md-4">
+              <div class="card standard-pricing popular text-center">
+                <div class="card-body">
+                  <div class="pricing-badge text-right">
+                    <div class="badge badge-pill badge-light-primary">Popular</div>
+                  </div>
+                  <img src="{{ data.pricing.standardPlan.img }}" class="mb-1" alt="svg img" />
+                  <h3>{{ data.pricing.standardPlan.title }}</h3>
+                  <p class="card-text">{{ data.pricing.standardPlan.subtitle }}</p>
+                  <div class="annual-plan">
+                    <div class="plan-price mt-2">
+                      <sup class="font-medium-1 font-weight-bold text-primary">$ </sup>
+                      <span class="pricing-standard-value font-weight-bolder text-primary">{{
+                        Monthly == true
+                          ? data.pricing.standardPlan.yearlyPlan.perMonth
+                          : data.pricing.standardPlan.monthlyPrice
+                      }}</span>
+                      <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/month</sub>
+                    </div>
+                    <small class="annual-pricing d-none text-muted" [ngClass]="{ 'd-block': Monthly === true }"
+                      >USD 480 / year</small
+                    >
+                  </div>
+                  <ul class="list-group list-group-circle text-left">
+                    <li class="list-group-item" *ngFor="let standardPlanRef of data.pricing.standardPlan.planBenefits">
+                      {{ standardPlanRef }}
+                    </li>
+                  </ul>
+                  <button class="btn btn-block btn-primary mt-2" rippleEffect>Upgrade</button>
+                </div>
+              </div>
+            </div>
+            <!--/ standard plan -->
+
+            <!-- enterprise plan -->
+            <div class="col-12 col-md-4">
+              <div class="card enterprise-pricing text-center">
+                <div class="card-body">
+                  <img src="{{ data.pricing.enterprisePlan.img }}" class="mb-2" alt="svg img" />
+                  <h3>{{ data.pricing.enterprisePlan.title }}</h3>
+                  <p class="card-text">{{ data.pricing.enterprisePlan.subtitle }}</p>
+                  <div class="annual-plan">
+                    <div class="plan-price mt-2">
+                      <sup class="font-medium-1 font-weight-bold text-primary">$ </sup>
+                      <span class="pricing-enterprise-value font-weight-bolder text-primary">{{
+                        Monthly == true
+                          ? data.pricing.enterprisePlan.yearlyPlan.perMonth
+                          : data.pricing.enterprisePlan.monthlyPrice
+                      }}</span>
+                      <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/month</sub>
+                    </div>
+                    <small class="annual-pricing d-none text-muted" [ngClass]="{ 'd-block': Monthly === true }"
+                      >USD 960 / year</small
+                    >
+                  </div>
+                  <ul class="list-group list-group-circle text-left">
+                    <li
+                      class="list-group-item"
+                      *ngFor="let enterprisePlanRef of data.pricing.enterprisePlan.planBenefits"
+                    >
+                      {{ enterprisePlanRef }}
+                    </li>
+                  </ul>
+                  <button class="btn btn-block btn-outline-primary mt-2" rippleEffect>Upgrade</button>
+                </div>
+              </div>
+            </div>
+            <!--/ enterprise plan -->
+          </div>
+        </div>
+      </div>
+      <!--/ pricing plan cards -->
+
+      <!-- pricing free trial -->
+      <div class="pricing-free-trial">
+        <div class="row">
+          <div class="col-12 col-lg-10 col-lg-offset-3 mx-auto">
+            <div class="pricing-trial-content d-flex justify-content-between">
+              <div class="text-center text-md-left mt-3">
+                <h3 class="text-primary">Still not convinced? Start with a 14-day FREE trial!</h3>
+                <h5>You will get full access to with all the features for 14 days.</h5>
+                <button class="btn btn-primary mt-2 mt-lg-3" rippleEffect>Start 14-day FREE trial</button>
+              </div>
+
+              <!-- image -->
+              <img
+                src="assets/images/illustration/pricing-Illustration.svg"
+                class="pricing-trial-img img-fluid"
+                alt="svg img"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ pricing free trial -->
+
+      <!-- pricing faq -->
+      <div class="pricing-faq">
+        <h3 class="text-center">FAQ's</h3>
+        <p class="text-center">Let us help answer the most common questions.</p>
+        <div class="row my-2">
+          <div class="col-12 col-lg-10 col-lg-offset-2 mx-auto">
+            <!-- faq collapse -->
+            <div class="accordion collapse-margin collapse-icon">
+              <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+                <ngb-panel
+                  id="deliveryId{{ i }}"
+                  [cardClass]="'collapse-margin'"
+                  *ngFor="let qandARef of data.pricing.qandA; let i = index"
+                >
+                  <ng-template ngbPanelTitle>
+                    <span>{{ qandARef.question }}</span>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    {{ qandARef.ans }}
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ pricing faq -->
+    </section>
+  </div>
+</div>

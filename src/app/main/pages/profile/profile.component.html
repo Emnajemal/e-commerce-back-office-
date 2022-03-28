@@ -1,0 +1,432 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <div id="user-profile">
+      <!-- profile header -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card profile-header mb-2">
+            <!-- profile cover photo -->
+            <img class="card-img-top" [src]="data.profileData.header.coverImg" alt="User Profile Image" />
+            <!--/ profile cover photo -->
+
+            <div class="position-relative">
+              <!-- profile picture -->
+              <div class="profile-img-container d-flex align-items-center">
+                <div class="profile-img">
+                  <img [src]="data.profileData.header.avatar" class="rounded img-fluid" alt="Card image" />
+                </div>
+                <!-- profile title -->
+                <div class="profile-title ml-3">
+                  <h2 class="text-white">{{ data.profileData.header.username }}</h2>
+                  <p class="text-white">{{ data.profileData.header.designation }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- tabs pill -->
+            <div class="profile-header-nav">
+              <!-- navbar -->
+              <nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
+                <button
+                  class="btn btn-icon navbar-toggler"
+                  type="button"
+                  data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                  (click)="toggleMenu = !toggleMenu"
+                  rippleEffect
+                >
+                  <i data-feather="align-justify" class="font-medium-5"></i>
+                </button>
+
+                <!-- collapse  -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="toggleMenu">
+                  <div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
+                    <ul class="nav nav-pills mb-0">
+                      <li class="nav-item">
+                        <a class="nav-link font-weight-bold active" href="javascript:void(0)">
+                          <span class="d-none d-md-block">Feed</span>
+                          <i data-feather="rss" class="d-block d-md-none"></i>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="javascript:void(0)">
+                          <span class="d-none d-md-block">About</span>
+                          <i data-feather="info" class="d-block d-md-none"></i>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="javascript:void(0)">
+                          <span class="d-none d-md-block">Photos</span>
+                          <i data-feather="image" class="d-block d-md-none"></i>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="javascript:void(0)">
+                          <span class="d-none d-md-block">Friends</span>
+                          <i data-feather="users" class="d-block d-md-none"></i>
+                        </a>
+                      </li>
+                    </ul>
+                    <!-- edit button -->
+                    <button class="btn btn-primary" rippleEffect>
+                      <i data-feather="edit" class="d-block d-md-none"></i>
+                      <span class="font-weight-bold d-none d-md-block">Edit</span>
+                    </button>
+                  </div>
+                </div>
+                <!--/ collapse  -->
+              </nav>
+              <!--/ navbar -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ profile header -->
+
+      <!-- profile info section -->
+      <section id="profile-info">
+        <div class="row">
+          <!-- left profile info section -->
+          <div class="col-lg-3 col-12 order-2 order-lg-1">
+            <!-- about -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="mb-75">About</h5>
+                <p class="card-text">
+                  {{ data.profileData.userAbout.about }}
+                </p>
+                <div class="mt-2">
+                  <h5 class="mb-75">Joined:</h5>
+                  <p class="card-text">{{ data.profileData.userAbout.joined }}</p>
+                </div>
+                <div class="mt-2">
+                  <h5 class="mb-75">Lives:</h5>
+                  <p class="card-text">{{ data.profileData.userAbout.lives }}</p>
+                </div>
+                <div class="mt-2">
+                  <h5 class="mb-75">Email:</h5>
+                  <p class="card-text">{{ data.profileData.userAbout.email }}</p>
+                </div>
+                <div class="mt-2">
+                  <h5 class="mb-50">Website:</h5>
+                  <p class="card-text mb-0">{{ data.profileData.userAbout.website }}</p>
+                </div>
+              </div>
+            </div>
+            <!--/ about -->
+
+            <!-- suggestion pages -->
+            <div class="card">
+              <div class="card-body profile-suggestion">
+                <h5 class="mb-2">Suggested Pages</h5>
+                <!-- user suggestions -->
+                <div
+                  class="d-flex justify-content-start align-items-center"
+                  [class.mb-1]="
+                    data.profileData.suggestedPages.length - 1 !==
+                    data.profileData.suggestedPages.indexOf(suggestedPagesRef)
+                  "
+                  *ngFor="let suggestedPagesRef of data.profileData.suggestedPages"
+                >
+                  <div class="avatar mr-1">
+                    <img [src]="suggestedPagesRef.avatar" alt="avatar img" height="40" width="40" />
+                  </div>
+                  <div class="profile-user-info">
+                    <h6 class="mb-0">{{ suggestedPagesRef.username }}</h6>
+                    <small class="text-muted">{{ suggestedPagesRef.subtitle }}</small>
+                  </div>
+                  <div class="profile-star ml-auto">
+                    <i
+                      class="font-medium-3 fa"
+                      [ngClass]="{
+                        'fa-star text-warning': suggestedPagesRef.favorite === true,
+                        'fa-star-o': suggestedPagesRef.favorite !== true
+                      }"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ suggestion pages -->
+
+            <!-- twitter feed card -->
+            <div class="card">
+              <div class="card-body">
+                <h5>Twitter Feeds</h5>
+                <!-- twitter feed -->
+                <div class="profile-twitter-feed mt-2" *ngFor="let twitterFeedsRef of data.profileData.twitterFeeds">
+                  <div class="d-flex justify-content-start align-items-center mb-1">
+                    <div class="avatar mr-1">
+                      <img [src]="twitterFeedsRef.imgUrl" alt="avatar img" height="40" width="40" />
+                    </div>
+                    <div class="profile-user-info">
+                      <h6 class="mb-0">{{ twitterFeedsRef.title }}</h6>
+                      <a href="javascript:void(0)">
+                        <small class="text-muted">{{ twitterFeedsRef.id }}</small>
+                        <i data-feather="check-circle"></i>
+                      </a>
+                    </div>
+                    <div class="profile-star ml-auto">
+                      <i
+                        class="font-medium-3 fa"
+                        [ngClass]="{
+                          'fa-star text-warning': twitterFeedsRef.favorite === true,
+                          'fa-star-o': twitterFeedsRef.favorite !== true
+                        }"
+                      ></i>
+                    </div>
+                  </div>
+                  <p class="card-text mb-50">{{ twitterFeedsRef.desc }}</p>
+                  <a href="javascript:void(0)">
+                    <small>{{ twitterFeedsRef.tags }}</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!--/ twitter feed card -->
+          </div>
+          <!--/ left profile info section -->
+
+          <!-- center profile info section -->
+          <div class="col-lg-6 col-12 order-1 order-lg-2">
+            <div class="card" *ngFor="let postRef of data.profileData.post">
+              <div class="card-body">
+                <div class="d-flex justify-content-start align-items-center mb-1">
+                  <!-- avatar -->
+                  <div class="avatar mr-1">
+                    <img [src]="postRef.avatar" alt="avatar img" height="50" width="50" />
+                  </div>
+                  <!--/ avatar -->
+                  <div class="profile-user-info">
+                    <h6 class="mb-0">{{ postRef.username }}</h6>
+                    <small class="text-muted">{{ postRef.postTime }}</small>
+                  </div>
+                </div>
+                <p class="card-text">
+                  {{ postRef.postText }}
+                </p>
+                <!-- post img -->
+                <div *ngIf="postRef.postImg">
+                  <img class="img-fluid rounded mb-75" src="{{ postRef.postImg }}" alt="avatar img" />
+                </div>
+
+                <div *ngIf="postRef.postVid">
+                  <iframe
+                    [src]="postRef.postVid | safe: 'resourceUrl'"
+                    class="w-100 rounded border-0 height-250 mb-50"
+                  ></iframe>
+                </div>
+
+                <!-- like share -->
+                <div class="row d-flex justify-content-start align-items-center flex-wrap pb-50">
+                  <div class="col-sm-6 d-flex justify-content-between justify-content-sm-start mb-2">
+                    <a href="javascript:void(0)" class="d-flex align-items-center text-muted text-nowrap">
+                      <i data-feather="heart" class="profile-likes font-medium-3 mr-50"></i>
+                      <span>{{ postRef.likes }}</span>
+                    </a>
+
+                    <!-- avatar group with tooltip -->
+                    <div class="d-flex align-items-center">
+                      <div class="avatar-group ml-1">
+                        <div
+                          data-toggle="tooltip"
+                          data-popup="tooltip-custom"
+                          placement="bottom"
+                          ngbTooltip="{{ likedUsersRef.username }}"
+                          class="avatar pull-up"
+                          *ngFor="let likedUsersRef of postRef.likedUsers"
+                        >
+                          <img [src]="likedUsersRef.avatar" alt="Avatar" height="26" width="26" />
+                        </div>
+                      </div>
+                      <a href="javascript:void(0)" class="text-muted text-nowrap ml-50"
+                        >+{{ postRef.likedCount }} more</a
+                      >
+                    </div>
+                    <!-- avatar group with tooltip -->
+                  </div>
+
+                  <!-- share and like count and icons -->
+                  <div class="col-sm-6 d-flex justify-content-between justify-content-sm-end align-items-center mb-2">
+                    <a href="javascript:void(0)" class="text-nowrap">
+                      <i data-feather="message-square" class="text-body font-medium-3 mr-50"></i>
+                      <span class="text-muted mr-1">{{ postRef.comments }}</span>
+                    </a>
+
+                    <a href="javascript:void(0)" class="text-nowrap">
+                      <i data-feather="share-2" class="text-body font-medium-3 mx-50"></i>
+                      <span class="text-muted">{{ postRef.share }}</span>
+                    </a>
+                  </div>
+                  <!-- share and like count and icons -->
+                </div>
+                <!-- like share -->
+
+                <!-- comments -->
+                <div
+                  class="d-flex align-items-start mb-1"
+                  *ngFor="let detailedCommentsRefRef of postRef.detailedComments"
+                >
+                  <div class="avatar mt-25 mr-75">
+                    <img [src]="detailedCommentsRefRef.avatar" alt="Avatar" height="34" width="34" />
+                  </div>
+                  <div class="profile-user-info w-100">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <h6 class="mb-0">{{ detailedCommentsRefRef.username }}</h6>
+                      <a href="javascript:void(0)">
+                        <i data-feather="heart" class="text-body font-medium-3 profile-likes"></i>
+                        <span class="align-middle text-muted"> {{ detailedCommentsRefRef.commentsLikes }}</span>
+                      </a>
+                    </div>
+                    <small>{{ detailedCommentsRefRef.comment }}</small>
+                  </div>
+                </div>
+
+                <!--/ comments -->
+
+                <!-- comment box -->
+                <fieldset class="form-label-group mb-50">
+                  <textarea class="form-control" id="label-textarea" rows="3" placeholder="Add Comment"></textarea>
+                  <label for="label-textarea">Add Comment</label>
+                </fieldset>
+                <!--/ comment box -->
+                <button type="button" class="btn btn-sm btn-primary" rippleEffect>Post Comment</button>
+              </div>
+            </div>
+          </div>
+          <!--/ center profile info section -->
+
+          <!-- right profile info section -->
+          <div class="col-lg-3 col-12 order-3">
+            <!-- latest profile pictures -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="mb-0">Latest Photos</h5>
+                <div class="row">
+                  <div
+                    class="col-md-4 col-6 profile-latest-img"
+                    *ngFor="let latestPhotosRef of data.profileData.latestPhotos"
+                  >
+                    <a href="javascript:void(0)">
+                      <img [src]="latestPhotosRef.img" class="img-fluid rounded" alt="avatar img" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ latest profile pictures -->
+
+            <!-- suggestion -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="mb-2">Suggestions</h5>
+                <div
+                  class="d-flex justify-content-start align-items-center mt-1"
+                  *ngFor="let suggestionsRef of data.profileData.suggestions"
+                >
+                  <div class="avatar mr-75">
+                    <img [src]="suggestionsRef.avatar" alt="avatar" height="40" width="40" />
+                  </div>
+                  <div class="profile-user-info">
+                    <h6 class="mb-0">{{ suggestionsRef.name }}</h6>
+                    <small class="text-muted">{{ suggestionsRef.mutualFriend }}</small>
+                  </div>
+                  <button type="button" class="btn btn-primary btn-icon btn-sm ml-auto" rippleEffect>
+                    <i data-feather="user-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--/ suggestion -->
+
+            <!-- polls card -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="mb-1">Polls</h5>
+                <p class="card-text mb-0">Who is the best actor in Marvel Cinematic Universe?</p>
+
+                <!-- polls -->
+                <div class="profile-polls-info mt-2" *ngFor="let pollsRef of data.profileData.polls">
+                  <!-- custom radio -->
+                  <div class="d-flex justify-content-between">
+                    <div class="custom-control custom-radio">
+                      <input
+                        type="radio"
+                        id="bestActorPoll{{ pollsRef.name }}"
+                        name="bestActorPoll"
+                        class="custom-control-input"
+                      />
+                      <label class="custom-control-label" for="bestActorPoll{{ pollsRef.name }}">{{
+                        pollsRef.name
+                      }}</label>
+                    </div>
+                    <div class="text-right">{{ pollsRef.result }}</div>
+                  </div>
+                  <!--/ custom radio -->
+
+                  <!-- progressbar -->
+                  <div class="progress progress-bar-primary my-50">
+                    <div
+                      class="progress-bar"
+                      role="progressbar"
+                      aria-valuenow="58"
+                      aria-valuemin="58"
+                      aria-valuemax="100"
+                      style="width: 82%"
+                    ></div>
+                  </div>
+                  <!--/ progressbar -->
+
+                  <!-- avatar group with tooltip -->
+                  <div class="avatar-group mt-1">
+                    <div
+                      placement="bottom"
+                      container="body"
+                      [ngbTooltip]="votedUserRef.username"
+                      class="avatar pull-up"
+                      *ngFor="let votedUserRef of pollsRef.votedUser"
+                    >
+                      <img [src]="votedUserRef.img" alt="Avatar" height="26" width="26" />
+                    </div>
+                  </div>
+                  <!--/ avatar group with tooltip -->
+                </div>
+
+                <!--/ polls -->
+              </div>
+            </div>
+            <!--/ polls card -->
+          </div>
+          <!--/ right profile info section -->
+        </div>
+
+        <!-- reload button -->
+        <div class="row">
+          <div class="col-12 text-center">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary block-element border-0 mb-1"
+              rippleEffect
+              (click)="loadMore()"
+            >
+              <span
+                role="status"
+                aria-hidden="true"
+                [class.spinner-border]="loadMoreRef"
+                class="spinner-border-sm"
+              ></span>
+              Load More
+            </button>
+          </div>
+        </div>
+        <!--/ reload button -->
+      </section>
+      <!--/ profile info section -->
+    </div>
+  </div>
+</div>

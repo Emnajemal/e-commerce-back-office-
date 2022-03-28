@@ -1,0 +1,35 @@
+<div class="content-area-wrapper container-xxl p-0">
+  <!-- Todo Main Sidebar (Filter) -->
+  <core-sidebar
+    class="sidebar-left"
+    name="todo-sidebar-main"
+    overlayClass="body-content-overlay"
+    collapsibleSidebar="bs-gt-lg"
+  >
+    <app-todo-main-sidebar></app-todo-main-sidebar>
+  </core-sidebar>
+  <!--/ Todo Main Sidebar -->
+
+  <!-- content-right -->
+  <div class="content-right">
+    <div class="content-wrapper container-xxl p-0">
+      <div class="content-body">
+        <!-- Todo List -->
+        <app-todo-list></app-todo-list>
+        <!--/ Todo List -->
+
+        <!-- Todo Right Sidebar (Detail) -->
+        <core-sidebar
+          class="modal modal-slide-in sidebar-todo-modal fade"
+          name="todo-sidebar-right"
+          overlayClass="modal-backdrop"
+          hideOnEsc="true"
+        >
+          <app-todo-right-sidebar></app-todo-right-sidebar>
+        </core-sidebar>
+        <!--/ Todo Right Sidebar -->
+      </div>
+    </div>
+  </div>
+  <!--/ content-right -->
+</div>

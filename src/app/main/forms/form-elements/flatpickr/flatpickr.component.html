@@ -1,0 +1,128 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- flatpickr basic & date-time -->
+    <section id="basic-and-time">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_basicDateSnippetCode">
+            <h4 class="card-title">Basic Date</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>ng2-flatpickr</code> component to get basic flatpickr.</p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="basicDateOptions" name="basicDate"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_dateTimeSnippetCode">
+            <h4 class="card-title">Date & Time</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>enableTime: true</code> option to make date and time flatpickr.</p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="dateTimeOptions" name="dateTime"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ flatpickr basic & date-time -->
+
+    <!-- flatpickr default-date & date-range  -->
+    <section id="default-date-and-range">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_DefaultDateSnippetCode">
+            <h4 class="card-title">Default Date</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>defaultDate: '2019-03-19'</code> option to get a default date.</p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="DefaultDateOptions" name="DefaultDate"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_DateRangeSnippetCode">
+            <h4 class="card-title">Date Range</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>mode: 'range'</code> option to select range of dates.</p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ flatpickr default-date & date-range  -->
+
+    <!-- flatpickr time & custom date  -->
+    <section id="multiple-and-inline">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_timeSnippetCode">
+            <h4 class="card-title">Time</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>enableTime: true, noCalendar: true</code> option to only get time.</p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="timeOptions" name="time"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_customDateSnippetCode">
+            <h4 class="card-title">Custom Date</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>altInput: true, altFormat: 'j-m-Y'</code> option to customize time
+                <a href="https://flatpickr.js.org/formatting/">format</a>.
+              </p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="customDateOptions" name="customDate"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ flatpickr multiple & custom date  -->
+
+    <!-- flatpickr multiple  -->
+    <section id="multiple-and-inline">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_multipleDateSnippetCode">
+            <h4 class="card-title">Multiple Date</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>mode: 'multiple'</code> option to select multiple of dates.</p>
+              <div class="row">
+                <div class="col-12">
+                  <ng2-flatpickr [config]="multipleDateOptions" name="multipleDate"></ng2-flatpickr>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ flatpickr multiple  -->
+  </div>
+</div>

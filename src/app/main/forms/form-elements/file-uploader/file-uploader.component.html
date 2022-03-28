@@ -1,0 +1,179 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- ngb-alert component -->
+    <ngb-alert [type]="'warning'" [dismissible]="false">
+      <div class="alert-body">
+        <strong>Note:</strong> File Uploader is for demo purpose only. So, you cannot upload files from here. For
+        Backend connectivity Refer this official
+        <a class="alert-link" href="https://valor-software.com/ng2-file-upload/" target="_blank">documentation</a>.
+      </div>
+    </ngb-alert>
+    <!--/ ngb-alert component -->
+    <!-- File Uploader -->
+    <section id="file-upload">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 col-lg-6">
+              <div
+                ng2FileDrop
+                [ngClass]="{ 'file-drop-over': hasBaseDropZoneOver }"
+                (fileOver)="fileOverBase($event)"
+                [uploader]="uploader"
+                class="py-5 mb-3 text-center font-medium-5 text-uppercase file-drop-zone"
+              >
+                Drop Files Here To Upload
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div
+                ng2FileDrop
+                [ngClass]="{ 'file-drop-over-another': hasAnotherDropZoneOver }"
+                (fileOver)="fileOverAnother($event)"
+                [uploader]="uploader"
+                class="py-5 mb-3 text-center font-medium-5 text-uppercase file-drop-zone"
+              >
+                Another dropzone
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <h4>Select files</h4>
+              <fieldset class="form-group">
+                <label for="file-upload-multiple">Multiple:</label>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    type="file"
+                    ng2FileSelect
+                    [uploader]="uploader"
+                    multiple
+                    id="file-upload-multiple"
+                  />
+                  <label class="custom-file-label">Choose file</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="file-upload-single">Single:</label>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    type="file"
+                    ng2FileSelect
+                    [uploader]="uploader"
+                    id="file-upload-single"
+                  />
+                  <label class="custom-file-label">Choose file</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="col-lg-9 overflow-auto">
+              <div class="d-flex justify-content-between mb-1">
+                <h4>Upload queue</h4>
+                <p>Queue length: {{ uploader?.queue?.length }}</p>
+              </div>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th width="50%">Name</th>
+                    <th>Size</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of uploader.queue">
+                    <td>
+                      <strong>{{ item?.file?.name }}</strong>
+                    </td>
+                    <td *ngIf="uploader.options.isHTML5" nowrap>
+                      {{ item?.file?.size / 1024 / 1024 | number: '.2' }} MB
+                    </td>
+                    <td *ngIf="uploader.options.isHTML5">
+                      <ngb-progressbar type="primary" [value]="item.progress"></ngb-progressbar>
+                    </td>
+                    <td class="text-center">
+                      <span *ngIf="item.isSuccess"><i data-feather="check"></i></span>
+                      <span *ngIf="item.isCancel"><i data-feather="slash"></i></span>
+                      <span *ngIf="item.isError"><i data-feather="x-circle"></i></span>
+                    </td>
+                    <td nowrap>
+                      <button
+                        type="button"
+                        class="btn btn-raised btn-outline-success btn-sm mr-50"
+                        (click)="item.upload()"
+                        [disabled]="item.isReady || item.isUploading || item.isSuccess"
+                        rippleEffect
+                      >
+                        <span data-feather="upload"></span>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-raised btn-outline-warning btn-sm mr-50"
+                        (click)="item.cancel()"
+                        [disabled]="!item.isUploading"
+                        rippleEffect
+                      >
+                        <i data-feather="slash"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-raised btn-outline-danger btn-sm"
+                        (click)="item.remove()"
+                        rippleEffect
+                      >
+                        <i data-feather="trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div id="">
+                <p class="mt-1">Queue progress:</p>
+                <ngb-progressbar class="mb-1" type="primary" [value]="uploader.progress"></ngb-progressbar>
+                <button
+                  type="button"
+                  class="btn mr-1 btn-primary mb-1 mb-sm-0"
+                  (click)="uploader.uploadAll()"
+                  [disabled]="!uploader.getNotUploadedItems().length"
+                  rippleEffect
+                >
+                  <span data-feather="upload" class="mr-25"></span> Upload all
+                </button>
+                <button
+                  type="button"
+                  class="btn mr-1 btn-outline-warning mb-1 mb-sm-0"
+                  (click)="uploader.cancelAll()"
+                  [disabled]="!uploader.isUploading"
+                  rippleEffect
+                >
+                  <span data-feather="slash" class="mr-25"></span> Cancel all
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger mb-1 mb-sm-0"
+                  (click)="uploader.clearQueue()"
+                  [disabled]="!uploader.queue.length"
+                  rippleEffect
+                >
+                  <span data-feather="trash" class="mr-25"></span> Remove all
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ File Uploader -->
+  </div>
+</div>

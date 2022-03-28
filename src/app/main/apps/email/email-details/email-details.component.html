@@ -1,0 +1,340 @@
+<!-- Detailed Email View -->
+<ng-container *ngIf="isOpen === true">
+  <div class="email-app-details" [class.show]="isOpen === true">
+    <!-- Detailed Email Header starts -->
+    <div class="email-detail-header">
+      <div class="email-header-left d-flex align-items-center">
+        <button class="btn go-back p-0 mr-1" (click)="toggleDetails()">
+          <i data-feather="chevron-left" [size]="21"></i>
+        </button>
+        <h4 class="email-subject mb-0">{{ openedEmail.subject }}</h4>
+      </div>
+      <div class="email-header-right ml-2 pl-1">
+        <ul class="list-inline m-0">
+          <li class="list-inline-item mr-75">
+            <button class="action-icon btn p-0" (click)="toggleStarred(); $event.stopPropagation()">
+              <i
+                class="fa font-medium-3"
+                [ngClass]="{
+                  'fa-star text-warning': openedEmail.isStarred === true,
+                  'fa-star-o': openedEmail.isStarred !== true
+                }"
+              ></i>
+            </button>
+          </li>
+          <li class="list-inline-item mr-75">
+            <div ngbDropdown class="no-arrow">
+              <a
+                href="javascript:void(0);"
+                ngbDropdownToggle
+                id="folder"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i data-feather="folder" [size]="18"></i>
+              </a>
+              <div ngbDropdownMenu aria-labelledby="folder">
+                <a
+                  ngbDropdownItem
+                  (click)="updateFolderOnSelectedMails('draft')"
+                  class="d-flex align-items-center"
+                  href="javascript:void(0);"
+                >
+                  <i data-feather="edit-2" class="font-small-4 mr-50"></i>
+                  <span>Draft</span>
+                </a>
+                <a
+                  ngbDropdownItem
+                  (click)="updateFolderOnSelectedMails('spam')"
+                  class="d-flex align-items-center"
+                  href="javascript:void(0);"
+                >
+                  <i data-feather="info" class="font-small-4 mr-50"></i>
+                  <span>Spam</span>
+                </a>
+                <a
+                  ngbDropdownItem
+                  (click)="updateFolderOnSelectedMails('trash')"
+                  class="d-flex align-items-center"
+                  href="javascript:void(0);"
+                >
+                  <i data-feather="trash" class="font-small-4 mr-50"></i>
+                  <span>Trash</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item mr-75">
+            <div ngbDropdown class="no-arrow">
+              <a
+                href="javascript:void(0);"
+                ngbDropdownToggle
+                id="tag"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i data-feather="tag" [size]="18"></i>
+              </a>
+              <div ngbDropdownMenu aria-labelledby="tag">
+                <a ngbDropdownItem (click)="updateLabelOnSelectedEmails('personal')" href="javascript:void(0);"
+                  ><span class="mr-50 bullet bullet-success bullet-sm"></span>Personal</a
+                >
+                <a ngbDropdownItem (click)="updateLabelOnSelectedEmails('company')" href="javascript:void(0);"
+                  ><span class="mr-50 bullet bullet-primary bullet-sm"></span>Company</a
+                >
+                <a ngbDropdownItem (click)="updateLabelOnSelectedEmails('important')" href="javascript:void(0);"
+                  ><span class="mr-50 bullet bullet-warning bullet-sm"></span>Important</a
+                >
+                <a ngbDropdownItem (click)="updateLabelOnSelectedEmails('private')" href="javascript:void(0);"
+                  ><span class="mr-50 bullet bullet-danger bullet-sm"></span>Private</a
+                >
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item mr-75">
+            <button (click)="unRead()" class="btn action-icon p-0"><i data-feather="mail" [size]="18"></i></button>
+          </li>
+          <li class="list-inline-item mr-75">
+            <button (click)="updateFolderOnSelectedMails('trash')" class="btn action-icon p-0">
+              <i data-feather="trash" [size]="18"></i>
+            </button>
+          </li>
+          <li class="list-inline-item mr-75 email-prev">
+            <span class="action-icon"><i data-feather="chevron-left" [size]="18"></i></span>
+          </li>
+          <li class="list-inline-item mr-75 email-next">
+            <span class="action-icon"><i data-feather="chevron-right" [size]="18"></i></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Detailed Email Header ends -->
+
+    <!-- Detailed Email Content starts -->
+    <div class="email-scroll-area" [perfectScrollbar]>
+      <div class="row">
+        <div class="col-12">
+          <div class="email-label">
+            <span
+              class="mail-label badge badge-pill mr-50"
+              *ngFor="let label of openedEmail.labels"
+              [ngClass]="{
+                'badge-light-success': label === 'personal',
+                'badge-light-primary': label === 'company',
+                'badge-light-warning': label === 'important',
+                'badge-light-danger': label === 'private'
+              }"
+              >{{ label }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="currentMail?.replies.length > 0 && emailAppDetailReplies === false">
+        <div class="col-12">
+          <a (click)="openReplies()" href="javascript:void(0);" class="font-weight-bold"> View 2 Earlier Messages </a>
+        </div>
+      </div>
+      <!-- replies -->
+      <ng-container *ngIf="currentMail?.replies.length > 0 && emailAppDetailReplies === true">
+        <div class="row" *ngFor="let replie of currentMail?.replies">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header email-detail-head">
+                <div class="user-details d-flex justify-content-between align-items-center flex-wrap">
+                  <div class="avatar mr-75">
+                    <img [src]="replie.from.avatar" alt="avatar img holder" width="48" height="48" />
+                  </div>
+                  <div class="mail-items">
+                    <h5 class="mb-0">{{ replie.from.name }}</h5>
+                    <div ngbDropdown class="email-info-dropup">
+                      <span
+                        role="button"
+                        class="font-small-3 text-muted"
+                        id="card_top01"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        ngbDropdownToggle
+                      >
+                        {{ replie.from.email }}
+                      </span>
+                      <div ngbDropdownMenu aria-labelledby="card_top01">
+                        <table class="table table-sm table-borderless">
+                          <tbody>
+                            <tr>
+                              <td class="text-right">From:</td>
+                              <td>{{ replie.from.email }}</td>
+                            </tr>
+                            <tr>
+                              <td class="text-right">To:</td>
+                              <ng-container *ngFor="let emailToRef of replie.to">
+                                <td>{{ emailToRef.email }}</td>
+                              </ng-container>
+                            </tr>
+                            <tr>
+                              <td class="text-right">Date:</td>
+                              <td>{{ replie.time | date: 'short':'UTC' }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mail-meta-item d-flex align-items-center">
+                  <small class="mail-date-time text-muted">{{ replie.time | date: 'short':'UTC' }}</small>
+                  <div ngbDropdown class="ml-50">
+                    <div
+                      role="button"
+                      class="hide-arrow"
+                      id="email_more"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      ngbDropdownToggle
+                    >
+                      <i data-feather="more-vertical" [size]="18"></i>
+                    </div>
+                    <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="email_more">
+                      <div ngbDropdownItem><i data-feather="corner-up-left" class="mr-50"></i>Reply</div>
+                      <div ngbDropdownItem><i data-feather="corner-up-right" class="mr-50"></i>Forward</div>
+                      <div ngbDropdownItem><i data-feather="trash-2" class="mr-50"></i>Delete</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body mail-message-wrapper pt-2">
+                <div class="mail-message" [innerHTML]="replie.message"></div>
+              </div>
+              <div class="card-footer" *ngIf="replie.attachments.length > 0">
+                <div class="mail-attachments">
+                  <div class="d-flex align-items-center mb-1">
+                    <i data-feather="paperclip" [size]="16" class="mr-50"></i>
+                    <h5 class="font-weight-bolder text-body mb-0">{{ replie.attachments.length }} Attachments</h5>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <a href="javascript:void(0);" class="mb-50" *ngFor="let attachment of replie.attachments">
+                      <img [src]="attachment.thumbnail" class="mr-25" alt="png" height="18" />
+                      <small class="text-muted font-weight-bolder">{{ attachment.fileName }}</small>
+                      <span class="text-muted font-small-2 ml-25">({{ attachment.size }})</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <!-- replies -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header email-detail-head">
+              <div class="user-details d-flex justify-content-between align-items-center flex-wrap">
+                <div class="avatar mr-75">
+                  <img [src]="openedEmail.from.avatar" alt="avatar img holder" width="48" height="48" />
+                </div>
+                <div class="mail-items">
+                  <h5 class="mb-0">{{ openedEmail.from.name }}</h5>
+                  <div ngbDropdown class="email-info-dropup">
+                    <span
+                      role="button"
+                      class="font-small-3 text-muted"
+                      id="card_top01"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      ngbDropdownToggle
+                    >
+                      {{ openedEmail.from.email }}
+                    </span>
+                    <div ngbDropdownMenu aria-labelledby="card_top01">
+                      <table class="table table-sm table-borderless">
+                        <tbody>
+                          <tr>
+                            <td class="text-right">From:</td>
+                            <td>{{ openedEmail.from.email }}</td>
+                          </tr>
+                          <tr>
+                            <td class="text-right">To:</td>
+                            <ng-container *ngFor="let emailToRef of openedEmail.to">
+                              <td>{{ emailToRef.email }}</td>
+                            </ng-container>
+                          </tr>
+                          <tr>
+                            <td class="text-right">Date:</td>
+                            <td>{{ openedEmail.time | date: 'short':'UTC' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mail-meta-item d-flex align-items-center">
+                <small class="mail-date-time text-muted">{{ openedEmail.time | date: 'short':'UTC' }}</small>
+                <div ngbDropdown class="ml-50">
+                  <div
+                    role="button"
+                    class="hide-arrow"
+                    id="email_more"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    ngbDropdownToggle
+                  >
+                    <i data-feather="more-vertical" [size]="18"></i>
+                  </div>
+                  <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="email_more">
+                    <div ngbDropdownItem><i data-feather="corner-up-left" class="mr-50"></i>Reply</div>
+                    <div ngbDropdownItem><i data-feather="corner-up-right" class="mr-50"></i>Forward</div>
+                    <div ngbDropdownItem><i data-feather="trash-2" class="mr-50"></i>Delete</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body mail-message-wrapper pt-2">
+              <div class="mail-message" [innerHTML]="openedEmail.message"></div>
+            </div>
+            <div class="card-footer" *ngIf="openedEmail.attachments.length > 0">
+              <div class="mail-attachments">
+                <div class="d-flex align-items-center mb-1">
+                  <i data-feather="paperclip" [size]="16" class="mr-50"></i>
+                  <h5 class="font-weight-bolder text-body mb-0">{{ openedEmail.attachments.length }} Attachments</h5>
+                </div>
+                <div class="d-flex flex-column">
+                  <a href="javascript:void(0);" class="mb-50" *ngFor="let attachment of openedEmail.attachments">
+                    <img [src]="attachment.thumbnail" class="mr-25" alt="png" height="18" />
+                    <small class="text-muted font-weight-bolder">{{ attachment.fileName }}</small>
+                    <span class="text-muted font-small-2 ml-25">({{ attachment.size }})</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="mb-0">
+                  Click here to
+                  <a href="javascript:void(0);">Reply</a>
+                  or
+                  <a href="javascript:void(0);">Forward</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Detailed Email Content ends -->
+  </div>
+</ng-container>
+<!--/ Detailed Email View -->

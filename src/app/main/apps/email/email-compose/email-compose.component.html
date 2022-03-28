@@ -1,0 +1,264 @@
+<!-- compose email -->
+<ng-container *ngIf="isComposeOpen === true">
+  <div class="modal modal-sticky d-block" id="compose-mail">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content p-0">
+        <div class="modal-header">
+          <h5 class="modal-title">Compose Mail</h5>
+          <div class="modal-actions">
+            <a href="javascript:void(0);" class="text-body mr-75" (click)="closeCompose()"
+              ><i data-feather="minus"></i
+            ></a>
+            <a href="javascript:void(0);" class="text-body mr-75"><i data-feather="maximize-2"></i></a>
+            <a class="text-body" data-dismiss="modal" aria-label="Close" (click)="closeCompose()"
+              ><i data-feather="x"></i
+            ></a>
+          </div>
+        </div>
+        <div class="modal-body flex-grow-1 p-0">
+          <form class="compose-form">
+            <div class="compose-mail-form-field select2-primary">
+              <label for="email-to" class="form-label">To: </label>
+              <div class="flex-grow-1">
+                <div class="form-group">
+                  <ng-select
+                    #selectRef
+                    [items]="emailToSelect"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="name"
+                    placeholder="Select people"
+                    name="selectTo"
+                  >
+                    <ng-template ng-option-tmp let-item="item">
+                      <div class="media align-items-center p-25">
+                        <img
+                          class="d-block rounded-circle mr-50"
+                          [src]="item.avatar"
+                          height="24"
+                          width="24"
+                          [alt]="item.name"
+                        />
+                        <div class="media-body">
+                          <p class="mb-0">{{ item.name }}</p>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                      <div class="media align-items-center p-25">
+                        <img
+                          class="d-block rounded-circle mr-50"
+                          [src]="item.avatar"
+                          height="24"
+                          width="24"
+                          [alt]="item.name"
+                        />
+                        <div class="media-body">
+                          <p class="mb-0">{{ item.name }}</p>
+                        </div>
+                        <span class="ng-value-icon right" aria-hidden="true">×</span>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <div>
+                <a class="toggle-cc text-body mr-1" (click)="togglCcBcc('cc')">Cc</a>
+                <a class="toggle-bcc text-body" (click)="togglCcBcc('bcc')">Bcc</a>
+              </div>
+            </div>
+            <div class="compose-mail-form-field cc-wrapper" *ngIf="isOpenCC === true">
+              <label for="emailCC">Cc: </label>
+              <div class="flex-grow-1">
+                <div class="form-group">
+                  <ng-select
+                    [items]="emailCCSelect"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="name"
+                    placeholder="Select people"
+                    name="selectTo"
+                  >
+                    <ng-template ng-option-tmp let-item="item">
+                      <div class="media align-items-center p-25">
+                        <img
+                          class="d-block rounded-circle mr-50"
+                          [src]="item.avatar"
+                          height="24"
+                          width="24"
+                          [alt]="item.name"
+                        />
+                        <div class="media-body">
+                          <p class="mb-0">{{ item.name }}</p>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                      <div class="media align-items-center p-25">
+                        <img
+                          class="d-block rounded-circle mr-50"
+                          [src]="item.avatar"
+                          height="24"
+                          width="24"
+                          [alt]="item.name"
+                        />
+                        <div class="media-body">
+                          <p class="mb-0">{{ item.name }}</p>
+                        </div>
+                        <span class="ng-value-icon right" aria-hidden="true">×</span>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <a class="text-body toggle-cc" href="javascript:void(0);" (click)="togglCcBcc('cc')"
+                ><i data-feather="x"></i
+              ></a>
+            </div>
+            <div class="compose-mail-form-field bcc-wrapper" *ngIf="isOpenBCC === true">
+              <label for="emailBCC">Bcc: </label>
+              <div class="flex-grow-1">
+                <div class="form-group">
+                  <ng-select
+                    [items]="emailBCCSelect"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    [searchable]="false"
+                    bindLabel="name"
+                    placeholder="Select people"
+                    name="selectTo"
+                  >
+                    <ng-template ng-option-tmp let-item="item">
+                      <div class="media align-items-center p-25">
+                        <img
+                          class="d-block rounded-circle mr-50"
+                          [src]="item.avatar"
+                          height="24"
+                          width="24"
+                          [alt]="item.name"
+                        />
+                        <div class="media-body">
+                          <p class="mb-0">{{ item.name }}</p>
+                        </div>
+                      </div>
+                    </ng-template>
+                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                      <div class="media align-items-center p-25">
+                        <img
+                          class="d-block rounded-circle mr-50"
+                          [src]="item.avatar"
+                          height="24"
+                          width="24"
+                          [alt]="item.name"
+                        />
+                        <div class="media-body">
+                          <p class="mb-0">{{ item.name }}</p>
+                        </div>
+                        <span class="ng-value-icon right" aria-hidden="true">×</span>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+                </div>
+              </div>
+              <a class="text-body toggle-bcc" href="javascript:void(0);" (click)="togglCcBcc('bcc')"
+                ><i data-feather="x"></i
+              ></a>
+            </div>
+            <div class="compose-mail-form-field">
+              <label for="emailSubject">Subject: </label>
+              <input type="text" id="emailSubject" class="form-control" placeholder="Subject" name="emailSubject" />
+            </div>
+            <div class="form-group">
+              <quill-editor
+                name="addDescription"
+                customToolbarPosition="'bottom'"
+                class="border-bottom-0"
+                placeholder="Message"
+              >
+                <div quill-editor-toolbar>
+                  <div class="desc-toolbar border-top-0">
+                    <span class="ql-formats mr-0">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                      <button class="ql-align"></button>
+                      <button class="ql-link"></button>
+                    </span>
+                  </div>
+                </div>
+              </quill-editor>
+            </div>
+            <div class="compose-footer-wrapper">
+              <div class="btn-wrapper d-flex align-items-center">
+                <div class="btn-group dropup mr-1" ngbDropdown>
+                  <button type="button" class="btn btn-primary" (click)="closeCompose()" rippleEffect>Send</button>
+                  <button
+                    type="button"
+                    ngbDropdownToggle
+                    class="btn btn-primary dropdown-toggle-split"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-reference="parent"
+                    rippleEffect
+                  >
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <a ngbDropdownItem href="javascript:void(0);"> Schedule Send</a>
+                  </div>
+                </div>
+                <!-- add attachment -->
+                <div class="email-attachement">
+                  <label for="file-input">
+                    <i data-feather="paperclip" width="17" height="17" class="ml-50"></i>
+                  </label>
+
+                  <input id="file-input" type="file" class="d-none" />
+                </div>
+              </div>
+              <div class="footer-action d-flex align-items-center">
+                <div ngbDropdown>
+                  <a ngbDropdownToggle class="hide-arrow">
+                    <i
+                      class="cursor-pointer mr-50"
+                      data-feather="more-vertical"
+                      [size]="18"
+                      role="button"
+                      id="composeActions"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                    </i>
+                  </a>
+                  <div ngbDropdownMenu aria-labelledby="composeActions">
+                    <a ngbDropdownItem href="javascript:void(0);">
+                      <span class="align-middle">Add Label</span>
+                    </a>
+                    <a ngbDropdownItem href="javascript:void(0);">
+                      <span class="align-middle">Plain text mode</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a ngbDropdownItem href="javascript:void(0);">
+                      <span class="align-middle">Print</span>
+                    </a>
+                    <a ngbDropdownItem href="javascript:void(0);">
+                      <span class="align-middle">Check Spelling</span>
+                    </a>
+                  </div>
+                </div>
+                <button type="reset" class="btn p-0" (click)="closeCompose()">
+                  <i data-feather="trash" [size]="18" class="cursor-pointer" data-dismiss="modal"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<!--/ compose email -->

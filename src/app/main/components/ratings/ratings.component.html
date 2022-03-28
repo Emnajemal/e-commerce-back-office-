@@ -1,0 +1,173 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- ratings basic & icons -->
+    <section id="ratings-basic-icons">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeBasic">
+            <h4 class="card-title">Basic</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Use <code>ngb-rating</code> & wrap with <code>.rating</code> component to create basic ratings.
+              </p>
+              <div class="rating">
+                <ngb-rating [(rate)]="basicCurrentRate" class="outline-none"></ngb-rating>
+              </div>
+              <hr />
+              <pre class="p-1 text-white">Rate:<b>{{basicCurrentRate}}</b></pre>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeIcons">
+            <h4 class="card-title">Icons</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>ng-template</code> element to create custom Icons rating.</p>
+              <div class="rating">
+                <ngb-rating [(rate)]="iconsCurrentRate">
+                  <ng-template let-fill="fill" let-index="index"
+                    ><span class="fa fa-star-o" [class.fa-star]="fill === 100"></span
+                  ></ng-template>
+                </ngb-rating>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ ratings basic & icons -->
+
+    <!-- ratings sizes -->
+    <section id="ratings-sizes">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeSizes">
+            <h4 class="card-title">Sizes</h4>
+            <div class="card-body overflow-auto">
+              <p class="card-text">
+                Use <code>.rating.rating &#123; sm | lg &#125;</code> for small or large size ratings. Default is
+                medium.
+              </p>
+              <div class="row">
+                <div class="col-12 col-xl-4 my-auto">
+                  <div class="rating rating-sm">
+                    <ngb-rating [(rate)]="sizeSMCurrentRate" class="outline-none"></ngb-rating>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-4 my-auto">
+                  <div class="rating">
+                    <ngb-rating [(rate)]="sizeCurrentRate" class="outline-none"></ngb-rating>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-4 my-auto">
+                  <div class="rating rating-lg">
+                    <ngb-rating [(rate)]="sizeLGCurrentRate" class="outline-none"></ngb-rating>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ ratings sizes -->
+
+    <!-- ratings events readonly & form-integration -->
+    <section id="ratings-events-readonly-form-integration">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeReadonly">
+            <h4 class="card-title">Events and Readonly</h4>
+            <div class="card-body">
+              <p class="card-text">Use <code>[readonly]="true"</code> to make ratings readonly.</p>
+              <div class="rating">
+                <ngb-rating
+                  [(rate)]="ERselected"
+                  (hover)="ERhovered = $event"
+                  (leave)="ERhovered = 0"
+                  [readonly]="ERreadonly"
+                  class="outline-none"
+                ></ngb-rating>
+              </div>
+              <hr />
+              <pre class="p-1 text-white">Selected:<b>{{ERselected}}</b><br>Hovered:<b>{{ERhovered}}</b></pre>
+              <button
+                class="btn btn-sm btn-outline-{{ ERreadonly ? 'danger' : 'success' }}"
+                (click)="ERreadonly = !ERreadonly"
+                rippleEffect
+              >
+                {{ ERreadonly ? 'Readonly' : 'Editable' }}
+              </button>
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeIntegration">
+            <h4 class="card-title">Form Integration</h4>
+            <div class="card-body">
+              <p class="card-text"><code>NgModel</code> and reactive forms can be used without the 'rate' binding.</p>
+              <div class="form-group">
+                <div class="rating">
+                  <ngb-rating [formControl]="ctrl" class="outline-none"></ngb-rating>
+                </div>
+                <div class="form-text small">
+                  <div *ngIf="ctrl.valid" class="text-success">Thanks!</div>
+                  <div *ngIf="ctrl.invalid" class="text-danger">Please rate us</div>
+                </div>
+              </div>
+              <hr />
+              <pre class="p-1 text-white">Model:<b>{{ ctrl.value}}</b></pre>
+              <button
+                class="btn btn-sm btn-outline-{{ ctrl.disabled ? 'danger' : 'success' }} mr-2"
+                (click)="toggle()"
+                rippleEffect
+              >
+                {{ ctrl.disabled ? 'control disabled' : ' control enabled' }}</button
+              ><button class="btn btn-sm btn-outline-primary" (click)="ctrl.setValue(null)" rippleEffect>Clear</button>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ ratings events readonly & form-integration -->
+
+    <!-- ratings custom decimal -->
+    <section id="ratings-custom-decimal">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeCustomdecimal">
+            <h4 class="card-title">Custom decimal</h4>
+            <div class="card-body">
+              <p class="card-text">
+                Custom rating template provided via a variable. Shows fine-grained rating display.
+              </p>
+              <ng-template #t let-fill="fill"
+                ><span class="custom-star" [class.custom-full]="fill === 100"
+                  ><span class="custom-half" [style.width.%]="fill">&#9733;</span>&#9733;
+                </span></ng-template
+              >
+              <div class="rating">
+                <ngb-rating
+                  [(rate)]="decimalCurrentRate"
+                  [starTemplate]="t"
+                  [max]="5"
+                  class="outline-none"
+                ></ngb-rating>
+              </div>
+              <hr />
+              <pre class="p-1 text-white">Rate:<b>{{decimalCurrentRate}}</b></pre>
+              <button class="btn btn-sm btn-outline-primary mr-2" (click)="decimalCurrentRate = 1.35" rippleEffect>
+                1.35</button
+              ><button class="btn btn-sm btn-outline-primary" (click)="decimalCurrentRate = 4.5" rippleEffect>
+                4.50
+              </button>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!--/ ratings custom decimal -->
+  </div>
+</div>

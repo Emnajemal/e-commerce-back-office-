@@ -1,0 +1,96 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Basic Textarea start -->
+    <section class="basic-textarea">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeDefault">
+            <h4 class="card-title">Default</h4>
+            <div class="card-body">
+              <p class="card-text">To add a Textarea we have the component <code>textarea</code>.</p>
+              <div class="row">
+                <div class="col-12">
+                  <label for="basicTextarea">Textarea</label>
+                  <fieldset class="form-group">
+                    <textarea class="form-control" id="basicTextarea" rows="3" placeholder="Textarea"></textarea>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Basic Textarea end -->
+
+    <!-- Floating Label Textarea start -->
+    <section class="floating-label-textarea">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeFloating">
+            <h4 class="card-title">Floating Label</h4>
+            <div class="card-body">
+              <p class="mb-2">Use <code>.form-label-group</code> to add a Floating Label with Textarea.</p>
+              <div class="row">
+                <div class="col-12">
+                  <fieldset class="form-label-group">
+                    <textarea
+                      class="form-control"
+                      id="label-textarea"
+                      rows="3"
+                      placeholder="Label in Textarea"
+                    ></textarea>
+                    <label for="label-textarea">Label in Textarea</label>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Floating Label Textarea end -->
+
+    <!-- Counter Textarea start -->
+    <section class="counter-textarea">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeCounter">
+            <h4 class="card-title">Counter</h4>
+            <div class="card-body">
+              <p class="mb-2">
+                There are times when we need the user to only enter a certain number of characters for it, we have the
+                property counter, the value is a number and determines the maximum. Use
+                <code>[maxlength]</code> property with <code>&lt;textarea&gt;</code>tag for limiting text input length.
+              </p>
+              <div class="row">
+                <div class="col-12">
+                  <fieldset class="form-label-group mb-0">
+                    <textarea
+                      [(ngModel)]="textLength.value"
+                      #textLength
+                      [maxlength]="20"
+                      class="form-control char-textarea"
+                      id="textarea-counter"
+                      rows="3"
+                      placeholder="Counter"
+                    ></textarea>
+                    <label for="textarea-counter">Counter</label>
+                  </fieldset>
+                  <small class="textarea-counter-value float-right"
+                    ><span *ngIf="textLength" class="char-count">{{ textLength.value.length }}</span>
+                    <span *ngIf="!textLength" class="char-count">0 </span> / 20
+                  </small>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Counter Textarea end -->
+  </div>
+</div>

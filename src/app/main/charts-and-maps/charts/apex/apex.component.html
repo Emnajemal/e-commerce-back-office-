@@ -1,0 +1,442 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- Content-Header Component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Apexchart Line Chart Component-->
+    <section id="apex-line-chart">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
+            >
+              <div>
+                <h4 class="card-title">Line Chart</h4>
+                <span class="card-subtitle text-muted">Commercial networks</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="font-medium-2" data-feather="calendar"></i>
+                <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="apexLineChartId" #apexLineAreaChartRef>
+                <apx-chart
+                  [series]="apexLineAreaChart.series"
+                  [chart]="{
+                    height: 400,
+                    width: isMenuToggled === false ? apexLineAreaChartRef.offsetWidth : apexLineAreaChart.chart.width,
+                    type: 'area',
+                    stacked: true,
+                    zoom: {
+                      enabled: false
+                    },
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [fill]="apexLineAreaChart.fill"
+                  [xaxis]="apexLineAreaChart.xaxis"
+                  [dataLabels]="apexLineAreaChart.dataLabels"
+                  [grid]="apexLineAreaChart.grid"
+                  [tooltip]="apexLineAreaChart.tooltip"
+                  [stroke]="apexLineAreaChart.stroke"
+                  [colors]="apexLineAreaChart.colors"
+                  [legend]="apexLineAreaChart.legend"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apexchart Line Chart Component-->
+
+    <!-- Apex Column Charts -->
+    <section id="apex-column-charts">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-md-row flex-column justify-content-md-between justify-content-start align-items-md-center align-items-start"
+            >
+              <div>
+                <h4 class="card-title mb-50">Data Science</h4>
+              </div>
+              <div class="d-flex align-items-center mt-md-0 mt-1">
+                <i class="font-medium-2" data-feather="calendar"></i>
+                <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="column-chart" #apexColumnChartRef>
+                <apx-chart
+                  [series]="apexColumnChart.series"
+                  [chart]="{
+                    type: 'bar',
+                    height: 400,
+                    width: isMenuToggled === false ? apexColumnChartRef.offsetWidth : apexColumnChart.chart.width,
+                    stacked: true,
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [xaxis]="apexColumnChart.xaxis"
+                  [stroke]="apexColumnChart.stroke"
+                  [tooltip]="apexColumnChart.tooltip"
+                  [colors]="apexColumnChart.colors"
+                  [legend]="apexColumnChart.legend"
+                  [dataLabels]="apexColumnChart.dataLabels"
+                  [plotOptions]="apexColumnChart.plotOptions"
+                  [grid]="apexColumnChart.grid"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apex Column Charts -->
+
+    <!-- Apex Scatter Charts -->
+    <section id="apex-scatter-charts">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-md-row flex-column justify-content-md-between justify-content-start align-items-md-center align-items-start"
+            >
+              <div>
+                <h4 class="card-title mb-50">New Technologies Data</h4>
+              </div>
+              <div
+                class="btn-group btn-group-toggle mt-md-0 mt-1"
+                ngbRadioGroup
+                name="radioBasic"
+                [(ngModel)]="radioModel"
+              >
+                <label class="btn btn-outline-primary" ngbButtonLabel rippleEffect>
+                  <input type="radio" name="radio_options" id="radio_option1" [value]="1" ngbButton />
+                  <span>Daily</span>
+                </label>
+                <label class="btn btn-outline-primary" ngbButtonLabel rippleEffect>
+                  <input type="radio" name="radio_options" id="radio_option2" ngbButton [value]="2" />
+                  <span>Monthly</span>
+                </label>
+                <label class="btn btn-outline-primary" ngbButtonLabel rippleEffect>
+                  <input type="radio" name="radio_options" id="radio_option3" ngbButton [value]="3" />
+                  <span>Yearly</span>
+                </label>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="scatter-chart" #apexScatterChartRef>
+                <apx-chart
+                  [series]="apexScatterChart.series"
+                  [chart]="{
+                    height: 400,
+                    width: isMenuToggled === false ? apexScatterChartRef.offsetWidth : apexScatterChart.chart.width,
+                    type: 'scatter',
+                    zoom: {
+                      enabled: true,
+                      type: 'xy'
+                    },
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [xaxis]="apexScatterChart.xaxis"
+                  [yaxis]="apexScatterChart.yaxis"
+                  [colors]="apexScatterChart.colors"
+                  [legend]="apexScatterChart.legend"
+                  [grid]="apexScatterChart.grid"
+                >
+                </apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apex Scatter Charts -->
+
+    <!-- Apex Line Charts -->
+    <section id="apex-line-charts">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
+            >
+              <div>
+                <h4 class="card-title mb-25">Balance</h4>
+                <span class="card-subtitle text-muted">Commercial networks & enterprises</span>
+              </div>
+              <div class="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
+                <h5 class="font-weight-bolder mb-0 mr-1">$ 100,000</h5>
+                <div class="badge badge-light-secondary">
+                  <i class="text-danger font-small-3" data-feather="arrow-down"></i>
+                  <span class="align-middle">20%</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="line-chart" #apexLineChartRef>
+                <apx-chart
+                  [series]="apexLineChart.series"
+                  [chart]="{
+                    height: 400,
+                    width: isMenuToggled === false ? apexLineChartRef.offsetWidth : apexLineChart.chart.width,
+                    type: 'line',
+                    zoom: {
+                      enabled: false
+                    },
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [xaxis]="apexLineChart.xaxis"
+                  [stroke]="apexLineChart.stroke"
+                  [tooltip]="apexLineChart.tooltip"
+                  [colors]="apexLineChart.colors"
+                  [dataLabels]="apexLineChart.dataLabels"
+                  [grid]="apexLineChart.grid"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apex Line Charts -->
+
+    <!-- Apex Bar And Candlestick Charts -->
+    <section id="apex-bar-and-candlestick-charts">
+      <div class="row">
+        <div class="col-xl-6 col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
+            >
+              <div>
+                <p class="card-subtitle text-muted mb-25">Balance</p>
+                <h4 class="card-title font-weight-bolder">$74,382.72</h4>
+              </div>
+              <div class="d-flex align-items-center mt-md-0 mt-1">
+                <i class="font-medium-2" data-feather="calendar"></i>
+                <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="bar-chart" #apexBarChartRef>
+                <apx-chart
+                  [series]="apexBarChart.series"
+                  [chart]="{
+                    height: 400,
+                    width: isMenuToggled === false ? apexBarChartRef.offsetWidth : apexBarChart.chart.width,
+                    type: 'bar',
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [dataLabels]="apexBarChart.dataLabels"
+                  [plotOptions]="apexBarChart.plotOptions"
+                  [xaxis]="apexBarChart.xaxis"
+                  [colors]="apexBarChart.colors"
+                  [grid]="apexBarChart.grid"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
+            >
+              <div>
+                <h4 class="card-title mb-50">Stocks Prices</h4>
+                <p class="mb-0">$50,863.98</p>
+              </div>
+              <div class="d-flex align-items-center mt-md-0 mt-1">
+                <i class="font-medium-2" data-feather="calendar"></i>
+                <ng2-flatpickr [config]="DateRangeOptions" name="DateRange"></ng2-flatpickr>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="candlestick-chart" #apexCandlestickChartRef>
+                <apx-chart
+                  [series]="apexCandlestickChart.series"
+                  [chart]="{
+                    height: 400,
+                    width:
+                      isMenuToggled === false ? apexCandlestickChartRef.offsetWidth : apexCandlestickChart.chart.width,
+                    type: 'candlestick',
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [xaxis]="apexCandlestickChart.xaxis"
+                  [yaxis]="apexCandlestickChart.yaxis"
+                  [title]="apexCandlestickChart.title"
+                  [plotOptions]="apexCandlestickChart.plotOptions"
+                  [grid]="apexCandlestickChart.grid"
+                >
+                </apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apex Bar And Candlestick Charts -->
+
+    <!-- Apex Heatmap And Radialbar Chart -->
+    <section id="apex-heatmap-and-radialbar-chart">
+      <div class="row">
+        <div class="col-xl-6 col-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title">Daily Sales States</h4>
+              <div class="dropdown">
+                <i
+                  data-feather="more-vertical"
+                  class="cursor-pointer"
+                  role="button"
+                  id="heat-chart-dd"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                </i>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="heat-chart-dd">
+                  <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="heatmap-chart" #apexHeatmapChartRef>
+                <apx-chart
+                  [series]="apexHeatmapChart.series"
+                  [chart]="{
+                    height: 350,
+                    width: isMenuToggled === false ? apexHeatmapChartRef.offsetWidth : apexHeatmapChart.chart.width,
+                    type: 'heatmap',
+                    toolbar: {
+                      show: false
+                    }
+                  }"
+                  [xaxis]="apexHeatmapChart.xaxis"
+                  [dataLabels]="apexHeatmapChart.dataLabels"
+                  [colors]="apexHeatmapChart.colors"
+                  [legend]="apexHeatmapChart.legend"
+                  [plotOptions]="apexHeatmapChart.plotOptions"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
+            >
+              <h4 class="card-title mb-sm-0 mb-1">Statistics</h4>
+            </div>
+            <div class="card-body">
+              <div id="radialbar-chart" #apexRadialChartRef>
+                <apx-chart
+                  [series]="apexRadialChart.series"
+                  [chart]="{
+                    height: 400,
+                    width: isMenuToggled === false ? apexRadialChartRef.offsetWidth : apexRadialChart.chart.width,
+                    type: 'radialBar'
+                  }"
+                  [plotOptions]="apexRadialChart.plotOptions"
+                  [labels]="apexRadialChart.labels"
+                  [colors]="apexRadialChart.colors"
+                  [stroke]="apexRadialChart.stroke"
+                  [legend]="apexRadialChart.legend"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apex Heatmap And Radialbar Chart -->
+
+    <!-- Apex Radar And Donut Charts -->
+    <section id="apex-radar-and-donut-charts">
+      <div class="row">
+        <div class="col-xl-6 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Mobile Comparison</h4>
+            </div>
+            <div class="card-body">
+              <div id="radar-chart" #apexRadarChartRef>
+                <apx-chart
+                  [series]="apexRadarChart.series"
+                  [chart]="{
+                    height: 400,
+                    width: isMenuToggled === false ? apexRadarChartRef.offsetWidth : apexRadarChart.chart.width,
+                    type: 'radar',
+                    toolbar: {
+                      show: false
+                    },
+                    dropShadow: {
+                      enabled: false,
+                      blur: 8,
+                      left: 1,
+                      top: 1,
+                      opacity: 0.2
+                    }
+                  }"
+                  [xaxis]="apexRadarChart.xaxis"
+                  [stroke]="apexRadarChart.stroke"
+                  [markers]="apexRadarChart.markers"
+                  [fill]="apexRadarChart.fill"
+                  [grid]="apexRadarChart.grid"
+                  [title]="apexRadarChart.title"
+                  [colors]="apexRadarChart.colors"
+                  [legend]="apexRadarChart.legend"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-12">
+          <div class="card">
+            <div class="card-header flex-column align-items-start">
+              <h4 class="card-title mb-75">Expense Ratio</h4>
+              <span class="card-subtitle text-muted">Spending on various categories </span>
+            </div>
+            <div class="card-body">
+              <div id="donut-chart" #apexDonutChartRef>
+                <apx-chart
+                  [series]="apexDonutChart.series"
+                  [chart]="{
+                    height: 350,
+                    width: isMenuToggled === false ? apexDonutChartRef.offsetWidth : apexDonutChart.chart.width,
+                    type: 'donut'
+                  }"
+                  [labels]="apexDonutChart.labels"
+                  [plotOptions]="apexDonutChart.plotOptions"
+                  [responsive]="apexDonutChart.responsive"
+                  [colors]="apexDonutChart.colors"
+                  [legend]="apexDonutChart.legend"
+                ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Apex Radar And Donut Charts -->
+  </div>
+</div>

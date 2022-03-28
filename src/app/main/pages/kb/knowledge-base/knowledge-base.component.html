@@ -1,0 +1,69 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!-- Knowledge base Jumbotron -->
+    <section id="knowledge-base-search">
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="card knowledge-base-bg text-center"
+            style="background-image: url('assets/images/banner/banner.png')"
+          >
+            <div class="card-body">
+              <h2 class="text-primary">Dedicated Source Used on Website</h2>
+              <p class="card-text mb-2">
+                <span>Popular searches: </span><span class="font-weight-bolder">Sales automation, Email marketing</span>
+              </p>
+              <form class="kb-search-input">
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i data-feather="search"></i></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="searchText"
+                    id="searchbar"
+                    name="searchbar"
+                    placeholder="Ask a question..."
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Knowledge base Jumbotron -->
+    <!-- Knowledge base -->
+    <section id="knowledge-base-content">
+      <div class="row kb-search-content-info match-height">
+        <div
+          *ngFor="let knowledgeBaseRef of data.knowledgeBase | filter: searchText:'title'"
+          class="col-md-4 col-sm-6 col-12 kb-search-content"
+        >
+          <div class="card">
+            <a routerLink="/pages/knowledge-base/{{ knowledgeBaseRef.category }}">
+              <img src="{{ knowledgeBaseRef.img }}" class="card-img-top" alt="knowledge-base-image" />
+              <div class="card-body text-center">
+                <h4>{{ knowledgeBaseRef.title }}</h4>
+                <p class="text-body mt-1 mb-0">{{ knowledgeBaseRef.desc }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- no result -->
+        <ng-container *ngIf="(data.knowledgeBase | filter: searchText:'title').length; else noResults"></ng-container>
+        <ng-template #noResults>
+          <div class="col-12 text-center no-result">
+            <h4 class="mt-4">Search result not found!!</h4>
+          </div>
+        </ng-template>
+      </div>
+    </section>
+    <!-- Knowledge base ends -->
+  </div>
+</div>

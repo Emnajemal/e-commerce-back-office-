@@ -1,0 +1,81 @@
+<!-- Ecommerce Item -->
+<div class="item-img text-center">
+  <a [routerLink]="'/apps/e-commerce/details/' + product.id">
+    <img class="img-fluid card-img-top" [src]="product.image" alt="img-placeholder" />
+  </a>
+</div>
+<div class="card-body">
+  <div class="item-wrapper">
+    <div class="item-rating">
+      <div class="rating rating-sm">
+        <ngb-rating [rate]="product.rating" [readonly]="true" [max]="5" class="outline-none">
+          <ng-template let-fill="fill" let-index="index"
+            ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
+          ></ng-template>
+        </ngb-rating>
+      </div>
+    </div>
+    <div class="item-cost">
+      <h6 class="item-price">${{ product.price }}</h6>
+    </div>
+  </div>
+  <h6 class="item-name">
+    <a class="text-body" [routerLink]="'/apps/e-commerce/details/' + product.id"> {{ product.name }}</a>
+    <span class="card-text item-company"
+      >By <a href="javascript:void(0)" class="company-name">{{ product.brand }}</a></span
+    >
+  </h6>
+  <p class="card-text item-description">
+    {{ product.description }}
+  </p>
+</div>
+<div class="item-options text-center">
+  <div class="item-wrapper">
+    <div class="item-cost">
+      <h4 class="item-price">${{ product.price }}</h4>
+      <p class="card-text shipping" *ngIf="product.hasFreeShipping">
+        <span class="badge badge-pill badge-light-success">Free Shipping</span>
+      </p>
+    </div>
+  </div>
+  <a
+    *ngIf="isWishlistOpen === true"
+    href="javascript:void(0)"
+    class="btn btn-light btn-wishlist"
+    (click)="toggleWishlist(product)"
+    rippleEffect
+  >
+    <i data-feather="x"></i>
+    <span>Remove</span>
+  </a>
+  <a
+    *ngIf="isWishlistOpen !== true"
+    href="javascript:void(0)"
+    class="btn btn-light btn-wishlist"
+    (click)="toggleWishlist(product)"
+    rippleEffect
+  >
+    <i class="fa mr-25" [ngClass]="product.isInWishlist === true ? 'fa-heart text-danger' : 'fa-heart-o'"></i>
+    <span>Wishlist</span>
+  </a>
+  <a
+    *ngIf="product.isInCart !== true"
+    href="javascript:void(0)"
+    class="btn btn-primary btn-cart"
+    (click)="addToCart(product)"
+    rippleEffect
+  >
+    <i data-feather="shopping-cart" class="mr-25"></i>
+    <span class="add-to-cart">Add to cart</span>
+  </a>
+  <a
+    *ngIf="product.isInCart === true"
+    routerLink="/apps/e-commerce/checkout"
+    class="btn btn-primary btn-cart"
+    rippleEffect
+  >
+    <i data-feather="shopping-cart" class="mr-25"></i>
+    <span class="add-to-cart">View in cart</span>
+  </a>
+</div>
+<!--/ Ecommerce Item -->

@@ -1,0 +1,117 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <section id="credit-phone-mask">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeCredit">
+            <h4 class="card-title">Credit Card</h4>
+            <div class="card-body">
+              <input class="form-control" type="text" placeholder="1234 5678 8765 4321" mask="0000 0000 0000 0000" />
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodePhone">
+            <h4 class="card-title">Phone number</h4>
+            <div class="card-body">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">+63</span>
+                </div>
+                <input type="text" class="form-control" placeholder="(760) 123 00 00" mask="(000) 000 00 00" />
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <section id="date-time-mask">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeDate">
+            <h4 class="card-title">Date</h4>
+            <div class="card-body">
+              <input class="form-control" type="text" placeholder="01/02/2023" mask="00/00/0000" />
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeTime">
+            <h4 class="card-title">Time (24 hour format)</h4>
+            <div class="card-body">
+              <input class="form-control" type="text" placeholder="23:23:59" mask="Hh:m0:s0" />
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <section id="numeral-secure-mask">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeNumeral">
+            <h4 class="card-title">Numeral Formatting</h4>
+            <div class="card-body">
+              <input class="form-control" type="text" placeholder="10,000" mask="separator" thousandSeparator="," />
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeSecure">
+            <h4 class="card-title">Secure Input</h4>
+            <div class="card-body">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="XXX/X9/2032"
+                [hiddenInput]="true"
+                mask="XXX/X0/0000"
+              />
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <section id="prefix-suffix-mask">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodePrefix">
+            <h4 class="card-title">Prefix</h4>
+            <div class="card-body">
+              <input class="form-control" placeholder="+63" type="text" prefix="+63 " mask="(000) 000 00 00" />
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeSuffix">
+            <h4 class="card-title">Suffix</h4>
+            <div class="card-body">
+              <input class="form-control" placeholder="987654$" type="text" suffix=" $" mask="0000" />
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <section id="block-delimiters-mask">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeBlocks">
+            <h4 class="card-title">Blocks</h4>
+            <div class="card-body">
+              <input class="form-control" placeholder="1234 123 123" type="text" mask="0000 000 000" />
+            </div>
+          </core-card-snippet>
+        </div>
+        <div class="col-12 col-md-6">
+          <core-card-snippet [snippetCode]="_snippetCodeDelimiters">
+            <h4 class="card-title">Delimiters</h4>
+            <div class="card-body">
+              <input class="form-control" placeholder="123.456" type="text" mask="separator" thousandSeparator="." />
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

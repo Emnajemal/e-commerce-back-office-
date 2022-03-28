@@ -1,0 +1,61 @@
+<li ngbDropdown class="nav-item dropdown-cart mr-25">
+  <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarCartDropdown"
+    ><span [data-feather]="'shopping-cart'" [class]="'ficon'"></span
+    ><span class="badge badge-pill badge-primary badge-up cart-item-count">{{ cartListLength }}</span></a
+  >
+  <ul
+    ngbDropdownMenu
+    aria-labelledby="navbarCartDropdown"
+    class="dropdown-menu dropdown-menu-media dropdown-menu-right"
+  >
+    <!-- Cart header -->
+    <li class="dropdown-menu-header">
+      <div class="dropdown-header d-flex">
+        <h4 class="notification-title mb-0 mr-auto">My Cart</h4>
+        <div class="badge badge-pill badge-light-primary">{{ cartListLength }} Items</div>
+      </div>
+    </li>
+    <!--/ Cart header -->
+
+    <!-- Cart content -->
+    <li class="scrollable-container media-list" [perfectScrollbar]>
+      <ng-container *ngIf="products.length">
+        <ng-container *ngFor="let product of products">
+          <div class="media align-items-center" *ngIf="product?.isInCart === true">
+            <img class="d-block rounded mr-1" [src]="product.image" alt="donuts" width="62" />
+            <div class="media-body">
+              <button class="btn p-0" (click)="removeFromCart(product)">
+                <i class="ficon cart-item-remove" data-feather="x"></i>
+              </button>
+              <div class="media-heading">
+                <h6 class="cart-item-title">
+                  <a class="text-body" [routerLink]="'/apps/e-commerce/ecommerce-details/' + product.id">{{
+                    product.name
+                  }}</a>
+                </h6>
+                <small class="cart-item-by">{{ product.brand }}</small>
+              </div>
+              <div class="cart-item-qty">
+                <div class="input-group touchspin-cart">
+                  <core-touchspin [numberValue]="1" [stepValue]="1" [minValue]="1" [maxValue]="10"></core-touchspin>
+                </div>
+              </div>
+              <h5 class="cart-item-price">${{ product.price }}</h5>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </li>
+    <!--/ Cart content -->
+
+    <!-- Cart footer -->
+    <li class="dropdown-menu-footer">
+      <div class="d-flex justify-content-between mb-1">
+        <h6 class="font-weight-bolder mb-0">Total:</h6>
+        <h6 class="text-primary font-weight-bolder mb-0">$10,999.00</h6>
+      </div>
+      <a class="btn btn-primary btn-block" routerLink="/apps/e-commerce/checkout">Checkout</a>
+    </li>
+    <!--/ Cart footer -->
+  </ul>
+</li>

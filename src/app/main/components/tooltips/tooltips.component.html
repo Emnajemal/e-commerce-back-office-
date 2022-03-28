@@ -1,0 +1,268 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <!--Tooltip Positions Starts-->
+    <section id="tooltip-positions">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTooltipPositions">
+            <h4 class="card-title">Tooltip Positions</h4>
+            <div class="card-body">
+              <p class="card-text">Four options are available: top, right, bottom, and left aligned.</p>
+              <button
+                type="button"
+                rippleEffect
+                class="btn btn-outline-primary mr-2"
+                placement="top"
+                ngbTooltip="Tooltip on top"
+              >
+                Tooltip on top
+              </button>
+              <button
+                type="button"
+                rippleEffect
+                class="btn btn-outline-primary mr-2"
+                placement="right"
+                ngbTooltip="Tooltip on right"
+                container="body"
+              >
+                Tooltip on right
+              </button>
+              <button
+                type="button"
+                rippleEffect
+                class="btn btn-outline-primary mr-2"
+                placement="bottom"
+                ngbTooltip="Tooltip on bottom"
+              >
+                Tooltip on bottom
+              </button>
+
+              <button
+                type="button"
+                rippleEffect
+                class="btn btn-outline-primary"
+                placement="left"
+                ngbTooltip="Tooltip on left"
+                container="body"
+              >
+                Tooltip on left
+              </button>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Tooltip Positions Ends -->
+
+    <!-- Tooltip Triggers Starts-->
+    <section id="tooltip-triggers">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTooltipTriggers">
+            <h4 class="card-title">Tooltip Triggers</h4>
+            <div class="card-body">
+              <p class="card-text mb-0">Tooltip is triggered using - click | hover | manual options.</p>
+              <div class="demo-inline-spacing">
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Click Triggered"
+                  triggers="click:blur"
+                >
+                  On Click Trigger
+                </button>
+                <button type="button" rippleEffect class="btn btn-outline-primary" ngbTooltip="Hover Triggered">
+                  On Hover Trigger
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary manual"
+                  ngbTooltip="Manual Triggered"
+                  [autoClose]="true"
+                  triggers="manual"
+                  #manualOpen="ngbTooltip"
+                  (click)="manualOpen.open()"
+                >
+                  On Manual Trigger
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Manual Triggered"
+                  #manualClose="ngbTooltip"
+                  (click)="manualClose.close()"
+                >
+                  Click me to close a tooltip
+                </button>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Tooltip Triggers Ends -->
+
+    <!-- Tooltip Options -->
+    <section id="tooltip-options">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTooltipOptions">
+            <h4 class="card-title">Tooltip Options</h4>
+            <div class="card-body">
+              <div class="demo-inline-spacing">
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  tooltipClass="text-uppercase fadeInAnimation"
+                  ngbTooltip="Text in Uppercase"
+                >
+                  Click to toggle
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary delay"
+                  ngbTooltip="You see, I show up after 300ms and disappear after 500ms!"
+                  [openDelay]="300"
+                  [closeDelay]="500"
+                >
+                  Hover 300ms here
+                </button>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Tooltip Options Ends -->
+
+    <!-- Tooltip Methods Starts-->
+    <section id="tooltip-methods">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTooltipMethods">
+            <h4 class="card-title">Tooltip Methods</h4>
+            <div class="card-body">
+              <div class="demo-inline-spacing">
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Show Method Tooltip"
+                  triggers="manual"
+                  #methodOpen="ngbTooltip"
+                  (click)="methodOpen.open()"
+                >
+                  Show Method <span [data-feather]="'play-circle'" class="'ml-1'"></span>
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  #methodClose="ngbTooltip"
+                  (click)="methodClose.close()"
+                  ngbTooltip="Hide Method Tooltip"
+                >
+                  Hide Method <span [data-feather]="'play-circle'" class="'ml-1'"></span>
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  triggers="manual"
+                  #methodToggle="ngbTooltip"
+                  (click)="methodToggle.toggle()"
+                  ngbTooltip="Toggle Method Tooltip"
+                >
+                  Toggle Method <span [data-feather]="'play-circle'" class="'ml-1'"></span>
+                </button>
+                <div class="btn-group">
+                  <button
+                    type="button"
+                    rippleEffect
+                    class="btn btn-outline-primary"
+                    triggers="click"
+                    #methodIsOpen="ngbTooltip"
+                    (click)="methodIsOpen.isOpen()"
+                    ngbTooltip="Dispose Method Tooltip"
+                  >
+                    Toolip is : {{ methodIsOpen.isOpen() }}
+                  </button>
+                  <button type="button" rippleEffect class="btn btn-outline-primary">
+                    <span [data-feather]="'play-circle'"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Tooltip Methods Ends -->
+
+    <!-- Tooltip Events starts -->
+    <section id="tooltip-events">
+      <div class="row">
+        <div class="col-12">
+          <core-card-snippet [snippetCode]="_snippetCodeTooltipEvents">
+            <h4 class="card-title">Tooltip Events</h4>
+            <div class="card-body">
+              <div class="demo-inline-spacing">
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Tooltip Open Event"
+                  triggers="manual"
+                  #OpenEvent="ngbTooltip"
+                  (click)="openEvent()"
+                >
+                  Open Event Tooltip
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Tooltip Open Event"
+                  triggers="manual"
+                  #OpenEventAfter="ngbTooltip"
+                  (click)="openEventAfter()"
+                >
+                  Open Event Tooltip
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Tooltip Show Event"
+                  #CloseEvent="ngbTooltip"
+                  (click)="closeEvent()"
+                >
+                  Close Event Tooltip
+                </button>
+                <button
+                  type="button"
+                  rippleEffect
+                  class="btn btn-outline-primary"
+                  ngbTooltip="Tooltip Show Event"
+                  #CloseEventAfter="ngbTooltip"
+                  (click)="closeEventAfter()"
+                >
+                  Closed Event Tooltip
+                </button>
+              </div>
+            </div>
+          </core-card-snippet>
+        </div>
+      </div>
+    </section>
+    <!-- Tooltip Events Ends -->
+  </div>
+</div>

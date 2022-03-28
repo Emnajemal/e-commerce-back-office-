@@ -1,0 +1,53 @@
+@import '@core/scss/base/pages/app-calendar.scss';
+@import '@core/scss/angular/libs/flatpickr.component.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+
+@import '@core/scss/base/bootstrap-extended/include.scss'; // Bootstrap includes
+@import '~@fullcalendar/daygrid/main.css';
+
+//  Main Sidebar
+app-calendar-main-sidebar {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
+// Sidebar Toggle Button
+.fc-sidebarToggle-button {
+  background-image: url(str-replace(str-replace($menu, 'currentColor', $body-color), '#', '%23'));
+  width: 24px;
+  height: 24px;
+  margin-right: 0.7rem !important;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+// Hide sidebar toggle in lg screen
+@include media-breakpoint-up(lg) {
+  .fc-sidebarToggle-button {
+    display: none !important;
+  }
+}
+
+.fc {
+  .fc-button-primary {
+    &:not(:disabled) {
+      &:active:focus {
+        box-shadow: none !important;
+      }
+    }
+  }
+  .fc-button-active {
+    &:focus {
+      box-shadow: none !important;
+      &:active {
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+// ! Fix: fixed chrome bug
+.fc-scrollgrid-section-liquid {
+  height: 1px !important;
+}
