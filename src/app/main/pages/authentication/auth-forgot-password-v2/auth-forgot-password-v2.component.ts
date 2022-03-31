@@ -1,5 +1,6 @@
+import { AuthenticationService } from 'app/auth/service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -13,6 +14,11 @@ import { CoreConfigService } from '@core/services/config.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AuthForgotPasswordV2Component implements OnInit {
+  alert:boolean=false;
+  error={
+    email:null
+  }
+  message:any;
   // Public
   public emailVar;
   public coreConfig: any;
@@ -29,7 +35,8 @@ export class AuthForgotPasswordV2Component implements OnInit {
    * @param {FormBuilder} _formBuilder
    *
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder, 
+    private auth:AuthenticationService) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -58,14 +65,31 @@ export class AuthForgotPasswordV2Component implements OnInit {
   /**
    * On Submit
    */
-  onSubmit() {
+  onSubmit(form:NgForm) {
     this.submitted = true;
+    const email =form.value.email;
+    this.auth.forgot(email).subscribe((res:any)=>{
+       console.log(res)
+       this.alert=true;
+       form.reset({})
+     }
+    
 
+
+    ,(err)=>{
+  console.log(err.error.errors);
+     
+        })
+    
     // stop here if form is invalid
-    if (this.forgotPasswordForm.invalid) {
+      if (this.forgotPasswordForm.invalid) {
       return;
     }
   }
+  closeAlert(){
+    this.alert=false;
+  }
+  
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
