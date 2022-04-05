@@ -10,6 +10,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { AccountSettingsComponent } from 'app/main/pages/account-settings/account-settings.component';
 import { AccountSettingsService } from 'app/main/pages/account-settings/account-settings.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -31,7 +32,9 @@ const routes: Routes = [
     NgbModule,
     CoreCommonModule,
     ContentHeaderModule,
-    Ng2FlatpickrModule
+    Ng2FlatpickrModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 
   providers: [AccountSettingsService]

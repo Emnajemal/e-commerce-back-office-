@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { environment } from 'environments/environment';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -8,6 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AccountSettingsService implements Resolve<any> {
   rows: any;
   onSettingsChanged: BehaviorSubject<any>;
+  private ChangeUrl = 'http://127.0.0.1:8000/api/auth/change_password';
+  private uploadUrl='http://127.0.0.1:8000/api/update/user/{id}';
 
   /**
    * Constructor
@@ -16,8 +19,22 @@ export class AccountSettingsService implements Resolve<any> {
    */
   constructor(private _httpClient: HttpClient) {
     // Set the defaults
-    this.onSettingsChanged = new BehaviorSubject({});
+    this.onSettingsChanged =
+     new BehaviorSubject({});
   }
+  
+
+   change(form){
+      console.log("heloooo")
+   return this._httpClient.post(this.ChangeUrl,form);
+  }
+  
+  upload(uploadForm){
+    return this._httpClient.post(this.uploadUrl,uploadForm);
+
+  }
+
+  
 
   /**
    * Resolver

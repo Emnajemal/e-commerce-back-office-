@@ -20,7 +20,9 @@
                 <i data-feather="user" class="font-medium-3 mr-1"></i>
                 <span class="font-weight-bold">General</span>
               </a>
+
               <ng-template ngbNavContent>
+
                 <div class="card">
                   <div class="card-body">
                     <!-- header media -->
@@ -33,7 +35,7 @@
                         <button
                           (click)="file.click()"
                           for="account-upload"
-                          class="btn btn-sm btn-primary mb-75 mr-75"
+                          class="btn btn-sm btn-info mb-75 mr-75"
                           rippleEffect
                         >
                           Upload
@@ -54,32 +56,38 @@
                     <!--/ header media -->
 
                     <!-- form -->
-                    <form class="validate-form mt-2">
+                    <form class="validate-form mt-2" [formGroup]="uploadForm" (ngSubmit)="edituserSubmit()">
                       <div class="row">
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-username">Username</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.general.username"
                               class="form-control"
+                              formControlName="name"
                               id="account-username"
-                              name="username"
+                              name="name"
                               placeholder="Username"
                             />
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
-                            <label for="account-name">Name</label>
-                            <input
-                              type="text"
-                              [(ngModel)]="data.accountSetting.general.fullName"
-                              class="form-control"
-                              id="account-name"
-                              name="name"
-                              placeholder="Name"
-                            />
+                              <label for="phone">Mobile</label>
+                              <div class="input-group input-group-merge">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><span [data-feather]="'smartphone'"></span></span>
+                                </div>
+                                <input
+                                  type="number"
+                                  id="contact-icon"
+                                  formControlName="phone"
+                                  class="form-control"
+                                  name="contact-icon"
+                                  placeholder="Mobile"
+                                />
+                              </div>
+                            
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -87,8 +95,8 @@
                             <label for="account-e-mail">E-mail</label>
                             <input
                               type="email"
-                              [(ngModel)]="data.accountSetting.general.email"
                               class="form-control"
+                              formControlName="email"
                               id="account-e-mail"
                               name="email"
                               placeholder="Email"
@@ -100,8 +108,8 @@
                             <label for="account-company">Company</label>
                             <input
                               type="text"
-                              [(ngModel)]="data.accountSetting.general.company"
                               class="form-control"
+                              formControlName="company"
                               id="account-company"
                               name="company"
                               placeholder="Company name"
@@ -117,7 +125,7 @@
                           </div>
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary mt-2 mr-1" rippleEffect>Save changes</button>
+                          <button type="submit" class="btn btn-info mt-2 mr-1" rippleEffect>Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary mt-2" rippleEffect>Cancel</button>
                         </div>
                       </div>
@@ -125,7 +133,9 @@
                     <!--/ form -->
                   </div>
                 </div>
+               
               </ng-template>
+              
             </li>
             <li class="nav-item" ngbNavItem>
               <a
@@ -143,30 +153,22 @@
                 <div class="card">
                   <div class="card-body">
                     <!-- form -->
-                    <form class="validate-form">
+                    <form [formGroup]="resetForm" class="validate-form"(ngSubmit)="onSubmit()" >
                       <div class="row">
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-old-password">Old Password</label>
                             <div class="input-group form-password-toggle input-group-merge">
                               <input
-                                [type]="passwordTextTypeOld ? 'text' : 'password'"
+                              formControlName="old_password"
                                 class="form-control"
+                                [type]="passwordTextTypeOld ? 'text' : 'password'"
                                 id="account-old-password"
-                                name="password"
                                 placeholder="Old Password"
+                                [ngClass]="{ 'is-invalid': submitted && f.old_password.errors }"
                               />
                               <div class="input-group-append">
-                                <span class="input-group-text cursor-pointer"
-                                  ><i
-                                    class="feather font-small-4"
-                                    [ngClass]="{
-                                      'icon-eye-off': passwordTextTypeOld,
-                                      'icon-eye': !passwordTextTypeOld
-                                    }"
-                                    (click)="togglePasswordTextTypeOld()"
-                                  ></i
-                                ></span>
+                                
                               </div>
                             </div>
                           </div>
@@ -178,23 +180,18 @@
                             <label for="account-new-password">New Password</label>
                             <div class="input-group form-password-toggle input-group-merge">
                               <input
-                                [type]="passwordTextTypeNew ? 'text' : 'password'"
+                              formControlName="password"
+                              [type]="passwordTextTypeNew ? 'text' : 'password'"
                                 id="account-new-password"
-                                name="new-password"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
                                 class="form-control"
                                 placeholder="New Password"
                               />
                               <div class="input-group-append">
-                                <span class="input-group-text cursor-pointer"
-                                  ><i
-                                    class="feather font-small-4"
-                                    [ngClass]="{
-                                      'icon-eye-off': passwordTextTypeNew,
-                                      'icon-eye': !passwordTextTypeNew
-                                    }"
-                                    (click)="togglePasswordTextTypeNew()"
-                                  ></i
-                                ></span>
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                  <div *ngIf="f.password.errors.required">Password is required</div>
+                                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                              </div>
                               </div>
                             </div>
                           </div>
@@ -204,39 +201,37 @@
                             <label for="account-retype-new-password">Retype New Password</label>
                             <div class="input-group form-password-toggle input-group-merge">
                               <input
+                                formControlName="password_confirmer"
                                 [type]="passwordTextTypeRetype ? 'text' : 'password'"
                                 class="form-control"
                                 id="account-retype-new-password"
-                                name="confirm-new-password"
                                 placeholder="New Password"
+                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
                               />
                               <div class="input-group-append">
-                                <span class="input-group-text cursor-pointer"
-                                  ><i
-                                    class="feather font-small-4"
-                                    [ngClass]="{
-                                      'icon-eye-off': passwordTextTypeRetype,
-                                      'icon-eye': !passwordTextTypeRetype
-                                    }"
-                                    (click)="togglePasswordTextTypeRetype()"
-                                  ></i
-                                ></span>
+                                <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
+                                  <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
+                                  <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
+                              </div>
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
+                          <button type="submit" class="btn btn-info mr-1 mt-1"  rippleEffect>Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
                         </div>
                       </div>
                     </form>
+                    <!--<button class="btn btn-outline-primary" (click)="toastBasic('I am a Basic toast', 2000)" rippleEffect>
+                      Toast
+                    </button>-->
                     <!--/ form -->
                   </div>
                 </div>
               </ng-template>
             </li>
-            <li class="nav-item" ngbNavItem>
+           <!-- <li class="nav-item" ngbNavItem>
               <a
                 ngbNavLink
                 class="nav-link d-flex py-75"
@@ -250,9 +245,9 @@
               </a>
               <ng-template ngbNavContent>
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body">-->
                     <!-- form -->
-                    <form class="validate-form">
+                    <!--<form class="validate-form">
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group">
@@ -325,12 +320,13 @@
                           <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
                         </div>
                       </div>
-                    </form>
+                    </form>-->
                     <!--/ form -->
-                  </div>
+                  
+                <!--  </div>
                 </div>
-              </ng-template>
-            </li>
+              </ng-template>-->
+            <!--</li>
             <li class="nav-item" ngbNavItem>
               <a
                 ngbNavLink
@@ -345,19 +341,19 @@
               </a>
               <ng-template ngbNavContent>
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body">-->
                     <!-- form -->
-                    <form class="validate-form">
-                      <div class="row">
+                    <!--<form class="validate-form">
+                      <div class="row">-->
                         <!-- social header -->
-                        <div class="col-12">
+                       <!--- <div class="col-12">
                           <div class="d-flex align-items-center mb-2">
                             <i data-feather="link" class="font-medium-3"></i>
                             <h4 class="mb-0 ml-75">Social Links</h4>
                           </div>
-                        </div>
+                        </div>-->
                         <!-- twitter link input -->
-                        <div class="col-12 col-sm-6">
+                       <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-twitter">Twitter</label>
                             <input
@@ -369,9 +365,9 @@
                               placeholder="Add link"
                             />
                           </div>
-                        </div>
+                        </div>-->
                         <!-- facebook link input -->
-                        <div class="col-12 col-sm-6">
+                       <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-facebook">Facebook</label>
                             <input
@@ -383,9 +379,9 @@
                               placeholder="Add link"
                             />
                           </div>
-                        </div>
+                        </div>-->
                         <!-- google plus input -->
-                        <div class="col-12 col-sm-6">
+                        <!--<div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-google">Google+</label>
                             <input
@@ -397,9 +393,9 @@
                               placeholder="Add link"
                             />
                           </div>
-                        </div>
+                        </div>-->
                         <!-- linkedin link input -->
-                        <div class="col-12 col-sm-6">
+                       <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-linkedin">LinkedIn</label>
                             <input
@@ -411,9 +407,9 @@
                               placeholder="Add link"
                             />
                           </div>
-                        </div>
+                        </div>-->
                         <!-- instagram link input -->
-                        <div class="col-12 col-sm-6">
+                       <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-instagram">Instagram</label>
                             <input
@@ -425,9 +421,9 @@
                               placeholder="Add link"
                             />
                           </div>
-                        </div>
+                        </div>-->
                         <!-- Quora link input -->
-                        <div class="col-12 col-sm-6">
+                       <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-quora">Quora</label>
                             <input
@@ -439,23 +435,23 @@
                               placeholder="Add link"
                             />
                           </div>
-                        </div>
+                        </div>-->
 
                         <!-- divider -->
-                        <div class="col-12">
+                        <!--<div class="col-12">
                           <hr class="my-2" />
                         </div>
 
-                        <div class="col-12 mt-1">
+                        <div class="col-12 mt-1">-->
                           <!-- profile connection header -->
-                          <div class="d-flex align-items-center mb-3">
+                         <!-- <div class="d-flex align-items-center mb-3">
                             <i data-feather="user" class="font-medium-3"></i>
                             <h4 class="mb-0 ml-75">Profile Connections</h4>
                           </div>
 
-                          <div class="row">
+                          <div class="row">-->
                             <!-- twitter user -->
-                            <div class="col-6 col-md-3 text-center mb-1">
+                           <!-- <div class="col-6 col-md-3 text-center mb-1">
                               <p class="font-weight-bold">Your Twitter</p>
                               <div class="avatar mb-1">
                                 <span class="avatar-content">
@@ -469,14 +465,14 @@
                               </div>
                               <p class="mb-0">{{ data.accountSetting.social.connections.twitter.id }}</p>
                               <a href="javascript:void(0)">Disconnect</a>
-                            </div>
+                            </div>-->
                             <!-- facebook button -->
-                            <div class="col-6 col-md-3 text-center mb-1">
+                            <!--<div class="col-6 col-md-3 text-center mb-1">
                               <p class="font-weight-bold mb-2">Your Facebook</p>
                               <button class="btn btn-outline-primary" rippleEffect>Connect</button>
-                            </div>
+                            </div>-->
                             <!-- google user -->
-                            <div class="col-6 col-md-3 text-center mb-1">
+                           <!-- <div class="col-6 col-md-3 text-center mb-1">
                               <p class="font-weight-bold">Your Google</p>
                               <div class="avatar mb-1">
                                 <span class="avatar-content">
@@ -490,23 +486,23 @@
                               </div>
                               <p class="mb-0">{{ data.accountSetting.social.connections.google.id }}</p>
                               <a href="javascript:void(0)">Disconnect</a>
-                            </div>
+                            </div>-->
                             <!-- github button -->
-                            <div class="col-6 col-md-3 text-center mb-2">
+                           <!-- <div class="col-6 col-md-3 text-center mb-2">
                               <p class="font-weight-bold mb-1">Your GitHub</p>
                               <button class="btn btn-outline-primary" rippleEffect>Connect</button>
                             </div>
                           </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12">-->
                           <!-- submit and cancel button -->
-                          <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
+                         <!-- <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
                         </div>
                       </div>
-                    </form>
+                    </form>-->
                     <!--/ form -->
-                  </div>
+                 <!-- </div>
                 </div>
               </ng-template>
             </li>
@@ -610,6 +606,7 @@
                 </div>
               </ng-template>
             </li>
+          </ul>-->
           </ul>
         </div>
         <div [ngbNavOutlet]="navVertical" class="col-12 col-md-9"></div>

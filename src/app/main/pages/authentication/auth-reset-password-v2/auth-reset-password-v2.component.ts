@@ -1,5 +1,7 @@
+import { AuthenticationService } from 'app/auth/service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -13,6 +15,9 @@ import { CoreConfigService } from '@core/services/config.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AuthResetPasswordV2Component implements OnInit {
+  alert:boolean=false;
+  
+  token:any;
   // Public
   public coreConfig: any;
   public passwordTextType: boolean;
@@ -29,7 +34,9 @@ export class AuthResetPasswordV2Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder, private route:ActivatedRoute,
+    private auth:AuthenticationService) {
+
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -49,7 +56,10 @@ export class AuthResetPasswordV2Component implements OnInit {
       }
     };
   }
-
+error={
+    password:null
+  };
+  message:any;
   // convenience getter for easy access to form fields
   get f() {
     return this.resetPasswordForm.controls;
@@ -72,13 +82,43 @@ export class AuthResetPasswordV2Component implements OnInit {
   /**
    * On Submit
    */
-  onSubmit() {
+ /* onSubmit(form:NgForm) {
     this.submitted = true;
-
+    const password = form.value.password;
+    const password_confirmation = form.value.password_confirmation;
+    this.auth.reset(this.token,password,password_confirmation).subscribe((res:any)=>{
+     this.message=res.message;
+    }, (err=>{
+      this.error=err.error.errors;
+    })
+    )*/
     // stop here if form is invalid
-    if (this.resetPasswordForm.invalid) {
+   /* if (this.resetPasswordForm.invalid) {
       return;
-    }
+    }*/
+  //}
+  
+ 
+ 
+    onSubmit(form: NgForm){
+   // console.log(form.value)
+    const password = form.value.confirmPassword;
+    const password_confirmation = form.value.newPassword;
+   // console.log(this.token)
+    //console.log(password)
+   //console.log(password_confirmation)
+    this.auth.reset(this.token, password, password_confirmation).subscribe((res:any)=>{
+     this.message = res.message;
+
+     this.alert=true ;  
+     form.reset({})
+    }, (err)=>{
+     this.error =err.error.errors;
+    })
+    console.log(form)
+  }
+  closeAlert(){
+    this.alert=false;
   }
 
   // Lifecycle Hooks
@@ -88,6 +128,9 @@ export class AuthResetPasswordV2Component implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    this.route.queryParams.subscribe(param => {
+      this.token = param.token;
+    })
     this.resetPasswordForm = this._formBuilder.group({
       newPassword: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]

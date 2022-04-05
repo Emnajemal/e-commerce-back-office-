@@ -5,6 +5,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { CoreConfigService } from '@core/services/config.service';
+import { UserService} from 'app/auth/service';
+import {Router} from '@angular/router';
+import { User } from 'app/auth/models';
 
 @Component({
   selector: 'app-auth-register-v2',
@@ -13,11 +16,14 @@ import { CoreConfigService } from '@core/services/config.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AuthRegisterV2Component implements OnInit {
+  newuser = new User();  
   // Public
   public coreConfig: any;
   public passwordTextType: boolean;
   public registerForm: FormGroup;
   public submitted = false;
+ 
+
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -28,7 +34,9 @@ export class AuthRegisterV2Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder,private UserService :UserService,
+     private _router: Router,
+    ) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -61,12 +69,16 @@ export class AuthRegisterV2Component implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
+ 
   /**
    * On Submit
    */
+
+  
   onSubmit() {
     this.submitted = true;
-
+    
+    
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
@@ -83,7 +95,8 @@ export class AuthRegisterV2Component implements OnInit {
     this.registerForm = this._formBuilder.group({
       username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      password_confirmation:['',Validators.required]
     });
 
     // Subscribe to config changes

@@ -1,5 +1,7 @@
+import { ToastService } from 'app/main/components/toasts/toasts.service';
+import { AuthenticationService } from 'app/auth/service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -13,6 +15,14 @@ import { CoreConfigService } from '@core/services/config.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AuthForgotPasswordV2Component implements OnInit {
+  alert:boolean=false;
+  alert2:boolean=false;
+
+  error={
+    email:null
+  }
+  message:any;
+  
   // Public
   public emailVar;
   public coreConfig: any;
@@ -29,7 +39,8 @@ export class AuthForgotPasswordV2Component implements OnInit {
    * @param {FormBuilder} _formBuilder
    *
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder, 
+    private auth:AuthenticationService, private toastService:ToastService) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -58,14 +69,42 @@ export class AuthForgotPasswordV2Component implements OnInit {
   /**
    * On Submit
    */
-  onSubmit() {
+  onSubmit(form:NgForm) {
+    
     this.submitted = true;
+    const email =form.value.email;
+    this.auth.forgot(email).subscribe((res:any)=>{
+      this.message = res.message;
+     console.log(res)
+    // this.alert=true ;
+     if  (res.message == 'Error! Email Does not exists.')
+     {this.alert=true;
+      this.message =res.message}
+      else{
+      this.alert2=true ;
+      this.message=res.message;}
+      form.reset({})  
+  
+     })
+  
 
+    ,(err)=>{
+  console.log(err.error.errors);
+
+     
+        }
+    
     // stop here if form is invalid
-    if (this.forgotPasswordForm.invalid) {
+      if (this.forgotPasswordForm.invalid) {
       return;
     }
   }
+  
+  closeAlert(){
+    this.alert=false;
+    this.alert2=false;
+  }
+  
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------

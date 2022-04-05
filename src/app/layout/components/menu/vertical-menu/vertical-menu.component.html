@@ -5,9 +5,9 @@
       <!-- App Branding -->
       <a class="navbar-brand" [routerLink]="['/']">
         <span class="brand-logo">
-          <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" />
+          <img src="assets/images/logo/logo.png" width="200" alt="brand-logo" />
         </span>
-        <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
+        <h2 class="brand-text text-info mb-0">{{ coreConfig.app.appName }}</h2>
       </a>
     </li>
 
@@ -16,11 +16,11 @@
       <a class="nav-link modern-nav-toggle d-none d-xl-block pr-0" (click)="toggleSidebarCollapsible()">
         <i
           [ngClass]="isCollapsed === true ? 'icon-circle' : 'icon-disc'"
-          class="toggle-icon feather font-medium-4 collapse-toggle-icon text-primary"
+          class="toggle-icon feather font-medium-4 collapse-toggle-icon text-info"
         ></i>
       </a>
       <a class="nav-link modern-nav-toggle d-block d-xl-none pr-0" (click)="toggleSidebar()">
-        <i data-feather="x" class="font-medium-4 text-primary toggle-icon"></i>
+        <i data-feather="x" class="font-medium-4 text-info toggle-icon"></i>
       </a>
     </li>
   </ul>

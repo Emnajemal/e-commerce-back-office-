@@ -1,7 +1,7 @@
 <li ngbDropdown class="nav-item dropdown-cart mr-25">
   <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarCartDropdown"
     ><span [data-feather]="'shopping-cart'" [class]="'ficon'"></span
-    ><span class="badge badge-pill badge-primary badge-up cart-item-count">{{ cartListLength }}</span></a
+    ><span class="badge badge-pill badge-info badge-up cart-item-count">{{ cartListLength }}</span></a
   >
   <ul
     ngbDropdownMenu
@@ -12,7 +12,7 @@
     <li class="dropdown-menu-header">
       <div class="dropdown-header d-flex">
         <h4 class="notification-title mb-0 mr-auto">My Cart</h4>
-        <div class="badge badge-pill badge-light-primary">{{ cartListLength }} Items</div>
+        <div class="badge badge-pill badge-light-info">{{ cartListLength }} Items</div>
       </div>
     </li>
     <!--/ Cart header -->
@@ -52,9 +52,9 @@
     <li class="dropdown-menu-footer">
       <div class="d-flex justify-content-between mb-1">
         <h6 class="font-weight-bolder mb-0">Total:</h6>
-        <h6 class="text-primary font-weight-bolder mb-0">$10,999.00</h6>
+        <h6 class="text-info font-weight-bolder mb-0">$10,999.00</h6>
       </div>
-      <a class="btn btn-primary btn-block" routerLink="/apps/e-commerce/checkout">Checkout</a>
+      <a class="btn btn-info btn-block" routerLink="/apps/e-commerce/checkout">Checkout</a>
     </li>
     <!--/ Cart footer -->
   </ul>
