@@ -92,8 +92,11 @@
     "jasmine-core": "3.7.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "karma": "^6.3.17",
 =======
+=======
+>>>>>>> 90df64b7a8fd9036d4dc6a68f9edbb66df542cc5
 =======
 >>>>>>> 90df64b7a8fd9036d4dc6a68f9edbb66df542cc5
     "karma": "6.3.0",
