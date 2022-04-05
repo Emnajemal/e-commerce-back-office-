@@ -15,6 +15,7 @@ import { CoreConfigService } from '@core/services/config.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AuthResetPasswordV2Component implements OnInit {
+  alert:boolean=false;
   
   token:any;
   // Public
@@ -108,10 +109,16 @@ error={
    //console.log(password_confirmation)
     this.auth.reset(this.token, password, password_confirmation).subscribe((res:any)=>{
      this.message = res.message;
+
+     this.alert=true ;  
+     form.reset({})
     }, (err)=>{
      this.error =err.error.errors;
     })
     console.log(form)
+  }
+  closeAlert(){
+    this.alert=false;
   }
 
   // Lifecycle Hooks

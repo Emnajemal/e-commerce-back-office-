@@ -15,18 +15,18 @@ const routes: Routes = [
     path: 'miscellaneous/coming-soon',
     component: ComingSoonComponent
   },
-  {
+  /*{
     path: 'miscellaneous/not-authorized',
     component: NotAuthorizedComponent
-  },
+  },*/
   {
     path: 'miscellaneous/maintenance',
     component: MaintenanceComponent
   },
-  {
+ /* {
     path: 'miscellaneous/error',
     component: ErrorComponent
-  }
+  }*/
 ];
 
 @NgModule({

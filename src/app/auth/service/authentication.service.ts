@@ -120,10 +120,35 @@ password_confirmation:password_confirmation
    * User logout
    *
    */
+ /* removeToken (){
+    window.localStorage.removeItem(this.TOKEN_KEY);
+  }*/
   logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+  
+    // notify
+    this.currentUserSubject.next(null);
+    //zeyda
+    localStorage.removeItem('token');
+    console.log("user did logout successfully");
+
+  }
+
+
+ /* logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     // notify
     this.currentUserSubject.next(null);
-  }
+    //zyda
+    const user: any = localStorage.getItem('user');
+    const userObj = JSON.parse(user);
+
+    const token = userObj.token;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+   return this._http.post('http://127.0.0.1:8000/api/auth/logout', {headers:headers});
+  }*/
 }

@@ -4,12 +4,12 @@
     <section class="users-list-wrapper">
       <!-- users filter start -->
       <div class="card">
-        <h5 class="card-header">Search Filter</h5>
+        <h5 class="card-header">Search personal </h5>
         <div class="card-body">
           <div class="users-list-filter">
             <form>
               <div class="row">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-12">
                   <fieldset class="form-group">
                     <ng-select
                       [items]="selectRole"
@@ -21,8 +21,8 @@
                     ></ng-select>
                   </fieldset>
                 </div>
-                <div class="col-12 col-md-4">
-                  <fieldset class="form-group">
+               <!-- <div class="col-12 col-md-4">
+                <fieldset class="form-group">
                     <ng-select
                       [items]="selectPlan"
                       [(ngModel)]="selectedPlan"
@@ -44,7 +44,7 @@
                       (change)="filterByStatus($event)"
                     ></ng-select>
                   </fieldset>
-                </div>
+                </div> --> 
               </div>
             </form>
           </div>
@@ -147,7 +147,7 @@
               </div>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Plan" prop="currentPlan" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="Address" prop="currentPlan" [width]="100"></ngx-datatable-column>
           <ngx-datatable-column name="Status" prop="status" [width]="50">
             <ng-template let-status="value" ngx-datatable-cell-template>
               <div
