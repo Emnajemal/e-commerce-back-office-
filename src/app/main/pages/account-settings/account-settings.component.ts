@@ -15,8 +15,8 @@ import { ToastService } from 'app/main/components/toasts/toasts.service';
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   // public
-
-
+  tchek:boolean=null;
+  success:boolean=null;
   resetForm : FormGroup;
   uploadForm : FormGroup;
   public changeForm:NgForm;
@@ -86,7 +86,22 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
    }
    else{
       console.log(this.uploadForm.value)
-        this._accountSettingsService.upload(this.uploadForm.value).subscribe()
+      let data={
+        name:this.uploadForm.value.name,
+        profile_photo:this.uploadForm.value.profile_photo
+      }
+      let formdata=new FormData();
+      formdata.append('profile_photo',this.uploadForm.value.profile_photo);
+      formdata.append('name',this.uploadForm.value.name);
+      formdata.append('company',this.uploadForm.value.company);
+      formdata.append('email',this.uploadForm.value.email);
+      formdata.append('phone',this.uploadForm.value.phone);
+
+
+        this._accountSettingsService.upload(formdata).subscribe({
+          next:()=>this.success=false,
+          error:()=>this.success=false,
+        })
      }}
 
   
@@ -103,27 +118,17 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
      console.log(this.resetForm.value)
          this. _accountSettingsService
       .change(this.resetForm.value)
-      .subscribe(
-        (res:any)=>{
-          console.log(res);
-          this.toastBasic('Password Changed', 5000);
-         }
-   
-       ,(err)=>{
-      console.log(err.error.errors);
-        
-           })
-      ;
+      .subscribe({
+        next:()=>this.tchek=false,
+
+
+      })
           }
     }
 
 
-    toastBasic(data, delayTime) {
-      this.toastService.show(data, {
-        delay: delayTime,
-        autohide: true
-      });
-    }
+
+   
 
   /**
    * Upload Image
@@ -132,11 +137,13 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
    */
   uploadImage(event: any) {
     if (event.target.files && event.target.files[0]) {
+
+      this.uploadForm.get('profile_photo').setValue(event.target.files[0]);
+
       let reader = new FileReader();
 
       reader.onload = (event: any) => {
         this.avatarImage = event.target.result;
-        this.uploadForm.get('profile_photo').setValue(this.avatarImage);
         console.log(this.uploadForm.value)
       };
 

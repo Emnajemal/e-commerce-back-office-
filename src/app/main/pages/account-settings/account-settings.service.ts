@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { AuthenticationService } from 'app/auth/service';
 import { environment } from 'environments/environment';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -8,9 +9,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class AccountSettingsService implements Resolve<any> {
   rows: any;
+  public userdata:any =JSON.parse(localStorage.getItem('currentUser'));
+
   onSettingsChanged: BehaviorSubject<any>;
   private ChangeUrl = 'http://127.0.0.1:8000/api/auth/change_password';
-  private uploadUrl='http://127.0.0.1:8000/api/update/user/{id}';
+  private uploadUrl='http://127.0.0.1:8000/api/update/user/'+ this.userdata.id;
 
   /**
    * Constructor

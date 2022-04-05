@@ -8,10 +8,11 @@ import { I18nModule } from 'app/main/extensions/i18n/i18n.module';
 import { MediaPlayerModule } from 'app/main/extensions/media-player/media-player.module';
 import { NouiSliderModule } from 'app/main/extensions/noui-slider/noui-slider.module';
 import { SweetAlertsModule } from 'app/main/extensions/sweet-alerts/sweet-alerts.module';
-import { SwipersModule } from 'app/main/extensions/swiper/swiper.module';
 import { ToastrsModule } from 'app/main/extensions/toastr/toastr.module';
 import { TourModule } from 'app/main/extensions/tour/tour.module';
 import { TreeViewModule } from 'app/main/extensions/tree-view/tree-view.module';
+import { SwipersModule } from 'app/main/extensions/swiper/swiper.module';
+
 
 @NgModule({
   declarations: [],

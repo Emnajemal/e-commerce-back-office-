@@ -70,8 +70,6 @@ export class AuthenticationService {
           let user = payload.user
           user = { ...user, token: payload.access_token, first_name: user.name }
           if (user && user.token) {
-            console.log(user);
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
             
 
