@@ -4,7 +4,7 @@ import { colors } from 'app/colors.const';
 @Component({
   selector: 'app-chartjs',
   templateUrl: './chartjs.component.html',
-  styleUrls: ['./chartjs.component.scss'],
+  //styleUrls: ['./chartjs.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class ChartjsComponent implements OnInit {

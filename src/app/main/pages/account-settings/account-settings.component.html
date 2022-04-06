@@ -184,9 +184,6 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.old_password.errors }"
                               />
                               <div class="input-group-append">
-<<<<<<< Updated upstream
-                                
-=======
                                 <span class="input-group-text cursor-pointer"
                                   ><i
                                     class="feather font-small-4"
@@ -197,7 +194,6 @@
                                     (click)="togglePasswordTextTypeOld()"
                                   ></i
                                 ></span>
->>>>>>> Stashed changes
                               </div>
                               
                               <div class="input-group-append">
@@ -221,10 +217,16 @@
                                 placeholder="New Password"
                               />
                               <div class="input-group-append">
-                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                  <div *ngIf="f.password.errors.required">Password is required</div>
-                                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                              </div>
+                                <span class="input-group-text cursor-pointer"
+                                  ><i
+                                    class="feather font-small-4"
+                                    [ngClass]="{
+                                      'icon-eye-off': passwordTextTypeNew,
+                                      'icon-eye': !passwordTextTypeNew
+                                    }"
+                                    (click)="togglePasswordTextTypeNew()"
+                                  ></i
+                                ></span>
                               </div>
                               <div class="input-group-append">
                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -239,32 +241,29 @@
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-retype-new-password">Retype New Password</label>
-<<<<<<< Updated upstream
-                            <div class="input-group form-password-toggle input-group-merge">
-                              <input
-=======
                             <div class="input-group form-password-toggle input-group-merge" >
                                 <input
                               
->>>>>>> Stashed changes
                                 formControlName="password_confirmer"
                                 [type]="passwordTextTypeRetype ? 'text' : 'password'"
                                 class="form-control"
                                 id="account-retype-new-password"
                                 placeholder="New Password"
-<<<<<<< Updated upstream
-                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
-=======
                                 name="contact-icon"
                                 [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
                                 tabindex="2"
->>>>>>> Stashed changes
                               />
                               <div class="input-group-append">
-                                <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
-                                  <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
-                                  <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
-                              </div>
+                                <span class="input-group-text cursor-pointer"
+                                  ><i
+                                    class="feather font-small-4"
+                                    [ngClass]="{
+                                      'icon-eye-off': passwordTextTypeRetype,
+                                      'icon-eye': !passwordTextTypeRetype
+                                    }"
+                                    (click)="togglePasswordTextTypeRetype()"
+                                  ></i
+                                ></span>
                               </div>
                               <div class="input-group-append">
                                 <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
@@ -314,9 +313,6 @@
                         </div>
                       </div>
                     </form>
-                    <!--<button class="btn btn-outline-primary" (click)="toastBasic('I am a Basic toast', 2000)" rippleEffect>
-                      Toast
-                    </button>-->
                     <!--/ form -->
                   </div>
                 </div>
