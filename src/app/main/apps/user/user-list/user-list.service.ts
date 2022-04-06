@@ -1,3 +1,4 @@
+import { User } from 'app/auth/models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
@@ -32,6 +33,17 @@ export class UserListService implements Resolve<any> {
         resolve();
       }, reject);
     });
+  }
+
+
+  register(name:string, email:string, password:string, password_confirmation:string){
+    const data={
+      name:name,
+      email:email,
+      password:password,
+      password_confirmation:password_confirmation,
+    }
+    return this._httpClient.post('http://127.0.0.1:8000/api/auth/register', data);
   }
 
   /**

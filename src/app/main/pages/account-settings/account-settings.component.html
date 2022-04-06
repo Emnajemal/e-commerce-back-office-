@@ -28,7 +28,7 @@
                     <!-- header media -->
                     <div class="media">
                       <a href="javascript:void(0);" class="mr-25">
-                        <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
+                        <img src="assets/images/portrait/small/inconnu.jpg" class="rounded mr-50" alt="profile image" height="76" width="80" />
                       </a>
                       <!-- upload and reset button -->
                       <div class="media-body mt-75 ml-1">
@@ -116,12 +116,28 @@
                             />
                           </div>
                         </div>
-                        <div class="col-12 mt-75">
+                       <!-- <div class="col-12 mt-75">
                           <div class="alert alert-warning mb-50" role="alert">
                             <h4 class="alert-heading">Your email is not confirmed. Please check your inbox.</h4>
                             <div class="alert-body">
                               <a href="javascript: void(0);" class="alert-link">Resend confirmation</a>
                             </div>
+                          </div>
+                        </div>-->
+                        <div *ngIf="success" class="col-12 mt-75">
+                          <div class="alert alert-success mb-50" role="alert">
+                            <h4 class="alert-heading">Change successfully.</h4>
+                            <!--<div class="alert-body">
+                              <a href="javascript: void(0);" class="alert-link">Resend confirmation</a>
+                            </div>-->
+                          </div>
+                        </div>
+                        <div *ngIf="success==false" class="col-12 mt-75">
+                          <div class="alert alert-danger mb-50" role="alert">
+                            <h4 class="alert-heading">les champs obligatoires</h4>
+                            <!--<div class="alert-body">
+                              <a href="javascript: void(0);" class="alert-link">Resend confirmation</a>
+                            </div>-->
                           </div>
                         </div>
                         <div class="col-12">
@@ -168,6 +184,23 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.old_password.errors }"
                               />
                               <div class="input-group-append">
+<<<<<<< Updated upstream
+                                
+=======
+                                <span class="input-group-text cursor-pointer"
+                                  ><i
+                                    class="feather font-small-4"
+                                    [ngClass]="{
+                                      'icon-eye-off':passwordTextTypeOld,
+                                      'icon-eye': !passwordTextTypeOld
+                                    }"
+                                    (click)="togglePasswordTextTypeOld()"
+                                  ></i
+                                ></span>
+>>>>>>> Stashed changes
+                              </div>
+                              
+                              <div class="input-group-append">
                                 
                               </div>
                             </div>
@@ -193,20 +226,39 @@
                                   <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                               </div>
                               </div>
+                              <div class="input-group-append">
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                  <div *ngIf="f.password.errors.required">Password is required</div>
+                                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                              </div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                        <!-- hedhaa eli ena zeydeto-->
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-retype-new-password">Retype New Password</label>
+<<<<<<< Updated upstream
                             <div class="input-group form-password-toggle input-group-merge">
                               <input
+=======
+                            <div class="input-group form-password-toggle input-group-merge" >
+                                <input
+                              
+>>>>>>> Stashed changes
                                 formControlName="password_confirmer"
                                 [type]="passwordTextTypeRetype ? 'text' : 'password'"
                                 class="form-control"
                                 id="account-retype-new-password"
                                 placeholder="New Password"
+<<<<<<< Updated upstream
                                 [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
+=======
+                                name="contact-icon"
+                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
+                                tabindex="2"
+>>>>>>> Stashed changes
                               />
                               <div class="input-group-append">
                                 <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
@@ -214,9 +266,48 @@
                                   <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
                               </div>
                               </div>
+                              <div class="input-group-append">
+                                <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
+                                  <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
+                                  <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
+                                </div>
+                              </div>
+                              
                             </div>
                           </div>
                         </div>
+                        <!-- lena tekmeeeeeel-->
+                        
+                       <!-- hedhy l aslaneya 
+                         <div class="col-12 col-sm-6">
+                          <div class="form-group">
+                            <label for="account-retype-new-password">Retype New Password</label>
+                            <div class="input-group form-password-toggle input-group-merge" >
+                              
+                              <input
+                              
+                                formControlName="password_confirmer"
+                                [type]="passwordTextTypeRetype ? 'text' : 'password'"
+                                class="form-control"
+                                id="account-retype-new-password"
+                                placeholder="New Password"
+                                name="contact-icon"
+                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
+                              />
+                              <div class="input-group-append">
+                                <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
+                                  <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
+                                  <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>-->
+                        <!-- ngb-alert component -->
+                        <ngb-alert *ngIf="tchek==false" [type]="'primary'" >
+                        <div class="alert-body"><strong>Success !</strong> tchek your password</div>
+                        </ngb-alert>
+                        <!--/ ngb-alert component -->
                         <div class="col-12">
                           <button type="submit" class="btn btn-info mr-1 mt-1"  rippleEffect>Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
