@@ -195,7 +195,7 @@ export class CoreSidebarComponent implements OnInit, OnDestroy {
 
     // Register the sidebar
     this._coreSidebarService.setSidebarRegistry(this.name, this);
-
+console.log(this.name)
     // Setup collapsibleSidebar
     this._setupCollapsibleSidebar();
 

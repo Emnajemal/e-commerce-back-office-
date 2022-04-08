@@ -8,6 +8,9 @@ import { CoreConfigService } from '@core/services/config.service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 
 import { UserListService } from 'app/main/apps/user/user-list/user-list.service';
+import { User } from 'app/auth/models/user';
+import Swal from 'sweetalert2';
+import { SweetAlertsComponent } from 'app/main/extensions/sweet-alerts/sweet-alerts.component';
 
 @Component({
   selector: 'app-user-list',
@@ -16,6 +19,12 @@ import { UserListService } from 'app/main/apps/user/user-list/user-list.service'
   encapsulation: ViewEncapsulation.None
 })
 export class UserListComponent implements OnInit {
+  products:any;
+  personnel=new User;
+  
+  x:boolean=false;
+  
+ 
   // Public
   public sidebarToggleRef = false;
   public rows;
@@ -26,15 +35,22 @@ export class UserListComponent implements OnInit {
   public previousPlanFilter = '';
   public previousStatusFilter = '';
 
-  public selectRole: any = [
+ /* public selectRole: any = [
     { name: 'All', value: '' },
     { name: 'Admin', value: 'Admin' },
     { name: 'Author', value: 'Author' },
     { name: 'Editor', value: 'Editor' },
     { name: 'Maintainer', value: 'Maintainer' },
     { name: 'Subscriber', value: 'Subscriber' }
+  ];*/
+ public selectRole: any = [
+    { name: 'All', value: '' },
+    { name: 'Designer', value: 'Designer' },
+    { name: 'Community Manager', value: 'Community Manager' },
+    { name: 'Comptable', value: 'Comptable' },
+    { name: 'Magasinier', value: 'Magasinier' },
+    
   ];
-
   public selectPlan: any = [
     { name: 'All', value: '' },
     { name: 'Basic', value: 'Basic' },
@@ -177,7 +193,13 @@ export class UserListComponent implements OnInit {
   /**
    * On init
    */
+
+ 
+
   ngOnInit(): void {
+
+
+
     // Subscribe config change
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       //! If we have zoomIn route Transition then load datatable after 450ms(Transition will finish in 400ms)
@@ -197,6 +219,24 @@ export class UserListComponent implements OnInit {
     });
   }
 
+
+  deleteData(personnel:any){
+    console.log(personnel);
+    let conf=confirm("tu es sur vous voulez le supprimer ?");
+     (conf)
+ 
+    this._userListService.deletetData(personnel.id).subscribe(res =>{
+    console.log(res);
+   this._userListService.getDataTableRows();
+    })
+
+  }
+
+  
+ 
+
+   
+
   /**
    * On destroy
    */
@@ -205,4 +245,40 @@ export class UserListComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+
+
+ ConfirmTextOpen() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#7367F0',
+      cancelButtonColor: '#E42728',
+      confirmButtonText: 'Yes, delete it!',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-danger ml-1'
+      }
+    }).then(function (result) {
+      if (result.value) {
+    
+        Swal.fire({
+         
+          icon: 'success',
+          title: 'Deleted!',
+          text: 'The user has been deleted.',
+          customClass: {
+            confirmButton: 'btn btn-success',
+
+          
+          }
+        });
+      }
+     
+    });
+  }
+
+
 }
+
