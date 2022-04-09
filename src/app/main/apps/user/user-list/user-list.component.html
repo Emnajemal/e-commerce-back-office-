@@ -9,7 +9,7 @@
           <div class="users-list-filter">
             <form>
               <div class="row">
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-md-6">
                   <fieldset class="form-group">
                     <ng-select
                       [items]="selectRole"
@@ -45,10 +45,37 @@
                     ></ng-select>
                   </fieldset>
                 </div> --> 
+
+                <div class="col-12 col-md-4 d-flex justify-content-start justify-content-md-end">
+                  <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                    <label class="d-flex align-items-center ml-1 ml-md-0"
+                      >Search:<input
+                        [(ngModel)]="searchValue"
+                        name="searchValue"
+                        type="search"
+                        class="form-control ml-25"
+                        (keyup)="filterUpdate($event)"
+                        (search)="filterUpdate($event)"
+                    /></label>
+
+                  </div>
+                </div>
+      
+      
+      
+
+
               </div>
             </form>
           </div>
+
+        
+
+
+
+
         </div>
+
       </div>
       <!-- users filter end -->
 
@@ -70,7 +97,7 @@
           </div>
           <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
             <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
-              <label class="d-flex align-items-center ml-1 ml-md-0"
+             <!-- <label class="d-flex align-items-center ml-1 ml-md-0"
                 >Search:<input
                   [(ngModel)]="searchValue"
                   name="searchValue"
@@ -78,7 +105,7 @@
                   class="form-control ml-25"
                   (keyup)="filterUpdate($event)"
                   (search)="filterUpdate($event)"
-              /></label>
+              /></label>-->
               <button class="btn btn-primary ml-1" rippleEffect (click)="toggleSidebar('new-user-sidebar')">
                 <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
                 ><span class="d-none d-sm-inline-block">Add New User</span>
@@ -96,10 +123,10 @@
           [footerHeight]="50"
           [scrollbarH]="true"
         >
-          <ngx-datatable-column name="User" prop="fullName" [width]="200">
+          <ngx-datatable-column name="User" prop="name" [width]="100">
             <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
-                <div *ngIf="row.avatar.length > 0; else customAvatar">
+               <!-- <div *ngIf="row.avatar.length > 0; else customAvatar">
                   <img
                     class="rounded-circle mr-1"
                     src="{{ row.avatar }}"
@@ -119,36 +146,49 @@
                   >
                     <div class="avatar-content">{{ name | initials }}</div>
                   </div>
-                </ng-template>
+
+                </ng-template>-->
+                
                 <div class="cell-line-height">
                   <a routerLink="/apps/user/user-view/{{ row.id }}" class="font-medium-1 d-block"
                     ><span class="font-weight-bold">{{ name }}</span></a
                   >
-                  <span class="text-muted font-small-2"> @{{ row.username }}</span>
+                  <span class="text-muted font-small-2"> @{{ row.name }}</span>
                 </div>
               </div>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Email" prop="email" [width]="200"></ngx-datatable-column>
-          <ngx-datatable-column name="Role" prop="role" [width]="100">
+          <ngx-datatable-column name="Email" prop="email" [width]="220"></ngx-datatable-column>
+         <!-- <ngx-datatable-column name="Address" prop="Adresse" [width]="100"></ngx-datatable-column>-->
+          <ngx-datatable-column name="phone" prop="phone" [width]="80"></ngx-datatable-column>
+         <!-- <ngx-datatable-column name="password_confirmation" prop="password_confirmation" [width]="200"></ngx-datatable-column>
+          <ngx-datatable-column name="password" prop="password" [width]="200"></ngx-datatable-column>-->
+          <ngx-datatable-column name="Role" prop="role" [width]="80">
             <ng-template let-role="value" ngx-datatable-cell-template>
               <div>
                 <i
                   class="feather font-medium-3"
                   [ngClass]="{
-                    'icon-edit-2 text-info': role == 'Editor',
-                    'icon-settings text-warning': role == 'Author',
-                    'icon-database text-success': role == 'Maintainer',
-                    'icon-user text-primary': role == 'Subscriber',
-                    'icon-slack text-danger': role == 'Admin'
+                    'icon-eye text-info': role == 'Community Manager',
+                    'icon-edit-1 text-primary': role == 'Magasinier',
+                    'icon-user text-danger': role == 'Comptable',
+                    'icon-edit-2 text-info': role == 'Designer',
+                    'icon-settings text-warning': role == 'Administrateur'
                   }"
+                  
                 ></i>
                 {{ role }}
               </div>
+           <!-- 'icon-slack text-danger': role == 'Admin'--->
             </ng-template>
           </ngx-datatable-column>
+<<<<<<< Updated upstream
           <ngx-datatable-column name="Address" prop="currentPlan" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="Status" prop="status" [width]="50">
+=======
+         <!-- <ngx-datatable-column name="Address" prop="currentPlan" [width]="100"></ngx-datatable-column>
           <ngx-datatable-column name="Phone" prop="status" [width]="50">
+>>>>>>> Stashed changes
             <ng-template let-status="value" ngx-datatable-cell-template>
               <div
                 class="badge badge-pill"
@@ -161,22 +201,46 @@
                 {{ status }}
               </div>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
-            <ng-template ngx-datatable-cell-template let-row="row">
+          </ngx-datatable-column> -->
+          <ngx-datatable-column name="Delete user" [width]="70" [sortable]="false">
+              <ng-template ngx-datatable-cell-template let-row="row">
               <div ngbDropdown container="body">
-                <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
-                  <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+                
+                <button   (click)="deleteData(row)"  ngbDropdownToggle type="button"  class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem
+                  >
+                  <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'" ></span> Delete</a
+                  >
                 </button>
-                <div ngbDropdownMenu>
-                  <a routerLink="/apps/user/user-view/{{ row.id }}" ngbDropdownItem
+                
+                
+  <!-- Sweet Alert ConfirmText 
+  <button class="btn btn-outline-primary mr-1" [swal]="SweetAlertConfirmText" rippleEffect>
+    (click)="deleteData(row)"
+    Confirm Text
+  </button>-->
+  <!-- Swal of Sweet Alert ConfirmText -->
+  <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()">
+    
+    
+  </swal>
+  
+ 
+  <!-- Swal of Sweet Alert ConfirmText -->
+
+                
+                <!-- <div ngbDropdownMenu>
+                 
+                    <a routerLink="/apps/user/user-view/{{ row.id }}" ngbDropdownItem
                     ><span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details</a
                   ><a routerLink="/apps/user/user-edit/{{ row.id }}" ngbDropdownItem
                     ><span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit</a
-                  ><a href="javascript:;" ngbDropdownItem
-                    ><span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
+                  >-->
+                  <!--<a href="javascript:;" ngbDropdownItem
+                    >
+                    <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
                   >
-                </div>
+                </div>-->
               </div>
             </ng-template>
           </ngx-datatable-column>

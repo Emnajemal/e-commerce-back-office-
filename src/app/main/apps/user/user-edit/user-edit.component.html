@@ -23,6 +23,7 @@
                         alt="User avatar"
                       />
                     </div>
+                    
                     <ng-template #customAvatar>
                       <div
                         class="mr-1 ml-0"
@@ -84,7 +85,7 @@
                           </span>
                         </div>
                       </div>
-                     <!-- <div class="col-md-4">
+                      <div class="col-md-4">
                         <div class="form-group">
                           <label for="name">Name</label>
                           <input
@@ -104,7 +105,7 @@
                             >
                           </span>
                         </div>
-                      </div>-->
+                      </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="email">E-mail</label>
@@ -126,18 +127,7 @@
                           </span>
                         </div>
                       </div>
-
                       <div class="col-md-4">
-                      <label class="form-label">Phone</label>       
-  <div class="input-group">
-   
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">+216</span>
-    </div>
-    <input type="text" class="form-control" placeholder="(+216) 000 000 00" mask="(000) 000 00 00" />
-  </div>
-  </div>
-                      <!--<div class="col-md-4">
                         <div class="form-group">
                           <label for="status">Status</label>
                           <select class="form-control" [(ngModel)]="currentRow.status" name="status" id="status">
@@ -146,26 +136,27 @@
                             <option>pending</option>
                           </select>
                         </div>
-                      </div>-->
+                      </div>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="role">Role</label>
                           <select class="form-control" [(ngModel)]="currentRow.role" name="role" id="role">
-                            <option>Designer</option>
-                            <option>Community Manager</option>
-                            <option>Magasinier</option>
-                            <option>Comptable</option>
+                            <option>Maintainer</option>
+                            <option>Subscriber</option>
+                            <option>Author</option>
+                            <option>Editor</option>
+                            <option>Admin</option>
                           </select>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label for="company">Address</label>
+                          <label for="company">Company</label>
                           <input
                             type="text"
                             class="form-control"
                             [(ngModel)]="currentRow.company"
-                            placeholder="Address"
+                            placeholder="Company name"
                             id="company"
                             name="company"
                           />
@@ -189,7 +180,7 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Magasinier</td>
+                                <td>Admin</td>
                                 <td>
                                   <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="admin-read" checked />
@@ -216,7 +207,7 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td>Community Manager</td>
+                                <td>Staff</td>
                                 <td>
                                   <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="staff-read" />
@@ -243,7 +234,7 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td>Designer</td>
+                                <td>Author</td>
                                 <td>
                                   <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="author-read" checked />
@@ -270,7 +261,7 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td>Comptable</td>
+                                <td>Contributor</td>
                                 <td>
                                   <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="contributor-read" />
@@ -296,7 +287,7 @@
                                   </div>
                                 </td>
                               </tr>
-                             <!-- <tr>
+                              <tr>
                                 <td>User</td>
                                 <td>
                                   <div class="custom-control custom-checkbox">
@@ -322,7 +313,7 @@
                                     <label class="custom-control-label" for="user-delete"></label>
                                   </div>
                                 </td>
-                              </tr>-->
+                              </tr>
                             </tbody>
                           </table>
                         </div>
@@ -347,15 +338,15 @@
                 <!-- Account Tab ends -->
               </ng-template>
             </li>
-           <!-- <li ngbNavItem>
+            <li ngbNavItem>
               <a ngbNavLink class="d-flex align-items-center">
                 <i data-feather="info" class="mr-sm-50"></i><span class="d-none d-sm-block">Information</span></a
               >
-              <ng-template ngbNavContent>-->
+              <ng-template ngbNavContent>
                 <!-- Information Tab starts -->
-               <!-- <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">-->
+                <div class="tab-pane" id="information" aria-labelledby="information-tab" role="tabpanel">
                   <!-- users edit Info form start  -->
-                 <!-- <form class="form-validate">
+                  <form class="form-validate">
                     <div class="row mt-1">
                       <div class="col-12">
                         <h4 class="mb-1">
@@ -498,12 +489,12 @@
                         <button type="reset" class="btn btn-outline-secondary" rippleEffect>Reset</button>
                       </div>
                     </div>
-                  </form>-->
+                  </form>
                   <!-- users edit Info form ends -->
-              <!--  </div>-->
+                </div>
                 <!-- Information Tab ends -->
-             <!-- </ng-template>
-            </li>-->
+              </ng-template>
+            </li>
             <li ngbNavItem>
               <a ngbNavLink class="d-flex align-items-center"
                 ><i data-feather="share-2" class="mr-sm-50"></i><span class="d-none d-sm-block">Social</span></a

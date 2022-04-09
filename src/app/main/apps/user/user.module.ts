@@ -25,6 +25,9 @@ import { UserListService } from 'app/main/apps/user/user-list/user-list.service'
 import { UserViewComponent } from 'app/main/apps/user/user-view/user-view.component';
 import { UserViewService } from 'app/main/apps/user/user-view/user-view.service';
 import { NewUserSidebarComponent } from 'app/main/apps/user/user-list/new-user-sidebar/new-user-sidebar.component';
+import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // routing
 const routes: Routes = [
@@ -77,7 +80,14 @@ const routes: Routes = [
     CorePipesModule,
     CoreDirectivesModule,
     InvoiceModule,
-    CoreSidebarModule
+    CoreSidebarModule,
+    
+      RouterModule.forChild(routes),
+      ContentHeaderModule,
+      CoreCommonModule,
+      CardSnippetModule,
+      SweetAlert2Module.forRoot()
+  
   ],
   providers: [UserListService, UserViewService, UserEditService]
 })

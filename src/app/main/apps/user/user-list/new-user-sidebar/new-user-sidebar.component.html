@@ -2,8 +2,12 @@
   <!-- Modal to add new user starts-->
   <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
     <div class="modal-dialog">
-      
+<<<<<<< Updated upstream
       <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+=======
+     <!--(ngSubmit)="(newUserForm.form.valid)--> 
+      <form [formGroup]="registerForm" class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+>>>>>>> Stashed changes
         <button
           type="button"
           class="close"
@@ -17,7 +21,7 @@
           <h5 class="modal-title" id="exampleModalLabel">New User</h5>
         </div>
         <div class="modal-body flex-grow-1">
-         <!-- <div class="form-group">
+          <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
             <input
               type="text"
@@ -35,18 +39,24 @@
             <span *ngIf="newUserForm.submitted && FNameRef.invalid" class="invalid-form">
               <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
             </span>
-          </div>-->
+<<<<<<< Updated upstream
+          </div>
           <div class="form-group">
+=======
+          </div>-->
+         <!-- <div class="form-group">
+>>>>>>> Stashed changes
             <label class="form-label" for="basic-icon-default-uname">Username</label>
             <input
               type="text"
               id="basic-icon-default-uname"
               class="form-control dt-uname"
-              placeholder=" Username"
+              placeholder="Web Developer"
               aria-label="jdoe1"
               aria-describedby="basic-icon-default-uname2"
-              name="user-name"
-              [(ngModel)]="username"
+              name="name"
+              [(ngModel)]="name"
+              formControlName="name"
               [class.error]="newUserForm.submitted && FUserNameRef.invalid"
               #FUserNameRef="ngModel"
               required
@@ -54,8 +64,50 @@
             <span *ngIf="newUserForm.submitted && FUserNameRef.invalid" class="invalid-form">
               <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
             </span>
+          </div>-->
+         <ngb-alert *ngIf="alert" [type]="'success'" [dismissible]="false">
+            <h4 class="alert-heading">user added successfully</h4>
+            
+          </ngb-alert>
+
+         <!-- <ngb-alert [type]="'success'" [dismissible]="false">
+            <h4 class="alert-heading"> user added successfully</h4>
+         
+          </ngb-alert>-->
+          
+          <div class="form-group" >
+            <label for="register-username" class="form-label">Name</label>
+            <input
+
+              type="text"
+              formControlName="name"
+              name="name"
+
+              class="form-control"
+              placeholder="Name"
+              aria-describedby="register-name"
+              tabindex="1"
+              autofocus
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+            />
+
+            
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Username is required  </div>
+
+            </div>
           </div>
-          <div class="form-group">
+
+
+        
+         
+
+
+
+
+
+
+         <!-- <div class="form-group">
             <label class="form-label" for="basic-icon-default-email">Email</label>
             <input
               type="text"
@@ -64,7 +116,8 @@
               placeholder="john.doe@example.com"
               aria-label="john.doe@example.com"
               aria-describedby="basic-icon-default-email2"
-              name="user-email"
+              name="email"
+              formControlemail="email"
               [(ngModel)]="email"
               [class.error]="newUserForm.submitted && FEmailRef.invalid"
               #FEmailRef="ngModel"
@@ -74,40 +127,224 @@
               <small class="form-text text-danger" *ngIf="FEmailRef.errors.required">This field is required!</small>
             </span>
             <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-          </div>
-
-  <label class="form-label">Phone</label>       
-  <div class="input-group">
-   
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">+216</span>
-    </div>
-    <input type="text" class="form-control" placeholder="(+216) 000 000 00" mask="(000) 000 00 00" />
-  </div>
-  
-  <div class="form-group">
-    <label for="country-floating">Address</label>
-    <input
-      type="text"
-      id="Address-floating"
-      class="form-control"
-      name="Address-floating"
-      placeholder="Address"
-    />
-  </div>
+          </div>-->
 
 
-  
           <div class="form-group">
+            <label for="register-email" class="form-label">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              name="email"
+              class="form-control"
+              placeholder="email@example.com"
+              aria-describedby="register-email"
+              tabindex="2"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+            />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+<<<<<<< Updated upstream
+=======
+
+
+         
+        
+
+
+
+
+
+          <!--  <div class="form-group">
+              <label class="form-control-label" class="form-label">Password</label>
+              <input type="password"
+               name="password" 
+               class="form-control" 
+               placeholder="Your Password"
+                formControlpassword="password" 
+                required minlength="6"
+                pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password">
+              <div *ngIf="password.invalid && password.touched"
+                class="form-text text-muted danger">
+                <small *ngIf="password.errors.required"> Password is required. </small>
+
+              </div>
+            </div>
+         
+         
+            <div class="form-group">
+              <label class="form-control-label" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" placeholder="Confirm Password" minlength="6"
+                name="password_confirmation" placeholder="Confirm Password" class="form-control" 
+                  formControlpassword_confirmation="password_confirmation" pattern="{{ password_confirmation.value }}"
+                id="password_confirmation">
+              <div *ngIf=" password_confirmation.invalid && password_confirmation.touched"
+                class="form-text text-muted danger">
+                <small *ngIf="password_confirmation.errors.required"> Confirm password is required. </small>
+                <small *ngIf="password_confirmation.errors.pattern"> Password & Confirm Password does not
+                  match.</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>       
+              <div class="input-group">
+               
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="phone">+216</span>
+                </div>
+                <input type="text" class="form-control" formControlphone="phone" placeholder="(+216) 000 000 00" mask="(000) 000 00 00" />
+              </div>
+              </div>-->
+
+
+
+
+         <!-- <div class="form-group">
+            <label for="register-password" class="form-label">Password</label>
+
+            <div class="input-group input-group-merge form-password-toggle">
+              <input
+                [type]="passwordTextType ? 'text' : 'password'"
+                formControlName="password"
+                class="form-control form-control-merge"
+                placeholder="············"
+                aria-describedby="register-password"
+                tabindex="3"
+                [ngClass]="{ 'is-invalid error': submitted && f.password.errors }"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer"
+                  ><i
+                    class="feather font-small-4"
+                    [ngClass]="{
+                      'icon-eye-off': passwordTextType,
+                      'icon-eye': !passwordTextType
+                    }"
+                    (click)="togglePasswordTextType()"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <div
+              *ngIf="submitted && f.password.errors"
+              class="invalid-feedback"
+              [ngClass]="{ 'd-block': submitted && f.password.errors }"
+            >
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div> 
+          
+
+>>>>>>> Stashed changes
+          <div class="form-group">
+            <label for="register-password-confimation" class="form-label">Password Confirmation</label>
+
+            <div class="input-group input-group-merge form-password-toggle">
+              <input
+                [type]="passwordTextType ? 'text' : 'password'"
+                formControlName="password_confirmation"
+                class="form-control form-control-merge"
+                placeholder="············"
+                aria-describedby="register-password"
+                tabindex="3"
+                [ngClass]="{ 'is-invalid error': submitted && f.password.errors }"
+
+              />
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.password"> Wrong password</div>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer"
+                  ><i
+                    class="feather font-small-4"
+                    [ngClass]="{
+                      'icon-eye-off': passwordTextType,
+                      'icon-eye': !passwordTextType
+                    }"
+                    (click)="togglePasswordTextTypeRetype()"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <div
+              *ngIf="submitted && f.password.errors"
+              class="invalid-feedback"
+              [ngClass]="{ 'd-block': submitted && f.password.errors }"
+            >
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>-->
+          <div class="form-group">
+            <label for="register-phone" class="form-label">Phone</label>
+            
+            <input
+              type="text"
+              id="phone"
+              class="form-control"
+              name="phone"
+              formControlName="phone"
+              placeholder="phone"
+              [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+            />
+            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+              
+              <div *ngIf="f.phone.errors.required">Phone is required</div>
+              <div *ngIf="f.phone.errors.phone">Phone must be a valid number</div>
+              
+            </div>
+          </div>
+        
+          
+        
+
+         
+            
+
+  
+  
+          <div class="form-group" >
+             
             <label class="form-label" for="user-role">User Role</label>
+<<<<<<< Updated upstream
             <select id="user-role" class="form-control">
+              <option value="subscriber">Subscriber</option>
+              <option value="editor">Editor</option>
+              <option value="maintainer">Maintainer</option>
+              <option value="author">Author</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="form-group mb-2">
+=======
+            <select id="user-role" class="form-control" formControlName="role">
               <option value="Community Manager"> Community Manager</option>
               <option value="Magasinier">Magasinier</option>
               <option value="Comptable">Comptable</option>
               <option value="Designer">Designer</option>
+              
             </select>
           </div>
+
+
+          <div class="form-group">
+            <label for="register-adresse" class="form-label">Address</label>
+            <input
+              type="text"
+              id="Adresse"
+              class="form-control"
+              formControlName="Adresse"
+              name="Adresse"
+              placeholder="Address"
+            />
+          </div>
+        
+
          <!--<div class="form-group mb-2">
+>>>>>>> Stashed changes
             <label class="form-label" for="user-plan">Select Plan</label>
             <select id="user-plan" class="form-control">
               <option value="basic">Basic</option>
@@ -115,19 +352,53 @@
               <option value="company">Company</option>
               <option value="team">Team</option>
             </select>
+<<<<<<< Updated upstream
+          </div>
+          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Submit</button>
+=======
           </div>---> 
 
-          <div class="form-group">
+         <!-- <div class="form-group">
             <label for="basicInputFile">Import image</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile" />
               <label class="custom-file-label" for="customFile">Choose image</label>
             </div>
-          </div>
+          </div>-->
 
 
+<!-- <div class="media">
+            <a href="javascript:void(0);" class="mr-25" >
+              <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
+            </a>
+           
+            <div class="media-body mt-75 ml-1">
+              <button
+                (click)="file.click()"
+                for="account-upload"
+                class="btn btn-sm btn-info mb-75 mr-75"
+                rippleEffect
+              >
+                Upload
+              </button>
+              <input
+                type="file"
+                #file
+                id="account-upload"
+                hidden
+                accept="image/*"
+                (change)="uploadImage($event)"
+              />
+              <button class="btn btn-sm btn-outline-secondary mb-75" rippleEffect>Reset</button>
+              <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+            </div>
+     
+          </div>-->
 
-          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Submit</button>
+
+            <!--(click)="submit(newUserForm)"-->
+          <button type="submit" class="btn btn-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
+>>>>>>> Stashed changes
           <button
             type="reset"
             class="btn btn-outline-secondary"
