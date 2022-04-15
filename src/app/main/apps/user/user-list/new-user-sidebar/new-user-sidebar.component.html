@@ -2,12 +2,8 @@
   <!-- Modal to add new user starts-->
   <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
     <div class="modal-dialog">
-<<<<<<< Updated upstream
-      <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
-=======
      <!--(ngSubmit)="(newUserForm.form.valid)--> 
       <form [formGroup]="registerForm" class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
->>>>>>> Stashed changes
         <button
           type="button"
           class="close"
@@ -17,11 +13,12 @@
         >
           ×
         </button>
+
         <div class="modal-header mb-1">
           <h5 class="modal-title" id="exampleModalLabel">New User</h5>
         </div>
         <div class="modal-body flex-grow-1">
-          <div class="form-group">
+         <!-- <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
             <input
               type="text"
@@ -39,13 +36,8 @@
             <span *ngIf="newUserForm.submitted && FNameRef.invalid" class="invalid-form">
               <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
             </span>
-<<<<<<< Updated upstream
-          </div>
-          <div class="form-group">
-=======
           </div>-->
          <!-- <div class="form-group">
->>>>>>> Stashed changes
             <label class="form-label" for="basic-icon-default-uname">Username</label>
             <input
               type="text"
@@ -65,10 +57,15 @@
               <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
             </span>
           </div>-->
-         <ngb-alert *ngIf="alert" [type]="'success'" [dismissible]="false">
+         <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
             <h4 class="alert-heading">user added successfully</h4>
             
           </ngb-alert>
+          <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
+            <h4 class="alert-heading">Error! Check your fields </h4>
+            
+          </ngb-alert>
+          
 
          <!-- <ngb-alert [type]="'success'" [dismissible]="false">
             <h4 class="alert-heading"> user added successfully</h4>
@@ -147,8 +144,6 @@
               <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
             </div>
           </div>
-<<<<<<< Updated upstream
-=======
 
 
          
@@ -238,7 +233,6 @@
           </div> 
           
 
->>>>>>> Stashed changes
           <div class="form-group">
             <label for="register-password-confimation" class="form-label">Password Confirmation</label>
 
@@ -309,17 +303,6 @@
           <div class="form-group" >
              
             <label class="form-label" for="user-role">User Role</label>
-<<<<<<< Updated upstream
-            <select id="user-role" class="form-control">
-              <option value="subscriber">Subscriber</option>
-              <option value="editor">Editor</option>
-              <option value="maintainer">Maintainer</option>
-              <option value="author">Author</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-          <div class="form-group mb-2">
-=======
             <select id="user-role" class="form-control" formControlName="role">
               <option value="Community Manager"> Community Manager</option>
               <option value="Magasinier">Magasinier</option>
@@ -343,8 +326,9 @@
           </div>
         
 
+       
+
          <!--<div class="form-group mb-2">
->>>>>>> Stashed changes
             <label class="form-label" for="user-plan">Select Plan</label>
             <select id="user-plan" class="form-control">
               <option value="basic">Basic</option>
@@ -352,20 +336,37 @@
               <option value="company">Company</option>
               <option value="team">Team</option>
             </select>
-<<<<<<< Updated upstream
-          </div>
-          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Submit</button>
-=======
           </div>---> 
 
-         <!-- <div class="form-group">
+         <div class="form-group">
             <label for="basicInputFile">Import image</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile" />
+              <input type="file"
+             
+              #file
+              hidden
+               class="custom-file-input"
+                id="customFile" 
+                (change)="uploadImage($event)"
+                />
               <label class="custom-file-label" for="customFile">Choose image</label>
             </div>
-          </div>-->
+          </div>
 
+
+         <!-- <div class="row mb-2">
+            <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
+            <div class="col-sm-6">
+              <div class="custom-file">
+                <input type="file" 
+                #file              
+                 hidden
+                 class="custom-file-input"
+                 id="customFile" 
+                 (change)="uploadImage($event)" />
+            </div>
+            </div>
+            </div>-->
 
 <!-- <div class="media">
             <a href="javascript:void(0);" class="mr-25" >
@@ -398,11 +399,11 @@
 
             <!--(click)="submit(newUserForm)"-->
           <button type="submit" class="btn btn-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
->>>>>>> Stashed changes
-          <button
+          <button 
             type="reset"
             class="btn btn-outline-secondary"
             (click)="toggleSidebar('new-user-sidebar')"
+            
             rippleEffect
           >
             Cancel

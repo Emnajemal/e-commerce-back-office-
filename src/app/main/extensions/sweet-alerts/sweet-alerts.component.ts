@@ -4,6 +4,8 @@ import { BeforeOpenEvent } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 
 import * as snippet from 'app/main/extensions/sweet-alerts/sweet-alerts.snippetcode';
+import { UserListService } from 'app/main/apps/user/user-list/user-list.service';
+
 
 @Component({
   selector: 'app-sweet-alerts',

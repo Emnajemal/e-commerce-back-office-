@@ -25,9 +25,17 @@ import { UserListService } from 'app/main/apps/user/user-list/user-list.service'
 import { UserViewComponent } from 'app/main/apps/user/user-view/user-view.component';
 import { UserViewService } from 'app/main/apps/user/user-view/user-view.service';
 import { NewUserSidebarComponent } from 'app/main/apps/user/user-list/new-user-sidebar/new-user-sidebar.component';
+
+
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+import { ToastrComponent } from 'app/main/extensions/toastr/toastr.component';
+import { CustomToastrComponent } from 'app/main/extensions/toastr/custom-toastr/custom-toastr.component';
+import { ToastrModule } from 'ngx-toastr/toastr/toastr.module';
+import { SweetAlertsComponent } from 'app/main/extensions/sweet-alerts/sweet-alerts.component';
+
 
 // routing
 const routes: Routes = [
@@ -63,6 +71,11 @@ const routes: Routes = [
   {
     path: 'user-edit',
     redirectTo: '/apps/user/user-edit/2' // Redirection
+  },
+  {
+    path: 'sweet-alerts',
+    component: SweetAlertsComponent,
+    data: { animation: 'sweet-alerts' }
   }
 ];
 
@@ -86,7 +99,14 @@ const routes: Routes = [
       ContentHeaderModule,
       CoreCommonModule,
       CardSnippetModule,
-      SweetAlert2Module.forRoot()
+      SweetAlert2Module.forRoot(),
+
+
+      RouterModule.forChild(routes),
+    ContentHeaderModule,
+    CoreCommonModule,
+    CardSnippetModule,
+    SweetAlert2Module.forRoot()
   
   ],
   providers: [UserListService, UserViewService, UserEditService]
