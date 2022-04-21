@@ -1,0 +1,91 @@
+<form class="form" [formGroup]="editForm" (ngSubmit)="editproductSubmit()">
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+
+
+
+        <div class="row mb-2">
+            <label for="first-name-column " class="col-sm-3 col-form-label">Name :</label>
+            <div class="col-sm-6">
+                <input type="text" formControlName="name" class="form-control" placeholder="Shop name" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="itemCost" class="col-sm-3 col-form-label">Réference : </label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="itemcost" formControlName="reference" placeholder="ref" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="itemCost" class="col-sm-3 col-form-label">Supplier price : </label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="itemcost" formControlName="pricesupplier"
+                    placeholder="prix" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="itemCost" class="col-sm-3 col-form-label">Selling price: </label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="itemcost" formControlName="sellingprice"
+                    placeholder="prix" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <label for="itemCost" class="col-sm-3 col-form-label">Gain: </label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="itemcost" formControlName="gain" placeholder="gain" />
+            </div>
+        </div>
+        <!-- status Select -->
+        <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Status: </label>
+
+            <div class="col-sm-6">
+                <select class="custom-select" formControlName="status">
+                    <option value="In stock">In Stock</option>
+                    <option value="Out of Stock">Out of Stock</option>
+                </select>
+            </div>
+        </div>
+        <!--discreption-->
+        <div class="row mb-2">
+            <label for="basicTextarea" class="col-sm-3 col-form-label">Description</label>
+            <div class="col-sm-6">
+                <fieldset class="form-group">
+                    <textarea class="form-control" formControlName="description" class="form-control" id="basicTextarea"
+                        rows="3" placeholder="Ecrivez votre description ici">
+              </textarea>
+                </fieldset>
+            </div>
+        </div>
+        <!-- finiiiiiiiiiiiii-->
+        <div class="row mb-2">
+            <label for="basicInputFile" class="col-sm-3 col-form-label"> image product :</label>
+            <div class="col-sm-6">
+                <div class="custom-file">
+                    <input type="file" #file hidden class="custom-file-input" id="customeditFile"
+                        (change)="uploadImage($event)" />
+                    <label class="custom-file-label" for="customeditFile">Choose picture</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="image">
+
+            <div class="col-12">
+                <img [src]="image" class="imagee" style="max-width: 400px;" alt="">
+            </div>
+            <br>
+
+
+
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" rippleEffect class="btn btn-info mr-1">Edit
+            product</button>
+        <!-- <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button> -->
+    </div>
+</form>

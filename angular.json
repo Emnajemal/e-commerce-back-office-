@@ -46,11 +46,15 @@
               "src/assets/fonts/feather/iconfont.css",
               "src/assets/fonts/font-awesome/css/font-awesome.min.css",
               "src/assets/fonts/flag-icon-css/css/flag-icon.min.css"
+          
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules", "src/assets/"]
             },
-            "scripts": ["./node_modules/katex/dist/katex.min.js", "./node_modules/quill/dist/quill.min.js"],
+            "scripts": [
+              "./node_modules/katex/dist/katex.min.js",
+               "./node_modules/quill/dist/quill.min.js"
+            ],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

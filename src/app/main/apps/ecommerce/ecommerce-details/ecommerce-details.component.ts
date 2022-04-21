@@ -3,6 +3,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-ecommerce-details',
@@ -18,6 +20,8 @@ export class EcommerceDetailsComponent implements OnInit {
   public wishlist;
   public cartList;
   public relatedProducts;
+  baseUrl = environment.apiUrl
+
 
   // Swiper
   public swiperResponsive: SwiperConfigInterface = {
@@ -52,7 +56,9 @@ export class EcommerceDetailsComponent implements OnInit {
    *
    * @param {EcommerceService} _ecommerceService
    */
-  constructor(private _ecommerceService: EcommerceService) {}
+  //l activate route heya eli tkhalini n'accedi lel haja eli ena feha taou tjib les paramt tjib route eli ahna aalih 
+  //yjib les param mtaa route eli ena aalih taou 
+  constructor(private _ecommerceService: EcommerceService,private activatedRoute:ActivatedRoute) {}
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -84,6 +90,13 @@ export class EcommerceDetailsComponent implements OnInit {
       product.isInCart = true;
     });
   }
+  getProductById(param){
+    this._ecommerceService.getProductById(param).subscribe((result:any)=>{
+      console.log('product details',result)
+      this.product=result;
+      
+    })
+  }
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -92,10 +105,16 @@ export class EcommerceDetailsComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    //njib l id eli majouda fel param (observable) o manajem nchuf eli fi westha ken ki namel subsribe o byh houaa nousel l ay produit bel id 
+    this.activatedRoute.params.subscribe((param:any)=>{
+      this.getProductById(param.id)
+      console.log(param.id)
+    })
+    console.log(this.activatedRoute)
     // Subscribe to Selected Product change
-    this._ecommerceService.onSelectedProductChange.subscribe(res => {
-      this.product = res[0];
-    });
+    // this._ecommerceService.onSelectedProductChange.subscribe(res => {
+    //   this.product = res[0];
+    // });
 
     // Subscribe to Wishlist change
     this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));

@@ -21,6 +21,9 @@ import { EcommerceSidebarComponent } from 'app/main/apps/ecommerce/ecommerce-sho
 import { EcommerceWishlistComponent } from 'app/main/apps/ecommerce/ecommerce-wishlist/ecommerce-wishlist.component';
 import { EcommerceCheckoutComponent } from 'app/main/apps/ecommerce/ecommerce-checkout/ecommerce-checkout.component';
 import { EcommerceCheckoutItemComponent } from 'app/main/apps/ecommerce/ecommerce-checkout/ecommerce-checkout-item/ecommerce-checkout-item.component';
+import { AddproductComponent } from './addproduct/addproduct.component';
+import { EditproductComponent } from './editproduct/editproduct.component';
+import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -70,15 +73,19 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    //naaref ken les components , pipes,directives
     EcommerceShopComponent,
     EcommerceSidebarComponent,
     EcommerceDetailsComponent,
     EcommerceWishlistComponent,
     EcommerceCheckoutComponent,
     EcommerceItemComponent,
-    EcommerceCheckoutItemComponent
+    EcommerceCheckoutItemComponent,
+    AddproductComponent,
+    EditproductComponent
   ],
   imports: [
+    //naaref ken les modules barka akahw
     CommonModule,
     RouterModule.forChild(routes),
     SwiperModule,
@@ -90,11 +97,16 @@ const routes: Routes = [
     NgbModule,
     NouisliderModule
   ],
+  //nhot houni les services 
   providers: [
+    knowledgeBaseService,
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG
     }
+  ],
+  exports:[
+    
   ]
 })
 export class EcommerceModule {}

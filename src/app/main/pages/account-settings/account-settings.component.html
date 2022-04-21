@@ -27,8 +27,8 @@
                   <div class="card-body">
                     <!-- header media -->
                     <div class="media">
-                      <a href="javascript:void(0);" class="mr-25">
-                        <img src="assets/images/portrait/small/inconnu.jpg" class="rounded mr-50" alt="profile image" height="76" width="80" />
+                      <a href="javascript:void(0);" class="mr-25" >
+                        <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
                       </a>
                       <!-- upload and reset button -->
                       <div class="media-body mt-75 ml-1">
@@ -105,13 +105,13 @@
                         </div>
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
-                            <label for="account-company">Company</label>
+                            <label for="account-company">Address</label>
                             <input
                               type="text"
                               class="form-control"
-                              formControlName="company"
+                              formControlName="Adresse"
                               id="account-company"
-                              name="company"
+                              name="Adresse"
                               placeholder="Company name"
                             />
                           </div>

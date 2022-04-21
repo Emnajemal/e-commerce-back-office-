@@ -7,6 +7,7 @@ import { AccountSettingsService } from 'app/main/pages/account-settings/account-
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MustMatch } from './mustmatch';
 import { ToastService } from 'app/main/components/toasts/toasts.service';
+import { User } from 'app/auth/models';
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
@@ -15,17 +16,17 @@ import { ToastService } from 'app/main/components/toasts/toasts.service';
 })
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   // public
-  tchek:boolean=null;
-  success:boolean=null;
-  resetForm : FormGroup;
-  uploadForm : FormGroup;
-  public changeForm:NgForm;
+  tchek: boolean = null;
+  success: boolean = null;
+  resetForm: FormGroup;
+  uploadForm: FormGroup;
+  public changeForm: NgForm;
   public submitted = false;
   public contentHeader: object;
   public data: any;
   public birthDateOptions: FlatpickrOptions = {
     altInput: true
-    
+
   };
   public passwordTextTypeOld = false;
   public passwordTextTypeNew = false;
@@ -35,7 +36,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   // private
   private _unsubscribeAll: Subject<any>;
   user: any;
-  
+
 
   /**
    * Constructor
@@ -45,14 +46,14 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   constructor(private _accountSettingsService: AccountSettingsService, private fb: FormBuilder, public toastService: ToastService) {
     this._unsubscribeAll = new Subject();
   }
-  
+
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
 
   /**
    * Toggle Password Text Type Old
    */
-   
+
   togglePasswordTextTypeOld() {
     this.passwordTextTypeOld = !this.passwordTextTypeOld;
   }
@@ -70,65 +71,68 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   togglePasswordTextTypeRetype() {
     this.passwordTextTypeRetype = !this.passwordTextTypeRetype;
   }
-  get f1(){
+  get f1() {
     return this.uploadForm.controls;
   }
   get f() {
-     return this.resetForm.controls;
-     }
-
-
-     //Edit User
-     edituserSubmit(){
-      this.submitted=true; 
-      if (this.uploadForm.invalid) {
-       return;
-   }
-   else{
-      console.log(this.uploadForm.value)
-      let data={
-        name:this.uploadForm.value.name,
-        profile_photo:this.uploadForm.value.profile_photo
-      }
-      let formdata=new FormData();
-      formdata.append('profile_photo',this.uploadForm.value.profile_photo);
-      formdata.append('name',this.uploadForm.value.name);
-      formdata.append('company',this.uploadForm.value.company);
-      formdata.append('email',this.uploadForm.value.email);
-      formdata.append('phone',this.uploadForm.value.phone);
-
-
-        this._accountSettingsService.upload(formdata).subscribe({
-          next:()=>this.success=false,
-          error:()=>this.success=false,
-        })
-     }}
-
-  
-     //Change password 
-   onSubmit(){
-     this.submitted=true;
-   //  const old_password = form.value.old_password;
-     //const password = form.value.password;
-     //const password_confirmer = form.value.password_confirmer; 
-     if (this.resetForm.invalid) {
-      return;
+    return this.resetForm.controls;
   }
-  else{
-     console.log(this.resetForm.value)
-         this. _accountSettingsService
-      .change(this.resetForm.value)
-      .subscribe({
-        next:()=>this.tchek=false,
 
-
-      })
-          }
+  //Edit User
+  edituserSubmit() {
+    this.submitted = true;
+    if (this.uploadForm.invalid) {
+      return;
     }
 
+    let formdata = new FormData();
+    if (this.uploadForm.value.profile_photo) {
+      formdata.append('profile_photo', this.uploadForm.value.profile_photo);
+    }
+    formdata.append('name', this.uploadForm.value.name);
+    formdata.append('Adresse', this.uploadForm.value.Adresse);
+    formdata.append('email', this.uploadForm.value.email);
+    formdata.append('phone', this.uploadForm.value.phone);
 
 
-   
+    this._accountSettingsService.upload(formdata).subscribe({
+      next: (data:any) => {
+        console.log(data)
+        this.success = true
+        this.user = { ...this.user,...data.user,  first_name: data.user.name }
+
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
+
+        //TO-DO  update  user localStorage 
+      },
+      error: () => this.success = false,
+    })
+  }
+
+
+  //Change password 
+  onSubmit() {
+    this.submitted = true;
+    //  const old_password = form.value.old_password;
+    //const password = form.value.password;
+    //const password_confirmer = form.value.password_confirmer; 
+    if (this.resetForm.invalid) {
+      return;
+    }
+    else {
+      console.log(this.resetForm.value)
+      this._accountSettingsService
+        .change(this.resetForm.value)
+        .subscribe({
+          next: () => this.tchek = false,
+
+
+        })
+    }
+  }
+
+
+
 
   /**
    * Upload Image
@@ -144,13 +148,12 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
 
       reader.onload = (event: any) => {
         this.avatarImage = event.target.result;
-        console.log(this.uploadForm.value)
       };
 
       reader.readAsDataURL(event.target.files[0]);
     }
-  } 
- 
+  }
+
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -158,28 +161,34 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit() {
-  
-    this.user =  JSON.parse(localStorage.getItem('currentUser'));
-    this.uploadForm=this.fb.group({
-      name:[''],
-      email:[''],
-      company:[''],
-      phone:[''],
-      profile_photo:['']
+
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.user);
+    if (this.user?.profile_photo) {
+      this.avatarImage = this.isEncoded(this.user.profile_photo) ? this.user.profile_photo : `http://localhost:8000${this.user.profile_photo}`
+    }
+    this.uploadForm = this.fb.group({
+      name: [this.user.name],
+      email: [this.user.email],
+      Adresse: [this.user.Adresse],
+      phone: [this.user.phone],
+      profile_photo: [null]
     })
 
     this.resetForm = this.fb.group({
-      old_password:['', Validators.required],
-      password:['', Validators.required],
-      password_confirmer:['', Validators.required],
-      id:[this.user.id]
+      old_password: ['', Validators.required],
+      password: ['', Validators.required],
+      password_confirmer: ['', Validators.required],
+      id: [this.user.id]
     }, {
       validator: MustMatch('password', 'password_confirmer')
-  })
-    this._accountSettingsService.onSettingsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-      this.data = response;
-      this.avatarImage = this.data.accountSetting.general.avatar;
-    });
+    })
+    //this.uploadForm.patch=JSON.parse(localStorage.getItem('currentUser'));
+
+    //   this._accountSettingsService.onSettingsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
+    //    this.data = response;
+    //    this.avatarImage = this.data.accountSetting.general.avatar;
+    //  });
 
     // content header
     this.contentHeader = {
@@ -206,8 +215,10 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       }
     };
   }
- 
 
+  isEncoded(str:string) {
+    return str.startsWith('data:image')
+  }
 
   /**
    * On destroy
