@@ -9,37 +9,41 @@
           <div class="row my-2">
             <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
               <div class="d-flex align-items-center justify-content-center">
-                <img [src]="product.image" class="img-fluid product-img" alt="product image" />
+                <img [src]="baseUrl+product.image" class="img-fluid product-img"  />
               </div>
             </div>
             <div class="col-12 col-md-7">
               <h4>{{ product.name }}</h4>
               <span class="card-text item-company"
-                >By <a href="javascript:void(0)" class="company-name">{{ product.brand }}</a></span
+                >Ref :  <a href="javascript:void(0)" class="company-name">{{ product.reference }}</a></span
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h4 class="item-price mr-1">${{ product.price }}</h4>
-                <div class="rating rating-sm pl-1 border-left mb-1">
-                  <ngb-rating [rate]="product.rating" [readonly]="true" [max]="5" class="outline-none">
-                    <ng-template let-fill="fill" let-index="index"
-                      ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
-                    ></ng-template>
-                  </ngb-rating>
-                </div>
+                <h4 class="item-price mr-1">TND {{ product.price }}</h4>
+                <br>
               </div>
-              <p class="card-text">Available - <span class="text-success">In stock</span></p>
+              <div class="ecommerce-details-price d-flex flex-wrap mt-1">
+                <h5 class="item-price mr-1">Supplier price : {{ product.pricesupplier }}</h5>
+                <br>
+              </div>
+              <div class="ecommerce-details-price d-flex flex-wrap mt-1">
+                <h5 class="item-price mr-1">Gain : {{ product.gain }}</h5>
+                <br>
+              </div>
+              
+              <p class="card-text">availablity - <span class="text-success">{{ product.status }}</span></p>
+              <hr />
               <p class="card-text">
                 {{ product.description }}
               </p>
               <ul class="product-features list-unstyled">
                 <li *ngIf="product.hasFreeShipping"><i data-feather="shopping-cart"></i> <span>Free Shipping</span></li>
                 <li>
-                  <i data-feather="dollar-sign"></i>
-                  <span>EMI options available</span>
+                  <!--<i data-feather="dollar-sign"></i>-->
+                  <!--<span>EMI options available</span>-->
                 </li>
               </ul>
               <hr />
-              <div class="product-color-options">
+              <!--<div class="product-color-options">
                 <h6>Colors</h6>
                 <ul class="list-unstyled mb-0">
                   <li class="d-inline-block selected">
@@ -68,9 +72,9 @@
                     </div>
                   </li>
                 </ul>
-              </div>
-              <hr />
-              <div class="d-flex flex-column flex-sm-row pt-1">
+              </div>-->
+              <!--<hr />-->
+              <!--<div class="d-flex flex-column flex-sm-row pt-1">
                 <a
                   *ngIf="product.isInCart !== true"
                   href="javascript:void(0)"
@@ -128,14 +132,14 @@
                     </a>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
         <!-- Product Details ends -->
 
         <!-- Item features starts -->
-        <div class="item-features">
+        <!--<div class="item-features">
           <div class="row text-center">
             <div class="col-12 col-md-4 mb-4 mb-md-0">
               <div class="w-75 mx-auto">
@@ -159,11 +163,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
         <!-- Item features ends -->
 
         <!-- Related Products starts -->
-        <div class="card-body">
+        <!--<div class="card-body">
           <div class="mt-4 mb-2 text-center">
             <h4>Related Products</h4>
             <p class="card-text">People also search for this items</p>
@@ -191,12 +195,12 @@
                   </div>
                 </a>
               </div>
-            </div>
+            </div>-->
             <!-- Add Arrows -->
-            <div class="swiper-button-next"></div>
+            <!--<div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
           </div>
-        </div>
+        </div>-->
         <!-- Related Products ends -->
       </div>
     </section>
