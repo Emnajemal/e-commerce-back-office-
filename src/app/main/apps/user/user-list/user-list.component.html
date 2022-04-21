@@ -100,7 +100,7 @@
               <div class="d-flex align-items-center">
 
 
-                
+
                 <!-- <div *ngIf="row.avatar.length > 0; else customAvatar">
                   <img
                     class="rounded-circle mr-1"
@@ -124,6 +124,29 @@
 
                 </ng-template>-->
 
+                 <!-- <div  *ngIf="row.avatar.length > 0; else customAvatar">
+                  <img
+                    class="rounded-circle mr-1"
+                    src="{{ row.avatar}}"
+                    height="32"
+                    width="32"
+                    alt="datatable-avatar"
+                  />
+                </div>
+                <ng-template #customAvatar>
+                  <div
+                    class="avatar mr-1 ml-0"
+                    [ngClass]="{
+                      'bg-light-success': row.status == 'active',
+                      'bg-light-secondary': row.status == 'inactive',
+                      'bg-light-warning': row.status == 'pending'
+                    }"
+                  >
+                    <div class="avatar-content">{{ name | initials }}</div>
+                  </div>
+
+                </ng-template> -->
+
 
 
 
@@ -137,7 +160,8 @@
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="Email" prop="email" [width]="220"></ngx-datatable-column>
-          <!-- <ngx-datatable-column name="Address" prop="Adresse" [width]="50"></ngx-datatable-column> -->
+          
+          <ngx-datatable-column name="Address" prop="Adresse" [width]="50"></ngx-datatable-column>
           <ngx-datatable-column name="phone" prop="phone" [width]="80"></ngx-datatable-column>
           <!-- <ngx-datatable-column name="password_confirmation" prop="password_confirmation" [width]="200"></ngx-datatable-column>
           <ngx-datatable-column name="password" prop="password" [width]="200"></ngx-datatable-column>-->
@@ -146,10 +170,10 @@
               <div>
                 <i class="feather font-medium-3" [ngClass]="{
                     'icon-eye text-info': role == 'Community Manager',
-                    'icon-edit-1 text-primary': role == 'Magasinier',
-                    'icon-user text-danger': role == 'Comptable',
-                    'icon-edit-2 text-info': role == 'Designer',
-                    'icon-settings text-warning': role == 'Administrateur'
+                    'icon-edit-1 text-info': role == 'Designer',
+                    'icon-user text-danger': role == 'Accountant',
+                    'icon-edit-1 text-info': role == 'Designer',
+                    'icon-settings text-warning': role == 'Administrator'
                   }"></i>
                 {{ role }}
               </div>
@@ -175,19 +199,21 @@
             <ng-template ngx-datatable-cell-template let-row="row">
               <div ngbDropdown container="body">
 
-                <button (click)="deleteData(row)" ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow"
+                <button (click)="deleteData(row)" [swal]="SweetAlertConfirmText" ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow"
                   rippleEffect>
                   <a href="javascript:;" ngbDropdownItem>
                     <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a>
                 </button>
-                
-         
+
+
 
                 <!-- Sweet Alert ConfirmText 
-  <button class="btn btn-outline-primary mr-1" [swal]="SweetAlertConfirmText" rippleEffect>
-    (click)="deleteData(row)"
-    Confirm Text
-  </button>-->
+ 
+ 
+                  <button class="btn btn-outline-primary mr-1" [swal]="SweetAlertConfirmText" rippleEffect>
+                 (click)="deleteData(row)"
+                       Confirm Text
+                     </button>-->
                 <!-- Swal of Sweet Alert ConfirmText -->
                 <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()">
 

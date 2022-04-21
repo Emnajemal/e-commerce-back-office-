@@ -8,6 +8,7 @@ import { CoreConfigService } from '@core/services/config.service';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 
 import { UserListService } from 'app/main/apps/user/user-list/user-list.service';
+import { User } from 'app/auth/models/user';
 
 
 import { BeforeOpenEvent } from '@sweetalert2/ngx-sweetalert2';
@@ -22,6 +23,8 @@ import * as snippet from 'app/main/extensions/sweet-alerts/sweet-alerts.snippetc
   encapsulation: ViewEncapsulation.None
 })
 export class UserListComponent implements OnInit {
+  public user: User ;
+  public profile_photo: string;
   // Public
   public sidebarToggleRef = false;
   public rows;
@@ -188,15 +191,42 @@ export class UserListComponent implements OnInit {
 
   deleteData(personnel: any) {
     console.log(personnel);
-    let conf = confirm("Are you sure you want to delete it?");
-    if(conf)
+    // let conf = confirm("Are you sure you want to delete it?");
+    // if(conf)
     this._userListService.deletetData(personnel.id).subscribe(res => {
       console.log(res);
-     let x = confirm("User deleted successfully");
+    //  let x = confirm("User deleted successfully");
       this._userListService.getDataTableRows();
     })
  
   }
+  
+  // ConfirmTextOpen() {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: "You won't be able to revert this!",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#7367F0',
+  //     cancelButtonColor: '#E42728',
+  //     confirmButtonText: 'Yes, delete it!',
+  //     customClass: {
+  //       confirmButton: 'btn btn-primary',
+  //       cancelButton: 'btn btn-danger ml-1'
+  //     }
+  //   }).then(function (result) {
+  //     if (result.value) {
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Deleted!',
+  //         text: 'Your file has been deleted.',
+  //         customClass: {
+  //           confirmButton: 'btn btn-success'
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
   //  Swal.fire({
   //     title: 'Are you sure?',
@@ -234,6 +264,7 @@ export class UserListComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this.getboutique();
     // Subscribe config change
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       //! If we have zoomIn route Transition then load datatable after 450ms(Transition will finish in 400ms)
@@ -261,4 +292,13 @@ export class UserListComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
+  // getboutique() {
+  //   this._userListService.getDataTableRows().then((data: any) => {
+  //     this.user = data.map(user => {
+  //       return { ...user, profile_photo: `http://localhost:8000${user.profile_photo}` }
+  //     });
+  //     console.log(data)
+  //   })
+
+  // }
 }

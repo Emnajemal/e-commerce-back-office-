@@ -86,4 +86,5 @@ deletetData(id:any){
       }, reject);
     });
   }
+
 }

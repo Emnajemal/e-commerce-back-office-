@@ -14,6 +14,7 @@ import { locale as portuguese } from 'app/main/tables/datatables/i18n/pt';
 import * as snippet from 'app/main/tables/datatables/datatables.snippetcode';
 
 import { DatatablesService } from 'app/main/tables/datatables/datatables.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-datatables',
@@ -173,9 +174,13 @@ export class DatatablesComponent implements OnInit {
    * @param {DatatablesService} _datatablesService
    * @param {CoreTranslationService} _coreTranslationService
    */
-  constructor(private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService) {
+  constructor(private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService,private modalService: NgbModal) {
     this._unsubscribeAll = new Subject();
     this._coreTranslationService.translate(english, french, german, portuguese);
+  }
+   // modal Open Form
+  modalOpenForm(modalForm) {
+    this.modalService.open(modalForm);
   }
 
   // Lifecycle Hooks

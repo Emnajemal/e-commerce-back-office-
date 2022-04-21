@@ -27,7 +27,8 @@ public registerForm: FormGroup;
   public passwordTextType: boolean;
   public passwordTextTypeRetype = false;
   public error = '';
-  user:any;
+  // user:any;
+  public user: User ;
  public profile_photo:string;
   selectedfile: File;
 
@@ -70,41 +71,77 @@ public registerForm: FormGroup;
       this.toggleSidebar('new-user-sidebar');
     }
   }*/
-
   submit() {
-    console.log(this.registerForm.value.name)
-  console.log("bonjour")
-  console.log(this.registerForm.value.profile_photo)
-    this.submitted=true;
-//     const formdata = new FormData();
-// //   //  if (this.registerForm.value.profile_photo) {
-//       formdata.append('profile_photo', this.registerForm.value.profile_photo);
-//    formdata.append('name',this.registerForm.value.name);
-//       formdata.append('phone',this.registerForm.value.phone);
-//       formdata.append('adresse',this.registerForm.value.adresse);
-//      formdata.append('email',this.registerForm.value.email);
-//      formdata.append('role',this.registerForm.value.email);
-// console.log(this.registerForm.value.profile_photo);
-// //  //   }
-  //  this.UserListService.register(this.registerForm.value).subscribe(user => 
- // console.log(formdata)
- //this.registerForm.value.profile_photo=this.registerForm.value.profile_photo.name;
- this.registerForm.value.profile_photo=this.registerForm.value.profile_photo;
-    this.UserListService.register(this.registerForm.value).subscribe(user => 
-      {
-        console.log(this.registerForm.value.profile_photo)
-     this.alert=true ; 
-      
-   //   this._router.navigate(['/login']);
-    },
-    
-        error => {
-          this.error = error;
-         this.alert=false;
-        }
-      );
-
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      return;
     }
+    let formdata = new FormData();
+    data: User;
+
+    if (this.registerForm.value.store_image) {
+      formdata.append('store_image', this.registerForm.value.store_image);
+      console.log(this.registerForm.value.store_image);
+    }
+    
+    formdata.append('profile_photo', this.registerForm.value.profile_photo);
+   formdata.append('name',this.registerForm.value.name);
+      formdata.append('phone',this.registerForm.value.phone);
+      formdata.append('Adresse',this.registerForm.value.Adresse);
+     formdata.append('email',this.registerForm.value.email);
+     formdata.append('role',this.registerForm.value.role);
+    console.log(this.registerForm.value.name);
+      this.UserListService.register(formdata).subscribe({
+      next: (data: any) => {
+        console.log(data)
+        data.profile_photo = `http://localhost:8000${data.profile_photo}`
+     //   this.user.push(data)
+        
+        
+        // console.log(data)
+        // this.done= true;
+        // setTimeout(() => {
+        //   this.done= false;
+        // }, 2000)
+        // this.clearForm();
+      }
+    })
+  }
+
+//   submit() {
+//     console.log(this.registerForm.value.name)
+//   console.log("bonjour")
+//   console.log(this.registerForm.value.profile_photo)
+//     this.submitted=true;
+// //     const formdata = new FormData();
+// // //   //  if (this.registerForm.value.profile_photo) {
+// //       formdata.append('profile_photo', this.registerForm.value.profile_photo);
+// //    formdata.append('name',this.registerForm.value.name);
+// //       formdata.append('phone',this.registerForm.value.phone);
+// //       formdata.append('adresse',this.registerForm.value.adresse);
+// //      formdata.append('email',this.registerForm.value.email);
+// //      formdata.append('role',this.registerForm.value.email);
+// // console.log(this.registerForm.value.profile_photo);
+// // //  //   }
+//   //  this.UserListService.register(this.registerForm.value).subscribe(user => 
+//  // console.log(formdata)
+//  //this.registerForm.value.profile_photo=this.registerForm.value.profile_photo.name;
+//  this.registerForm.value.profile_photo=this.registerForm.value.profile_photo;
+//     this.UserListService.register(this.registerForm.value).subscribe(user => 
+//       {
+//         console.log(this.registerForm.value.profile_photo)
+//      this.alert=true ; 
+      
+//    //   this._router.navigate(['/login']);
+//     },
+    
+//         error => {
+//           this.error = error;
+//          this.alert=false;
+//         }
+//       );
+
+//     }
     closeAlert(){
       this.alert=false;
     }
@@ -155,16 +192,24 @@ ngOnInit(): void {
     this.avatarImage = this.isEncoded(this.user.profile_photo) ? this.user.profile_photo :`http://localhost:8000${this.user.profile_photo}`
   }*/
  
-  this.registerForm = this._formBuilder.group({
-    name: new FormControl('', [Validators.required,Validators.minLength(3)]), 
-    email: new FormControl('', [Validators.required,Validators.email]),
-   // password: new FormControl('', [Validators.required]),
-    //password_confirmation: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
-    Adresse: new FormControl('', [Validators.required]),
-    role: new FormControl('', [Validators.required]),
-   profile_photo: new FormControl(''),
-  // profile_photo:   localStorage.getItem("pic") 
-  })
-}
+//   this.registerForm = this._formBuilder.group({
+//     name: new FormControl('', [Validators.required,Validators.minLength(3)]), 
+//     email: new FormControl('', [Validators.required,Validators.email]),
+//    // password: new FormControl('', [Validators.required]),
+//     //password_confirmation: new FormControl('', [Validators.required]),
+//     phone: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
+//     Adresse: new FormControl('', [Validators.required]),
+//     role: new FormControl('', [Validators.required]),
+//    profile_photo: new FormControl(''),
+//   // profile_photo:   localStorage.getItem("pic") 
+//   })
+this.registerForm = this._formBuilder.group({
+  name: ['', Validators.required],
+  email: ['', Validators.required],
+  phone: ['', Validators.required],
+  Adresse: ['', Validators.required],
+  role: ['', Validators.required],
+  profile_photo: [null],
+})
+ }
 }
