@@ -9,28 +9,71 @@
         <div class="col-12">
           <div
             class="card knowledge-base-bg text-center"
-            style="background-image: url('assets/images/banner/banner.png')"
+            style="background-image: url('assets/images/banner/emna.jpg')"
           >
             <div class="card-body">
-              <h2 class="text-primary">Dedicated Source Used on Website</h2>
-              <p class="card-text mb-2">
-                <span>Popular searches: </span><span class="font-weight-bolder">Sales automation, Email marketing</span>
+              <h1 class="text-primary"> Add a new store </h1>
+              <p class="card-text mb-4">
+                <span></span><span class="font-weight-bolder"></span>
               </p>
-              <form class="kb-search-input">
-                <div class="input-group input-group-merge">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i data-feather="search"></i></span>
+              <div class="container-fluid">
+              <form class="form" [formGroup]="addForm" (ngSubmit)="addshopSubmit()">
+               
+
+                <div class="row mb-2" >
+                  <label for="first-name-column " class="col-sm-3 col-form-label">Insert your shop name :</label>
+                  <div class="col-sm-6">
+                    <input
+                        type="text"
+                        formControlName="name"
+                        class="form-control"
+                        placeholder="Shop name"
+                        />
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="searchText"
-                    id="searchbar"
-                    name="searchbar"
-                    placeholder="Ask a question..."
-                  />
                 </div>
+                <div class="row mb-2">
+                  <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
+                  <div class="col-sm-6">
+                    <div class="custom-file">
+                      <input type="file" 
+                      #file              
+                       hidden
+                       class="custom-file-input"
+                       id="customFile" 
+                    
+                       (change)="uploadImage($event)" />
+                      <label class="custom-file-label" for="customFile">Choose picture</label>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <div *ngIf="store_image && !update">
+                 
+                  <div class="col-12">
+                    <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
+                  </div>
+                  <br>
+                </div>
+                
+               <div class="container">
+                 <div class="row">
+                
+                   <div class="col"> <button type="submit" rippleEffect class="btn btn-info mr-1">Validate</button></div>
+                 </div>
+                 <br>
+                 <ngb-alert role="alert" class="alert  alert-success fade" [class]="{show : done}" ng-reflect-type="success" ng-reflect-dismissible="false">
+                   <h4 class="alert-heading">Success</h4>
+                   <div class="alert-body">
+                    
+                     </div>
+          
+               </ngb-alert>
+               </div>
+            
               </form>
+              </div>
+              
             </div>
           </div>
         </div>
@@ -41,29 +84,144 @@
     <section id="knowledge-base-content">
       <div class="row kb-search-content-info match-height">
         <div
-          *ngFor="let knowledgeBaseRef of data.knowledgeBase | filter: searchText:'title'"
+          *ngFor="let store of stores | filter: searchText:'name'"
           class="col-md-4 col-sm-6 col-12 kb-search-content"
         >
           <div class="card">
-            <a routerLink="/pages/knowledge-base/{{ knowledgeBaseRef.category }}">
-              <img src="{{ knowledgeBaseRef.img }}" class="card-img-top" alt="knowledge-base-image" />
-              <div class="card-body text-center">
-                <h4>{{ knowledgeBaseRef.title }}</h4>
-                <p class="text-body mt-1 mb-0">{{ knowledgeBaseRef.desc }}</p>
+            <div ngbDropdown container="body">
+              <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+              </button>
+              <div ngbDropdownMenu>
+                <button (click)="modalOpen(modalBasic, store)" ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow"
+                  rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem>  
+                <span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details </a>
+                  </button><br>
+
+                  
+                 <!--<button (click)="editshopSubmit(store)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>--> 
+
+               <button (click)="modalOpenForm(modalForm, store)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem>                 
+                  <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit </a>
+                </button> <br>
+                  
+                  <button (click)="deleteshopSubmit(store.id)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow"
+                  rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem>
+                    <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a>
+                 </button>                
               </div>
-            </a>
+            </div>
+            
+              <img src="{{ store.store_image }}" class="card-img-top" alt="knowledge-base-image" />
+              <div class="card-body text-center">
+                <h4>{{ store.name }}</h4>
+                <p class="text-body mt-1 mb-0"></p>
+              </div>
+                 <!-- houuuuuniiiii maa kol card  -->
+                
+
+                
           </div>
+          
         </div>
 
         <!-- no result -->
-        <ng-container *ngIf="(data.knowledgeBase | filter: searchText:'title').length; else noResults"></ng-container>
+        <!--<ng-container *ngIf="(data.knowledgeBase | filter: searchText:'title').length; else noResults"></ng-container>
         <ng-template #noResults>
           <div class="col-12 text-center no-result">
             <h4 class="mt-4">Search result not found!!</h4>
           </div>
-        </ng-template>
+        </ng-template>-->
       </div>
     </section>
     <!-- Knowledge base ends -->
+
+    <div class="edit-form">
+      <!-- Button trigger modal -->
+     
+    
+      <!-- Modal -->
+      <ng-template #modalForm let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel1">Update Store {{update}}</h4>
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form" [formGroup]="editForm" (ngSubmit)="editShopSubmit()">
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+         
+               
+
+            <div class="row mb-2" >
+              <label for="first-name-column " class="col-sm-3 col-form-label">Insert your shop name :</label>
+              <div class="col-sm-6">
+                <input
+                    type="text"
+                    formControlName="name"
+                    class="form-control"
+                    placeholder="Shop name"
+                    />
+              </div>
+            </div>
+            <div class="row mb-2">
+              <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
+              <div class="col-sm-6">
+                <div class="custom-file">
+                  <input type="file" 
+                  #file              
+                   hidden
+                   class="custom-file-input"
+                   id="customEditFile" 
+                
+                   (change)="editImage($event)" />
+                  <label class="custom-file-label" for="customEditFile">Choose picture</label>
+                </div>
+              </div>
+              
+            </div>
+            
+            <div *ngIf="store_image">
+             
+              <div class="col-12">
+                <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
+              </div>
+              <br>
+            
+           
+            
+             
+        </div>
+     
+      </div>
+        <div class="modal-footer">
+          <button type="submit" (click)="modal.close('Accept click')" rippleEffect class="btn btn-info mr-1">Update</button>
+          <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button>
+        </div>
+      </form>
+      </ng-template>
+      
+      <!-- / Modal -->
+    </div>
+    <!-- Modal -->
+    <ng-template #modalBasic let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">{{storeDetails.name}}</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+       <img [src]="storeDetails.store_image" style="max-width: 100%;" alt="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close()" rippleEffect>
+        Back
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>

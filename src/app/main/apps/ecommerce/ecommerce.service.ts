@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { environment } from 'environments/environment';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -8,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EcommerceService implements Resolve<any> {
+  baseUrl=environment.apiUrl
   // Public
   public productList: Array<any>;
   public wishlist: Array<any>;
@@ -36,6 +38,7 @@ export class EcommerceService implements Resolve<any> {
     }
     return comparison;
   };
+  onKBChanged: any;
 
   /**
    * Constructor
@@ -57,6 +60,28 @@ export class EcommerceService implements Resolve<any> {
    * @param {RouterStateSnapshot} state
    * @returns {Observable<any> | Promise<any> | any}
    */
+   boutique(addForm){
+    console.log(addForm);
+    return this._httpClient.post('http://127.0.0.1:8000/api/product/addProduct/',addForm);
+
+  }
+  productEdit(editForm,id){
+    return this._httpClient.post(`http://127.0.0.1:8000/api/product/updateProduct/${id}`,editForm);
+
+  }
+  getProductById(id){
+    return this._httpClient.get(`http://127.0.0.1:8000/api/product/product/${id}`);
+
+  }
+
+deleteProduct(id){
+  return this._httpClient.delete(`http://127.0.0.1:8000/api/product/deleteProduct/${id}`);
+
+}
+
+
+
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     this.idHandel = route.params.id;
 
@@ -70,14 +95,15 @@ export class EcommerceService implements Resolve<any> {
   /**
    * Get Products
    */
-  getProducts(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get('api/ecommerce-products').subscribe((response: any) => {
-        this.productList = response;
-        this.sortProduct('featured'); // Default shorting
-        resolve(this.productList);
-      }, reject);
-    });
+  getProducts(){
+    return this._httpClient.get(`${this.baseUrl}/api/product/products`)
+    // return new Promise((resolve, reject) => {
+    //   this._httpClient.get('api/ecommerce-products').subscribe((response: any) => {
+    //     this.productList = response;
+    //     this.sortProduct('featured'); // Default shorting
+    //     resolve(this.productList);
+    //   }, reject);
+    // });
   }
 
   /**
@@ -199,18 +225,18 @@ export class EcommerceService implements Resolve<any> {
    */
   addToCart(id) {
     return new Promise<void>((resolve, reject) => {
-      const maxValueId = Math.max(...this.cartList.map(cart => cart.id), 0) + 1;
-      const cartRef = { id: maxValueId, productId: id, qty: 1 };
-      var cartId: any = '';
+      // const maxValueId = Math.max(...this.cartList.map(cart => cart.id), 0) + 1;
+      // const cartRef = { id: maxValueId, productId: id, qty: 1 };
+      // var cartId: any = '';
 
-      // If cart is not Empty
-      if (maxValueId !== 1) {
-        cartId = maxValueId;
-      }
-      this._httpClient.post('api/ecommerce-userCart/' + cartId, { ...cartRef }).subscribe(response => {
-        this.getCartList();
-        resolve();
-      }, reject);
+      // // If cart is not Empty
+      // if (maxValueId !== 1) {
+      //   cartId = maxValueId;
+      // }
+      // this._httpClient.post('api/ecommerce-userCart/' + cartId, { ...cartRef }).subscribe(response => {
+      //   this.getCartList();
+      //   resolve();
+      // }, reject);
     });
   }
 
@@ -230,4 +256,5 @@ export class EcommerceService implements Resolve<any> {
       }, reject);
     });
   }
+
 }

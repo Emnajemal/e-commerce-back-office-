@@ -12,8 +12,9 @@ export class AccountSettingsService implements Resolve<any> {
   public userdata:any =JSON.parse(localStorage.getItem('currentUser'));
 
   onSettingsChanged: BehaviorSubject<any>;
-  private ChangeUrl = 'http://127.0.0.1:8000/api/auth/change_password';
-  private uploadUrl='http://127.0.0.1:8000/api/update/user/'+ this.userdata.id;
+  private ChangeUrl = 'http://127.0.0.1:8000/api/auth/change_password/'+ this.userdata.id;
+  private uploadUrl='http://127.0.0.1:8000/api/auth/update/user/'+ this.userdata.id;
+  
 
   /**
    * Constructor
@@ -21,6 +22,7 @@ export class AccountSettingsService implements Resolve<any> {
    * @param {HttpClient} _httpClient
    */
   constructor(private _httpClient: HttpClient) {
+    console.log(this.uploadUrl);
     // Set the defaults
     this.onSettingsChanged =
      new BehaviorSubject({});
@@ -33,6 +35,7 @@ export class AccountSettingsService implements Resolve<any> {
   }
   
   upload(uploadForm){
+    console.log(uploadForm);
     return this._httpClient.post(this.uploadUrl,uploadForm);
 
   }
@@ -67,3 +70,4 @@ export class AccountSettingsService implements Resolve<any> {
     });
   }
 }
+
