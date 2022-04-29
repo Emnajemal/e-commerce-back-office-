@@ -46,8 +46,8 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
    * @param {knowledgeBaseService} _knowledgeBaseService
    */
   constructor(private _knowledgeBaseService: knowledgeBaseService,
-     private fb: FormBuilder,
-     private modalService: NgbModal) {
+    private fb: FormBuilder,
+    private modalService: NgbModal) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -67,21 +67,21 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     }
     formdata.append('name', this.addForm.value.name);
     console.log(this.addForm.value.name);
-      this._knowledgeBaseService.boutique(formdata).subscribe({
+    this._knowledgeBaseService.boutique(formdata).subscribe({
       next: (data: any) => {
         data.store_image = `http://localhost:8000${data.store_image}`
         this.stores.push(data)
         console.log(data)
-        this.done= true;
+        this.done = true;
         setTimeout(() => {
-          this.done= false;
+          this.done = false;
         }, 2000)
         this.clearForm();
       }
     })
   }
 
- editShopSubmit() {
+  editShopSubmit() {
     this.submitted = true;
     if (this.editForm.invalid) {
       return;
@@ -96,22 +96,22 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     formdata.append('name', this.editForm.value.name);
     console.log(this.editForm.value.name);
 
-      this._knowledgeBaseService.updateshop(this.update,formdata).subscribe({
-        next: (data:any) => {
-          console.log(data);
-          let store = this.stores.find(store => store.id == this.update);
-         store.name = data.name;
-         store.store_image = `http://localhost:8000${data.store_image}`
-          //TO-DO  update  user localStorage 
-          this.clearForm();
-          this.done= true;
-          setTimeout(() => {
-            this.done= false;
-          }, 2000)
-        }
-      
-      })
-      console.log(this.update);
+    this._knowledgeBaseService.updateshop(this.update, formdata).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        let store = this.stores.find(store => store.id == this.update);
+        store.name = data.name;
+        store.store_image = `http://localhost:8000${data.store_image}`
+        //TO-DO  update  user localStorage 
+        this.clearForm();
+        this.done = true;
+        setTimeout(() => {
+          this.done = false;
+        }, 2000)
+      }
+
+    })
+    console.log(this.update);
   }
 
   /**
@@ -131,26 +131,26 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
   //nlawj aala boutique bel id mteeio o nfaskhouu
   findStore(id): Store {
     return this.stores.find(store => store.id === id);
-}
+  }
   deleteshopSubmit(id) {
-    let store=this.findStore(id)
-   
+    let store = this.findStore(id)
+
     this._knowledgeBaseService.deletetData(id).subscribe(res => {
       let index = this.stores.findIndex(store => store.id === id)
-      this.stores.splice(index,1);
+      this.stores.splice(index, 1);
       console.log(res);
-    
-  }) 
- }
- //njib les valeur mel back o nhothom besh nbadelhom
- editshopSubmit(data) {
-  
-this.update = data.id;
-this.store_image = data?.store_image;
-  let formdata = new FormData();
-  console.log(this.update + " / ")
- this.editForm?.patchValue(this.stores.find(a => a.id == data.id));
-   
+
+    })
+  }
+  //njib les valeur mel back o nhothom besh nbadelhom
+  editshopSubmit(data) {
+
+    this.update = data.id;
+     this.store_image = data?.store_image;
+   // let formdata = new FormData();
+    console.log(this.update + " / ")
+    this.editForm?.patchValue(this.stores.find(a => a.id == data.id));
+
   }
   clearForm() {
     this.addForm.get("name").setValue('');
@@ -227,8 +227,8 @@ this.store_image = data?.store_image;
       name: ['', Validators.required],
       store_image: [null],
     })
-      
-    
+
+
 
     // content header
     this.contentHeader = {
