@@ -14,7 +14,9 @@ import { EcommerceService } from '../ecommerce.service';
 export class AddproductComponent implements OnInit {
   addForm: FormGroup;
   image: string;
+  success: boolean;
   formData:FormData  = new FormData()
+  submitted = false;
   public stores: Store[];
  // public products: Product[];
 
@@ -26,14 +28,14 @@ export class AddproductComponent implements OnInit {
     this.addForm = this.fb.group({
       name: ['', Validators.required],
       reference: ['', Validators.required],
-      status: ['', Validators.required],
+    //    status: ['', Validators.required],
       sellingprice: ['', Validators.required],
       pricesupplier: ['', Validators.required],
      // gain: ['', Validators.required],
       stores_id: ['', Validators.required],
       description: ['', Validators.required],
       quantity: ['', Validators.required],
-      image: [null],
+      image: [null, Validators.required],
     })
     this.getStores();
   }
@@ -64,10 +66,12 @@ export class AddproductComponent implements OnInit {
       console.log(data)
     })
   }
+  get f() { return this.addForm.controls; }
 
   //add product 
   addproductSubmit() {
-    // this.submitted = true;
+    console.log(this.addForm);
+     this.submitted = true;
     if (this.addForm.invalid) {
       return;
     }
@@ -80,21 +84,26 @@ export class AddproductComponent implements OnInit {
    // }
     this.formData.append('name', this.addForm.value.name);
     console.log(this.addForm.value.name);
+    //console.log(this.addForm);
     this.formData.append('reference', this.addForm.value.reference);
     this.formData.append('pricesupplier', this.addForm.value.pricesupplier);
     this.formData.append('sellingprice', this.addForm.value.sellingprice);
    // this.formData.append('gain', this.addForm.value.gain);
     this.formData.append('stores_id', this.addForm.value.stores_id);
     this.formData.append('quantity', this.addForm.value.quantity);
-    this.formData.append('status', this.addForm.value.status);
+    //this.formData.append('status', this.addForm.value.status);
     this.formData.append('description', this.addForm.value.description);
+    console.log(this.formData);
     this._ecommerceService.boutique(this.formData).subscribe((data: any) => {
        //data.image = `http://localhost:8000${data.image}`
       // this.products.push(data)
       this.onAddProduct.emit()
       console.log(data)
+      this.success = true;
+      this.modalService.dismissAll()
 
     },(error:any)=>{
+      this.success = false
       console.log(error)
     }
     )

@@ -21,7 +21,7 @@ export class EcommerceShopComponent implements OnInit {
   public shopSidebarToggle = false;
   public shopSidebarReset = false;
   public gridViewRef = true;
- // public products;
+  // public products;
   public wishlist;
   public cartList;
   public page = 1;
@@ -33,26 +33,26 @@ export class EcommerceShopComponent implements OnInit {
   public products: Product[];
   public data: any;
   private _unsubscribeAll: Subject<any>;
-  productId:number
-// nabaathha mel child lel parents out o l input l aakes
-@Output() onAddProduct = new EventEmitter()
-// @Input() product:any;
+  productId: number
+  // nabaathha mel child lel parents out o l input l aakes
+  @Output() onAddProduct = new EventEmitter()
+  // @Input() product:any;
 
-// <eccomerce (onAddProduct)= 'function()'></eccomerce>
-// (click)="function()"
+  // <eccomerce (onAddProduct)= 'function()'></eccomerce>
+  // (click)="function()"
 
-// <eccomerce [product]="value"></eccomerce>
+  // <eccomerce [product]="value"></eccomerce>
 
   /**
    *
    * @param {CoreSidebarService} _coreSidebarService
    * @param {EcommerceService} _ecommerceService
    */
-  constructor(private _coreSidebarService: CoreSidebarService,private fb: FormBuilder,
-    private _ecommerceService: EcommerceService,private modalService: NgbModal) {
-      this._unsubscribeAll = new Subject();
+  constructor(private _coreSidebarService: CoreSidebarService, private fb: FormBuilder,
+    private _ecommerceService: EcommerceService, private modalService: NgbModal) {
+    this._unsubscribeAll = new Subject();
 
-    }
+  }
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -62,37 +62,37 @@ export class EcommerceShopComponent implements OnInit {
    *
    * @param name
    */
-//add product 
-// addproductSubmit() {
-//   this.submitted = true;
-//   if (this.addForm.invalid) {
-//     return;
-//   }
-//   let formdata = new FormData();
-//   data: Product;
+  //add product 
+  // addproductSubmit() {
+  //   this.submitted = true;
+  //   if (this.addForm.invalid) {
+  //     return;
+  //   }
+  //   let formdata = new FormData();
+  //   data: Product;
 
-//   if (this.addForm.value.image) {
-//     formdata.append('image', this.addForm.value.image);
-//     console.log(this.addForm.value.image);
-//   }
-//   formdata.append('name', this.addForm.value.name);
-//     console.log(this.addForm.value.name);
-//   formdata.append('reference', this.addForm.value.reference);
-//   formdata.append('pricesupplier', this.addForm.value.pricesupplier);
-//   formdata.append('sellingprice', this.addForm.value.sellingprice);
-//   formdata.append('gain', this.addForm.value.gain);
-//   formdata.append('status', this.addForm.value.status);
-//   formdata.append('description', this.addForm.value.description);
-//     this._ecommerceService.boutique(formdata).subscribe( (data: any) => {
-//       // data.image = `http://localhost:8000${data.image}`
-//      // this.products.push(data)
-//     this.onAddProduct.emit()
-//       console.log(data)
-      
-//     }
-//   )
-// }
-// fin add product
+  //   if (this.addForm.value.image) {
+  //     formdata.append('image', this.addForm.value.image);
+  //     console.log(this.addForm.value.image);
+  //   }
+  //   formdata.append('name', this.addForm.value.name);
+  //     console.log(this.addForm.value.name);
+  //   formdata.append('reference', this.addForm.value.reference);
+  //   formdata.append('pricesupplier', this.addForm.value.pricesupplier);
+  //   formdata.append('sellingprice', this.addForm.value.sellingprice);
+  //   formdata.append('gain', this.addForm.value.gain);
+  //   formdata.append('status', this.addForm.value.status);
+  //   formdata.append('description', this.addForm.value.description);
+  //     this._ecommerceService.boutique(formdata).subscribe( (data: any) => {
+  //       // data.image = `http://localhost:8000${data.image}`
+  //      // this.products.push(data)
+  //     this.onAddProduct.emit()
+  //       console.log(data)
+
+  //     }
+  //   )
+  // }
+  // fin add product
 
 
 
@@ -125,37 +125,44 @@ export class EcommerceShopComponent implements OnInit {
 
 
   //pop upp function
-  modalOpenForm(modalForm,event?:number) {
-   // this.addproductSubmit();
-   console.log(event)
-   this.productId = event
-
+  modalOpenForm(modalForm, event?: number) {
+    // this.addproductSubmit();
+    console.log(event)
+    this.productId = event
     this.modalService.open(modalForm);
+
+  }
+  //cofirmation delete
+  modalOpenDanger(modalDanger) {
+    this.modalService.open(modalDanger, {
+      centered: true,
+      windowClass: 'modal modal-danger'
+    });
   }
 
-//nfasakh product 
-deleteproductSubmit(){
-  
-}
-//toufaa houni delete
+  //nfasakh product 
+  deleteproductSubmit() {
+
+  }
+  //toufaa houni delete
 
 
 
- //imaaageeeeeeeeeeeeeeee
-//  uploadImage(event: any) {
+  //imaaageeeeeeeeeeeeeeee
+  //  uploadImage(event: any) {
 
-//   if (event.target.files && event.target.files[0]) {
+  //   if (event.target.files && event.target.files[0]) {
 
-//     this.addForm.get('image').setValue(event.target.files[0]);
+  //     this.addForm.get('image').setValue(event.target.files[0]);
 
-//     let reader = new FileReader();
+  //     let reader = new FileReader();
 
-//     reader.onload = (event: any) => {
-//       this.image = event.target.result;
-//     };
-//     reader.readAsDataURL(event.target.files[0]);
-//   }
-// }
+  //     reader.onload = (event: any) => {
+  //       this.image = event.target.result;
+  //     };
+  //     reader.readAsDataURL(event.target.files[0]);
+  //   }
+  // }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -175,16 +182,16 @@ deleteproductSubmit(){
     // });
 
 
-    this.addForm = this.fb.group({
-      name: ['', Validators.required],
-      reference: ['', Validators.required],
-      status: ['', Validators.required],
-      sellingprice: ['', Validators.required],
-      pricesupplier: ['', Validators.required],
-      gain: ['', Validators.required],
-      description: ['', Validators.required],
-      image: [null],
-    })
+    // this.addForm = this.fb.group({
+    //   name: ['', Validators.required],
+    //   reference: ['', Validators.required],
+    //   status: ['', Validators.required],
+    //   sellingprice: ['', Validators.required],
+    //   pricesupplier: ['', Validators.required],
+    //   gain: ['', Validators.required],
+    //   description: ['', Validators.required],
+    //   image: [null],
+    // })
 
     // Subscribe to Wishlist change
     this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));
@@ -223,10 +230,29 @@ deleteproductSubmit(){
       }
     };
   }
-  getProducts(){
-    this._ecommerceService.getProducts().subscribe((result:any)=>{
+  getProducts() {
+    this._ecommerceService.getProducts().subscribe((result: any) => {
       console.log(result)
       this.products = result
+    })
+  }
+  //hedhy tjibli l id mtaa product eli nheb nfaskhouu 
+  getProductId(event: any,modal:any) {
+    console.log('product id shop component ', event)
+    //hatyna l id fel event hadheka 
+    this.productId = event
+    //neftah l modal
+    this.modalService.open(modal)
+    // this.deleteProduct(event)
+  }
+  //njib delete 
+  deleteProduct(id: number) {
+    //besh tfaskhli bel id hadheka 
+    this._ecommerceService.deleteProduct(id).subscribe((result: any) => {
+      console.log(result)
+      //o hne njbo data jdida
+      this.getProducts()
+      this.modalService.dismissAll()
     })
   }
 }

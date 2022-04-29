@@ -115,7 +115,7 @@
               </div>
             </div>
             
-              <img src="{{ store.store_image }}" class="card-img-top" alt="knowledge-base-image" />
+              <img src="{{ store.store_image }}" class="card-img-top" [alt]="store.name" />
               <div class="card-body text-center">
                 <h4>{{ store.name }}</h4>
                 <p class="text-body mt-1 mb-0"></p>
@@ -171,8 +171,7 @@
               <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
               <div class="col-sm-6">
                 <div class="custom-file">
-                  <input type="file" 
-                  #file              
+                  <input type="file"       
                    hidden
                    class="custom-file-input"
                    id="customEditFile" 

@@ -13,24 +13,27 @@
               </div>
             </div>
             <div class="col-12 col-md-7">
-              <h4>{{ product.name }}</h4>
+              <h3>{{ product.name }}</h3>
               <span class="card-text item-company"
-                >Ref :  <a href="javascript:void(0)" class="company-name">{{ product.reference }}</a></span
+                >reference :  <a href="javascript:void(0)" class="company-name"></a>{{ product.reference }}</span
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h4 class="item-price mr-1">TND {{ product.price }}</h4>
+                <h5 class="item-price mr-1"> selling price : </h5>
+                {{ product.sellingprice }} TND
                 <br>
               </div>
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h5 class="item-price mr-1">Supplier price : {{ product.pricesupplier }}</h5>
+                <h5 class="item-price mr-1">Supplier price : </h5>
+                {{ product.pricesupplier }} TND
                 <br>
               </div>
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h5 class="item-price mr-1">Gain : {{ product.gain }}</h5>
+                <h5 class="item-price mr-1">Gain : </h5>
+                {{ product.gain }}
                 <br>
               </div>
               
-              <p class="card-text">availablity - <span class="text-success">{{ product.status }}</span></p>
+              <p class="card-text">availablity - <span class="badge text-uppercase" [ngClass]="{'badge-danger':product.status !='on stock','badge-success':product.status =='on stock'}">{{ product.status }}</span></p>
               <hr />
               <p class="card-text">
                 {{ product.description }}

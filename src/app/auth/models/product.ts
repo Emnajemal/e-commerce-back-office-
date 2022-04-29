@@ -1,4 +1,5 @@
 export default class Product {
+    id:number;
     name:string
     status:string
     reference:number
