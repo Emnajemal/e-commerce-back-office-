@@ -100,7 +100,7 @@
               <div class="d-flex align-items-center">
 
 
-
+ 
                 <!-- <div *ngIf="row.avatar.length > 0; else customAvatar">
                   <img
                     class="rounded-circle mr-1"
@@ -124,13 +124,13 @@
 
                 </ng-template>-->
 
-                 <!-- <div  *ngIf="row.avatar.length > 0; else customAvatar">
+           <div *ngIf="row.length> 0; else customAvatar">
                   <img
                     class="rounded-circle mr-1"
-                    src="{{ row.avatar}}"
+                    src="{{row.profile_photo}}"
                     height="32"
                     width="32"
-                    alt="datatable-avatar"
+                    
                   />
                 </div>
                 <ng-template #customAvatar>
@@ -145,8 +145,7 @@
                     <div class="avatar-content">{{ name | initials }}</div>
                   </div>
 
-                </ng-template> -->
-
+                </ng-template>
 
 
 
@@ -159,10 +158,32 @@
               </div>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Email" prop="email" [width]="220"></ngx-datatable-column>
+          <ngx-datatable-column name="Email" prop="email" [width]="200"></ngx-datatable-column>
+         
           
           <ngx-datatable-column name="Address" prop="Adresse" [width]="50"></ngx-datatable-column>
-          <ngx-datatable-column name="phone" prop="phone" [width]="80"></ngx-datatable-column>
+          <ngx-datatable-column name="Phone" prop="phone" [width]="80"></ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Store" prop="stores" [width]="50">
+            <ng-template let-value="value" ngx-datatable-cell-template> -->
+            <!-- <span>{{value.name}}</span> -->
+            <!-- <span>{{value.name |json}}</span> -->
+            
+        <!-- </ng-template></ngx-datatable-column> -->
+
+        <ngx-datatable-column name="Store" prop="stores" [width]="50">
+          <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+              <ng-template ngFor let-obj [ngForOf]="value">
+                  <strong> {{ obj.name }} </strong>
+          
+                  <br />
+              </ng-template>
+          </ng-template>
+      </ngx-datatable-column>
+        <!-- <ngx-datatable-column name="Store">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            {{ value.name }}
+          </ng-template>
+        </ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="password_confirmation" prop="password_confirmation" [width]="200"></ngx-datatable-column>
           <ngx-datatable-column name="password" prop="password" [width]="200"></ngx-datatable-column>-->
           <ngx-datatable-column name="Role" prop="role" [width]="80">

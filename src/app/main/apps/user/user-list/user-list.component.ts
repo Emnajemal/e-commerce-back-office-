@@ -15,7 +15,8 @@ import { BeforeOpenEvent } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 
 import * as snippet from 'app/main/extensions/sweet-alerts/sweet-alerts.snippetcode';
-
+import { StoreService } from 'Serv/store.service';
+import Store from 'app/auth/models/store';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -63,6 +64,7 @@ export class UserListComponent implements OnInit {
   public selectedPlan = [];
   public selectedStatus = [];
   public searchValue = '';
+  public stores: Store[];
 
   // Decorator
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -81,7 +83,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private _userListService: UserListService,
     private _coreSidebarService: CoreSidebarService,
-    private _coreConfigService: CoreConfigService
+    private _coreConfigService: CoreConfigService,
+    private StoreServices:  StoreService,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -94,6 +97,14 @@ export class UserListComponent implements OnInit {
    *
    * @param event
    */
+   getStores(){
+    console.log('heyy')
+    this.StoreServices.getDataTableRows().then((data: any) => {
+      
+      this.stores=data;
+      console.log(data)
+    })
+  }
   filterUpdate(event) {
     // Reset ng-select on search
     this.selectedRole = this.selectRole[0];
@@ -201,32 +212,32 @@ export class UserListComponent implements OnInit {
  
   }
   
-  // ConfirmTextOpen() {
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: "You won't be able to revert this!",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#7367F0',
-  //     cancelButtonColor: '#E42728',
-  //     confirmButtonText: 'Yes, delete it!',
-  //     customClass: {
-  //       confirmButton: 'btn btn-primary',
-  //       cancelButton: 'btn btn-danger ml-1'
-  //     }
-  //   }).then(function (result) {
-  //     if (result.value) {
-  //       Swal.fire({
-  //         icon: 'success',
-  //         title: 'Deleted!',
-  //         text: 'Your file has been deleted.',
-  //         customClass: {
-  //           confirmButton: 'btn btn-success'
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+  ConfirmTextOpen() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#7367F0',
+      cancelButtonColor: '#E42728',
+      confirmButtonText: 'Yes, delete it!',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-danger ml-1'
+      }
+    }).then(function (result) {
+      if (result.value) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Deleted!',
+          text: 'The user has been deleted.',
+          customClass: {
+            confirmButton: 'btn btn-success'
+          }
+        });
+      }
+    });
+  }
 
   //  Swal.fire({
   //     title: 'Are you sure?',
@@ -264,7 +275,7 @@ export class UserListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.getboutique();
+  
     // Subscribe config change
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
       //! If we have zoomIn route Transition then load datatable after 450ms(Transition will finish in 400ms)
@@ -292,13 +303,5 @@ export class UserListComponent implements OnInit {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-  // getboutique() {
-  //   this._userListService.getDataTableRows().then((data: any) => {
-  //     this.user = data.map(user => {
-  //       return { ...user, profile_photo: `http://localhost:8000${user.profile_photo}` }
-  //     });
-  //     console.log(data)
-  //   })
 
-  // }
 }

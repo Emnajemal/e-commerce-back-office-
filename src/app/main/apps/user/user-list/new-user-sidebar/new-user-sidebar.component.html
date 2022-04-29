@@ -353,25 +353,43 @@
             </div>
           </div>
 
+<!-- 
+          
+            <div class="custom-control custom-control-info custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="colorCheck6" checked />
+              <label class="custom-control-label" for="colorCheck6"> </label>
+              -->
 
-         <!-- <div class="row mb-2">
-            <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
-            <div class="col-sm-6">
-              <div class="custom-file">
-                <input type="file" 
-                #file              
-                 hidden
-                 class="custom-file-input"
-                 id="customFile" 
-                 (change)="uploadImage($event)" />
-            </div>
-            </div>
-            </div>-->
+          <!-- <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Stores: </label>
+    
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="stores_id" >
+                <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
+            </select>
+          </div>
+         </div> -->
+          
 
+<!-- 
+    <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Stores: </label>
+    
+          <div  class="custom-control custom-control-info custom-checkbox">
+            <input type="checkbox"  class="custom-control-input" formControlName="stores_id" id="colorCheck6" checked />
+          
+           
+            <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
+          
+          </div>
+         </div> -->
+
+      
 <!-- <div class="media">
             <a href="javascript:void(0);" class="mr-25" >
               <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
             </a>
+            
            
             <div class="media-body mt-75 ml-1">
               <button
@@ -396,7 +414,25 @@
      
           </div>-->
 
+          <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Stores: </label>
+    
+         
 
+            <div class="form-check form-check-inline" *ngFor="let store of stores" >
+              <input class="form-check-input" formControlName="store_id" type="checkbox" id="inlineCheckbox1" [value]="store.id" (change)="onCheckboxChange($event)"  />
+              <label class="form-check-label" for="inlineCheckbox1">{{store.name}}</label>
+          
+            </div>
+
+          
+           <!-- <div class="col-sm-6" >
+            <select class="custom-select" formControlName="store_id" >
+                <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
+            </select>
+          </div> -->
+         
+         </div>
             <!--(click)="submit(newUserForm)"-->
           <button type="submit" class="btn btn-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
           <button 

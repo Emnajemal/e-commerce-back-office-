@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DataService } from './../../forms/form-elements/select/data.service';
+// import { Product } from 'app/auth/models/product';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +17,11 @@ import * as snippet from 'app/main/tables/datatables/datatables.snippetcode';
 
 import { DatatablesService } from 'app/main/tables/datatables/datatables.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Stock from 'app/auth/models/stock';
+import Product from 'app/auth/models/product';
+import {EcommerceService} from 'app/main/apps/ecommerce/ecommerce.service';
+import { StoreService } from 'Serv/store.service';
 @Component({
   selector: 'app-datatables',
   templateUrl: './datatables.component.html',
@@ -42,6 +48,11 @@ export class DatatablesComponent implements OnInit {
   public chkBoxSelected = [];
   public SelectionType = SelectionType;
   public exportCSVData;
+  public stockForm: FormGroup;
+  formData:FormData  = new FormData();
+  public submitted = false;
+  alert:boolean=null;
+  public products: Product[];
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild('tableRowDetails') tableRowDetails: any;
@@ -53,6 +64,7 @@ export class DatatablesComponent implements OnInit {
   public _snippetCodeCustomCheckbox = snippet.snippetCodeCustomCheckbox;
   public _snippetCodeResponsive = snippet.snippetCodeResponsive;
   public _snippetCodeMultilangual = snippet.snippetCodeMultilangual;
+  
 
   // Public Methods
   // -----------------------------------------------------------------------------------------------------
@@ -90,6 +102,9 @@ export class DatatablesComponent implements OnInit {
    * @param cell
    * @param rowIndex
    */
+   transformDate(date){
+ return new Date(date).toLocaleDateString()
+  }
   inlineEditingUpdateSalary(event, cell, rowIndex) {
     this.editingSalary[rowIndex + '-' + cell] = false;
     this.rows[rowIndex][cell] = event.target.value;
@@ -149,6 +164,8 @@ export class DatatablesComponent implements OnInit {
     this.selected.push(...selected);
   }
 
+ 
+
   /**
    * For ref only, log activate events
    *
@@ -174,14 +191,22 @@ export class DatatablesComponent implements OnInit {
    * @param {DatatablesService} _datatablesService
    * @param {CoreTranslationService} _coreTranslationService
    */
-  constructor(private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService,private modalService: NgbModal) {
+  // @Output() onAddstock = new EventEmitter()
+  constructor(private _datatablesService: DatatablesService, private _coreTranslationService: CoreTranslationService,private modalService: NgbModal,private _formBuilder: FormBuilder, private EcommerceService:EcommerceService
+  , private StoreServices :StoreService) {
     this._unsubscribeAll = new Subject();
     this._coreTranslationService.translate(english, french, german, portuguese);
   }
    // modal Open Form
   modalOpenForm(modalForm) {
+    
     this.modalService.open(modalForm);
+    // this.submit();
   }
+
+
+
+ 
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -189,6 +214,70 @@ export class DatatablesComponent implements OnInit {
   /**
    * On init
    */
+  //  addstockSubmit() {
+  //   // this.submitted = true;
+  //   if (this.addForm.invalid) {
+  //     return;
+  //   }
+  
+  //   data: Stock;
+
+  
+  //   this.formData.append('name', this.addForm.value.name);
+  //   console.log(this.addForm.value.name);
+  //   this.formData.append('reference', this.addForm.value.reference);
+  //   this.formData.append('pricesupplier', this.addForm.value.pricesupplier);
+  //   this.formData.append('sellingprice', this.addForm.value.sellingprice);
+
+  //   this.formData.append('stores_id', this.addForm.value.stores_id);
+  //   this.formData.append('quantity', this.addForm.value.quantity);
+  //   this.formData.append('status', this.addForm.value.status);
+  //   this.formData.append('description', this.addForm.value.description);
+  //   this._ecommerceService.boutique(this.formData).subscribe((data: any) => {
+  //      //data.image = `http://localhost:8000${data.image}`
+  //     // this.products.push(data)
+  //     this.onAddstock.emit()
+  //     console.log(data)
+
+  //   },(error:any)=>{
+  //     console.log(error)
+  //   }
+  //   )
+  // }
+  getproducts(){
+    this.StoreServices.getProducts().then((data: any) => {
+      this.products=data;
+      console.log(data)
+    })
+  }
+
+  submit() {
+    this.submitted = true;
+    // if (this.stockForm.invalid) {
+    //   return;
+    // }
+    let formdata = new FormData();
+    data: Stock;
+    
+   formdata.append('products_id',this.stockForm.value.products_id);
+      formdata.append('insert_quantity',this.stockForm.value.insert_quantity);
+      formdata.append('quantity',this.stockForm.value.quantity);
+   
+    console.log(this.stockForm.value.products_id);
+      this._datatablesService.addstock(formdata).subscribe((data: any) => {
+        
+       this.alert=true;
+      // this.onAddstock.emit()
+       console.log(data)
+ 
+     },(error:any)=>{
+       this.alert=false;
+       console.log(error)
+     }
+     )
+  }
+
+
   ngOnInit() {
     this._datatablesService.onDatatablessChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
       this.rows = response;
@@ -196,6 +285,16 @@ export class DatatablesComponent implements OnInit {
       this.kitchenSinkRows = this.rows;
       this.exportCSVData = this.rows;
     });
+
+    this.stockForm = this._formBuilder.group({
+      insert_quantity: ['', Validators.required],
+      products_id: ['', Validators.required],
+      quantity: [''],
+ 
+    
+    })
+    this.getproducts();
+     
 
     // content header
     this.contentHeader = {

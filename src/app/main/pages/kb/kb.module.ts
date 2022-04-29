@@ -61,7 +61,6 @@ const routes: Routes = [
     NgSelectModule,
     FormsModule
   ],
-
   providers: [knowledgeBaseService, knowledgeBaseCategoryService, knowledgeBaseQuestionService]
 })
 export class KbModule {}

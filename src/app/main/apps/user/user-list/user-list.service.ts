@@ -12,6 +12,7 @@ const httpOptions = {
 export class UserListService implements Resolve<any> {
   public rows: any;
   public onUserListChanged: BehaviorSubject<any>;
+  onKBChanged: any;
 
   /**
    * Constructor
@@ -81,10 +82,10 @@ deletetData(id:any){
       this._httpClient.get('http://127.0.0.1:8000/api/auth/user').subscribe((response: any) => {
         //console.log(response)
         this.rows = response;
+        console.log(this.rows)
         this.onUserListChanged.next(this.rows);
         resolve(this.rows);
       }, reject);
     });
   }
-
 }

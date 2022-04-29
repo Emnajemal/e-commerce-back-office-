@@ -77,6 +77,7 @@ baseUrl=environment.apiUrl
     return new Promise((resolve, reject) => {
       this._httpClient.get('http://127.0.0.1:8000/api/store/get').subscribe((response: any) => {
         this.rows = response;
+        console.log(this.rows)
         this.onKBChanged.next(this.rows);
         resolve(this.rows);
       }, reject);

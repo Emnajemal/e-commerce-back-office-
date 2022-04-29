@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
 import { UserListService} from '../user-list.service';
-import { FormControl, NgForm } from '@angular/forms';
+import { FormControl, NgForm , FormArray} from '@angular/forms';
 
 //add
 import { UserService } from 'app/auth/service';
@@ -11,6 +11,11 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CoreConfigService } from '@core/services/config.service';
 import { User } from 'app/auth/models/user';
+import Store from 'app/auth/models/store';
+import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
+import { EventEmitter } from 'events';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreService } from 'Serv/store.service';
 
 
 
@@ -21,6 +26,8 @@ import { User } from 'app/auth/models/user';
 export class NewUserSidebarComponent implements OnInit {
   alert:boolean=null;
   public avatarImage:string;
+  public stores: Store[];
+ public st : string ;
 //zedtha
 public registerForm: FormGroup;
   public submitted = false;
@@ -31,13 +38,17 @@ public registerForm: FormGroup;
   public user: User ;
  public profile_photo:string;
   selectedfile: File;
+// @Output() onAdduser = new EventEmitter()
 
   /**
    * Constructor
    *
    * @param {CoreSidebarService} _coreSidebarService
    */
-  constructor(private _coreSidebarService: CoreSidebarService, private  UserListService: UserListService, private _coreConfigService: CoreConfigService, private _formBuilder: FormBuilder) {}
+  constructor(private _coreSidebarService: CoreSidebarService, private  UserListService: UserListService, private _coreConfigService: CoreConfigService,
+     private _formBuilder: FormBuilder,
+      private knowledgeBaseServices:  StoreService,
+       ) {}
 //zedt el form builder w el core config wel userlist servive
   /**
    * Toggle the sidebar
@@ -71,7 +82,28 @@ public registerForm: FormGroup;
       this.toggleSidebar('new-user-sidebar');
     }
   }*/
-  submit() {
+
+  // getStore(){
+  //   this.UserListService.getStore()
+  // }
+  
+  getStores(){
+    console.log('heyy')
+    this.knowledgeBaseServices.getDataTableRows().then((data: any) => {
+      console.log('heyy2')
+      this.stores=data;
+      console.log(data)
+    })
+  }
+  onCheckboxChange(e) {
+    this.st=e.target.value;
+   
+     
+      console.log(e.target.value)
+  }
+
+  submit () {
+    
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
@@ -90,24 +122,34 @@ public registerForm: FormGroup;
       formdata.append('Adresse',this.registerForm.value.Adresse);
      formdata.append('email',this.registerForm.value.email);
      formdata.append('role',this.registerForm.value.role);
+    formdata.append('store_id', this.st);
+   
+    
+
+    console.log(this.registerForm.value.store_id);
     console.log(this.registerForm.value.name);
       this.UserListService.register(formdata).subscribe({
       next: (data: any) => {
+        // this.onAdduser.emit()
         console.log(data)
+        this.alert=true ; 
+       
         data.profile_photo = `http://localhost:8000${data.profile_photo}`
-     //   this.user.push(data)
-        
-        
-        // console.log(data)
-        // this.done= true;
-        // setTimeout(() => {
-        //   this.done= false;
-        // }, 2000)
-        // this.clearForm();
       }
-    })
+    }
+     ),
+     
+    (error:any)=>{
+      this.alert=false;
+      console.log(error)
+    }
+    
+    //   (error:any)=>{
+    //     console.log(error)
+    //     this.submitted = false;
+    //   }
   }
-
+  
 //   submit() {
 //     console.log(this.registerForm.value.name)
 //   console.log("bonjour")
@@ -186,6 +228,7 @@ isEncoded(str:string) {
   return str.startsWith('data:image')
 }
 ngOnInit(): void {
+  // this.UserListService.getDataTableRows();
 
  /* if (this.user?.profile_photo) 
   {
@@ -204,12 +247,21 @@ ngOnInit(): void {
 //   // profile_photo:   localStorage.getItem("pic") 
 //   })
 this.registerForm = this._formBuilder.group({
-  name: ['', Validators.required],
-  email: ['', Validators.required],
-  phone: ['', Validators.required],
-  Adresse: ['', Validators.required],
-  role: ['', Validators.required],
-  profile_photo: [null],
+  // name: ['', Validators.required],
+  // email: ['', Validators.required],
+  // phone: ['', Validators.required],
+  // Adresse: ['', Validators.required],
+  // role: ['', Validators.required],
+  // profile_photo: [null],
+  //    stores_id: ['', Validators.required],
+      name: new FormControl('', [Validators.required,Validators.minLength(3)]), 
+    email: new FormControl('', [Validators.required,Validators.email]),
+    phone: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
+    Adresse: new FormControl('', [Validators.required]),
+    role: new FormControl('', [Validators.required]),
+   profile_photo: new FormControl(''),
+   store_id:new FormControl('', [Validators.required]),
 })
+this.getStores();
  }
 }

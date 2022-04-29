@@ -461,9 +461,11 @@
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
               <div class="ml-75 pl-5 pt-75">
                 <div>
-                  <span><strong>City : </strong> {{ row.city }}</span
-                  ><span class="ml-1"><strong>Experience : </strong> {{ row.experience }}</span
-                  ><span class="ml-1"><strong>Start Date : </strong> {{ row.start_date }}</span>
+                  <span><strong>Quantity added : </strong> {{ row.insert_quantity }}</span
+                  >
+                  <!-- <span class="ml-1"><strong>Experience : </strong> {{ row.experience }}</span> -->
+                  <span class="ml-1"><strong> Date : </strong> {{transformDate(row.insert_date)}}</span>
+
                 </div>
               </div>
             </ng-template>
@@ -487,10 +489,10 @@
               </a>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Id_stock" prop="full_name" [width]="280">
+          <!-- <ngx-datatable-column name="Product Name" prop="name" [width]="280">
             <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
-                <!-- <div *ngIf="row.avatar.length > 0; else customAvatar">
+                <div *ngIf="row.avatar.length > 0; else customAvatar">
                   <img
                     class="rounded-circle mr-1"
                     src="assets/images/portrait/small/{{ row.avatar }}"
@@ -498,7 +500,7 @@
                     width="32"
                     alt="datatable-avatar"
                   />
-                </div> -->
+                </div>
                 <ng-template #customAvatar>
                   <div
                     class="avatar mr-1 ml-0"
@@ -509,6 +511,7 @@
                       'bg-light-warning': row.status == '4',
                       'bg-light-info': row.status == '5'
                     }"
+
                   >
                     <div class="avatar-content">{{ name | initials }}</div>
                   </div>
@@ -518,12 +521,46 @@
                   <span class="text-muted font-small-2"> {{ row.post }}</span>
                 </div>
               </div>
+            </ng-template> 
+          </ngx-datatable-column>-->
+          <ngx-datatable-column name="Product" prop="products" [width]="50">
+            <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                <ng-template ngFor let-obj [ngForOf]="value">
+                    <strong> {{ obj.name}} </strong>
+            
+                    <br />
+                </ng-template>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Id_product" prop="email" [width]="200"></ngx-datatable-column>
-          <ngx-datatable-column name="Total quantity" prop="age" [width]="100"></ngx-datatable-column>
-          <ngx-datatable-column name="Stock addition date" prop="salary" [width]="120"></ngx-datatable-column>
-          <ngx-datatable-column name="Status" prop="status" [width]="120">
+        </ngx-datatable-column>
+          <ngx-datatable-column name="Product Reference" prop="products" [width]="60">
+            <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                <ng-template ngFor let-obj [ngForOf]="value">
+                    <strong> {{ obj.reference }} </strong>
+            
+                    <br />
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column>
+          
+          <!-- <ngx-datatable-column name="Id_product" prop="email" [width]="200"></ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="Total quantity" prop="quantity" [width]="100"></ngx-datatable-column> -->
+          <ngx-datatable-column name="Total quantity" prop="products" [width]="60">
+            <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                <ng-template ngFor let-obj [ngForOf]="value">
+                    <strong> {{ obj.quantity }} </strong>
+            
+                    <br />
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Quantity added" prop="insert_quantity" [width]="120"></ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="Date" prop="insert_date" [width]="100">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+             {{transformDate(row.insert_date)}}
+          </ng-template>
+        </ngx-datatable-column> -->
+
+          <!-- <ngx-datatable-column name="Status" prop="status" [width]="120">
             <ng-template let-status="value" ngx-datatable-cell-template>
               <div
                 class="badge badge-pill"
@@ -550,7 +587,7 @@
                 }}
               </div>
             </ng-template>
-          </ngx-datatable-column>
+          </ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Actions" [width]="120" [sortable]="false">
             <ng-template ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
@@ -1013,7 +1050,7 @@
     </section> -->
     <!--/ Multilangual Datatables -->
     <!-- Login Form -->
-  <div class="login-form">
+  <div class="login-form" >
     <!-- Button trigger modal -->
     <!-- <button type="button" (click)="modalOpenForm(modalForm)" class="btn btn-outline-primary" rippleEffect>
       Login Form
@@ -1022,26 +1059,109 @@
     <!-- Modal -->
     <ng-template #modalForm let-modal>
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel1">Inline Login Form</h4>
+        <h4 class="modal-title" id="myModalLabel1">Add New Stock</h4>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
-        <form action="#">
-          <label>Email: </label>
-          <div class="form-group">
-            <input type="text" placeholder="Email Address" class="form-control" />
+        <form  class="form" [formGroup]="stockForm" (ngSubmit)="submit()" action="#">
+          <!-- <label>Id_product: </label> -->
+          <!-- <div class="form-group">
+            <input type="text" placeholder="Id_product" class="form-control" />
+          </div> -->
+          <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
+            <h4 class="alert-heading">Stock added successfully</h4>
+            
+          </ngb-alert>
+          <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
+            <h4 class="alert-heading">Error! Check your fields </h4>
+            
+          </ngb-alert>
+          <!-- <div class="form-group">
+            <label for="register-adresse" class="form-label">Id_product</label>
+            <input
+              type="text"
+              id="products_id"
+              class="form-control"
+              formControlName="products_id"
+              name="products_id"
+              placeholder="Id_product"
+            />
+          </div> -->
+          <!-- <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Product </label>
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="products_id" >
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
           </div>
-          <label>Password: </label>
+         </div> -->
+
+          <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label" > Product </label>
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="products_id" >
+                <option ngbDropdownItem  *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
+          </div>
+         </div>
+                           
+          <!-- <label> Quantity: </label>
           <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control" />
+          
+
+            <input type="text" placeholder="Quantity" class="form-control" />
+          </div> -->
+          
+          <!-- <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Quantity </label>
+    
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="quantity" >
+                <option *ngFor="let product of products" [value]="product.quantity">{{product.quantity}}</option>
+            </select>
+            
+          </div>
+         </div>   -->
+
+
+          <!-- <div class="form-group row mb-2 " >
+            <label for="register-adresse" class="col-sm-3 col-form-label">Quantity </label>
+            <div class="col-sm-6">
+            <input
+              type="text"
+              id="quantity"
+              class="form-control"
+              formControlName="quantity"
+              name="quantity"
+              placeholder="Quantity"
+            />
+          </div>
+        </div> -->
+
+          <div class="form-group row mb-2 ">
+            <label for="register-adresse" class="col-sm-3 col-form-label">Insert  Quantity </label>
+            <div class="col-sm-6">
+            <input
+              type="text"
+              id="insert_quantity"
+              class="form-control"
+              formControlName="insert_quantity"
+              name="insert_quantity"
+              placeholder="Quantity"
+            />
+          </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
-          Login
+        <!-- <button type="button" class="btn bg-light-primary" (click)="modal.close('Accept click')" rippleEffect>
+          Submit
+        </button> -->
+        <button type="submit" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
+        <button type="button" class="btn bg-light-danger" (click)="modal.close('Accept click')" rippleEffect>
+          Cancel
         </button>
       </div>
     </ng-template>
