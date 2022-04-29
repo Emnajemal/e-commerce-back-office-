@@ -80,11 +80,10 @@ export class EcommerceItemComponent implements OnInit {
   editProduct(productId:number){
     this.onOpenModel.emit(productId)
   }
+  //lhaja hedhy heya eli torbtli mabin l item o shop o tekhou l id o on deleteproduct heya eli tobit binethom zouz 
   deleteProduct(productId:number){
-    this._ecommerceService.deleteProduct(productId).subscribe((result:any)=>{
-      this.onDeleteProduct.emit()
-      console.log(result)
-    })
+      this.onDeleteProduct.emit(productId)
+   
   }
 
   // Lifecycle Hooks

@@ -1,8 +1,8 @@
 <!-- Ecommerce Item -->
-<div class="badge text-uppercase position-absolute stock" [ngClass]="{'badge-success':product.status =='in stock','badge-danger':product.status !='in stock'}">{{product.status}} </div>
+<div class="badge text-uppercase position-absolute stock" [ngClass]="{'badge-danger':product.status !='on stock','badge-success':product.status =='on stock'}">{{product.status}} </div>
 
 <div class="item-img text-center">
-  <a [routerLink]="'/apps/e-commerce/details/' + product.id">
+  <a [routerLink]="'/apps/e-commerce/details/' + product.id"  class="d-inline-block w-50 mx-auto">
     <img class="img-fluid card-img-top" [src]="baseUrl+product.image" alt="img-placeholder" />
   </a>
 </div>
@@ -58,6 +58,7 @@
     rippleEffect
   >
     <i class="fa mr-25" ></i>
+
     <span> Edit</span>
   </a>
   
@@ -72,7 +73,7 @@
     <span class="add-to-cart">Add to cart</span>
   </a> -->
   <a
-    class="btn btn-primary btn-cart"
+    class="btn btn-danger btn-cart"
     (click)="deleteProduct(product.id)"
     rippleEffect
   >
