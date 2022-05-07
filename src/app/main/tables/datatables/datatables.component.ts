@@ -53,6 +53,9 @@ export class DatatablesComponent implements OnInit {
   public submitted = false;
   alert:boolean=null;
   public products: Product[];
+//  stock=new Stock;
+ public stockDetails: Stock;
+ public stocks: Stock[];
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild('tableRowDetails') tableRowDetails: any;
@@ -205,7 +208,12 @@ export class DatatablesComponent implements OnInit {
   }
 
 
-
+  modalOpen(modalBasic, stock) {
+    this.stockDetails = stock;
+    console.log('cc')
+    console.log(stock)
+    this.modalService.open(modalBasic);
+  }
  
 
   // Lifecycle Hooks
@@ -251,6 +259,13 @@ export class DatatablesComponent implements OnInit {
     })
   }
 
+  getstocks(){
+    this._datatablesService.getDataTableRows().then((data: any) => {
+      this.stocks=data;
+      console.log('nour')
+      console.log(data)
+    })
+  }
   submit() {
     this.submitted = true;
     // if (this.stockForm.invalid) {
@@ -268,57 +283,95 @@ export class DatatablesComponent implements OnInit {
         
        this.alert=true;
       // this.onAddstock.emit()
-       console.log(data)
+       console.log(data) ;
+       setTimeout(() => {
+        this.alert= null;
+       
  
+      }, 4000)
+     
+      this.clearForm();
+     //this.getproducts();
      },(error:any)=>{
        this.alert=false;
        console.log(error)
      }
+     
      )
+
   }
 
+  clearForm() {
+    this.stockForm.get("insert_quantity").setValue('');
+    this.stockForm.get("products_id").setValue('');
+    
+  }
 
-  ngOnInit() {
-    this._datatablesService.onDatatablessChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-      this.rows = response;
-      this.tempData = this.rows;
-      this.kitchenSinkRows = this.rows;
-      this.exportCSVData = this.rows;
-    });
-
-    this.stockForm = this._formBuilder.group({
+  ngOnInit(): void {
+   
+        this.stockForm = this._formBuilder.group({
+          
       insert_quantity: ['', Validators.required],
       products_id: ['', Validators.required],
-      quantity: [''],
- 
+      quantity: [''] ,
+     
+    }  );
+  this.getproducts();
+  this.getstocks();
+  }
+  // insertData(){
+  //   //console.log('bonjour-insertion-test');
+  //   //console.log(this.product);
+  //   this._datatablesService.addstock(this.stock).subscribe(res =>{
+  //     //console.log(res);
+  //     this.getproducts();
     
-    })
-    this.getproducts();
+  //   })
+
+  // }
+  // ngOnInit() {
+  //   this._datatablesService.onDatatablessChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
+  //     this.rows = response;
+  //     this.tempData = this.rows;
+  //     this.kitchenSinkRows = this.rows;
+  //     this.exportCSVData = this.rows;
+      
+  //   });
+
+  //   this.stockForm = this._formBuilder.group({
+  //     insert_quantity: ['', Validators.required],
+  //     products_id: ['', Validators.required],
+  //     quantity: [''],
+     
+    
+  //   })
+    
+  //   this.getproducts();
      
 
-    // content header
-    this.contentHeader = {
-      headerTitle: 'Datatables',
-      actionButton: true,
-      breadcrumb: {
-        type: '',
-        links: [
-          {
-            name: 'Home',
-            isLink: true,
-            link: '/'
-          },
-          {
-            name: 'Forms & Tables',
-            isLink: true,
-            link: '/'
-          },
-          {
-            name: 'Datatables',
-            isLink: false
-          }
-        ]
-      }
-    };
-  }
+  //   // content header
+  //   this.contentHeader = {
+  //     headerTitle: 'Datatables',
+  //     actionButton: true,
+  //     breadcrumb: {
+  //       type: '',
+  //       links: [
+  //         {
+  //           name: 'Home',
+  //           isLink: true,
+  //           link: '/'
+  //         },
+  //         {
+  //           name: 'Forms & Tables',
+  //           isLink: true,
+  //           link: '/'
+  //         },
+  //         {
+  //           name: 'Datatables',
+  //           isLink: false
+  //         }
+  //       ]
+  //     }
+  //   };
+  // }
 }

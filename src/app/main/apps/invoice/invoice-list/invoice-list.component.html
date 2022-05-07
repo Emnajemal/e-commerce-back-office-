@@ -17,10 +17,200 @@
                     <option value="100">100</option>
                   </select>
                 </label>
-                <button class="btn btn-primary ml-2" routerLink="/apps/invoice/add" rippleEffect>Add Record</button>
+                <!-- <button class="btn btn-success ml-2" routerLink="/apps/invoice/add" rippleEffect>Add Order</button> -->
+                <button (click)="modalOpenForm(modalForm)" class="btn btn-success ml-2" rippleEffect>Add Order</button>
               </div>
             </div>
           </div>
+
+         
+          <ng-template #modalForm let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel1">Add New Order </h4>
+              <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" tabindex="0" ngbAutofocus>
+              <form  class="form" [formGroup]="OrderForm" (ngSubmit)="submit()" action="#">
+               
+                <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
+                  <h4 class="alert-heading">Order added successfully</h4>
+                  
+                </ngb-alert>
+                <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
+                  <h4 class="alert-heading">Error! Check your fields </h4>
+                  
+                </ngb-alert>
+      
+                
+      
+               
+                <!-- <div class="form-group row mb-2">
+                  <label for="customSelect" class="col-sm-3 col-form-label" > Product </label>
+                <div class="col-sm-6">
+                  <select class="custom-select" formControlName="products_id" >
+                      <option ngbDropdownItem href="javascript:void(0)" *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+                  </select>
+                </div>
+               </div>
+      
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Insert  Quantity </label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="insert_quantity"
+                    class="form-control"
+                    formControlName="insert_quantity"
+                    name="insert_quantity"
+                    placeholder="Quantity"
+                  />
+                </div>
+                </div> -->
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Reference </label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Reference"
+                    class="form-control"
+                    formControlName="Reference"
+                    name="Reference"
+                    placeholder="Reference"
+                  />
+                </div>
+                </div>
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Client Name </label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Client Name"
+                    class="form-control"
+                    formControlName="Client Name"
+                    name="Client Name"
+                    placeholder="Client Name"
+                  />
+                </div>
+                </div>
+<!-- 
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Client Lastname</label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Client Phone"
+                    class="form-control"
+                    formControlName="Client Phone"
+                    name="Client Phone"
+                    placeholder="Client Phone"
+                  />
+                </div>
+                </div> -->
+
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Client Phone </label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Client Phone"
+                    class="form-control"
+                    formControlName="Client Phone"
+                    name="Client Phone"
+                    placeholder="Client Phone"
+                  />
+                </div>
+                </div>
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Total </label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Total"
+                    class="form-control"
+                    formControlName="Total"
+                    name="Total"
+                    placeholder="Total"
+                  />
+                </div>
+                </div>
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Delivery man </label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Delivery man"
+                    class="form-control"
+                    formControlName="Delivery man"
+                    name="Delivery man"
+                    placeholder="Delivery man"
+                  />
+                </div>
+                </div>
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Package Reference</label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Package Reference"
+                    class="form-control"
+                    formControlName="Package Reference"
+                    name="Package Reference"
+                    placeholder="Package Reference"
+                  />
+                </div>
+                </div>
+                <!-- <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Delivery Date</label>
+                  <div class="col-sm-6">
+                  <input
+                    type="text"
+                    id="Delivery Date"
+                    class="form-control"
+                    formControlName="Delivery Date"
+                    name="Delivery Date"
+                    placeholder="Delivery Date"
+                  />
+                </div>
+                </div> -->
+                
+                <div class="form-group row mb-2 ">
+                  <label for="register-adresse" class="col-sm-3 col-form-label">Delivery Date</label>
+                  <div class="col-sm-4">
+  <!-- Basic Date Picker -->
+  <form class="form-inline">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="Basic Date Picker" [(ngModel)]="basicDPdata"
+          ngbDatepicker #basicDP="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary feather icon-calendar" (click)="basicDP.toggle()"
+            type="button" rippleEffect></button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- <pre class="mt-2 p-1">Model: {{ basicDPdata | json }}</pre> -->
+  <!--/ Basic Date Picker -->
+</div>
+</div>
+  
+              </form>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn bg-light-primary" (click)="modal.close('Accept click')" rippleEffect>
+                Submit
+              </button> -->
+              <button type="submit" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
+              <button type="button" class="btn bg-light-danger" (click)="modal.close('Accept click')" rippleEffect>
+                Cancel
+              </button>
+            </div>
+          </ng-template>
+
+
+
           <div
             class="
               col-md-6 col-lg-4 col-12
@@ -43,7 +233,7 @@
                     (search)="filterUpdate($event)"
                 /></label>
               </div>
-              <div class="col-10 col-md-6 mt-2 ml-1 ml-md-0 mt-md-0">
+              <!--Hedhi select status <div class="col-10 col-md-6 mt-2 ml-1 ml-md-0 mt-md-0">
                 <fieldset class="form-group mb-0">
                   <ng-select
                     [items]="selectStatus"
@@ -53,7 +243,7 @@
                     (change)="filterByStatus($event)"
                   ></ng-select>
                 </fieldset>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -70,15 +260,17 @@
           [footerHeight]="50"
           [scrollbarH]="true"
         >
-          <ngx-datatable-column name="#" prop="id" [width]="50">
+          <ngx-datatable-column name="#Reference" prop="id" [width]="60">
             <ng-template let-id="value" ngx-datatable-cell-template>
               <a routerLink="/apps/invoice/preview/{{ id }}" class="font-weight-bold">#{{ id }}</a>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="status" prop="invoiceStatus" [width]="50">
-            <ng-template let-row="row" let-invoiceStatus="value" ngx-datatable-cell-template>
+
+          <!--7atitha fi commentaire-->
+          <!-- <ngx-datatable-column name="status" prop="invoiceStatus" [width]="50">
+            <ng-template let-row="row" let-invoiceStatus="value" ngx-datatable-cell-template> -->
               <!-- <a class="font-weight-bold">{{ invoiceStatus }}</a> -->
-              <div
+              <!-- <div
                 class="avatar avatar-status"
                 [ngClass]="{
                   'bg-light-secondary': row.invoiceStatus == 'Sent',
@@ -111,8 +303,10 @@
                 ></span>
               </div>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="client" prop="client.name" [width]="250">
+          </ngx-datatable-column> -->
+
+          <ngx-datatable-column name="Client Name" prop="client.name" [width]="170">
+            
             <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
                 <div *ngIf="row.avatar.length > 0; else customAvatar">
@@ -146,6 +340,9 @@
               </div>
             </ng-template>
           </ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Client last name" prop="email" [width]="100"></ngx-datatable-column> -->
+          <ngx-datatable-column name="client Phone" prop="phone" [width]="80"></ngx-datatable-column>
+       
           <ngx-datatable-column name="Total" prop="total" [width]="50">
             <ng-template let-total="value" ngx-datatable-cell-template>
               <div>
@@ -154,21 +351,22 @@
               </div>
             </ng-template>
           </ngx-datatable-column>
-
-          <ngx-datatable-column name="Issued Date" prop="issuedDate" [width]="100"> </ngx-datatable-column>
-          <ngx-datatable-column name="Balance" prop="balance" [width]="40">
+          <ngx-datatable-column name="delivery man" prop="phone" [width]="80"></ngx-datatable-column>
+          <ngx-datatable-column name="package reference" prop="phone" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="delivery Date" prop="issuedDate" [width]="100"> </ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Balance" prop="balance" [width]="40">
             <ng-template let-balance="value" ngx-datatable-cell-template>
               <div class="" [ngClass]="balance == 0 ? 'badge badge-pill badge-light-success' : ' '">
                 {{ balance == 0 ? 'paid' : balance }}
               </div>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Actions" [width]="40" [sortable]="false">
+          </ngx-datatable-column> -->
+          <ngx-datatable-column name="Actions" [width]="30" [sortable]="false">
             <ng-template ngx-datatable-cell-template let-row="row">
               <div class="d-flex align-items-center col-actions">
-                <a class="mr-1" href="javascript:void(0);" container="body" placement="top" ngbTooltip="Send Mail"
+                <!-- Hedhi bech tabaath mail <a class="mr-1" href="javascript:void(0);" container="body" placement="top" ngbTooltip="Send Mail"
                   ><i size="18" data-feather="send"></i
-                ></a>
+                ></a> -->
                 <a
                   class="mr-1"
                   routerLink="/apps/invoice/preview/{{ row.id }}"
@@ -182,20 +380,235 @@
                     <i data-feather="more-vertical" size="18" class="cursor-pointer"></i>
                   </button>
                   <div ngbDropdownMenu>
-                    <a href="javascript:void(0)" ngbDropdownItem><i data-feather="download" class="mr-1"></i>Download</a
-                    ><a routerLink="/apps/invoice/edit/{{ row.id }}" ngbDropdownItem
-                      ><i data-feather="edit" class="mr-1"></i>Edit</a
-                    ><a href="javascript:void(0)" ngbDropdownItem><i data-feather="trash" class="mr-1"></i>Delete</a
-                    ><a href="javascript:void(0)" ngbDropdownItem><i data-feather="copy" class="mr-1"></i>Duplicate</a>
+                    <!-- <a href="javascript:void(0)" ngbDropdownItem><i data-feather="download" class="mr-1"></i>Download</a
+                    > -->
+                    <!-- <a routerLink="/apps/invoice/edit/{{ row.id }}" ngbDropdownItem
+                      ><i data-feather="edit" class="mr-1"></i>Edit</a> -->
+
+                      <button (click)="modalOpenForm(modalForm2, Order)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                        <a href="javascript:;" ngbDropdownItem>                 
+                        <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit </a>
+                      </button> <br>
+                                            
+                    <a href="javascript:void(0)" ngbDropdownItem><i data-feather="trash" class="mr-1"></i>Delete</a
+                    >
+                    <!-- <a href="javascript:void(0)" ngbDropdownItem><i data-feather="copy" class="mr-1"></i>Duplicate</a> -->
                   </div>
                 </div>
               </div>
             </ng-template>
+
           </ngx-datatable-column>
         </ngx-datatable>
+        
         <!--/ Invoice List Table -->
+
+        
       </div>
     </section>
-    <!--/ Invoice List -->
+
+
+
+    <div class="edit-form">
+      <!-- Button trigger modal -->
+     
+    
+      <!-- Modal -->
+      <ng-template #modalForm2 let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel1">Update Order {{update}}</h4>
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="form" [formGroup]="editForm" (ngSubmit)="editShopSubmit()">
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+         
+               
+
+            <!-- <div class="row mb-2" >
+              <label for="first-name-column " class="col-sm-3 col-form-label">Insert your shop name :</label>
+              <div class="col-sm-6">
+                <input
+                    type="text"
+                    formControlName="name"
+                    class="form-control"
+                    placeholder="Shop name"
+                    />
+              </div>
+            </div>
+            <div class="row mb-2">
+              <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
+              <div class="col-sm-6">
+                <div class="custom-file">
+                  <input type="file"       
+                   hidden
+                   class="custom-file-input"
+                   id="customEditFile" 
+                
+                   (change)="editImage($event)" />
+                  <label class="custom-file-label" for="customEditFile">Choose picture</label>
+                </div>
+              </div>
+              
+            </div>
+            
+            <div *ngIf="store_image">
+             
+              <div class="col-12">
+                <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
+              </div>
+              <br>
+            
+           
+            
+             
+        </div> -->
+
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Reference </label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Reference"
+            class="form-control"
+            formControlName="Reference"
+            name="Reference"
+            placeholder="Reference"
+          />
+        </div>
+        </div>
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Client Name </label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Client Name"
+            class="form-control"
+            formControlName="Client Name"
+            name="Client Name"
+            placeholder="Client Name"
+          />
+        </div>
+        </div>
+<!-- 
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Client Lastname</label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Client Phone"
+            class="form-control"
+            formControlName="Client Phone"
+            name="Client Phone"
+            placeholder="Client Phone"
+          />
+        </div>
+        </div> -->
+
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Client Phone </label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Client Phone"
+            class="form-control"
+            formControlName="Client Phone"
+            name="Client Phone"
+            placeholder="Client Phone"
+          />
+        </div>
+        </div>
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Total </label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Total"
+            class="form-control"
+            formControlName="Total"
+            name="Total"
+            placeholder="Total"
+          />
+        </div>
+        </div>
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Delivery man </label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Delivery man"
+            class="form-control"
+            formControlName="Delivery man"
+            name="Delivery man"
+            placeholder="Delivery man"
+          />
+        </div>
+        </div>
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Package Reference</label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Package Reference"
+            class="form-control"
+            formControlName="Package Reference"
+            name="Package Reference"
+            placeholder="Package Reference"
+          />
+        </div>
+        </div>
+        <!-- <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Delivery Date</label>
+          <div class="col-sm-6">
+          <input
+            type="text"
+            id="Delivery Date"
+            class="form-control"
+            formControlName="Delivery Date"
+            name="Delivery Date"
+            placeholder="Delivery Date"
+          />
+        </div>
+        </div> -->
+        
+        <div class="form-group row mb-2 ">
+          <label for="register-adresse" class="col-sm-3 col-form-label">Delivery Date</label>
+          <div class="col-sm-4">
+<!-- Basic Date Picker -->
+<form class="form-inline">
+<div class="form-group">
+<div class="input-group">
+<input class="form-control" placeholder="yyyy-mm-dd" name="Basic Date Picker" [(ngModel)]="basicDPdata"
+  ngbDatepicker #basicDP="ngbDatepicker">
+<div class="input-group-append">
+  <button class="btn btn-outline-secondary feather icon-calendar" (click)="basicDP.toggle()"
+    type="button" rippleEffect></button>
+</div>
+</div>
+</div>
+</form>
+<!-- <pre class="mt-2 p-1">Model: {{ basicDPdata | json }}</pre> -->
+<!--/ Basic Date Picker -->
+</div>
+</div>
+
+
+     
+      </div>
+        <div class="modal-footer">
+          <button type="submit" (click)="modal.close('Accept click')" rippleEffect class="btn bg-light-primary mr-1">Update</button>
+          <button (click)="onCancel();modal.close()" rippleEffect class="btn bg-light-danger mr-1">cancel</button>
+        </div>
+      </form>
+      </ng-template>
+      
+      <!-- / Modal -->
+    </div>
+    
+   
+
+   
+
   </div>
 </div>

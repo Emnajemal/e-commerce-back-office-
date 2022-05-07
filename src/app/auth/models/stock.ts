@@ -1,5 +1,7 @@
 export default class Stock {
-    Id_product:number
-    Quantity:number
+    id:number;
+    insert_quantity:number;
+    insert_date:Date;
+
   
 }

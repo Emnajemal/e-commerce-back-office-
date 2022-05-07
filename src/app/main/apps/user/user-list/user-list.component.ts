@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 import * as snippet from 'app/main/extensions/sweet-alerts/sweet-alerts.snippetcode';
 import { StoreService } from 'Serv/store.service';
 import Store from 'app/auth/models/store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -35,7 +36,10 @@ export class UserListComponent implements OnInit {
   public previousRoleFilter = '';
   public previousPlanFilter = '';
   public previousStatusFilter = '';
-
+ userId: number;
+ public users: User[];
+public state=false;
+id_pers:number=0;
   public selectRole: any = [
     { name: 'All', value: '' },
     { name: 'Admin', value: 'Admin' },
@@ -85,6 +89,7 @@ export class UserListComponent implements OnInit {
     private _coreSidebarService: CoreSidebarService,
     private _coreConfigService: CoreConfigService,
     private StoreServices:  StoreService,
+    private modalService: NgbModal,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -200,46 +205,67 @@ export class UserListComponent implements OnInit {
 
 
 
-  deleteData(personnel: any) {
-    console.log(personnel);
-    // let conf = confirm("Are you sure you want to delete it?");
-    // if(conf)
-    this._userListService.deletetData(personnel.id).subscribe(res => {
-      console.log(res);
-    //  let x = confirm("User deleted successfully");
-      this._userListService.getDataTableRows();
-    })
+  // deleteData(personnel: any) {
+  //   console.log(personnel);
+  //   let conf = confirm("Are you sure you want to delete it?");
+  //   if(conf)
+  //   this._userListService.deletetData(personnel.id).subscribe(res => {
+  //     console.log(res);
+  //    let x = confirm("User deleted successfully");
+  //     this._userListService.getDataTableRows();
+  //   })
  
-  }
-  
-  ConfirmTextOpen() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#7367F0',
-      cancelButtonColor: '#E42728',
-      confirmButtonText: 'Yes, delete it!',
-      customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-danger ml-1'
-      }
-    }).then(function (result) {
-      if (result.value) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Deleted!',
-          text: 'The user has been deleted.',
-          customClass: {
-            confirmButton: 'btn btn-success'
-          }
-        });
-      }
-    });
-  }
+  // }
 
-  //  Swal.fire({
+    //nlawj aala boutique bel id mteeio o nfaskhouu
+  //   finduser(id): User {
+  //     return this.users.find(user => user.id === id);
+  //   }
+  // deleteData(id) {
+  //   let user = this.finduser(id)
+
+  //   this._userListService.deletetData(id).subscribe(res => {
+  //     let index = this.users.findIndex(user => user.id === id)
+  //     this.users.splice(index, 1);
+  //     console.log(res);
+
+  //   })
+  // }
+
+
+  
+ 
+  modalOpenDanger(modalDanger,row:any) {
+    // console.log('hey'+row)
+    this.modalService.open(modalDanger, {
+      centered: true,
+      windowClass: 'modal modal-danger'
+
+    });
+    this.id_pers=row.id;
+// console.log(this.state)
+// if (this.state==true){
+//     this.deleteData(row);
+//   } 
+}
+
+
+deleteData(personnel:any) {
+  
+  //besh tfaskhli bel id hadheka 
+  if(this.id_pers !== 0) {
+  console.log('ahla',personnel)
+  this._userListService.deletetData(this.id_pers).subscribe((result: any) => {
+    console.log('salem'+personnel.id)
+    console.log('cc'+result)
+    //o hne njbo data jdida
+    this._userListService.getDataTableRows();
+    this.modalService.dismissAll()
+  })
+}}
+
+  // ConfirmTextOpen() {
+  //   Swal.fire({
   //     title: 'Are you sure?',
   //     text: "You won't be able to revert this!",
   //     icon: 'warning',
@@ -252,20 +278,20 @@ export class UserListComponent implements OnInit {
   //       cancelButton: 'btn btn-danger ml-1'
   //     }
   //   }).then(function (result) {
-      
   //     if (result.value) {
-        
   //       Swal.fire({
   //         icon: 'success',
   //         title: 'Deleted!',
-  //         text: 'Your file has been deleted.',
+  //         text: 'The user has been deleted.',
   //         customClass: {
   //           confirmButton: 'btn btn-success'
   //         }
   //       });
   //     }
-      
   //   });
+  // }
+
+
   //   this._userListService.deletetData(personnel.id).subscribe(res => {
   //     console.log(res);
   //    // let x = confirm("User deleted successfully");

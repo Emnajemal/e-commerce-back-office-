@@ -1,6 +1,6 @@
+import { UserListService } from './../user-list.service';
 import { Component, OnInit, Output } from '@angular/core';
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
-import { UserListService} from '../user-list.service';
 import { FormControl, NgForm , FormArray} from '@angular/forms';
 
 //add
@@ -24,7 +24,7 @@ import { StoreService } from 'Serv/store.service';
   templateUrl: './new-user-sidebar.component.html'
 })
 export class NewUserSidebarComponent implements OnInit {
-  alert:boolean=null;
+  public alert =false;
   public avatarImage:string;
   public stores: Store[];
  public st : string ;
@@ -37,6 +37,7 @@ public registerForm: FormGroup;
   // user:any;
   public user: User ;
  public profile_photo:string;
+ public alrt = false;
   selectedfile: File;
 // @Output() onAdduser = new EventEmitter()
 
@@ -106,6 +107,11 @@ public registerForm: FormGroup;
     
     this.submitted = true;
     if (this.registerForm.invalid) {
+      this.alert=true;
+      setTimeout(() => {
+        this.alert = false;
+       
+      }, 2000) 
       return;
     }
     let formdata = new FormData();
@@ -132,24 +138,33 @@ public registerForm: FormGroup;
       next: (data: any) => {
         // this.onAdduser.emit()
         console.log(data)
-        this.alert=true ; 
+        // this.alert=true ; 
        
         data.profile_photo = `http://localhost:8000${data.profile_photo}`
-      }
-    }
-     ),
-     
-    (error:any)=>{
-      this.alert=false;
-      console.log(error)
-    }
-    
-    //   (error:any)=>{
-    //     console.log(error)
-    //     this.submitted = false;
-    //   }
+        this.alrt = true;
+        setTimeout(() => {
+          this.alrt = false;
+          this.toggleSidebar('new-user-sidebar');
+        }, 4000) 
+ 
+       this.UserListService.getDataTableRows();
+      },
+      
+       
+    } )
+    // window.location.reload()
   }
   
+  clearForm() {
+    this.registerForm.get("name").setValue('');
+    this.registerForm.get("Adresse").setValue('');
+    this.registerForm.get("phone").setValue('');
+    this.registerForm.get("profile_photo").setValue('');
+    this.registerForm.get("role").setValue('');
+    this.registerForm.get("store_id").setValue('');
+    this.registerForm.get("email").setValue('');
+    this.profile_photo = '';
+  }
 //   submit() {
 //     console.log(this.registerForm.value.name)
 //   console.log("bonjour")

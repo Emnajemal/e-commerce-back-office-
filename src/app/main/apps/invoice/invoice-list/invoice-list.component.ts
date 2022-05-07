@@ -7,6 +7,7 @@ import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { CoreConfigService } from '@core/services/config.service';
 
 import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-invoice-list',
@@ -41,6 +42,10 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
   public rows;
   public tempFilterData;
   public previousStatusFilter = '';
+  
+  public basicDPdata: NgbDateStruct;
+
+  
 
   /**
    * Constructor
@@ -49,7 +54,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
    * @param {CalendarService} _calendarService
    * @param {InvoiceListService} _invoiceListService
    */
-  constructor(private _invoiceListService: InvoiceListService, private _coreConfigService: CoreConfigService) {
+  constructor(private _invoiceListService: InvoiceListService, private _coreConfigService: CoreConfigService, private modalService: NgbModal) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -112,6 +117,13 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
   /**
    * On init
    */
+
+   modalOpenForm(modalForm) {
+    
+    this.modalService.open(modalForm);
+    // this.submit();
+  }
+
   ngOnInit(): void {
     // Subscribe config change
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
