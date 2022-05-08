@@ -134,8 +134,7 @@ public registerForm: FormGroup;
         console.log(data)
         this.alert=true ; 
        
-        data.profile_photo = `http://localhost:8000${data.profile_photo}`
-      }
+        data.profile_photo = `http://localhost:8000${data.profile_photo}`      }
     }
      ),
      
@@ -240,7 +239,7 @@ ngOnInit(): void {
 //     email: new FormControl('', [Validators.required,Validators.email]),
 //    // password: new FormControl('', [Validators.required]),
 //     //password_confirmation: new FormControl('', [Validators.required]),
-//     phone: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
+//     phone: new FormControl('', [Validators.required,Validators.minLength(😎,Validators.maxLength(8)]),
 //     Adresse: new FormControl('', [Validators.required]),
 //     role: new FormControl('', [Validators.required]),
 //    profile_photo: new FormControl(''),
@@ -257,7 +256,7 @@ this.registerForm = this._formBuilder.group({
       name: new FormControl('', [Validators.required,Validators.minLength(3)]), 
     email: new FormControl('', [Validators.required,Validators.email]),
     phone: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
-    Adresse: new FormControl('', [Validators.required]),
+        Adresse: new FormControl('', [Validators.required]),
     role: new FormControl('', [Validators.required]),
    profile_photo: new FormControl(''),
    store_id:new FormControl('', [Validators.required]),

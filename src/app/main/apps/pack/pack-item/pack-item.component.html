@@ -1,16 +1,16 @@
 <!-- Ecommerce Item -->
-<div class="badge text-uppercase position-absolute stock" [ngClass]="{'badge-danger':product.status !='on stock','badge-success':product.status =='on stock'}">{{product.status}} </div>
+<div *ngIf="pack.status_pack" class="badge text-uppercase position-absolute product" [ngClass]="{'badge-danger':pack.status_pack !='on stock','badge-success':pack.status_pack =='on stock'}">{{pack.status_pack}} </div>
 
 <div class="item-img text-center">
-  <a [routerLink]="'/apps/e-commerce/details/' + product.id"  class="d-inline-block w-50 mx-auto">
-    <img class="img-fluid card-img-top" [src]="product.image" alt="img-placeholder" />
+  <a [routerLink]="'details/'+pack.id"  class="d-inline-block w-50 mx-auto">
+    <img class="img-fluid card-img-top" [src]="baseUrl+pack.image_pack" alt="img-placeholder" />
   </a>
 </div>
 <div class="card-body">
   <div class="item-wrapper">
     <div class="item-rating">
       <!-- <div class="rating rating-sm">
-        <ngb-rating [rate]="product.rating" [readonly]="true" [max]="5" class="outline-none">
+        <ngb-rating [rate]="pack.rating" [readonly]="true" [max]="5" class="outline-none">
           <ng-template let-fill="fill" let-index="index"
             ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
           ></ng-template>
@@ -18,24 +18,24 @@
       </div> -->
     </div>
     <div class="item-cost">
-      <h6 class="item-price">TND {{ product.sellingprice }}</h6>
+      <h6 class="item-price">TND {{ pack.pricesupplierp }}</h6>
     </div>
   </div>
   <h6 class="item-name">
-    <a class="text-body" [routerLink]="'/apps/e-commerce/details/' + product.id"> {{ product.name }}</a>
+    <a class="text-body" [routerLink]="'/pack/details/'+pack.id"> {{ pack.name_pack }}</a>
     <span class="card-text item-company"
-      >By <a href="javascript:void(0)" class="company-name">{{ product.brand }}</a></span
+      >By <a href="javascript:void(0)" class="company-name">{{ pack.price }}</a></span
     >
   </h6>
   <p class="card-text item-description"> Référence :
-    {{ product.reference }}
+    {{ pack.reference_pack }}
   </p>
 </div>
 <div class="item-options text-center">
   <div class="item-wrapper">
     <div class="item-cost">
-      <h4 class="item-price">${{ product.sellingprice }}</h4>
-      <p class="card-text shipping" *ngIf="product.hasFreeShipping">
+      <h4 class="item-price">${{ pack.quantity_Pack }}</h4>
+      <p class="card-text shipping" *ngIf="pack.hasFreeShipping">
         <span class="badge badge-pill badge-light-success">Free Shipping</span>
       </p>
     </div>
@@ -54,7 +54,7 @@
     *ngIf="isWishlistOpen !== true"
     href="javascript:void(0)"
     class="btn btn-light btn-wishlist"
-    (click)="editProduct(product.id)"
+    (click)="editProduct(pack.id)"
     rippleEffect
   >
     <i class="fa mr-25" ></i>
@@ -63,7 +63,7 @@
   </a>
   
   <!-- <a
-    *ngIf="product.isInCart !== true"
+    *ngIf="pack.isInCart !== true"
     href="javascript:void(0)"
     class="btn btn-primary btn-cart"
     (click)="addToCart(product)"
@@ -74,11 +74,13 @@
   </a> -->
   <a
     class="btn btn-danger btn-cart"
-    (click)="deleteProduct(product.id)"
+    (click)="deleteProduct(pack.id)"
     rippleEffect
   >
   <i data-feather="x"></i>
   <span>Remove </span>
   </a>
 </div>
+<!-- <button class="btn btn-primary" (click)="toastBasic('I am a Basic toast', 5000)" rippleEffect>Toast</button> -->
 <!--/ Ecommerce Item -->
+
