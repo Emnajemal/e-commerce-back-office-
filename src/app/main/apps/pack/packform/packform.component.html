@@ -1,0 +1,191 @@
+<form class="form" [formGroup]="packForm" (ngSubmit)="submit()">
+
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+
+
+
+    <div class="row mb-2">
+      <label for="first-name-column " class="col-sm-3 col-form-label">Name:</label>
+      <div class="col-sm-6">
+        <input type="text" formControlName="name_pack" [ngClass]="{ 'is-invalid': submitted && f.name_pack.errors }"
+          class="form-control" placeholder="pack name" />
+        <div *ngIf="submitted && f.name_pack.errors" class="invalid-feedback">
+          <div *ngIf="f.name_pack.errors.required">First Name is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <label for="itemCost" class="col-sm-3 col-form-label">Réference: </label>
+      <div class="col-sm-6">
+        <input type="number" class="form-control" id="itemcost"
+          [ngClass]="{ 'is-invalid': submitted && f.reference_pack.errors }" formControlName="reference_pack"
+          placeholder="ref" />
+        <div *ngIf="submitted && f.reference_pack.errors" class="invalid-feedback">
+          <div *ngIf="f.reference_pack.errors.required">reference is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <label for="itemCost" class="col-sm-3 col-form-label"> selling price: </label>
+      <div class="col-sm-6">
+        <input type="number" class="form-control" id="itemcost"
+          [ngClass]="{ 'is-invalid': submitted && f.price.errors }" formControlName="price" placeholder="prix" />
+        <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+          <div *ngIf="f.price.errors.required">Supplier price is required</div>
+        </div>
+      </div>
+    </div>
+
+
+   
+
+    <!--<div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label"> Product: </label>
+    
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="products_id" [ngClass]="{ 'is-invalid': submitted && f.products_id.errors }" >
+                <option *ngFor="let product of product " [value]="products.id">{{product.name}}</option>
+            </select>
+          </div>
+          <div *ngIf="submitted && f.products_id.errors" class="invalid-feedback">
+            <div *ngIf="f.products_id.errors.required">stores is required</div>
+          </div>
+        </div>-->
+    <div class="row mb-2">
+      <label for="itemCost" class="col-sm-3 col-form-label">Quantity: </label>
+      <div class="col-sm-6">
+        <input type="number" class="form-control" id="itemcost"
+          [ngClass]="{ 'is-invalid': submitted && f.quantity_Pack.errors }" formControlName="quantity_Pack"
+          placeholder="quantity" />
+        <div *ngIf="submitted && f.quantity_Pack.errors" class="invalid-feedback">
+          <div *ngIf="f.quantity_Pack.errors.required">quantity is required</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formType=='edit'"> 
+      <div class="row mb-2">
+        <label for="itemCost" class="col-sm-3 col-form-label">Gain: </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="itemcost"
+            [ngClass]="{ 'is-invalid': submitted && f.gain_pack.errors }" formControlName="gain_pack"
+            placeholder="gain" />
+          <div *ngIf="submitted && f.gain_pack.errors" class="invalid-feedback">
+            <div *ngIf="f.gain_pack.errors.required">gain is required</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div *ngIf="formType=='edit'"> 
+      <div class="row mb-2">
+        <label for="itemCost" class="col-sm-3 col-form-label">price supplier: </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="itemcost"
+            [ngClass]="{ 'is-invalid': submitted && f.pricesupplierp.errors }" formControlName="pricesupplierp"
+            placeholder="price supplier" />
+          <div *ngIf="submitted && f.pricesupplierp.errors" class="invalid-feedback">
+            <div *ngIf="f.pricesupplierp.errors.required">price supplier is required</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row mb-2">
+      <label for="itemCost" class="col-sm-3 col-form-label"> products : </label>
+      <div class="col-sm-6">
+    
+      <div class="form-group">
+       
+        <ng-select
+        [items]="products | async"
+        [multiple]="true"
+        bindLabel="name"
+        bindValue="id"
+        placeholder=" select product"
+        [(ngModel)]="selectedProducts "
+        [ngModelOptions]="{standalone: true}"
+      >
+        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+          <span class="ng-value-label"
+            ><img [src]="item.image" width="20px" height="20px" /> {{ item.name }}</span
+          >
+          <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+        </ng-template>
+    
+        <ng-template ng-option-tmp let-item="item">
+          <img [src]="item.image" width="20px" height="20px" /> {{ item.name }}
+        </ng-template>
+      </ng-select>
+      <!--/ Select Multi with Icon -->
+      </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <label for="basicInputFile" class="col-sm-3 col-form-label"> image product:</label>
+      <div class="col-sm-6">
+        <div class="custom-file">
+          <input type="file" #file hidden class="custom-file-input" id="customAddFile" (change)="uploadImage($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.image_pack.errors }" />
+
+          <label class="custom-file-label" for="customAddFile">Choose picture</label>
+
+        </div>
+        <div *ngIf="submitted && f.image_pack.errors" class="invalid-feedback">
+          <div *ngIf="f.image_pack.errors.required">image is required</div>
+        </div>
+      </div>
+
+
+    </div>
+    
+
+    <div *ngIf="image_pack">
+
+      <div class="col-12">
+        <img [src]="image_pack" class="imagee" style="max-width: 400px;" alt="">
+      </div>
+      <br>
+
+    </div>
+
+  </div>
+  
+  <div *ngIf="success" class="col-12 mt-75">
+    <div class="alert alert-success mb-50" role="alert">
+      <h4 class="alert-heading">Add successfully.</h4>
+      <!--<div class="alert-body">
+            <a href="javascript: void(0);" class="alert-link">Resend confirmation</a>
+          </div>-->
+    </div>
+  </div>
+  <div *ngIf="success==false" class="col-12 mt-75">
+    <div class="alert alert-danger mb-50" role="alert">
+      <h4 class="alert-heading">les champs obligatoires</h4>
+      <!--<div class="alert-body">
+            <a href="javascript: void(0);" class="alert-link">Resend confirmation</a>
+          </div>-->
+    </div>
+  </div>
+  
+  <!-- <div *ngIf="success;else invalidForm" class="col-12 mt-75">
+        <div class="alert alert-success mb-50" role="alert">
+            <h4 class="alert-heading">Add successfully.</h4>
+            
+        </div>
+    </div>
+    <ng-template #invalidForm>
+        <div class="alert alert-danger mb-50" role="alert">
+            <h4 class="alert-heading">les champs obligatoires</h4>
+        </div>
+    </ng-template> -->
+  <div *ngIf="formType=='add'" class="modal-footer">
+    <button type="submit" rippleEffect class="btn btn-success mr-1">Add product</button>
+    <!-- <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button> -->
+  </div>
+  <div *ngIf="formType=='edit'" class="modal-footer">
+    <button type="submit" rippleEffect class="btn btn-success mr-1">Edit product</button>
+    <!-- <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button> -->
+  </div>
+</form>

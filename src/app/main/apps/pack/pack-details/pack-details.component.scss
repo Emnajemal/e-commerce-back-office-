@@ -1,0 +1,34 @@
+@import '@core/scss/base/pages/app-ecommerce-details.scss';
+@import '@core/scss/angular/libs/swiper.component.scss';
+@import '@core/scss/angular/libs/ratings.component.scss';
+.ecommerce-application {
+    .app-ecommerce-details {
+      .product-img {
+        width: 300px
+      }
+    }}
+    .ecommerce-application
+     .app-ecommerce-details 
+     .item-price {
+      color: #ff9f43;
+      font-style: oblique;
+  }
+  .ecommerce-application
+  .app-ecommerce-details 
+  .item-supplier {
+   color: hsl(142, 65%, 36%);
+   font-style: oblique;
+}
+.ecommerce-application
+  .app-ecommerce-details 
+  .item-gain {
+   color: hsl(182, 68%, 45%);
+   font-style: oblique;
+}
+.col-12{
+  font-style: oblique;
+
+}
+// .card-text{
+// font-style: normal;  color: #000000;
+// }

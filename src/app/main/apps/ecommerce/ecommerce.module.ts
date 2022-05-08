@@ -25,6 +25,7 @@ import { AddproductComponent } from './addproduct/addproduct.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
 
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   observer: true
@@ -69,7 +70,7 @@ const routes: Routes = [
     redirectTo: '/apps/e-commerce/details/27', //Redirection
     data: { animation: 'EcommerceDetailsComponent' }
   }
-];
+]; 
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ const routes: Routes = [
     EcommerceItemComponent,
     EcommerceCheckoutItemComponent,
     AddproductComponent,
-    EditproductComponent
+    EditproductComponent,
+   
   ],
   imports: [
     //naaref ken les modules barka akahw

@@ -9,14 +9,8 @@
         <div class="col-md-3 mb-2 mb-md-0">
           <ul ngbNav #navVertical="ngbNav" class="nav nav-pills flex-column nav-left">
             <li class="nav-item" ngbNavItem>
-              <a
-                ngbNavLink
-                class="nav-link d-flex py-75"
-                id="account-pill-general"
-                data-toggle="pill"
-                href="#account-vertical-general"
-                aria-expanded="true"
-              >
+              <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-general" data-toggle="pill"
+                href="#account-vertical-general" aria-expanded="true">
                 <i data-feather="user" class="font-medium-3 mr-1"></i>
                 <span class="font-weight-bold">General</span>
               </a>
@@ -27,27 +21,17 @@
                   <div class="card-body">
                     <!-- header media -->
                     <div class="media">
-                      <a href="javascript:void(0);" class="mr-25" >
+                      <a href="javascript:void(0);" class="mr-25">
                         <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
                       </a>
                       <!-- upload and reset button -->
                       <div class="media-body mt-75 ml-1">
-                        <button
-                          (click)="file.click()"
-                          for="account-upload"
-                          class="btn btn-sm btn-info mb-75 mr-75"
-                          rippleEffect
-                        >
+                        <button (click)="file.click()" for="account-upload" class="btn btn-sm btn-info mb-75 mr-75"
+                          rippleEffect>
                           Upload
                         </button>
-                        <input
-                          type="file"
-                          #file
-                          id="account-upload"
-                          hidden
-                          accept="image/*"
-                          (change)="uploadImage($event)"
-                        />
+                        <input type="file" #file id="account-upload" hidden accept="image/*"
+                          (change)="uploadImage($event)" />
                         <button class="btn btn-sm btn-outline-secondary mb-75" rippleEffect>Reset</button>
                         <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
                       </div>
@@ -61,62 +45,38 @@
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-username">Username</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="name"
-                              id="account-username"
-                              name="name"
-                              placeholder="Username"
-                            />
+                            <input type="text" class="form-control" formControlName="name" id="account-username"
+                              name="name" placeholder="Username" />
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
-                              <label for="phone">Mobile</label>
-                              <div class="input-group input-group-merge">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text"><span [data-feather]="'smartphone'"></span></span>
-                                </div>
-                                <input
-                                  type="number"
-                                  id="contact-icon"
-                                  formControlName="phone"
-                                  class="form-control"
-                                  name="contact-icon"
-                                  placeholder="Mobile"
-                                />
+                            <label for="phone">Mobile</label>
+                            <div class="input-group input-group-merge">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><span [data-feather]="'smartphone'"></span></span>
                               </div>
-                            
+                              <input type="number" id="contact-icon" formControlName="phone" class="form-control"
+                                name="contact-icon" placeholder="Mobile" />
+                            </div>
+
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-e-mail">E-mail</label>
-                            <input
-                              type="email"
-                              class="form-control"
-                              formControlName="email"
-                              id="account-e-mail"
-                              name="email"
-                              placeholder="Email"
-                            />
+                            <input type="email" class="form-control" formControlName="email" id="account-e-mail"
+                              name="email" placeholder="Email" />
                           </div>
                         </div>
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-company">Address</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="Adresse"
-                              id="account-company"
-                              name="Adresse"
-                              placeholder="Company name"
-                            />
+                            <input type="text" class="form-control" formControlName="Adresse" id="account-company"
+                              name="Adresse" placeholder="Company name" />
                           </div>
                         </div>
-                       <!-- <div class="col-12 mt-75">
+                        <!-- <div class="col-12 mt-75">
                           <div class="alert alert-warning mb-50" role="alert">
                             <h4 class="alert-heading">Your email is not confirmed. Please check your inbox.</h4>
                             <div class="alert-body">
@@ -149,19 +109,13 @@
                     <!--/ form -->
                   </div>
                 </div>
-               
+
               </ng-template>
-              
+
             </li>
             <li class="nav-item" ngbNavItem>
-              <a
-                ngbNavLink
-                class="nav-link d-flex py-75"
-                id="account-pill-password"
-                data-toggle="pill"
-                href="#account-vertical-password"
-                aria-expanded="false"
-              >
+              <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-password" data-toggle="pill"
+                href="#account-vertical-password" aria-expanded="false">
                 <i data-feather="lock" class="font-medium-3 mr-1"></i>
                 <span class="font-weight-bold">Change Password</span>
               </a>
@@ -169,36 +123,26 @@
                 <div class="card">
                   <div class="card-body">
                     <!-- form -->
-                    <form [formGroup]="resetForm" class="validate-form"(ngSubmit)="onSubmit()" >
+                    <form [formGroup]="resetForm" class="validate-form" (ngSubmit)="onSubmit()">
                       <div class="row">
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-old-password">Old Password</label>
                             <div class="input-group form-password-toggle input-group-merge">
-                              <input
-                              formControlName="old_password"
-                                class="form-control"
-                                [type]="passwordTextTypeOld ? 'text' : 'password'"
-                                id="account-old-password"
+                              <input formControlName="old_password" class="form-control"
+                                [type]="passwordTextTypeOld ? 'text' : 'password'" id="account-old-password"
                                 placeholder="Old Password"
-                                [ngClass]="{ 'is-invalid': submitted && f.old_password.errors }"
-                              />
+                                [ngClass]="{ 'is-invalid': submitted && f.old_password.errors }" />
                               <div class="input-group-append">
-                                <span class="input-group-text cursor-pointer"
-                                  ><i
-                                    class="feather font-small-4"
-                                    [ngClass]="{
+                                <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
                                       'icon-eye-off':passwordTextTypeOld,
                                       'icon-eye': !passwordTextTypeOld
-                                    }"
-                                    (click)="togglePasswordTextTypeOld()"
-                                  ></i
-                                ></span>
+                                    }" (click)="togglePasswordTextTypeOld()"></i></span>
                               </div>
-                              
-                              <div class="input-group-append">
-                                
-                              </div>
+
+
+
+
                             </div>
                           </div>
                         </div>
@@ -208,32 +152,22 @@
                           <div class="form-group">
                             <label for="account-new-password">New Password</label>
                             <div class="input-group form-password-toggle input-group-merge">
-                              <input
-                              formControlName="password"
-                              [type]="passwordTextTypeNew ? 'text' : 'password'"
-                                id="account-new-password"
-                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                class="form-control"
-                                placeholder="New Password"
-                              />
+                              <input formControlName="password" [type]="passwordTextTypeNew ? 'text' : 'password'"
+                                id="account-new-password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                class="form-control" placeholder="New Password" />
                               <div class="input-group-append">
-                                <span class="input-group-text cursor-pointer"
-                                  ><i
-                                    class="feather font-small-4"
-                                    [ngClass]="{
+                                <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
                                       'icon-eye-off': passwordTextTypeNew,
                                       'icon-eye': !passwordTextTypeNew
-                                    }"
-                                    (click)="togglePasswordTextTypeNew()"
-                                  ></i
-                                ></span>
+                                    }" (click)="togglePasswordTextTypeNew()"></i></span>
                               </div>
-                              <div class="input-group-append">
-                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                  <div *ngIf="f.password.errors.required">Password is required</div>
-                                  <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                              </div>
-                              </div>
+
+
+                            </div>
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                              <div *ngIf="f.password.errors.required">Password is required</div>
+                              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+
                             </div>
                           </div>
                         </div>
@@ -241,43 +175,32 @@
                         <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-retype-new-password">Retype New Password</label>
-                            <div class="input-group form-password-toggle input-group-merge" >
-                                <input
-                              
-                                formControlName="password_confirmer"
-                                [type]="passwordTextTypeRetype ? 'text' : 'password'"
-                                class="form-control"
-                                id="account-retype-new-password"
-                                placeholder="New Password"
-                                name="contact-icon"
-                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }"
-                                tabindex="2"
-                              />
+                            <div class="input-group form-password-toggle input-group-merge">
+                              <input formControlName="password_confirmer"
+                                [type]="passwordTextTypeRetype ? 'text' : 'password'" class="form-control"
+                                id="account-retype-new-password" placeholder="New Password" name="contact-icon"
+                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer.errors }" tabindex="2" />
                               <div class="input-group-append">
-                                <span class="input-group-text cursor-pointer"
-                                  ><i
-                                    class="feather font-small-4"
-                                    [ngClass]="{
+                                <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
                                       'icon-eye-off': passwordTextTypeRetype,
                                       'icon-eye': !passwordTextTypeRetype
-                                    }"
-                                    (click)="togglePasswordTextTypeRetype()"
-                                  ></i
-                                ></span>
+                                    }" (click)="togglePasswordTextTypeRetype()"></i></span>
                               </div>
-                              <div class="input-group-append">
-                                <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
-                                  <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
-                                  <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
-                                </div>
-                              </div>
-                              
+
+
+
+
                             </div>
+                            <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
+                              <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
+                              <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
+                            </div>
+
                           </div>
                         </div>
                         <!-- lena tekmeeeeeel-->
-                        
-                       <!-- hedhy l aslaneya 
+
+                        <!-- hedhy l aslaneya 
                          <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-retype-new-password">Retype New Password</label>
@@ -303,12 +226,12 @@
                           </div>
                         </div>-->
                         <!-- ngb-alert component -->
-                        <ngb-alert *ngIf="tchek==false" [type]="'primary'" >
-                        <div class="alert-body"><strong>Success !</strong> tchek your password</div>
+                        <ngb-alert *ngIf="tchek==false" [type]="'primary'">
+                          <div class="alert-body"><strong>Success !</strong> tchek your password</div>
                         </ngb-alert>
                         <!--/ ngb-alert component -->
                         <div class="col-12">
-                          <button type="submit" class="btn btn-info mr-1 mt-1"  rippleEffect>Save changes</button>
+                          <button type="submit" class="btn btn-info mr-1 mt-1" rippleEffect>Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
                         </div>
                       </div>
@@ -318,7 +241,7 @@
                 </div>
               </ng-template>
             </li>
-           <!-- <li class="nav-item" ngbNavItem>
+            <!-- <li class="nav-item" ngbNavItem>
               <a
                 ngbNavLink
                 class="nav-link d-flex py-75"
@@ -333,8 +256,8 @@
               <ng-template ngbNavContent>
                 <div class="card">
                   <div class="card-body">-->
-                    <!-- form -->
-                    <!--<form class="validate-form">
+            <!-- form -->
+            <!--<form class="validate-form">
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group">
@@ -408,9 +331,9 @@
                         </div>
                       </div>
                     </form>-->
-                    <!--/ form -->
-                  
-                <!--  </div>
+            <!--/ form -->
+
+            <!--  </div>
                 </div>
               </ng-template>-->
             <!--</li>
@@ -429,18 +352,18 @@
               <ng-template ngbNavContent>
                 <div class="card">
                   <div class="card-body">-->
-                    <!-- form -->
-                    <!--<form class="validate-form">
+            <!-- form -->
+            <!--<form class="validate-form">
                       <div class="row">-->
-                        <!-- social header -->
-                       <!--- <div class="col-12">
+            <!-- social header -->
+            <!--- <div class="col-12">
                           <div class="d-flex align-items-center mb-2">
                             <i data-feather="link" class="font-medium-3"></i>
                             <h4 class="mb-0 ml-75">Social Links</h4>
                           </div>
                         </div>-->
-                        <!-- twitter link input -->
-                       <!-- <div class="col-12 col-sm-6">
+            <!-- twitter link input -->
+            <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-twitter">Twitter</label>
                             <input
@@ -453,8 +376,8 @@
                             />
                           </div>
                         </div>-->
-                        <!-- facebook link input -->
-                       <!-- <div class="col-12 col-sm-6">
+            <!-- facebook link input -->
+            <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-facebook">Facebook</label>
                             <input
@@ -467,8 +390,8 @@
                             />
                           </div>
                         </div>-->
-                        <!-- google plus input -->
-                        <!--<div class="col-12 col-sm-6">
+            <!-- google plus input -->
+            <!--<div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-google">Google+</label>
                             <input
@@ -481,8 +404,8 @@
                             />
                           </div>
                         </div>-->
-                        <!-- linkedin link input -->
-                       <!-- <div class="col-12 col-sm-6">
+            <!-- linkedin link input -->
+            <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-linkedin">LinkedIn</label>
                             <input
@@ -495,8 +418,8 @@
                             />
                           </div>
                         </div>-->
-                        <!-- instagram link input -->
-                       <!-- <div class="col-12 col-sm-6">
+            <!-- instagram link input -->
+            <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-instagram">Instagram</label>
                             <input
@@ -509,8 +432,8 @@
                             />
                           </div>
                         </div>-->
-                        <!-- Quora link input -->
-                       <!-- <div class="col-12 col-sm-6">
+            <!-- Quora link input -->
+            <!-- <div class="col-12 col-sm-6">
                           <div class="form-group">
                             <label for="account-quora">Quora</label>
                             <input
@@ -524,21 +447,21 @@
                           </div>
                         </div>-->
 
-                        <!-- divider -->
-                        <!--<div class="col-12">
+            <!-- divider -->
+            <!--<div class="col-12">
                           <hr class="my-2" />
                         </div>
 
                         <div class="col-12 mt-1">-->
-                          <!-- profile connection header -->
-                         <!-- <div class="d-flex align-items-center mb-3">
+            <!-- profile connection header -->
+            <!-- <div class="d-flex align-items-center mb-3">
                             <i data-feather="user" class="font-medium-3"></i>
                             <h4 class="mb-0 ml-75">Profile Connections</h4>
                           </div>
 
                           <div class="row">-->
-                            <!-- twitter user -->
-                           <!-- <div class="col-6 col-md-3 text-center mb-1">
+            <!-- twitter user -->
+            <!-- <div class="col-6 col-md-3 text-center mb-1">
                               <p class="font-weight-bold">Your Twitter</p>
                               <div class="avatar mb-1">
                                 <span class="avatar-content">
@@ -553,13 +476,13 @@
                               <p class="mb-0">{{ data.accountSetting.social.connections.twitter.id }}</p>
                               <a href="javascript:void(0)">Disconnect</a>
                             </div>-->
-                            <!-- facebook button -->
-                            <!--<div class="col-6 col-md-3 text-center mb-1">
+            <!-- facebook button -->
+            <!--<div class="col-6 col-md-3 text-center mb-1">
                               <p class="font-weight-bold mb-2">Your Facebook</p>
                               <button class="btn btn-outline-primary" rippleEffect>Connect</button>
                             </div>-->
-                            <!-- google user -->
-                           <!-- <div class="col-6 col-md-3 text-center mb-1">
+            <!-- google user -->
+            <!-- <div class="col-6 col-md-3 text-center mb-1">
                               <p class="font-weight-bold">Your Google</p>
                               <div class="avatar mb-1">
                                 <span class="avatar-content">
@@ -574,22 +497,22 @@
                               <p class="mb-0">{{ data.accountSetting.social.connections.google.id }}</p>
                               <a href="javascript:void(0)">Disconnect</a>
                             </div>-->
-                            <!-- github button -->
-                           <!-- <div class="col-6 col-md-3 text-center mb-2">
+            <!-- github button -->
+            <!-- <div class="col-6 col-md-3 text-center mb-2">
                               <p class="font-weight-bold mb-1">Your GitHub</p>
                               <button class="btn btn-outline-primary" rippleEffect>Connect</button>
                             </div>
                           </div>
                         </div>
                         <div class="col-12">-->
-                          <!-- submit and cancel button -->
-                         <!-- <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
+            <!-- submit and cancel button -->
+            <!-- <button type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
                         </div>
                       </div>
                     </form>-->
-                    <!--/ form -->
-                 <!-- </div>
+            <!--/ form -->
+            <!-- </div>
                 </div>
               </ng-template>
             </li>

@@ -395,6 +395,15 @@ export const menu: CoreMenu[] = [
             url: 'apps/e-commerce/shop'
           },
           {
+            id: 'pack',
+            title: 'Pack',
+            translate: 'MENU.APPS.ECOMMERCE.PACK',
+            type: 'item',
+            icon: 'circle',
+            url: '/pack'
+          },
+        
+          /*{
             id: 'details',
             title: 'Details',
             translate: 'MENU.APPS.ECOMMERCE.DETAIL',
@@ -417,7 +426,7 @@ export const menu: CoreMenu[] = [
             type: 'item',
             icon: 'circle',
             url: 'apps/e-commerce/checkout'
-          }
+          }*/
         ]
       },
       {
