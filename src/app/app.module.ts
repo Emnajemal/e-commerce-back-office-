@@ -38,6 +38,10 @@ const appRoutes: Routes = [
     loadChildren: () => import('./main/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
+    path: 'pack',
+    loadChildren: () => import('./main/apps/pack/pack.module').then(m => m.PackModule)
+  },
+  {
     path: 'apps',
     loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule),
     canActivate: [AuthGuard]

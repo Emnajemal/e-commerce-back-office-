@@ -3,25 +3,19 @@
     <!-- User List -->
     <section class="users-list-wrapper">
       <!-- users filter start -->
-      <div class="card">
+      <!--<div class="card">
         <h5 class="card-header">Search personal </h5>
         <div class="card-body">
           <div class="users-list-filter">
             <form>
-              <div class="row">
-                <div class="col-12 col-md-6">
+              <div class="row">-->
+      <!--  <div class="col-12 col-md-6">
                   <fieldset class="form-group">
-                    <ng-select
-                      [items]="selectRole"
-                      [(ngModel)]="selectedRole"
-                      name="selectedRole"
-                      bindLabel="name"
-                      placeholder="Select Role"
-                      (change)="filterByRole($event)"
-                    ></ng-select>
+                    <ng-select [items]="selectRole" [(ngModel)]="selectedRole" name="selectedRole" bindLabel="name"
+                      placeholder="Select Role" (change)="filterByRole($event)"></ng-select>
                   </fieldset>
-                </div>
-               <!-- <div class="col-12 col-md-4">
+                </div>-->
+      <!-- <div class="col-12 col-md-4">
                 <fieldset class="form-group">
                     <ng-select
                       [items]="selectPlan"
@@ -44,89 +38,70 @@
                       (change)="filterByStatus($event)"
                     ></ng-select>
                   </fieldset>
-                </div> --> 
+                </div> -->
 
-                <div class="col-12 col-md-4 d-flex justify-content-start justify-content-md-end">
+      <!--<div class="col-12 col-md-4 d-flex justify-content-start justify-content-md-end">
                   <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
-                    <label class="d-flex align-items-center ml-1 ml-md-0"
-                      >Search:<input
-                        [(ngModel)]="searchValue"
-                        name="searchValue"
-                        type="search"
-                        class="form-control ml-25"
-                        (keyup)="filterUpdate($event)"
-                        (search)="filterUpdate($event)"
-                    /></label>
+                    <label class="d-flex align-items-center ml-1 ml-md-0">Search:<input [(ngModel)]="searchValue"
+                        name="searchValue" type="search" class="form-control ml-25" (keyup)="filterUpdate($event)"
+                        (search)="filterUpdate($event)" /></label>
 
                   </div>
-                </div>
-      
-      
-      
+                </div>-->
 
 
-              </div>
+
+
+
+      <!--  </div>
             </form>
           </div>
 
-        
+
 
 
 
 
         </div>
 
-      </div>
+      </div>-->
       <!-- users filter end -->
 
       <div class="card">
         <div class="row">
           <div class="col-md-6 col-12">
             <div class="d-flex justify-content-between align-items-center m-1">
-              <label class="d-flex align-items-center"
-                >Show
+              <label class="d-flex align-items-center">Show
                 <select class="form-control mx-25" [(ngModel)]="selectedOption">
                   <option value="10">10</option>
                   <option value="25">25</option>
                   <option value="50">50</option>
                   <option value="100">100</option>
                 </select>
-                entries</label
-              >
+                entries</label>
             </div>
           </div>
           <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
             <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
-             <!-- <label class="d-flex align-items-center ml-1 ml-md-0"
-                >Search:<input
-                  [(ngModel)]="searchValue"
-                  name="searchValue"
-                  type="search"
-                  class="form-control ml-25"
-                  (keyup)="filterUpdate($event)"
-                  (search)="filterUpdate($event)"
-              /></label>-->
+              <label class="d-flex align-items-center ml-1 ml-md-0">Search:<input [(ngModel)]="searchValue"
+                  name="searchValue" type="search" class="form-control ml-25" (keyup)="filterUpdate($event)"
+                  (search)="filterUpdate($event)" /></label>
               <button class="btn btn-primary ml-1" rippleEffect (click)="toggleSidebar('new-user-sidebar')">
-                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
-                ><span class="d-none d-sm-inline-block">Add New User</span>
+                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span
+                  class="d-none d-sm-inline-block">Add New User</span>
               </button>
             </div>
           </div>
         </div>
-        <ngx-datatable
-          [rows]="rows"
-          [rowHeight]="50"
-          class="bootstrap core-bootstrap"
-          [limit]="selectedOption"
-          [columnMode]="ColumnMode.force"
-          [headerHeight]="50"
-          [footerHeight]="50"
-          [scrollbarH]="true"
-        >
+        <ngx-datatable [rows]="rows" [rowHeight]="50" class="bootstrap core-bootstrap" [limit]="selectedOption"
+          [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true">
           <ngx-datatable-column name="User" prop="name" [width]="100">
             <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
-               <!-- <div *ngIf="row.avatar.length > 0; else customAvatar">
+
+
+ 
+                <!-- <div *ngIf="row.avatar.length > 0; else customAvatar">
                   <img
                     class="rounded-circle mr-1"
                     src="{{ row.avatar }}"
@@ -148,47 +123,86 @@
                   </div>
 
                 </ng-template>-->
-                
-                <div class="cell-line-height">
-                  <a routerLink="/apps/user/user-view/{{ row.id }}" class="font-medium-1 d-block"
-                    ><span class="font-weight-bold">{{ name }}</span></a
+
+           <div *ngIf="row.length> 0; else customAvatar">
+                  <img
+                    class="rounded-circle mr-1"
+                    src="{{row.profile_photo}}"
+                    height="32"
+                    width="32"
+                    
+                  />
+                </div>
+                <ng-template #customAvatar>
+                  <div
+                    class="avatar mr-1 ml-0"
+                    [ngClass]="{
+                      'bg-light-success': row.status == 'active',
+                      'bg-light-secondary': row.status == 'inactive',
+                      'bg-light-warning': row.status == 'pending'
+                    }"
                   >
+                    <div class="avatar-content">{{ name | initials }}</div>
+                  </div>
+
+                </ng-template>
+
+
+
+
+                <div class="cell-line-height">
+                  <a routerLink="/apps/user/user-view/{{ row.id }}" class="font-medium-1 d-block"><span
+                      class="font-weight-bold">{{ name }}</span></a>
                   <span class="text-muted font-small-2"> @{{ row.name }}</span>
                 </div>
               </div>
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="Email" prop="email" [width]="220"></ngx-datatable-column>
-         <!-- <ngx-datatable-column name="Address" prop="Adresse" [width]="100"></ngx-datatable-column>-->
-          <ngx-datatable-column name="phone" prop="phone" [width]="80"></ngx-datatable-column>
-         <!-- <ngx-datatable-column name="password_confirmation" prop="password_confirmation" [width]="200"></ngx-datatable-column>
+          <ngx-datatable-column name="Email" prop="email" [width]="200"></ngx-datatable-column>
+         
+          
+          <ngx-datatable-column name="Address" prop="Adresse" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="Phone" prop="phone" [width]="80"></ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Store" prop="stores" [width]="50">
+            <ng-template let-value="value" ngx-datatable-cell-template> -->
+            <!-- <span>{{value.name}}</span> -->
+            <!-- <span>{{value.name |json}}</span> -->
+            
+        <!-- </ng-template></ngx-datatable-column> -->
+
+        <ngx-datatable-column name="Store" prop="stores" [width]="50">
+          <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+              <ng-template ngFor let-obj [ngForOf]="value">
+                  <strong> {{ obj.name }} </strong>
+          
+                  <br />
+              </ng-template>
+          </ng-template>
+      </ngx-datatable-column>
+        <!-- <ngx-datatable-column name="Store">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            {{ value.name }}
+          </ng-template>
+        </ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="password_confirmation" prop="password_confirmation" [width]="200"></ngx-datatable-column>
           <ngx-datatable-column name="password" prop="password" [width]="200"></ngx-datatable-column>-->
           <ngx-datatable-column name="Role" prop="role" [width]="80">
             <ng-template let-role="value" ngx-datatable-cell-template>
               <div>
-                <i
-                  class="feather font-medium-3"
-                  [ngClass]="{
+                <i class="feather font-medium-3" [ngClass]="{
                     'icon-eye text-info': role == 'Community Manager',
-                    'icon-edit-1 text-primary': role == 'Magasinier',
-                    'icon-user text-danger': role == 'Comptable',
-                    'icon-edit-2 text-info': role == 'Designer',
-                    'icon-settings text-warning': role == 'Administrateur'
-                  }"
-                  
-                ></i>
+                    'icon-edit-1 text-info': role == 'Designer',
+                    'icon-user text-danger': role == 'Accountant',
+                    'icon-edit-1 text-info': role == 'Designer',
+                    'icon-settings text-warning': role == 'Administrator'
+                  }"></i>
                 {{ role }}
               </div>
-           <!-- 'icon-slack text-danger': role == 'Admin'--->
+              <!-- 'icon-slack text-danger': role == 'Admin'--->
             </ng-template>
           </ngx-datatable-column>
-<<<<<<< Updated upstream
-          <ngx-datatable-column name="Address" prop="currentPlan" [width]="100"></ngx-datatable-column>
-          <ngx-datatable-column name="Status" prop="status" [width]="50">
-=======
-         <!-- <ngx-datatable-column name="Address" prop="currentPlan" [width]="100"></ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Address" prop="currentPlan" [width]="100"></ngx-datatable-column>
           <ngx-datatable-column name="Phone" prop="status" [width]="50">
->>>>>>> Stashed changes
             <ng-template let-status="value" ngx-datatable-cell-template>
               <div
                 class="badge badge-pill"
@@ -203,32 +217,35 @@
             </ng-template>
           </ngx-datatable-column> -->
           <ngx-datatable-column name="Delete user" [width]="70" [sortable]="false">
-              <ng-template ngx-datatable-cell-template let-row="row">
+            <ng-template ngx-datatable-cell-template let-row="row">
               <div ngbDropdown container="body">
-                
-                <button   (click)="deleteData(row)"  ngbDropdownToggle type="button"  class="btn icon-btn btn-sm hide-arrow" rippleEffect>
-                  <a href="javascript:;" ngbDropdownItem
-                  >
-                  <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'" ></span> Delete</a
-                  >
-                </button>
-                
-                
-  <!-- Sweet Alert ConfirmText 
-  <button class="btn btn-outline-primary mr-1" [swal]="SweetAlertConfirmText" rippleEffect>
-    (click)="deleteData(row)"
-    Confirm Text
-  </button>-->
-  <!-- Swal of Sweet Alert ConfirmText -->
-  <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()">
-    
-    
-  </swal>
-  
- 
-  <!-- Swal of Sweet Alert ConfirmText -->
 
-                
+                <button (click)="deleteData(row)" [swal]="SweetAlertConfirmText" ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow"
+                  rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem>
+                    <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a>
+                </button>
+
+
+
+                <!-- Sweet Alert ConfirmText 
+ 
+ 
+                  <button class="btn btn-outline-primary mr-1" [swal]="SweetAlertConfirmText" rippleEffect>
+                 (click)="deleteData(row)"
+                       Confirm Text
+                     </button>-->
+                <!-- Swal of Sweet Alert ConfirmText -->
+                <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()">
+
+
+                </swal>
+
+
+
+                <!-- Swal of Sweet Alert ConfirmText -->
+
+
                 <!-- <div ngbDropdownMenu>
                  
                     <a routerLink="/apps/user/user-view/{{ row.id }}" ngbDropdownItem
@@ -236,7 +253,7 @@
                   ><a routerLink="/apps/user/user-edit/{{ row.id }}" ngbDropdownItem
                     ><span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit</a
                   >-->
-                  <!--<a href="javascript:;" ngbDropdownItem
+                <!--<a href="javascript:;" ngbDropdownItem
                     >
                     <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
                   >
@@ -251,11 +268,8 @@
   </div>
 
   <!-- New User Sidebar -->
-  <core-sidebar
-    class="modal modal-slide-in sidebar-todo-modal fade"
-    name="new-user-sidebar"
-    overlayClass="modal-backdrop"
-  >
+  <core-sidebar class="modal modal-slide-in sidebar-todo-modal fade" name="new-user-sidebar"
+    overlayClass="modal-backdrop">
     <app-new-user-sidebar></app-new-user-sidebar>
   </core-sidebar>
   <!--/ New User Sidebar -->

@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
-import { HttpClient } from '@angular/common/http';
-=======
 import { User } from 'app/auth/models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
->>>>>>> Stashed changes
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
@@ -16,6 +12,7 @@ const httpOptions = {
 export class UserListService implements Resolve<any> {
   public rows: any;
   public onUserListChanged: BehaviorSubject<any>;
+  onKBChanged: any;
 
   /**
    * Constructor
@@ -42,8 +39,6 @@ export class UserListService implements Resolve<any> {
     });
   }
 
-<<<<<<< Updated upstream
-=======
 
  /* register(name:string, email:string, password:string, password_confirmation:string){
     const data={
@@ -57,8 +52,21 @@ export class UserListService implements Resolve<any> {
 */
 private registerUrl = 'http://127.0.0.1:8000/api/auth/register';
 register(data:any): Observable<any>{
-  return this._httpClient.post(this.registerUrl,JSON.stringify(data), httpOptions)
+  console.log(data)
+ return this._httpClient.post(this.registerUrl,data)
+ 
 }
+/*register(data:any): Observable<any>{
+  let formdata = new FormData();
+   
+        formdata.append('profile_photo', data.profile_photo);
+     formdata.append('name',data.name);
+        formdata.append('phone',data.phone);
+        formdata.append('adresse',data.adresse);
+       formdata.append('email',data.email);
+       formdata.append('role',data.email);
+  return this._httpClient.post(this.registerUrl,formdata,{responseType:'json'})
+}*/
 
 
 deletetData(id:any){
@@ -66,7 +74,6 @@ deletetData(id:any){
 }
 
 
->>>>>>> Stashed changes
   /**
    * Get rows
    */
@@ -75,6 +82,7 @@ deletetData(id:any){
       this._httpClient.get('http://127.0.0.1:8000/api/auth/user').subscribe((response: any) => {
         //console.log(response)
         this.rows = response;
+        console.log(this.rows)
         this.onUserListChanged.next(this.rows);
         resolve(this.rows);
       }, reject);

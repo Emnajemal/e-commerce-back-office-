@@ -409,15 +409,15 @@
                     <ng-select
                       [items]="multiIconGithubUsers | async"
                       [multiple]="true"
-                      bindLabel="login"
-                      bindValue="login"
+                      bindLabel="node_id"
+                      bindValue="node_id"
                       placeholder="Select items"
                       [(ngModel)]="multiCustomGithubUsersSelected"
                     >
                       <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
                         <div class="ng-value" *ngFor="let item of items | slice: 0:2">
                           <span class="ng-value-label"
-                            ><img [src]="item.avatar_url" width="20px" height="20px" /> {{ item.login }}</span
+                            ><img [src]="item.avatar_url" width="20px" height="20px" /> {{ item.node_id }}</span
                           >
                           <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
                         </div>

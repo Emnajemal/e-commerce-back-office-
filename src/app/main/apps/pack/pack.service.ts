@@ -2,19 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import Product from 'app/auth/models/product';
-import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 import { environment } from 'environments/environment';
-
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EcommerceService implements Resolve<any> {
-  getPackById(id: number) {
-    throw new Error('Method not implemented.');
-  }
+export class PackService implements Resolve<any> {
 
   // handeleError c'est une fonction des gestions des erreurs ...
   private handleError<T> (operation = 'operation', result?: T) {
@@ -81,26 +76,26 @@ export class EcommerceService implements Resolve<any> {
    * @param {RouterStateSnapshot} state
    * @returns {Observable<any> | Promise<any> | any}
    */
-   boutique(addForm){
+   pack(addForm){
     console.log(addForm);
-    return this._httpClient.post('http://127.0.0.1:8000/api/product/addProduct/',addForm);
+    return this._httpClient.post('http://127.0.0.1:8000/api/pack/addpack/',addForm);
 
   }
-  productEdit(editForm,id){
-    return this._httpClient.post(`http://127.0.0.1:8000/api/product/updateProduct/${id}`,editForm)
+  packEdit(editForm,id){
+    return this._httpClient.post(`http://127.0.0.1:8000/api/pack/updatepack/${id}`,editForm)
     .pipe(
       tap((newEquipement: Product) => console.log(`added hero w/ id=${newEquipement.id}`)),
       catchError(this.handleError<Product>('create'))
     );
 
   }
-  getProductById(id){
-    return this._httpClient.get(`http://127.0.0.1:8000/api/product/product/${id}`);
+  getPackById(id){
+    return this._httpClient.get(`http://127.0.0.1:8000/api/pack/packs/${id}`);
 
   }
 
-deleteProduct(id){
-  return this._httpClient.delete(`http://127.0.0.1:8000/api/product/deleteProduct/${id}`);
+deletePack(id){
+  return this._httpClient.delete(`http://127.0.0.1:8000/api/pack/deletepack/${id}`);
 
 }
 
@@ -111,24 +106,17 @@ deleteProduct(id){
     this.idHandel = route.params.id;
 
     return new Promise<void>((resolve, reject) => {
-      Promise.all([this.getProducts(), this.getWishlist(), this.getCartList(), this.getSelectedProduct()]).then(() => {
+      Promise.all([this.getPacks(), this.getWishlist(), this.getCartList(), this.getSelectedProduct()]).then(() => {
         resolve();
       }, reject);
     });
   }
 
   /**
-   * Get Products
+   * Get Packs
    */
-  getProducts(){
-    return this._httpClient.get<any>(`${this.baseUrl}/api/product/products`).pipe(
-      map(products => {
-
-        return products.map(product => {
-           return {...product,image:this.baseUrl+product.image}
-        })
-      })
-    )
+  getPacks(){
+    return this._httpClient.get(`${this.baseUrl}/api/pack/packs`)
     // return new Promise((resolve, reject) => {
     //   this._httpClient.get('api/ecommerce-products').subscribe((response: any) => {
     //     this.productList = response;

@@ -6,6 +6,7 @@ export class ToastService {
 
   show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
     this.toasts.push({ textOrTpl, ...options });
+    console.log(this.toasts)
   }
 
   remove(toast) {

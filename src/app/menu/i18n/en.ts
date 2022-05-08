@@ -1,5 +1,5 @@
 export const locale = {
-  lang: 'en',
+  lang: 'en', 
   data: {
     MENU: {
       DASHBOARD: {
@@ -26,7 +26,8 @@ export const locale = {
           SHOP: 'Shop',
           DETAIL: 'Details',
           WISHLIST: 'Wish List',
-          CHECKOUT: 'Checkout'
+          CHECKOUT: 'Checkout',
+          PACK:'Pack'
         },
         USER: {
           COLLAPSIBLE: 'User',
