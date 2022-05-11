@@ -36,9 +36,20 @@
                 
                 <p class="card-text">availablity - <span class="badge text-uppercase" [ngClass]="{'badge-danger':pack?.status_pack !='on stock','badge-success':pack?.status_pack =='on stock'}">{{ pack?.status_pack }}</span></p>
                 <hr />
-                <p class="card-text">
-                  <!--{{ product.description }}-->
-                </p>
+                <p> Pack Details </p>
+                <div *ngFor="let product of pack.products" class="media mb-1 ">
+                    <a class="media-left" href="javascript:void(0)">
+                      <img
+                        [src]="baseUrl+product.image"
+                        alt="Generic placeholder image"
+                        height="30"
+                        width="30"
+                      />
+                    </a>
+                    <div class="media-body">
+                      <h4 class="media-heading">  {{ product.name }}  </h4>
+                    </div>
+                  </div>
                 <ul class="product-features list-unstyled">
                   <li *ngIf="pack?.hasFreeShipping"><i data-feather="shopping-cart"></i> <span>Free Shipping</span></li>
                   <li>

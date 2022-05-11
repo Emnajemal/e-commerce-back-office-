@@ -7,7 +7,7 @@ import Product from 'app/auth/models/product';
 import { Subject } from 'rxjs';
 import { PackService } from '../pack.service';
 import { PackformComponent } from '../packform/packform.component';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pack-list',
@@ -147,6 +147,7 @@ export class PackListComponent implements OnInit {
     this.modalService.open(modalDanger, {
       centered: true,
       windowClass: 'modal modal-danger'
+      
     });
   }
 
@@ -247,7 +248,7 @@ export class PackListComponent implements OnInit {
     //hatyna l id fel event hadheka 
     this.packId = event
     //neftah l modal
-    this.modalService.open(modal)
+    this.modalService.open(modal,{centered: true})
     // this.deletePack(event)
   }
   //njib delete 
@@ -258,6 +259,12 @@ export class PackListComponent implements OnInit {
       //o hne njbo data jdida
       this.getPacks()
       this.modalService.dismissAll()
+     Swal.fire({
+      title: "Deleted!",
+      icon:"success",
+     // imageUrl: result.value.avatar_url,
+      customClass: { confirmButton: 'btn btn-success' }
+    });
     })
   }
 
