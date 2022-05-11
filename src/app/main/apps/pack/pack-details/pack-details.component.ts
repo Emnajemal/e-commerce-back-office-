@@ -130,7 +130,7 @@ export class PackDetailsComponent implements OnInit {
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Product Details',
+      headerTitle: 'Pack Details',
       actionButton: true,
       breadcrumb: {
         type: '',

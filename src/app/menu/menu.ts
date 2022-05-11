@@ -26,15 +26,23 @@ export const menu: CoreMenu[] = [
         icon: 'circle',
         url: 'dashboard/analytics'
       },
+      // {
+      //   // If role is not assigned will be display to all
+      //   id: 'ecommerce',
+      //   title: 'eCommerce',
+      //   translate: 'MENU.DASHBOARD.ECOMMERCE',
+      //   type: 'item',
+      //   icon: 'circle',
+      //   url: 'dashboard/ecommerce'
+      // }
       {
-        // If role is not assigned will be display to all
-        id: 'ecommerce',
-        title: 'eCommerce',
-        translate: 'MENU.DASHBOARD.ECOMMERCE',
+        id: 'Card-analytics',
+        title: 'Analytics',
+        translate: 'MENU.UI.CARDS.ANALYTICS',
         type: 'item',
         icon: 'circle',
-        url: 'dashboard/ecommerce'
-      }
+        url: 'ui/card/analytics'
+      },
     ]
   },
   // Apps & Pages
@@ -388,7 +396,7 @@ export const menu: CoreMenu[] = [
         children: [
           {
             id: 'shop',
-            title: 'Shop',
+            title: 'Product',
             translate: 'MENU.APPS.ECOMMERCE.SHOP',
             type: 'item',
             icon: 'circle',

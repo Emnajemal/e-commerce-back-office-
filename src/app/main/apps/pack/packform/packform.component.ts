@@ -3,16 +3,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Pack from 'app/auth/models/pack';
 import { environment } from 'environments/environment';
+import { GlobalConfig, ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EcommerceService } from '../../ecommerce/ecommerce.service';
 import { PackService } from '../pack.service';
 
+
+
+
 @Component({
   selector: 'app-packform',
   templateUrl: './packform.component.html',
   styleUrls: ['./packform.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  
 
 })
 export class PackformComponent implements OnInit {
@@ -28,6 +33,7 @@ export class PackformComponent implements OnInit {
   public products: Observable<any[]>;
   public selectedProducts :any = []
  baseUrl:string = environment.apiUrl
+ totalPricesupplier:number=0;
 
 
 
@@ -35,7 +41,8 @@ export class PackformComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private modalService: NgbModal, private _PackService: PackService, private _ecommerceService: EcommerceService) { }
+
+  constructor(private fb: FormBuilder, private modalService: NgbModal, private _PackService: PackService, private _ecommerceService: EcommerceService,private toastr: ToastrService) { }
 
   get f() { return this.packForm.controls; }
 
@@ -56,6 +63,7 @@ export class PackformComponent implements OnInit {
     }
   }
   submit() {
+   
     if (this.formType=='add'){
 
     this.submitted = true;
@@ -70,22 +78,32 @@ export class PackformComponent implements OnInit {
    // this.formData.append('status_pack', this.packForm.value.status_pack);
     this.formData.append('quantity_Pack', this.packForm.value.quantity_Pack);
     this.formData.append('image_pack', this.packForm.value.image_pack);
+    console.log(this.selectedProducts);
+    
     this._PackService.pack(this.formData).subscribe((data: any) => {
+     // this.toastrSuccess();
+     this.toastrProgressBar();
+     
+
+      
+      console.log(data);
       //data.image = `http://localhost:8000${data.image}`
       // this.products.push(data)
       this.onGetPack.emit()
       this.success = true;
       this.modalService.dismissAll()
+     
 
     }, (error: any) => {
       this.success = false
       console.log(error)
     })
+    
   }
      if (this.formType=='edit'){
        this.submitted = true;
      if (this.packForm.invalid) {
-       console.log(this.packForm)
+      // console.log(this.packForm)
        return;
     }
        data: Pack;
@@ -96,12 +114,17 @@ export class PackformComponent implements OnInit {
        this.formData.append('products_id', this.selectedProducts);
       // this.formData.append('status_pack', this.packForm.value.status_pack);
        this.formData.append('quantity_Pack', this.packForm.value.quantity_Pack);
-       this.formData.append('image_pack', this.packForm.value.image_pack);
-       console.log(this.formData);
+       if (this.packForm.get('image_pack').dirty){
+        this.formData.append('image_pack', this.packForm.value.image_pack);
+
+       }
+       //console.log(this.formData);
        this._PackService.packEdit(this.formData,this.packId).subscribe((data: any) => {
         //data.image = `http://localhost:8000${data.image}`
          // this.products.push(data)
         // this.onGetPack.emit()
+        console.log('hello')
+        console.log(this.packForm.value.selectedProducts)
          console.log(data)
          this.success = true;
          this.modalService.dismissAll()     
@@ -112,6 +135,7 @@ export class PackformComponent implements OnInit {
        })
 
      }
+    
   }
   
   getProducts() {
@@ -124,8 +148,11 @@ export class PackformComponent implements OnInit {
       this.packForm.patchValue(result)
       this.selectedProducts=result.products.map(item=>{
         return item.id;
+      
       })
-      console.log(this.selectedProducts)
+      this.totalPricesupplier=result.pricesupplierp;
+      this.packForm.get('price').setValidators([Validators.min(this.totalPricesupplier),Validators.required])
+      this.packForm.get('price').updateValueAndValidity();
     })
 
   }
@@ -144,6 +171,33 @@ export class PackformComponent implements OnInit {
   }
   public multiCustomGithubUsersSelected = ['anjmao'];
 
+  //validation sur selling price
+  validateSellingprice($event,mode){
+  if (mode=='add'){
+    this.totalPricesupplier+=$event.pricesupplier
+  }
+  else {
+    this.totalPricesupplier-=$event.pricesupplier
+  }
+  console.log(this.totalPricesupplier)
+  this.packForm.get('price').setValidators([Validators.min(this.totalPricesupplier),Validators.required])
+  this.packForm.get('price').updateValueAndValidity();
+  }
+  // toastrSuccess() {
+  //   this.toastr.success('👋 Your pack was added successfully .', 'Added successfully!', {
+  //     toastClass: 'toast ngx-toastr',
+  //     positionClass: 'toast-top-left',
+  //     closeButton: true
+  //   });}
+  toastrProgressBar() {
+    this.toastr.success('Have fun storming the castle!', 'Progress Bar', {
+      progressBar: true,
+      toastClass: 'toast ngx-toastr',
+      closeButton: true
+    });
+  }
+  
+
 
 
   ngOnInit(): void {
@@ -151,7 +205,7 @@ export class PackformComponent implements OnInit {
     this.packForm = this.fb.group({
       name_pack: ['', Validators.required],
       reference_pack: ['', Validators.required],
-      price: ['', Validators.required],
+      price: ['', [Validators.required]],
       quantity_Pack: ['', Validators.required],
       products_id: [],
       image_pack: [null, Validators.required],
@@ -160,9 +214,11 @@ export class PackformComponent implements OnInit {
       gain_pack:[]
 
     })
-
+   if(this.formType=='edit'){
     this.getPackById(this.packId)
-    this.getPacks()
+
+   }
+    //this.getPacks()
     this.products = this.getProducts()
   
    // this.products.forEach(console.log)

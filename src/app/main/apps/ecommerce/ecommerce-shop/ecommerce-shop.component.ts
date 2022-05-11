@@ -8,6 +8,7 @@ import Product from 'app/auth/models/product';
 import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-ecommerce-shop',
   templateUrl: './ecommerce-shop.component.html',
@@ -207,7 +208,7 @@ export class EcommerceShopComponent implements OnInit {
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Shop',
+      headerTitle: 'Product',
       actionButton: true,
       breadcrumb: {
         type: '',
@@ -223,7 +224,7 @@ export class EcommerceShopComponent implements OnInit {
             link: '/'
           },
           {
-            name: 'Shop',
+            name: 'Product',
             isLink: false
           }
         ]
@@ -242,7 +243,8 @@ export class EcommerceShopComponent implements OnInit {
     //hatyna l id fel event hadheka 
     this.productId = event
     //neftah l modal
-    this.modalService.open(modal)
+    this.modalService.open(modal,{centered: true})
+
     // this.deleteProduct(event)
   }
   //njib delete 
@@ -253,6 +255,12 @@ export class EcommerceShopComponent implements OnInit {
       //o hne njbo data jdida
       this.getProducts()
       this.modalService.dismissAll()
+      Swal.fire({
+        title: "Deleted!",
+        icon:"success",
+       // imageUrl: result.value.avatar_url,
+        customClass: { confirmButton: 'btn btn-success' }
+      });
     })
   }
 }
