@@ -52,6 +52,7 @@ export class DatatablesComponent implements OnInit {
   formData:FormData  = new FormData();
   public submitted = false;
   alert:boolean=null;
+  public x :number ;
   public products: Product[];
 //  stock=new Stock;
  public stockDetails: Stock;
@@ -265,11 +266,14 @@ export class DatatablesComponent implements OnInit {
       console.log('nour')
       console.log(data)
     })
-  }
+
+  } 
+
   submit() {
     this.submitted = true;
     // if (this.stockForm.invalid) {
     //   return;
+
     // }
     let formdata = new FormData();
     data: Stock;
@@ -280,18 +284,22 @@ export class DatatablesComponent implements OnInit {
    
     console.log(this.stockForm.value.products_id);
       this._datatablesService.addstock(formdata).subscribe((data: any) => {
-        
+       
        this.alert=true;
+    
       // this.onAddstock.emit()
        console.log(data) ;
        setTimeout(() => {
         this.alert= null;
-       
+     
  
-      }, 4000)
+      }, 1000)
      
       this.clearForm();
-     //this.getproducts();
+     
+     this.getproducts();
+     this.getstocks();
+
      },(error:any)=>{
        this.alert=false;
        console.log(error)
@@ -300,12 +308,24 @@ export class DatatablesComponent implements OnInit {
      )
 
   }
+  // modal Open Success
+  // modalOpenSuccess(modalSuccess ) {
+  //   if (this.alert==true){
+   
+  //   this.modalService.open(modalSuccess, {
+  //     centered: true,
+  //     windowClass: 'modal modal-success'
+      
+  //   });}
+  // }  
 
   clearForm() {
     this.stockForm.get("insert_quantity").setValue('');
     this.stockForm.get("products_id").setValue('');
     
   }
+
+
 
   ngOnInit(): void {
    

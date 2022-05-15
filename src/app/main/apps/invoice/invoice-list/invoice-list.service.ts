@@ -37,13 +37,19 @@ export class InvoiceListService implements Resolve<any> {
   /**
    * Get rows
    */
+   deletetData(id:any){
+    return this._httpClient.delete('http://127.0.01:8000/api/order/deleteorder/'+id);
+  }
+
   getDataTableRows(): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      this._httpClient.get('api/invoice-data').subscribe((response: any) => {
+      // this._httpClient.get('api/invoice-data').subscribe((response: any) => {
+        this._httpClient.get('http://127.0.01:8000/api/order/getorder').subscribe((response: any) => {
         this.rows = response;
         this.onInvoiceListChanged.next(this.rows);
         resolve(this.rows);
       }, reject);
     });
+   
   }
 }

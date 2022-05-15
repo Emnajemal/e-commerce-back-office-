@@ -243,22 +243,19 @@ id_pers:number=0;
 
     });
     this.id_pers=row.id;
-// console.log(this.state)
-// if (this.state==true){
-//     this.deleteData(row);
-//   } 
+
 }
 
 
 deleteData(personnel:any) {
   
-  //besh tfaskhli bel id hadheka 
+ 
   if(this.id_pers !== 0) {
   console.log('ahla',personnel)
   this._userListService.deletetData(this.id_pers).subscribe((result: any) => {
     console.log('salem'+personnel.id)
     console.log('cc'+result)
-    //o hne njbo data jdida
+
     this._userListService.getDataTableRows();
     this.modalService.dismissAll()
   })

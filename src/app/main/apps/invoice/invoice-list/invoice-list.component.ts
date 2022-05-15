@@ -8,7 +8,8 @@ import { CoreConfigService } from '@core/services/config.service';
 
 import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import Order from 'app/auth/models/order';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
@@ -17,6 +18,7 @@ import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class InvoiceListComponent implements OnInit, OnDestroy {
   // public
+  public orders: Order[];
   public data: any;
   public selectedOption = 10;
   public ColumnMode = ColumnMode;
@@ -45,7 +47,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
   
   public basicDPdata: NgbDateStruct;
 
-  
+  id_pers:number=0;
 
   /**
    * Constructor
@@ -66,6 +68,44 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
    *
    * @param event
    */
+   modalOpenDanger(modalDanger,row) {
+    // console.log('hey'+row)
+    this.modalService.open(modalDanger, {
+      centered: true,
+      windowClass: 'modal modal-danger'
+
+    });
+    this.id_pers=row.id;
+
+}
+
+deleteData(order:any) {
+  
+ 
+  if(this.id_pers !== 0) {
+  console.log('ahla',order)
+  this._invoiceListService.deletetData(this.id_pers).subscribe((result: any) => {
+    console.log('salem'+order.id)
+    console.log('cc'+result)
+
+    this._invoiceListService.getDataTableRows();
+    this.modalService.dismissAll()
+    Swal.fire({
+      title: "Deleted!",
+      icon:"success",
+     // imageUrl: result.value.avatar_url,
+      customClass: { confirmButton: 'btn btn-success' }
+    });
+  })
+}}
+
+
+   getorders(){
+    this._invoiceListService.getDataTableRows().then((data: any) => {
+      this.orders=data;
+      console.log(data)
+    })
+  }
   filterUpdate(event) {
     // Reset ng-select on search
     this.selectedStatus = this.selectStatus[0];

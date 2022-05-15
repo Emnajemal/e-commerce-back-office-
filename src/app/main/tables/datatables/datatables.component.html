@@ -1137,10 +1137,29 @@
           <!-- <div class="form-group">
             <input type="text" placeholder="Id_product" class="form-control" />
           </div> -->
+
+          <!-- Modal -->
+  <ng-template #modalSuccess let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">Success </h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+      Stock added successfully
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modal.close('Accept click')" rippleEffect>
+       Close
+      </button>
+    </div>
+  </ng-template>
           <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
             <h4 class="alert-heading">Stock added successfully</h4>
             
           </ngb-alert>
+
           <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
             <h4 class="alert-heading">Error! Check your fields </h4>
             
@@ -1203,7 +1222,7 @@
         <!-- <button type="button" class="btn bg-light-primary" (click)="modal.close('Accept click')" rippleEffect>
           Submit
         </button> -->
-        <button type="submit" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
+        <button type="submit" (click)="modalOpenSuccess(modalSuccess)" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
         <button type="button" class="btn bg-light-danger" (click)="modal.close('Accept click')" rippleEffect>
           Cancel
         </button>

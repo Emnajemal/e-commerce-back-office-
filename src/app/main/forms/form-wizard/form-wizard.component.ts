@@ -1,6 +1,14 @@
+import { OrderService } from './order.service';
+// import { Product } from 'app/auth/models/product';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Product from 'app/auth/models/store'
 
 import Stepper from 'bs-stepper';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import  Order  from 'app/auth/models/order';
+import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
+import { StoreService } from 'Serv/store.service';
 
 @Component({
   selector: 'app-form-wizard',
@@ -9,10 +17,21 @@ import Stepper from 'bs-stepper';
   encapsulation: ViewEncapsulation.None
 })
 export class FormWizardComponent implements OnInit {
+  registerForm: FormGroup;
+  public alert =false;
+  public order: Order ;
+  public alrt = false;
+  public products: Product[];
+  
+  public basicDPdata: NgbDateStruct;
+
+  
   // public
   public contentHeader: object;
   public TDNameVar;
   public TDEmailVar;
+  public total;
+  public Order;
   public TDFirstNameVar;
   public TDLastNameVar;
   public twitterVar;
@@ -21,18 +40,21 @@ export class FormWizardComponent implements OnInit {
   public linkedinVar;
   public landmarkVar;
   public addressVar;
-
+  public livreur;
+  
+submitted = false;
   public selectBasic = [
-    { name: 'UK' },
-    { name: 'USA' },
-    { name: 'Spain' },
-    { name: 'France' },
-    { name: 'Italy' },
-    { name: 'Australia' }
+    { name: 'Paid' },
+    { name: 'Unpaid' },
+    // { name: 'Spain' },
+    // { name: 'France' },
+    // { name: 'Italy' },
+    // { name: 'Australia' }
   ];
 
-  public selectMulti = [{ name: 'English' }, { name: 'French' }, { name: 'Spanish' }];
+  public selectMulti = [{ name: 'Undelivered' }, { name: 'Delivered' }, { name: 'In delivering' }];
   public selectMultiSelected;
+
 
   // private
   private horizontalWizardStepper: Stepper;
@@ -40,6 +62,15 @@ export class FormWizardComponent implements OnInit {
   private modernWizardStepper: Stepper;
   private modernVerticalWizardStepper: Stepper;
   private bsStepper;
+  
+
+  
+  public MinMaxDPdata: NgbDateStruct;
+
+  
+  public selectedProducts :any = []
+
+  
 
   /**
    * Horizontal Wizard Stepper Next
@@ -70,6 +101,9 @@ export class FormWizardComponent implements OnInit {
   verticalWizardPrevious() {
     this.verticalWizardStepper.previous();
   }
+
+
+  get f() { return this.registerForm.controls; }
   /**
    * Modern Horizontal Wizard Stepper Next
    */
@@ -98,12 +132,107 @@ export class FormWizardComponent implements OnInit {
   /**
    * On Submit
    */
-  onSubmit() {
-    alert('Submitted!!');
-    return false;
+  // onSubmit() {
+  //   alert('Submitted!!');
+  //   return false;
+  // }
+ 
+  
+  // public
+  public items = [{ itemId: '', itemName: '', itemQuantity: '', itemCost: '' }];
+
+  public item = {
+    itemName: '',
+    itemQuantity: '',
+    itemCost: ''
+  };
+
+  // Public Methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Add Item
+   */
+  addItem() {
+    this.items.push({
+      itemId: '',
+      itemName: '',
+      itemQuantity: '',
+      itemCost: ''
+    });
   }
 
-  constructor() {}
+  getproducts(){
+    this.StoreServices.getProducts().then((data: any) => {
+      this.products=data;
+      console.log(data)
+    })
+  }
+  
+  onSubmit () {
+    
+    this.submitted = true;
+    if (this.registerForm.invalid) {
+      this.alert=true;
+      setTimeout(() => {
+        this.alert = false;
+       
+      }, 2000) 
+      return;
+    }
+    let formdata = new FormData();
+    data: Order;
+    
+    formdata.append('client_name', this.registerForm.value.client_name);
+   
+   formdata.append('client_lastname',this.registerForm.value.client_lastname);
+      formdata.append('num_tel',this.registerForm.value.num_tel);
+      formdata.append('livreur',this.registerForm.value.livreur);
+     formdata.append('colis_ref',this.registerForm.value.colis_ref);
+     formdata.append('products_id',this.registerForm.value.products_id);
+     formdata.append('quantity_order',this.registerForm.value.quantity_order);
+   console.log(this.registerForm.value.livreur)
+    
+
+    console.log(this.registerForm.value.quantity_order);
+  
+      this.OrderService.register(formdata).subscribe({
+      next: (data: any) => {
+      
+        console.log(data)
+        // this.alert=true ; 
+      
+        this.alrt = true;
+        setTimeout(() => {
+          this.alrt = false;
+        
+        }, 4000) 
+ 
+       this.StoreServices.getOrders();
+      },
+      
+       
+    } )
+  }
+
+  /**
+   * DeleteItem
+   *
+   * @param id
+   */
+  deleteItem(id) {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items.indexOf(this.items[i]) === id) {
+        this.items.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+
+  
+
+  constructor(private OrderService:OrderService, private StoreServices:  StoreService,private _formBuilder: FormBuilder,) {}
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -111,7 +240,32 @@ export class FormWizardComponent implements OnInit {
   /**
    * On Init
    */
+//    ngOnInit(): void {
+   
+//     this.registerForm = this._formBuilder.group({
+      
+//   insert_quantity: ['', Validators.required],
+//   products_id: ['', Validators.required],
+//   quantity: [''] ,
+ 
+// }  );
+// // this.getproducts();
+// // this.getstocks();
+
+// }
   ngOnInit() {
+
+    this.registerForm = this._formBuilder.group({
+      
+      client_name: ['', Validators.required],
+      client_lastname: ['', Validators.required],
+      num_tel:  ['', Validators.required] ,
+      livreur: ['', Validators.required],
+      colis_ref: ['', Validators.required],
+      products_id: ['', Validators.required],
+      quantity_order: ['', Validators.required],
+    });
+  
     this.horizontalWizardStepper = new Stepper(document.querySelector('#stepper1'), {});
 
     this.verticalWizardStepper = new Stepper(document.querySelector('#stepper2'), {
