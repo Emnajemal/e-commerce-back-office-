@@ -11,7 +11,7 @@
           aria-label="Close"
           (click)="toggleSidebar('new-user-sidebar')"
         >
-          
+          ×
         </button>
 
         <div class="modal-header mb-1">
@@ -57,11 +57,11 @@
               <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
             </span>
           </div>-->
-         <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
+         <ngb-alert *ngIf="alrt==true" [type]="'success'" [dismissible]="false">
             <h4 class="alert-heading">user added successfully</h4>
             
           </ngb-alert>
-          <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
+          <ngb-alert *ngIf="alert==true" [type]="'danger'" [dismissible]="false">
             <h4 class="alert-heading">Error! Check your fields </h4>
             
           </ngb-alert>

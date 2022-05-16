@@ -77,13 +77,14 @@ export class AuthForgotPasswordV2Component implements OnInit {
       this.message = res.message;
      console.log(res)
     // this.alert=true ;
-     if  (res.message == 'Error! Email Does not exists.')
+     if  (res.message == 'Email Does not exists.')
      {this.alert=true;
-      this.message =res.message}
+      this.message =res.message
+      form.reset({})  }
       else{
       this.alert2=true ;
       this.message=res.message;}
-      form.reset({})  
+      // form.reset({})  
   
      })
   

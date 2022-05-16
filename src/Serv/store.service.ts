@@ -56,8 +56,20 @@ baseUrl=environment.apiUrl
       }, reject);
     });
   }
+
+  getOrders(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      // this._httpClient.get('api/invoice-data').subscribe((response: any) => {
+        this._httpClient.get('http://127.0.01:8000/api/order/getorder').subscribe((response: any) => {
+        this.rows = response;
+        // this.onInvoiceListChanged.next(this.rows);
+        resolve(this.rows);
+      }, reject);
+    });
+   
+  }
   // getProducts(){
-  //   return this._httpClient.get(${this.baseUrl}/api/product/products)
+  //   return this._httpClient.get(`${this.baseUrl}/api/product/products`)
   //   // return new Promise((resolve, reject) => {
   //   //   this._httpClient.get('api/ecommerce-products').subscribe((response: any) => {
   //   //     this.productList = response;

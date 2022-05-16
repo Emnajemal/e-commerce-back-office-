@@ -1,10 +1,12 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <!-- content-header component -->
-    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <!-- <app-content-header [contentHeader]="contentHeader"></app-content-header> -->
+
+    
 
     <!-- Kitchen Sink Datatables -->
-    <section id="ngx-datatable-kitchen-sink">
+    <!-- <section id="ngx-datatable-kitchen-sink">
       <core-card-snippet [snippetCode]="_snippetCodeKitchenSink">
         <h4 class="card-title">Kitchen Sink</h4>
         <div class="row">
@@ -202,11 +204,11 @@
           </ngx-datatable-column>
         </ngx-datatable>
       </core-card-snippet>
-    </section>
+    </section> -->
     <!--/ Kitchen Sink Datatables -->
 
     <!-- Inline Editing Datatables -->
-    <section id="ngx-datatable-inline-editing">
+    <!-- <section id="ngx-datatable-inline-editing">
       <core-card-snippet [snippetCode]="_snippetCodeInlineEditing">
         <h4 class="card-title">Inline Editing</h4>
         <ngx-datatable
@@ -385,16 +387,66 @@
           </ngx-datatable-column>
         </ngx-datatable>
       </core-card-snippet>
-    </section>
+    </section> -->
     <!--/ Inline Editing Datatables -->
 
     <!-- Row Details  Datatables -->
     <section id="ngx-datatable-row-details">
-      <core-card-snippet [snippetCode]="_snippetCodeRowDetails">
-        <h4 class="card-title">Row Details</h4>
 
-        <!-- ngx-datatable-row-details -->
-        <ngx-datatable
+      <!-- <core-card-snippet [snippetCode]="_snippetCodeRowDetails"> -->
+        <core-card-snippet >
+         
+        <!-- <h4 class="card-title">Stock Details</h4> -->
+        <div class="row">
+          <!-- <div class="col-12 mb-50">
+            <button class="btn btn-primary ml-1" rippleEffect>
+              <i data-feather="plus" class="mr-0 mr-sm-1"></i
+              ><span class="d-none d-sm-inline-block">Add New Stock</span>
+            </button> -->
+
+            <!-- <a csvLink [data]="exportCSVData" class="btn btn-outline-secondary float-right mr-1" rippleEffect
+              >Export CSV</a
+            > -->
+          <!-- </div> -->
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center"
+                >Show
+                <select class="form-control mx-25" [(ngModel)]="basicSelectedOption">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                entries</label
+              >
+            </div>
+          </div>
+          
+          <div class="col-md-6 col-12 d-flex justify-content-md-end">
+            <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pl-1 pl-md-0 pb-md-0">
+              <label class="d-flex align-items-center"
+                >Search<input
+                  type="search"
+                  placeholder="Search"
+                  class="form-control ml-25"
+                  (keyup)="filterUpdate($event)"
+                  (search)="filterUpdate($event)"
+              /></label>
+
+
+
+              <button (click)="modalOpenForm(modalForm)" class="btn btn-success ml-1" rippleEffect>
+                <i data-feather="plus" class="mr-0 mr-sm-1"></i
+                ><span class="d-none d-sm-inline-block">Add New Stock</span>
+              </button> 
+  
+            </div>
+          </div>
+        </div>
+
+        <!-- nour ngx-datatable-row-details -->
+        <!-- <ngx-datatable
           #tableRowDetails
           class="bootstrap core-bootstrap"
           [columnMode]="ColumnMode.force"
@@ -404,19 +456,22 @@
           [limit]="10"
           [rows]="rows"
           [scrollbarH]="true"
-        >
+        > -->
           <!-- Row Detail Template -->
-          <ngx-datatable-row-detail [rowHeight]="50">
+          <!-- nour <ngx-datatable-row-detail [rowHeight]="50">
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
               <div class="ml-75 pl-5 pt-75">
                 <div>
-                  <span><strong>City : </strong> {{ row.city }}</span
-                  ><span class="ml-1"><strong>Experience : </strong> {{ row.experience }}</span
-                  ><span class="ml-1"><strong>Start Date : </strong> {{ row.start_date }}</span>
+                  <span><strong>Quantity added : </strong> {{ row.insert_quantity }}</span
+                  >
+                 
+                  <span class="ml-1"><strong> Date : </strong> {{transformDate(row.insert_date)}}</span>
+
                 </div>
               </div>
             </ng-template>
           </ngx-datatable-row-detail>
+          
           <ngx-datatable-column
             [width]="50"
             [resizeable]="false"
@@ -424,7 +479,7 @@
             [draggable]="false"
             [canAutoResize]="false"
           >
-            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            hedhi el details <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
               <a
                 href="javascript:void(0)"
                 class="text-body"
@@ -435,8 +490,8 @@
               >
               </a>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Name" prop="full_name" [width]="280">
+          </ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="Product Name" prop="name" [width]="280">
             <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
                 <div *ngIf="row.avatar.length > 0; else customAvatar">
@@ -458,6 +513,7 @@
                       'bg-light-warning': row.status == '4',
                       'bg-light-info': row.status == '5'
                     }"
+
                   >
                     <div class="avatar-content">{{ name | initials }}</div>
                   </div>
@@ -467,12 +523,49 @@
                   <span class="text-muted font-small-2"> {{ row.post }}</span>
                 </div>
               </div>
+            </ng-template> 
+          </ngx-datatable-column>-->
+          <!-- nour <ngx-datatable-column name="Product" prop="products" [width]="50">
+            <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                <ng-template ngFor let-obj [ngForOf]="value">
+                    <strong> {{ obj.name}} </strong>
+            
+                    <br />
+                </ng-template>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Email" prop="email" [width]="250"></ngx-datatable-column>
-          <ngx-datatable-column name="Age" prop="age" [width]="50"></ngx-datatable-column>
-          <ngx-datatable-column name="Salary" prop="salary" [width]="120"></ngx-datatable-column>
-          <ngx-datatable-column name="Status" prop="status" [width]="120">
+        </ngx-datatable-column>
+          <ngx-datatable-column name="Product Reference" prop="products" [width]="60">
+            <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                <ng-template ngFor let-obj [ngForOf]="value">
+                    <strong> {{ obj.reference }} </strong>
+            
+                    <br />
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column> -->
+          
+          <!-- <ngx-datatable-column name="Id_product" prop="email" [width]="200"></ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="Total quantity" prop="quantity" [width]="100"></ngx-datatable-column> -->
+          <!-- nour <ngx-datatable-column name="Total quantity" prop="products" [width]="60">
+            <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                <ng-template ngFor let-obj [ngForOf]="value">
+                    <strong> {{ obj.quantity }} </strong>
+            
+                    <br />
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column> -->
+
+     
+
+          <!-- <ngx-datatable-column name="Quantity added" prop="insert_quantity" [width]="120"></ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="Date" prop="insert_date" [width]="100">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+             {{transformDate(row.insert_date)}}
+          </ng-template>
+        </ngx-datatable-column> -->
+
+          <!-- <ngx-datatable-column name="Status" prop="status" [width]="120">
             <ng-template let-status="value" ngx-datatable-cell-template>
               <div
                 class="badge badge-pill"
@@ -499,8 +592,8 @@
                 }}
               </div>
             </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="Actions" [width]="120" [sortable]="false">
+          </ngx-datatable-column> -->
+          <!-- <ngx-datatable-column name="Actions" [width]="120" [sortable]="false">
             <ng-template ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
                 <div ngbDropdown container="body">
@@ -531,20 +624,21 @@
                 <i data-feather="edit" class="text-primary cursor-pointer"></i>
               </div>
             </ng-template>
-          </ngx-datatable-column>
-        </ngx-datatable>
+          </ngx-datatable-column> -->
+        <!-- nour </ngx-datatable> -->
         <!-- ngx-datatable-row-details -->
-      </core-card-snippet>
-    </section>
+      <!-- </core-card-snippet>
+   
+    </section>  -->
     <!-- Row Details  Datatables -->
 
     <!-- Custom Checkbox Datatables -->
-    <section id="ngx-datatable-custom-checkbox">
+    <!-- <section id="ngx-datatable-custom-checkbox">
       <core-card-snippet [snippetCode]="_snippetCodeCustomCheckbox">
-        <h4 class="card-title">Custom Checkbox</h4>
+        <h4 class="card-title">Custom Checkbox</h4> -->
 
         <!-- ngx-datatable-custom-checkbox -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12">
             <ngx-datatable
               class="bootstrap core-bootstrap"
@@ -714,19 +808,19 @@
               <li *ngIf="!chkBoxSelected?.length">No Selections</li>
             </ul>
           </div>
-        </div>
+        </div> -->
         <!--/ ngx-datatable-custom-checkbox -->
-      </core-card-snippet>
-    </section>
+      <!-- </core-card-snippet>
+    </section> -->
     <!--/ Custom Checkbox Datatables -->
 
     <!-- Responsive Datatable -->
-    <section id="ngx-datatable-Responsive">
+    <!-- <section id="ngx-datatable-Responsive">
       <core-card-snippet [snippetCode]="_snippetCodeResponsive">
-        <h4 class="card-title">Responsive</h4>
+        <h4 class="card-title">Responsive</h4> -->
 
         <!-- ngx-datatables responsive -->
-        <ngx-datatable
+        <!-- <ngx-datatable
           #table
           class="bootstrap core-bootstrap"
           [columnMode]="ColumnMode.force"
@@ -833,14 +927,14 @@
               </div>
             </ng-template>
           </ngx-datatable-column>
-        </ngx-datatable>
+        </ngx-datatable> -->
         <!--/ ngx-datatables responsive -->
-      </core-card-snippet>
-    </section>
+      <!-- </core-card-snippet>
+    </section> -->
     <!--/ Responsive Datatable -->
 
     <!-- Multilangual Datatables -->
-    <section id="ngx-datatable-multi-purpose">
+    <!-- <section id="ngx-datatable-multi-purpose">
       <core-card-snippet [snippetCode]="_snippetCodeMultilangual">
         <h4 class="card-title">Multilangual</h4>
         <div class="card-body">
@@ -959,7 +1053,219 @@
           </ngx-datatable-column>
         </ngx-datatable>
       </core-card-snippet>
-    </section>
+    </section> -->
     <!--/ Multilangual Datatables -->
+    <!-- Login Form -->
+  <div class="login-form" >
+    <!-- Button trigger modal -->
+    <!-- <button type="button" (click)="modalOpenForm(modalForm)" class="btn btn-outline-primary" rippleEffect>
+      Login Form
+    </button> -->
+    <!-- modal details -->
+    <!-- <ng-template #modalBasic let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">{{stockDetails.insert_quantity}}</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <h4 class="modal-title" id="myModalLabel1">{{stockDetails.insert_date}}</h4>
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-light-primary mr-1" (click)="modal.close()" rippleEffect>
+        Cancel
+        </button>
+      </div>
+    </ng-template> -->
+  
+    <ng-template #modalBasic let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">Stock Details</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+       
+         
+
+
+        
+          </div>
+        
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Quantity Added</th>
+                    <th scope="col"> Date</th>
+                    
+          
+                    <th></th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stock of stocks">
+                    <th scope="row">{{stock.insert_quantity}}</th>
+                    <!-- <td>{{stock.insert_date}}</td> -->
+                    <td> {{transformDate(stock.insert_date)}}</td>
+                    
+     
+                </tr>
+            </tbody>
+        </table>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-light-primary mr-1" (click)="modal.close()" rippleEffect>
+        Cancel
+        </button>
+      </div>
+    </ng-template>
+
+    <!-- Modal -->
+    <ng-template #modalForm let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">Add New Stock</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <form  class="form" [formGroup]="stockForm" (ngSubmit)="submit()" action="#">
+          <!-- <label>Id_product: </label> -->
+          <!-- <div class="form-group">
+            <input type="text" placeholder="Id_product" class="form-control" />
+          </div> -->
+
+          <!-- Modal -->
+  <ng-template #modalSuccess let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">Success </h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+      Stock added successfully
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modal.close('Accept click')" rippleEffect>
+       Close
+      </button>
+    </div>
+  </ng-template>
+          <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
+            <h4 class="alert-heading">Stock added successfully</h4>
+            
+          </ngb-alert>
+
+          <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
+            <h4 class="alert-heading">Error! Check your fields </h4>
+            
+          </ngb-alert>
+
+          <!-- <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label" > Product </label>
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="products_id" >
+                <option ngbDropdownItem  *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
+          </div>
+         </div> -->
+
+         
+          <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label" > Product </label>
+          <div class="col-sm-6">
+            <select class="custom-select" formControlName="products_id" >
+                <option ngbDropdownItem href="javascript:void(0)" *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
+          </div>
+         </div>
+<!-- <div class="btn-group ">
+          <div ngbDropdown>
+            <button
+              ngbDropdownToggle
+              class="btn btn-flat-info"
+              type="button"
+              id="dropdownMenuButton300"
+              rippleEffect
+            >
+              Choose product
+            </button>
+            <div class="col-sm-6">
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton300" formControlName="products_id">  -->
+              <!-- <a ngbDropdownItem href="javascript:void(0)">Option 1</a> -->
+              <!-- <a ngbDropdownItem href="javascript:void(0)"  *ngFor="let product of products" [value]="product.id">{{product.name}}</a>
+            </div>
+          </div>
+          </div>
+        </div> -->
+
+          <div class="form-group row mb-2 ">
+            <label for="register-adresse" class="col-sm-3 col-form-label">Insert  Quantity </label>
+            <div class="col-sm-6">
+            <input
+              type="text"
+              id="insert_quantity"
+              class="form-control"
+              formControlName="insert_quantity"
+              name="insert_quantity"
+              placeholder="Quantity"
+            />
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn bg-light-primary" (click)="modal.close('Accept click')" rippleEffect>
+          Submit
+        </button> -->
+        <button type="submit" (click)="modalOpenSuccess(modalSuccess)" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
+        <button type="button" class="btn bg-light-danger" (click)="modal.close('Accept click')" rippleEffect>
+          Cancel
+        </button>
+      </div>
+    </ng-template>
+    <!-- / Modal -->
+
+    
+  </div>
+
+  <table class="table">
+   
+    <thead>
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Reference</th>
+            <!-- <th scope="col">Description</th> -->
+            <th scope="col">Total Quantity</th>
+            <th scope="col">Stock History</th>
+            <th></th> 
+        </tr>
+    </thead>
+    <tbody>
+     
+        <tr *ngFor="let prod of products">
+            <th scope="row">{{prod.name}}</th>
+            <td>{{prod.reference}}</td>
+            <!-- <td>{{prod.description}}</td> -->
+            <td>{{prod.quantity}}</td>
+            <!-- <td>{{prod.prix}}</td> -->
+      
+            <td><button  class="btn bg-light-primary mr-1" (click)="modalOpen(modalBasic, stock)">Details</button></td>
+            <!-- <td><button  class="btn btn-info btn-sm mx-2" routerLink="edit/{{prod.id}}">Details</button></td>  -->
+      
+          </tr>
+     
+           
+        
+    </tbody>
+
+</table>
+</core-card-snippet>
+   
+</section> 
   </div>
 </div>

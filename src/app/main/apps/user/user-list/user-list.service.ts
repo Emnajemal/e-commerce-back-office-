@@ -72,6 +72,10 @@ register(data:any): Observable<any>{
 deletetData(id:any){
   return this._httpClient.delete('http://127.0.0.1:8000/api/auth/deleteuser/'+id);
 }
+// deletetData(id){
+//   return this._httpClient.delete(`http://127.0.0.1:8000/api/auth/deleteuser/${id}`);
+
+// }
 
 
   /**

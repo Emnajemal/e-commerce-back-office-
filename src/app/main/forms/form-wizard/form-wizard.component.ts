@@ -1,6 +1,13 @@
+import { OrderService } from './order.service';
+// import { Product } from 'app/auth/models/product';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Product from 'app/auth/models/store'
 import Stepper from 'bs-stepper';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import  Order  from 'app/auth/models/order';
+import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
+import { StoreService } from 'Serv/store.service';
 
 @Component({
   selector: 'app-form-wizard',
@@ -9,10 +16,23 @@ import Stepper from 'bs-stepper';
   encapsulation: ViewEncapsulation.None
 })
 export class FormWizardComponent implements OnInit {
+  registerForm: FormGroup;
+  public alert =false;
+  public order: Order ;
+  public alrt = false;
+  public products: Product[];
+
+  quantité=[];
+  command  = [];
+  public basicDPdata: NgbDateStruct;
+
+  
   // public
   public contentHeader: object;
   public TDNameVar;
   public TDEmailVar;
+  public total;
+  public Order;
   public TDFirstNameVar;
   public TDLastNameVar;
   public twitterVar;
@@ -21,18 +41,21 @@ export class FormWizardComponent implements OnInit {
   public linkedinVar;
   public landmarkVar;
   public addressVar;
-
+  public livreur;
+  
+submitted = false;
   public selectBasic = [
-    { name: 'UK' },
-    { name: 'USA' },
-    { name: 'Spain' },
-    { name: 'France' },
-    { name: 'Italy' },
-    { name: 'Australia' }
+    { name: 'Paid' },
+    { name: 'Unpaid' },
+    // { name: 'Spain' },
+    // { name: 'France' },
+    // { name: 'Italy' },
+    // { name: 'Australia' }
   ];
 
-  public selectMulti = [{ name: 'English' }, { name: 'French' }, { name: 'Spanish' }];
+  public selectMulti = [{ name: 'Undelivered' }, { name: 'Delivered' }, { name: 'In delivering' }];
   public selectMultiSelected;
+
 
   // private
   private horizontalWizardStepper: Stepper;
@@ -40,16 +63,28 @@ export class FormWizardComponent implements OnInit {
   private modernWizardStepper: Stepper;
   private modernVerticalWizardStepper: Stepper;
   private bsStepper;
+  
+
+  
+  public MinMaxDPdata: NgbDateStruct;
+
+  
+  public selectedProducts :any = []
+
+  
 
   /**
    * Horizontal Wizard Stepper Next
    *
    * @param data
    */
-  horizontalWizardStepperNext(data) {
-    if (data.form.valid === true) {
+  horizontalWizardStepperNext() {
+    // if (data.form.valid === true) {
+    //   this.horizontalWizardStepper.next();
+    // }
+   
       this.horizontalWizardStepper.next();
-    }
+    
   }
   /**
    * Horizontal Wizard Stepper Previous
@@ -70,6 +105,9 @@ export class FormWizardComponent implements OnInit {
   verticalWizardPrevious() {
     this.verticalWizardStepper.previous();
   }
+
+
+  get f() { return this.registerForm.controls; }
   /**
    * Modern Horizontal Wizard Stepper Next
    */
@@ -98,12 +136,129 @@ export class FormWizardComponent implements OnInit {
   /**
    * On Submit
    */
-  onSubmit() {
-    alert('Submitted!!');
-    return false;
+  // onSubmit() {
+  //   alert('Submitted!!');
+  //   return false;
+  // }
+ 
+  
+  // public
+  public items = [{  itemName: '', itemQuantity: '' }];
+
+  public item = {
+    itemName: '',
+    itemQuantity: '',
+  
+  };
+
+  // Public Methods
+  // -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Add Item
+   */
+  addItem() {
+    this.items.push({
+     
+      itemName:'',
+      itemQuantity:'' ,
+     
+    });
+    this.command.push({
+     
+      products_id:this.registerForm.value.products_id,
+      quantity_order:this.registerForm.value.quantity_order ,
+     
+    });
+// console.log(this.registerForm.value);
+//     console.log(this.item);
+//     alert(this.item);
   }
 
-  constructor() {}
+  getproducts(){
+    this.StoreServices.getProducts().then((data: any) => {
+      this.products=data;
+      console.log(data);
+    })
+  }
+  
+  onSubmit () {
+    console.log(this.registerForm)
+    this.submitted = true;
+
+    this.command.push({
+      products_id:this.registerForm.value.products_id,
+      quantity_order:this.registerForm.value.quantity_order ,
+    });
+    // alert('ok');
+    console.log(this.command);
+    this.registerForm.value.commande=this.command;
+    this.registerForm.value.products_id= '';
+    this.registerForm.value.quantity_order= '';
+    this.registerForm.value.delivery_date=this.registerForm.value.delivery_date.year+'/'+this.registerForm.value.delivery_date.month+'/'+this.registerForm.value.delivery_date.day;
+console.log(this.registerForm.value);
+
+    // if (this.registerForm.invalid) {
+    //   this.alert=true;
+    //   setTimeout(() => {
+    //     this.alert = false;
+       
+    //   }, 2000) 
+    //   return;
+    // }
+    // let formdata = new FormData();
+    // data: Order;
+    // console.log('hy')
+  //   formdata.append('client_name', this.registerForm.value.client_name);
+   
+  //  formdata.append('client_lastname',this.registerForm.value.client_lastname);
+  //     formdata.append('num_tel',this.registerForm.value.num_tel);
+  //     formdata.append('livreur',this.registerForm.value.livreur);
+  //    formdata.append('colis_ref',this.registerForm.value.colis_ref);
+  //    formdata.append('products_id',this.registerForm.value.products_id);
+  //    formdata.append('quantity_order',this.registerForm.value.quantity_order);
+   console.log(this.registerForm.value.livreur)
+    
+
+    console.log(this.registerForm.value.quantity_order);
+  
+      this.OrderService.register(this.registerForm.value).subscribe({
+      next: (data: any) => {
+      
+        console.log(data)
+        // this.alert=true ; 
+      
+        // this.alrt = true;
+        // setTimeout(() => {
+        //   this.alrt = false;
+        
+        // }, 4000) 
+ 
+      //  this.StoreServices.getOrders();
+      },
+      
+       
+    } )
+  }
+
+  /**
+   * DeleteItem
+   *
+   * @param id
+   */
+  deleteItem(id) {
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items.indexOf(this.items[i]) === id) {
+        this.items.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+
+  
+
+  constructor(private OrderService:OrderService, private StoreServices:  StoreService,private _formBuilder: FormBuilder,) {}
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -111,25 +266,57 @@ export class FormWizardComponent implements OnInit {
   /**
    * On Init
    */
+//    ngOnInit(): void {
+   
+//     this.registerForm = this._formBuilder.group({
+      
+//   insert_quantity: ['', Validators.required],
+//   products_id: ['', Validators.required],
+//   quantity: [''] ,
+ 
+// }  );
+// // this.getproducts();
+// // this.getstocks();
+
+// }
   ngOnInit() {
-    this.horizontalWizardStepper = new Stepper(document.querySelector('#stepper1'), {});
 
-    this.verticalWizardStepper = new Stepper(document.querySelector('#stepper2'), {
-      linear: false,
-      animation: true
+    this.registerForm = this._formBuilder.group({
+      
+      client_name: ['',[]],
+      client_lastname: ['', []],
+      num_tel:  ['', []] ,
+      num_tel2:  ['', []],
+      livreur: ['', []],
+      colis_ref: ['', []],
+      products_id: ['',[]],
+      quantity_order: ['',[]],
+      delivery_date: ['', []],   
+      status_livraison: ['', []],  
+      status_paiment: ['', []],  
+      gouvernerat: ['', []],  
+      commande:[, []],
     });
+  this.getproducts();
+  
+    // this.horizontalWizardStepper = new Stepper(document.querySelector('#stepper1'), {});
 
-    this.modernWizardStepper = new Stepper(document.querySelector('#stepper3'), {
-      linear: false,
-      animation: true
-    });
+    // this.verticalWizardStepper = new Stepper(document.querySelector('#stepper2'), {
+    //   linear: false,
+    //   animation: true
+    // });
 
-    this.modernVerticalWizardStepper = new Stepper(document.querySelector('#stepper4'), {
-      linear: false,
-      animation: true
-    });
+    // this.modernWizardStepper = new Stepper(document.querySelector('#stepper3'), {
+    //   linear: false,
+    //   animation: true
+    // });
 
-    this.bsStepper = document.querySelectorAll('.bs-stepper');
+    // this.modernVerticalWizardStepper = new Stepper(document.querySelector('#stepper4'), {
+    //   linear: false,
+    //   animation: true
+    // });
+
+    // this.bsStepper = document.querySelectorAll('.bs-stepper');
 
     // content header
     this.contentHeader = {
@@ -155,5 +342,29 @@ export class FormWizardComponent implements OnInit {
         ]
       }
     };
+    this.bsStepper = document.querySelector('div.bs-stepper');
+    console.log(this.bsStepper)
+    this.horizontalWizardStepper = new Stepper(document.querySelector('div.bs-stepper'), {});
+    console.log(this.bsStepper)
+  }
+
+  ngAfterViewInit(){
+   
+    // this.verticalWizardStepper = new Stepper(document.querySelector('div.stepper2'), {
+    //   linear: false,
+    //   animation: true
+    // });
+    // console.log(this.bsStepper)
+    // this.modernWizardStepper = new Stepper(document.querySelector('#stepper3'), {
+    //   linear: false,
+    //   animation: true
+    // });
+    // console.log(this.bsStepper)
+    // this.modernVerticalWizardStepper = new Stepper(document.querySelector('#stepper4'), {
+    //   linear: false,
+    //   animation: true
+    // });
+    // console.log(this.bsStepper)
+
   }
 }

@@ -7,7 +7,9 @@ import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { CoreConfigService } from '@core/services/config.service';
 
 import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
-
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Order from 'app/auth/models/order';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
@@ -16,6 +18,7 @@ import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-l
 })
 export class InvoiceListComponent implements OnInit, OnDestroy {
   // public
+  public orders: Order[];
   public data: any;
   public selectedOption = 10;
   public ColumnMode = ColumnMode;
@@ -41,6 +44,10 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
   public rows;
   public tempFilterData;
   public previousStatusFilter = '';
+  
+  public basicDPdata: NgbDateStruct;
+
+  id_pers:number=0;
 
   /**
    * Constructor
@@ -49,7 +56,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
    * @param {CalendarService} _calendarService
    * @param {InvoiceListService} _invoiceListService
    */
-  constructor(private _invoiceListService: InvoiceListService, private _coreConfigService: CoreConfigService) {
+  constructor(private _invoiceListService: InvoiceListService, private _coreConfigService: CoreConfigService, private modalService: NgbModal) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -61,6 +68,44 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
    *
    * @param event
    */
+   modalOpenDanger(modalDanger,row) {
+    // console.log('hey'+row)
+    this.modalService.open(modalDanger, {
+      centered: true,
+      windowClass: 'modal modal-danger'
+
+    });
+    this.id_pers=row.id;
+
+}
+
+deleteData(order:any) {
+  
+ 
+  if(this.id_pers !== 0) {
+  console.log('ahla',order)
+  this._invoiceListService.deletetData(this.id_pers).subscribe((result: any) => {
+    console.log('salem'+order.id)
+    console.log('cc'+result)
+
+    this._invoiceListService.getDataTableRows();
+    this.modalService.dismissAll()
+    Swal.fire({
+      title: "Deleted!",
+      icon:"success",
+    
+      customClass: { confirmButton: 'btn btn-success' }
+    });
+  })
+}}
+
+
+   getorders(){
+    this._invoiceListService.getDataTableRows().then((data: any) => {
+      this.orders=data;
+      console.log(data)
+    })
+  }
   filterUpdate(event) {
     // Reset ng-select on search
     this.selectedStatus = this.selectStatus[0];
@@ -112,6 +157,13 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
   /**
    * On init
    */
+
+   modalOpenForm(modalForm) {
+    
+    this.modalService.open(modalForm);
+    // this.submit();
+  }
+
   ngOnInit(): void {
     // Subscribe config change
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
