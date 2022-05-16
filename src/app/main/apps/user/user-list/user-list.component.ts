@@ -258,6 +258,12 @@ deleteData(personnel:any) {
 
     this._userListService.getDataTableRows();
     this.modalService.dismissAll()
+    Swal.fire({
+      title: "Deleted!",
+      icon:"success",
+    
+      customClass: { confirmButton: 'btn btn-success' }
+    });
   })
 }}
 

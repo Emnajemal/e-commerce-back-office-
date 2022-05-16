@@ -8,6 +8,8 @@ import { FormWizardModule } from 'app/main/forms/form-wizard/form-wizard.module'
 
 @NgModule({
   declarations: [],
-  imports: [FormElementsModule, FormLayoutModule, FormWizardModule, FormValidationModule, FormRepeaterModule]
+  imports: [FormElementsModule, FormLayoutModule, FormWizardModule, FormValidationModule, 
+  
+    FormRepeaterModule]
 })
 export class FormsModule {}

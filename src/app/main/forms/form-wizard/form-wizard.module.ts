@@ -11,7 +11,8 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { CoreDirectivesModule } from '@core/directives/directives';
 
 import { FormWizardComponent } from 'app/main/forms/form-wizard/form-wizard.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: 'form-wizard',
@@ -30,7 +31,10 @@ const routes: Routes = [
     CardSnippetModule,
     FormsModule,
     CoreDirectivesModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule,
+    CardSnippetModule,
+    ReactiveFormsModule
   ]
 })
 export class FormWizardModule {}

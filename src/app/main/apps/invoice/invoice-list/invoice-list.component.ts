@@ -93,7 +93,7 @@ deleteData(order:any) {
     Swal.fire({
       title: "Deleted!",
       icon:"success",
-     // imageUrl: result.value.avatar_url,
+    
       customClass: { confirmButton: 'btn btn-success' }
     });
   })
