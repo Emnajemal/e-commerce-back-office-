@@ -395,6 +395,7 @@
 
       <!-- <core-card-snippet [snippetCode]="_snippetCodeRowDetails"> -->
         <core-card-snippet >
+         
         <!-- <h4 class="card-title">Stock Details</h4> -->
         <div class="row">
           <!-- <div class="col-12 mb-50">
@@ -435,7 +436,7 @@
 
 
 
-              <button (click)="modalOpenForm(modalForm)" class="btn btn-primary ml-1" rippleEffect>
+              <button (click)="modalOpenForm(modalForm)" class="btn btn-success ml-1" rippleEffect>
                 <i data-feather="plus" class="mr-0 mr-sm-1"></i
                 ><span class="d-none d-sm-inline-block">Add New Stock</span>
               </button> 
@@ -444,8 +445,8 @@
           </div>
         </div>
 
-        <!-- ngx-datatable-row-details -->
-        <ngx-datatable
+        <!-- nour ngx-datatable-row-details -->
+        <!-- <ngx-datatable
           #tableRowDetails
           class="bootstrap core-bootstrap"
           [columnMode]="ColumnMode.force"
@@ -455,21 +456,22 @@
           [limit]="10"
           [rows]="rows"
           [scrollbarH]="true"
-        >
+        > -->
           <!-- Row Detail Template -->
-          <ngx-datatable-row-detail [rowHeight]="50">
+          <!-- nour <ngx-datatable-row-detail [rowHeight]="50">
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
               <div class="ml-75 pl-5 pt-75">
                 <div>
                   <span><strong>Quantity added : </strong> {{ row.insert_quantity }}</span
                   >
-                  <!-- <span class="ml-1"><strong>Experience : </strong> {{ row.experience }}</span> -->
+                 
                   <span class="ml-1"><strong> Date : </strong> {{transformDate(row.insert_date)}}</span>
 
                 </div>
               </div>
             </ng-template>
           </ngx-datatable-row-detail>
+          
           <ngx-datatable-column
             [width]="50"
             [resizeable]="false"
@@ -477,7 +479,7 @@
             [draggable]="false"
             [canAutoResize]="false"
           >
-            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+            hedhi el details <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
               <a
                 href="javascript:void(0)"
                 class="text-body"
@@ -488,7 +490,7 @@
               >
               </a>
             </ng-template>
-          </ngx-datatable-column>
+          </ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Product Name" prop="name" [width]="280">
             <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
               <div class="d-flex align-items-center">
@@ -523,7 +525,7 @@
               </div>
             </ng-template> 
           </ngx-datatable-column>-->
-          <ngx-datatable-column name="Product" prop="products" [width]="50">
+          <!-- nour <ngx-datatable-column name="Product" prop="products" [width]="50">
             <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
                 <ng-template ngFor let-obj [ngForOf]="value">
                     <strong> {{ obj.name}} </strong>
@@ -540,11 +542,11 @@
                     <br />
                 </ng-template>
             </ng-template>
-        </ngx-datatable-column>
+        </ngx-datatable-column> -->
           
           <!-- <ngx-datatable-column name="Id_product" prop="email" [width]="200"></ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Total quantity" prop="quantity" [width]="100"></ngx-datatable-column> -->
-          <ngx-datatable-column name="Total quantity" prop="products" [width]="60">
+          <!-- nour <ngx-datatable-column name="Total quantity" prop="products" [width]="60">
             <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
                 <ng-template ngFor let-obj [ngForOf]="value">
                     <strong> {{ obj.quantity }} </strong>
@@ -552,7 +554,10 @@
                     <br />
                 </ng-template>
             </ng-template>
-        </ngx-datatable-column>
+        </ngx-datatable-column> -->
+
+     
+
           <!-- <ngx-datatable-column name="Quantity added" prop="insert_quantity" [width]="120"></ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Date" prop="insert_date" [width]="100">
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -620,10 +625,11 @@
               </div>
             </ng-template>
           </ngx-datatable-column> -->
-        </ngx-datatable>
+        <!-- nour </ngx-datatable> -->
         <!-- ngx-datatable-row-details -->
-      </core-card-snippet>
-    </section>
+      <!-- </core-card-snippet>
+   
+    </section>  -->
     <!-- Row Details  Datatables -->
 
     <!-- Custom Checkbox Datatables -->
@@ -1055,7 +1061,68 @@
     <!-- <button type="button" (click)="modalOpenForm(modalForm)" class="btn btn-outline-primary" rippleEffect>
       Login Form
     </button> -->
+    <!-- modal details -->
+    <!-- <ng-template #modalBasic let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">{{stockDetails.insert_quantity}}</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+        <h4 class="modal-title" id="myModalLabel1">{{stockDetails.insert_date}}</h4>
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-light-primary mr-1" (click)="modal.close()" rippleEffect>
+        Cancel
+        </button>
+      </div>
+    </ng-template> -->
   
+    <ng-template #modalBasic let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">Stock Details</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" tabindex="0" ngbAutofocus>
+       
+         
+
+
+        
+          </div>
+        
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Quantity Added</th>
+                    <th scope="col"> Date</th>
+                    
+          
+                    <th></th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stock of stocks">
+                    <th scope="row">{{stock.insert_quantity}}</th>
+                    <!-- <td>{{stock.insert_date}}</td> -->
+                    <td> {{transformDate(stock.insert_date)}}</td>
+                    
+     
+                </tr>
+            </tbody>
+        </table>
+
+      <div class="modal-footer">
+        <button type="button" class="btn bg-light-primary mr-1" (click)="modal.close()" rippleEffect>
+        Cancel
+        </button>
+      </div>
+    </ng-template>
+
     <!-- Modal -->
     <ng-template #modalForm let-modal>
       <div class="modal-header">
@@ -1070,73 +1137,69 @@
           <!-- <div class="form-group">
             <input type="text" placeholder="Id_product" class="form-control" />
           </div> -->
+
+          <!-- Modal -->
+  <ng-template #modalSuccess let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">Success </h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+      Stock added successfully
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="modal.close('Accept click')" rippleEffect>
+       Close
+      </button>
+    </div>
+  </ng-template>
           <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
             <h4 class="alert-heading">Stock added successfully</h4>
             
           </ngb-alert>
+
           <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
             <h4 class="alert-heading">Error! Check your fields </h4>
             
           </ngb-alert>
-          <!-- <div class="form-group">
-            <label for="register-adresse" class="form-label">Id_product</label>
-            <input
-              type="text"
-              id="products_id"
-              class="form-control"
-              formControlName="products_id"
-              name="products_id"
-              placeholder="Id_product"
-            />
-          </div> -->
-          <!-- <div class="form-group row mb-2">
-            <label for="customSelect" class="col-sm-3 col-form-label"> Product </label>
-          <div class="col-sm-6">
-            <select class="custom-select" formControlName="products_id" >
-                <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
-            </select>
-          </div>
-         </div> -->
 
-          <div class="form-group row mb-2">
+          <!-- <div class="form-group row mb-2">
             <label for="customSelect" class="col-sm-3 col-form-label" > Product </label>
           <div class="col-sm-6">
             <select class="custom-select" formControlName="products_id" >
                 <option ngbDropdownItem  *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
             </select>
           </div>
-         </div>
-                           
-          <!-- <label> Quantity: </label>
-          <div class="form-group">
-          
+         </div> -->
 
-            <input type="text" placeholder="Quantity" class="form-control" />
-          </div> -->
-          
-          <!-- <div class="form-group row mb-2">
-            <label for="customSelect" class="col-sm-3 col-form-label"> Quantity </label>
-    
+         
+          <div class="form-group row mb-2">
+            <label for="customSelect" class="col-sm-3 col-form-label" > Product </label>
           <div class="col-sm-6">
-            <select class="custom-select" formControlName="quantity" >
-                <option *ngFor="let product of products" [value]="product.quantity">{{product.quantity}}</option>
+            <select class="custom-select" formControlName="products_id" >
+                <option ngbDropdownItem href="javascript:void(0)" *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
             </select>
-            
           </div>
-         </div>   -->
-
-
-          <!-- <div class="form-group row mb-2 " >
-            <label for="register-adresse" class="col-sm-3 col-form-label">Quantity </label>
+         </div>
+<!-- <div class="btn-group ">
+          <div ngbDropdown>
+            <button
+              ngbDropdownToggle
+              class="btn btn-flat-info"
+              type="button"
+              id="dropdownMenuButton300"
+              rippleEffect
+            >
+              Choose product
+            </button>
             <div class="col-sm-6">
-            <input
-              type="text"
-              id="quantity"
-              class="form-control"
-              formControlName="quantity"
-              name="quantity"
-              placeholder="Quantity"
-            />
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuButton300" formControlName="products_id">  -->
+              <!-- <a ngbDropdownItem href="javascript:void(0)">Option 1</a> -->
+              <!-- <a ngbDropdownItem href="javascript:void(0)"  *ngFor="let product of products" [value]="product.id">{{product.name}}</a>
+            </div>
+          </div>
           </div>
         </div> -->
 
@@ -1159,16 +1222,50 @@
         <!-- <button type="button" class="btn bg-light-primary" (click)="modal.close('Accept click')" rippleEffect>
           Submit
         </button> -->
-        <button type="submit" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
+        <button type="submit" (click)="modalOpenSuccess(modalSuccess)" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button>
         <button type="button" class="btn bg-light-danger" (click)="modal.close('Accept click')" rippleEffect>
           Cancel
         </button>
       </div>
     </ng-template>
     <!-- / Modal -->
+
+    
   </div>
 
+  <table class="table">
+   
+    <thead>
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Reference</th>
+            <!-- <th scope="col">Description</th> -->
+            <th scope="col">Total Quantity</th>
+            <th scope="col">Stock History</th>
+            <th></th> 
+        </tr>
+    </thead>
+    <tbody>
+     
+        <tr *ngFor="let prod of products">
+            <th scope="row">{{prod.name}}</th>
+            <td>{{prod.reference}}</td>
+            <!-- <td>{{prod.description}}</td> -->
+            <td>{{prod.quantity}}</td>
+            <!-- <td>{{prod.prix}}</td> -->
+      
+            <td><button  class="btn bg-light-primary mr-1" (click)="modalOpen(modalBasic, stock)">Details</button></td>
+            <!-- <td><button  class="btn btn-info btn-sm mx-2" routerLink="edit/{{prod.id}}">Details</button></td>  -->
+      
+          </tr>
+     
+           
+        
+    </tbody>
 
-
+</table>
+</core-card-snippet>
+   
+</section> 
   </div>
 </div>

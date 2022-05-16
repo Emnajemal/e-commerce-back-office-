@@ -16,8 +16,8 @@ import { CoreSidebarModule } from '@core/components';
 import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
 import { InvoiceModule } from 'app/main/apps/invoice/invoice.module';
 
-import { UserEditComponent } from 'app/main/apps/user/user-edit/user-edit.component';
-import { UserEditService } from 'app/main/apps/user/user-edit/user-edit.service';
+// import { UserEditComponent } from 'app/main/apps/user/user-edit/user-edit.component';
+// import { UserEditService } from 'app/main/apps/user/user-edit/user-edit.service';
 
 import { UserListComponent } from 'app/main/apps/user/user-list/user-list.component';
 import { UserListService } from 'app/main/apps/user/user-list/user-list.service';
@@ -56,14 +56,14 @@ const routes: Routes = [
     },
     data: { path: 'view/:id', animation: 'UserViewComponent' }
   },
-  {
-    path: 'user-edit/:id',
-    component: UserEditComponent,
-    resolve: {
-      ues: UserEditService
-    },
-    data: { animation: 'UserEditComponent' }
-  },
+  // {
+  //   path: 'user-edit/:id',
+  //   component: UserEditComponent,
+  //   resolve: {
+  //     ues: UserEditService
+  //   },
+  //   data: { animation: 'UserEditComponent' }
+  // },
   {
     path: 'user-view',
     redirectTo: '/apps/user/user-view/2' // Redirection
@@ -80,7 +80,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UserListComponent, UserViewComponent, UserEditComponent, NewUserSidebarComponent],
+  declarations: [UserListComponent, UserViewComponent, NewUserSidebarComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -109,6 +109,6 @@ const routes: Routes = [
     SweetAlert2Module.forRoot()
   
   ],
-  providers: [UserListService, UserViewService, UserEditService]
+  providers: [UserListService, UserViewService]
 })
 export class UserModule {}

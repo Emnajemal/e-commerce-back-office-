@@ -53,30 +53,30 @@ export const menu: CoreMenu[] = [
     translate: 'MENU.APPS.SECTION',
     icon: 'package',
     children: [
-      {
-        id: 'email',
-        title: 'Email',
-        translate: 'MENU.APPS.EMAIL',
-        type: 'item',
-        icon: 'mail',
-        url: 'apps/email'
-      },
-      {
-        id: 'chat',
-        title: 'Chat',
-        translate: 'MENU.APPS.CHAT',
-        type: 'item',
-        icon: 'message-square',
-        url: 'apps/chat'
-      },
-      {
-        id: 'todo',
-        title: 'Todo',
-        translate: 'MENU.APPS.TODO',
-        type: 'item',
-        icon: 'check-square',
-        url: 'apps/todo'
-      },
+      // {
+      //   id: 'email',
+      //   title: 'Email',
+      //   translate: 'MENU.APPS.EMAIL',
+      //   type: 'item',
+      //   icon: 'mail',
+      //   url: 'apps/email'
+      // },
+      // {
+      //   id: 'chat',
+      //   title: 'Chat',
+      //   translate: 'MENU.APPS.CHAT',
+      //   type: 'item',
+      //   icon: 'message-square',
+      //   url: 'apps/chat'
+      // },
+      // {
+      //   id: 'todo',
+      //   title: 'Todo',
+      //   translate: 'MENU.APPS.TODO',
+      //   type: 'item',
+      //   icon: 'check-square',
+      //   url: 'apps/todo'
+      // },
       {
         id: 'calendar',
         title: 'Calendar',
@@ -349,7 +349,7 @@ export const menu: CoreMenu[] = [
       {
         id: 'invoice',
         title: 'Invoice',
-        translate: 'MENU.APPS.INVOICE.COLLAPSIBLE',
+        translate: 'Order',
         type: 'collapsible',
         icon: 'file-text',
         children: [
@@ -377,14 +377,23 @@ export const menu: CoreMenu[] = [
             icon: 'circle',
             url: 'apps/invoice/edit'
           },
+          // {
+          //   id: 'invoiceAdd',
+          //   title: 'Add',
+          //   translate: 'MENU.APPS.INVOICE.ADD',
+          //   type: 'item',
+          //   icon: 'circle',
+          //   url: 'apps/invoice/add'
+          // },
           {
-            id: 'invoiceAdd',
-            title: 'Add',
-            translate: 'MENU.APPS.INVOICE.ADD',
+            id: 'form-wizard',
+            title: 'Form Wizard',
+            translate: 'Add',
             type: 'item',
             icon: 'circle',
-            url: 'apps/invoice/add'
-          }
+            url: 'forms/form-wizard'
+          },
+        
         ]
       },
       {
@@ -452,22 +461,22 @@ export const menu: CoreMenu[] = [
             icon: 'circle',
             url: 'apps/user/user-list'
           },
-          {
-            id: 'view',
-            title: 'View',
-            translate: 'MENU.APPS.USER.VIEW',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/user/user-view'
-          },
-          {
-            id: 'edit',
-            title: 'Edit',
-            translate: 'MENU.APPS.USER.EDIT',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/user/user-edit'
-          }
+          // {
+          //   id: 'view',
+          //   title: 'View',
+          //   translate: 'MENU.APPS.USER.VIEW',
+          //   type: 'item',
+          //   icon: 'circle',
+          //   url: 'apps/user/user-view'
+          // },
+          // {
+          //   id: 'edit',
+          //   title: 'Edit',
+          //   translate: 'MENU.APPS.USER.EDIT',
+          //   type: 'item',
+          //   icon: 'circle',
+          //   url: 'apps/user/user-edit'
+          // }
         ]
       }
     ]
@@ -1044,14 +1053,14 @@ export const menu: CoreMenu[] = [
         icon: 'box',
         url: 'forms/form-layout'
       },
-      {
-        id: 'form-wizard',
-        title: 'Form Wizard',
-        translate: 'MENU.FT.WIZARD',
-        type: 'item',
-        icon: 'package',
-        url: 'forms/form-wizard'
-      },
+      // {
+      //   id: 'form-wizard',
+      //   title: 'Form Wizard',
+      //   translate: 'MENU.FT.WIZARD',
+      //   type: 'item',
+      //   icon: 'package',
+      //   url: 'forms/form-wizard'
+      // },
       {
         id: 'form-validation',
         title: 'Form Validations',
@@ -1076,141 +1085,149 @@ export const menu: CoreMenu[] = [
         icon: 'server',
         url: 'tables/table'
       },
+      // {
+      //   id: 'tables-datatable',
+      //   title: 'DataTables',
+      //   translate: 'MENU.FT.DATATABLES',
+      //   type: 'item',
+      //   icon: 'grid',
+      //   url: 'tables/datatables'
+      // }
       {
         id: 'tables-datatable',
         title: 'DataTables',
-        translate: 'MENU.FT.DATATABLES',
+        translate: 'Stock',
         type: 'item',
         icon: 'grid',
         url: 'tables/datatables'
       }
     ]
   },
-  // Charts & Maps
-  {
-    id: 'charts-maps',
-    type: 'section',
-    title: 'Charts & Maps',
-    translate: 'MENU.CM.SECTION',
-    icon: 'bar-chart-2',
-    children: [
-      {
-        id: 'charts',
-        title: 'Charts',
-        translate: 'MENU.CM.CHARTS.COLLAPSIBLE',
-        type: 'collapsible',
-        icon: 'pie-chart',
-        badge: {
-          title: '2',
-          translate: 'MENU.CM.CHARTS.BADGE',
-          classes: 'badge-light-danger badge-pill'
-        },
-        children: [
-          {
-            id: 'apex',
-            title: 'Apex',
-            translate: 'MENU.CM.CHARTS.APEX',
-            type: 'item',
-            icon: 'circle',
-            url: 'charts-and-maps/apex'
-          },
-          {
-            id: 'chartJs',
-            title: 'ChartJS',
-            translate: 'MENU.CM.CHARTS.CHARTJS',
-            type: 'item',
-            icon: 'circle',
-            url: 'charts-and-maps/chartjs'
-          }
-        ]
-      },
-      {
-        id: 'google-maps',
-        title: 'Google Maps',
-        translate: 'MENU.CM.MAPS',
-        icon: 'map',
-        type: 'item',
-        url: 'charts-and-maps/google-maps'
-      }
-    ]
-  },
+  // // Charts & Maps
+  // {
+  //   id: 'charts-maps',
+  //   type: 'section',
+  //   title: 'Charts & Maps',
+  //   translate: 'MENU.CM.SECTION',
+  //   icon: 'bar-chart-2',
+  //   children: [
+  //     {
+  //       id: 'charts',
+  //       title: 'Charts',
+  //       translate: 'MENU.CM.CHARTS.COLLAPSIBLE',
+  //       type: 'collapsible',
+  //       icon: 'pie-chart',
+  //       badge: {
+  //         title: '2',
+  //         translate: 'MENU.CM.CHARTS.BADGE',
+  //         classes: 'badge-light-danger badge-pill'
+  //       },
+  //       children: [
+  //         {
+  //           id: 'apex',
+  //           title: 'Apex',
+  //           translate: 'MENU.CM.CHARTS.APEX',
+  //           type: 'item',
+  //           icon: 'circle',
+  //           url: 'charts-and-maps/apex'
+  //         },
+  //         {
+  //           id: 'chartJs',
+  //           title: 'ChartJS',
+  //           translate: 'MENU.CM.CHARTS.CHARTJS',
+  //           type: 'item',
+  //           icon: 'circle',
+  //           url: 'charts-and-maps/chartjs'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'google-maps',
+  //       title: 'Google Maps',
+  //       translate: 'MENU.CM.MAPS',
+  //       icon: 'map',
+  //       type: 'item',
+  //       url: 'charts-and-maps/google-maps'
+  //     }
+  //   ]
+  // },
   // Others
-  {
-    id: 'others',
-    type: 'section',
-    title: 'Others',
-    translate: 'MENU.OTHERS.SECTION',
-    icon: 'box',
-    children: [
-      {
-        id: 'menu-levels',
-        title: 'Menu Levels',
-        translate: 'MENU.OTHERS.LEVELS.COLLAPSIBLE',
-        icon: 'menu',
-        type: 'collapsible',
-        children: [
-          {
-            id: 'second-level',
-            title: 'Second Level',
-            translate: 'MENU.OTHERS.LEVELS.SECOND',
-            icon: 'circle',
-            type: 'item',
-            url: '#'
-          },
-          {
-            id: 'second-level1',
-            title: 'Second Level',
-            translate: 'MENU.OTHERS.LEVELS.SECOND1.COLLAPSIBLE',
-            icon: 'circle',
-            type: 'collapsible',
-            children: [
-              {
-                id: 'third-level',
-                title: 'Third Level',
-                translate: 'MENU.OTHERS.LEVELS.SECOND1.THIRD',
-                type: 'item',
-                url: '#'
-              },
-              {
-                id: 'third-level1',
-                title: 'Third Level',
-                translate: 'MENU.OTHERS.LEVELS.SECOND1.THIRD1',
-                type: 'item',
-                url: '#'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'disabled-menu',
-        title: 'Disabled Menu',
-        translate: 'MENU.OTHERS.DISABLED',
-        icon: 'eye-off',
-        type: 'item',
-        url: '#',
-        disabled: true
-      },
-      {
-        id: 'documentation',
-        title: 'Documentation',
-        translate: 'MENU.OTHERS.DOCUMENTATION',
-        icon: 'file-text',
-        type: 'item',
-        url: 'https://pixinvent.com/demo/vuexy-angular-admin-dashboard-template/documentation',
-        externalUrl: true,
-        openInNewTab: true
-      },
-      {
-        id: 'raise-support',
-        title: 'Raise Support',
-        translate: 'MENU.OTHERS.SUPPORT',
-        icon: 'life-buoy',
-        type: 'item',
-        url: 'https://pixinvent.ticksy.com/',
-        externalUrl: true,
-        openInNewTab: true
-      }
-    ]
-  }
+  // {
+  //   id: 'others',
+  //   type: 'section',
+  //   title: 'Others',
+  //   translate: 'MENU.OTHERS.SECTION',
+  //   icon: 'box',
+  //   children: [
+  //     {
+  //       id: 'menu-levels',
+  //       title: 'Menu Levels',
+  //       translate: 'MENU.OTHERS.LEVELS.COLLAPSIBLE',
+  //       icon: 'menu',
+  //       type: 'collapsible',
+  //       children: [
+  //         {
+  //           id: 'second-level',
+  //           title: 'Second Level',
+  //           translate: 'MENU.OTHERS.LEVELS.SECOND',
+  //           icon: 'circle',
+  //           type: 'item',
+  //           url: '#'
+  //         },
+  //         {
+  //           id: 'second-level1',
+  //           title: 'Second Level',
+  //           translate: 'MENU.OTHERS.LEVELS.SECOND1.COLLAPSIBLE',
+  //           icon: 'circle',
+  //           type: 'collapsible',
+  //           children: [
+  //             {
+  //               id: 'third-level',
+  //               title: 'Third Level',
+  //               translate: 'MENU.OTHERS.LEVELS.SECOND1.THIRD',
+  //               type: 'item',
+  //               url: '#'
+  //             },
+  //             {
+  //               id: 'third-level1',
+  //               title: 'Third Level',
+  //               translate: 'MENU.OTHERS.LEVELS.SECOND1.THIRD1',
+  //               type: 'item',
+  //               url: '#'
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     },
+  //     // {
+  //     //   id: 'disabled-menu',
+  //     //   title: 'Disabled Menu',
+  //     //   translate: 'MENU.OTHERS.DISABLED',
+  //     //   icon: 'eye-off',
+  //     //   type: 'item',
+  //     //   url: '#',
+  //     //   disabled: true
+  //     // },
+  //     // {
+  //     //   id: 'documentation',
+  //     //   title: 'Documentation',
+  //     //   translate: 'MENU.OTHERS.DOCUMENTATION',
+  //     //   icon: 'file-text',
+  //     //   type: 'item',
+  //     //   url: 'https://pixinvent.com/demo/vuexy-angular-admin-dashboard-template/documentation',
+  //     //   externalUrl: true,
+  //     //   openInNewTab: true
+  //     // },
+  //     // {
+  //     //   id: 'raise-support',
+  //     //   title: 'Raise Support',
+  //     //   translate: 'MENU.OTHERS.SUPPORT',
+  //     //   icon: 'life-buoy',
+  //     //   type: 'item',
+  //     //   url: 'https://pixinvent.ticksy.com/',
+  //     //   externalUrl: true,
+  //     //   openInNewTab: true
+  //     // }
+  //   ]
+  // }
 ];

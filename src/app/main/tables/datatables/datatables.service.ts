@@ -44,12 +44,25 @@ export class DatatablesService implements Resolve<any> {
         this.onDatatablessChanged.next(this.rows);
         resolve(this.rows);
       }, reject);
-      console.log('ahla');
+      
     });
+
     // var s = new Date(1650730133).toLocaleDateString("en-US")
     // var dateString = moment.unix(value).format("MM/DD/YYYY");
     //new Date(29056545165000).toISOString()
   }
+  getDataTableRows2(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this._httpClient.get('http://127.0.0.1:8000/api/stock/stock/{id}').subscribe((response: any) => {
+        this.rows = response;
+        this.onDatatablessChanged.next(this.rows);
+        resolve(this.rows);
+      }, reject);
+      
+    });
+
+  }
+
 
   private stockUrl = 'http://127.0.0.1:8000/api/stock/addstock';
 addstock(data:any): Observable<any>{
