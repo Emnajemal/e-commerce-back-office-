@@ -60,6 +60,7 @@ export class AddproductComponent implements OnInit {
 
     this.modalService.open(modalForm);
   }
+ 
   getStores(){
     this._knowledgeBaseService.getDataTableRows().then((data: any) => {
       this.stores=data;

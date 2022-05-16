@@ -24,6 +24,8 @@ import { EcommerceCheckoutItemComponent } from 'app/main/apps/ecommerce/ecommerc
 import { AddproductComponent } from './addproduct/addproduct.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
+import { PromotionComponent } from './promotion/promotion.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -84,6 +86,7 @@ const routes: Routes = [
     EcommerceCheckoutItemComponent,
     AddproductComponent,
     EditproductComponent,
+    PromotionComponent,
    
   ],
   imports: [
@@ -97,7 +100,9 @@ const routes: Routes = [
     CoreSidebarModule,
     CoreCommonModule,
     NgbModule,
-    NouisliderModule
+    NouisliderModule,
+    NgSelectModule
+    
   ],
   //nhot houni les services 
   providers: [

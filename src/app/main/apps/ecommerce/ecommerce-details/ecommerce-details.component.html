@@ -9,37 +9,37 @@
           <div class="row my-2">
             <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
               <div class="d-flex align-items-center justify-content-center">
-                <img [src]="baseUrl+product.image" class="img-fluid product-img"  />
+                <img [src]="baseUrl+product?.image" class="img-fluid product-img"  />
               </div>
             </div>
             <div class="col-12 col-md-7">
-              <h3>{{ product.name }}</h3>
+              <h3>{{ product?.name }}</h3>
               <span class="card-text item-company"
-                >reference :  <a href="javascript:void(0)" class="company-name"></a>{{ product.reference }}</span
+                >reference :  <a href="javascript:void(0)" class="company-name"></a>{{ product?.reference }}</span
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h5 class="item-price mr-1"> selling price : </h5>
-                {{ product.sellingprice }} TND
+                <h5 class="item-selling mr-1"> Selling price : </h5>
+                {{ product?.sellingprice }} TND
                 <br>
               </div>
-              <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h5 class="item-price mr-1">Supplier price : </h5>
-                {{ product.pricesupplier }} TND
+              <div class="ecommerce-details-supplier d-flex flex-wrap mt-1">
+                <h5 class="item-supplier mr-1">Supplier price : </h5>
+                {{ product?.pricesupplier }} TND
                 <br>
               </div>
-              <div class="ecommerce-details-price d-flex flex-wrap mt-1">
+              <div class="ecommerce-details-gain d-flex flex-wrap mt-1">
                 <h5 class="item-price mr-1">Gain : </h5>
-                {{ product.gain }}
+                {{ product?.gain }}
                 <br>
               </div>
               
-              <p class="card-text">availablity - <span class="badge text-uppercase" [ngClass]="{'badge-danger':product.status !='on stock','badge-success':product.status =='on stock'}">{{ product.status }}</span></p>
+              <p class="card-text">availablity - <span class="badge text-uppercase" [ngClass]="{'badge-danger':product?.status !='on stock','badge-success':product?.status =='on stock'}">{{ product?.status }}</span></p>
               <hr />
               <p class="card-text">
-                {{ product.description }}
+                {{ product?.description }}
               </p>
               <ul class="product-features list-unstyled">
-                <li *ngIf="product.hasFreeShipping"><i data-feather="shopping-cart"></i> <span>Free Shipping</span></li>
+                <li *ngIf="product?.hasFreeShipping"><i data-feather="shopping-cart"></i> <span>Free Shipping</span></li>
                 <li>
                   <!--<i data-feather="dollar-sign"></i>-->
                   <!--<span>EMI options available</span>-->
@@ -79,7 +79,7 @@
               <!--<hr />-->
               <!--<div class="d-flex flex-column flex-sm-row pt-1">
                 <a
-                  *ngIf="product.isInCart !== true"
+                  *ngIf="product?.isInCart !== true"
                   href="javascript:void(0)"
                   class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0"
                   (click)="addToCart(product)"
@@ -88,7 +88,7 @@
                   <span class="add-to-cart">Add to cart</span>
                 </a>
                 <a
-                  *ngIf="product.isInCart === true"
+                  *ngIf="product?.isInCart === true"
                   routerLink="/apps/e-commerce/checkout"
                   class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0"
                   rippleEffect
@@ -104,7 +104,7 @@
                 >
                   <i
                     class="fa mr-50"
-                    [ngClass]="product.isInWishlist === true ? 'fa-heart text-danger' : 'fa-heart-o'"
+                    [ngClass]="product?.isInWishlist === true ? 'fa-heart text-danger' : 'fa-heart-o'"
                   ></i>
                   <span>Wishlist</span>
                 </a>
@@ -180,21 +180,21 @@
               <div class="swiper-slide" *ngFor="let relatedProduct of relatedProducts">
                 <a href="javascript:void(0)">
                   <div class="item-heading">
-                    <h5 class="text-truncate mb-0">{{ relatedProduct.name }}</h5>
-                    <small class="text-body">by {{ relatedProduct.brand }}</small>
+                    <h5 class="text-truncate mb-0">{{ relatedproduct?.name }}</h5>
+                    <small class="text-body">by {{ relatedproduct?.brand }}</small>
                   </div>
                   <div class="img-container mx-auto py-75">
-                    <img [src]="relatedProduct.image" class="img-fluid" alt="image" />
+                    <img [src]="relatedproduct?.image" class="img-fluid" alt="image" />
                   </div>
                   <div class="item-meta">
                     <div class="rating rating-sm">
-                      <ngb-rating [rate]="relatedProduct.rating" [readonly]="true" [max]="5" class="outline-none">
+                      <ngb-rating [rate]="relatedproduct?.rating" [readonly]="true" [max]="5" class="outline-none">
                         <ng-template let-fill="fill" let-index="index"
                           ><span class="fa fa-star-o mr-25" [class.fa-star]="fill === 100"></span
                         ></ng-template>
                       </ngb-rating>
                     </div>
-                    <p class="card-text text-primary mb-0">${{ relatedProduct.price }}</p>
+                    <p class="card-text text-primary mb-0">${{ relatedproduct?.price }}</p>
                   </div>
                 </a>
               </div>

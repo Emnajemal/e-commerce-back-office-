@@ -10,6 +10,7 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 
 import { CardAnalyticsService } from 'app/main/ui/card/card-analytics/card-analytics.service';
 import { CardAnalyticsComponent } from 'app/main/ui/card/card-analytics/card-analytics.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 // routing
 const routes: Routes = [
@@ -31,7 +32,9 @@ const routes: Routes = [
     ContentHeaderModule,
     NgApexchartsModule,
     NgbModule,
-    CoreCommonModule
+    CoreCommonModule,
+    NgApexchartsModule,
+    PerfectScrollbarModule,
   ],
   providers: [CardAnalyticsService]
 })

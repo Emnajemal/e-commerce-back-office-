@@ -19,12 +19,20 @@ import {
   ApexYAxis
 } from 'ng-apexcharts';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { colors } from 'app/colors.const';
 import { CardAnalyticsService } from 'app/main/ui/card/card-analytics/card-analytics.service';
 import { CoreConfigService } from '@core/services/config.service';
+import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import Product from 'app/auth/models/product';
+import { environment } from 'environments/environment';
+import Pack from 'app/auth/models/pack';
+import { PackService } from 'app/main/apps/pack/pack.service';
+import { Thumbs } from 'swiper';
+import { ThisReceiver } from '@angular/compiler';
+
 
 // Interface Chartoptions
 export interface ChartOptions {
@@ -75,6 +83,10 @@ export interface ChartOptions2 {
 })
 export class CardAnalyticsComponent implements OnInit, OnDestroy {
   // Decorator
+  //hedhi jebtha ena mel ecommerce teb3a ts eli jebto 
+  @ViewChild('statisticsLineChartRef') statisticsLineChartRef: any;
+  @ViewChild('statisticsBarChartRef') statisticsBarChartRef: any;
+
   @ViewChild('supportChartoptionsRef') supportChartoptionsRef: any;
   @ViewChild('avgsessionChartoptionsRef') avgsessionChartoptionsRef: any;
   @ViewChild('revenueReportChartoptionsRef') revenueReportChartoptionsRef: any;
@@ -91,6 +103,10 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   // Public
   public contentHeader: object;
   public data: any;
+
+  public products: Observable<any[]>;
+  baseUrl: string = environment.apiUrl
+  public pack: Pack[];
 
   // Charts Of Interface Chartoptions
   public sessionChartoptions: Partial<ChartOptions>;
@@ -123,6 +139,13 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   private $label_color = '#e7eef7';
   private $purple = '#df87f2';
   private $white = '#fff';
+  //hedhom zouz zedthom ena taou 
+  private $trackBgColor = '#EBEBEB';
+  private $barColor = '#f3f3f3';
+  public statisticsLine;
+  public statisticsBar;
+
+
 
   private $textHeadingColor = '#5e5873';
   private $strokeColor = '#ebe9f1';
@@ -144,8 +167,162 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
    * @param {CoreConfigService} _coreConfigService
    * @param {CardAnalyticsService} _cardAnalyticsService
    */
-  constructor(private _cardAnalyticsService: CardAnalyticsService, private _coreConfigService: CoreConfigService) {
+  constructor(private _cardAnalyticsService: CardAnalyticsService,private _PackService: PackService,
+     private _coreConfigService: CoreConfigService,private _ecommerceService: EcommerceService) {
     this._unsubscribeAll = new Subject();
+    //hedhomm eli jebthom men component ecommerce o jebet ts eli teba3 kol wahda fehom 
+    // Statistics Line Chart
+    this.statisticsLine = {
+      chart: {
+        height: 70,
+        type: 'line',
+        toolbar: {
+          show: false
+        },
+        zoom: {
+          enabled: false
+        }
+      },
+      grid: {
+        // show: true,
+        borderColor: this.$trackBgColor,
+        strokeDashArray: 5,
+        xaxis: {
+          lines: {
+            show: true
+          }
+        },
+        yaxis: {
+          lines: {
+            show: false
+          }
+        },
+        padding: {
+          // left: 0,
+          // right: 0,
+          top: -30,
+          bottom: -10
+        }
+      },
+      stroke: {
+        width: 3
+      },
+      colors: [colors.solid.info],
+      series: [
+        {
+          data: [0, 20, 5, 30, 15, 45]
+        }
+      ],
+      markers: {
+        size: 2,
+        colors: colors.solid.info,
+        strokeColors: colors.solid.info,
+        strokeWidth: 2,
+        strokeOpacity: 1,
+        strokeDashArray: 0,
+        fillOpacity: 1,
+        discrete: [
+          {
+            seriesIndex: 0,
+            dataPointIndex: 5,
+            fillColor: '#ffffff',
+            strokeColor: colors.solid.info,
+            size: 5
+          }
+        ],
+        shape: 'circle',
+        radius: 2,
+        hover: {
+          size: 3
+        }
+      },
+      xaxis: {
+        labels: {
+          show: true,
+          style: {
+            fontSize: '0px'
+          }
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        }
+      },
+      yaxis: {
+        show: false
+      },
+      tooltip: {
+        x: {
+          show: false
+        }
+      }
+    };
+    // o hnee youfeew ssayee lbqey eli mawjoudin aslan 
+    // Statistics Bar Chart
+    this.statisticsBar = {
+      chart: {
+        height: 70,
+        type: 'bar',
+        stacked: true,
+        toolbar: {
+          show: false
+        }
+      },
+      grid: {
+        show: false,
+        padding: {
+          left: 0,
+          right: 0,
+          top: -15,
+          bottom: -15
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '20%',
+          startingShape: 'rounded',
+          colors: {
+            backgroundBarColors: [this.$barColor, this.$barColor, this.$barColor, this.$barColor, this.$barColor],
+            backgroundBarRadius: 5
+          }
+        }
+      },
+      legend: {
+        show: false
+      },
+      dataLabels: {
+        enabled: false
+      },
+      colors: [colors.solid.warning],
+      series: [
+        {
+          name: '2020',
+          data: [45, 85, 65, 45, 65]
+        }
+      ],
+      xaxis: {
+        labels: {
+          show: false
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        }
+      },
+      yaxis: {
+        show: false
+      },
+      tooltip: {
+        x: {
+          show: false
+        }
+      }
+    };
 
     // Revenue Report Chart
     this.revenueReportChartoptions = {
@@ -811,6 +988,92 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
       ]
     };
   }
+  getProducts() {
+
+    this._ecommerceService.getProducts().subscribe((result:any)=>{
+      this.products = result;
+      console.log('products',this.products)
+    })
+ }
+ expensiveProduct() {
+
+  this._cardAnalyticsService.expensiveProduct().subscribe((result:any)=>{
+    console.log(result);
+  })
+}
+getPacks(){
+  this._PackService.getPacks().subscribe((data: any) => {
+    this.pack=data;
+    console.log('packs',this.pack);
+  })
+}
+expensivePack(){
+  this._cardAnalyticsService.expensivePack().subscribe((result:any)=>{
+    console.log(result);
+  })
+}
+nombreProduct(){
+  this._cardAnalyticsService.nombreProduct().subscribe((result: any) => {
+    console.log(result);
+  })
+
+}
+nombrePack(){
+  this._cardAnalyticsService.nombrePack().subscribe((result: any) => {
+    console.log(result);
+  })
+
+}
+nombrePromotion(){
+  this._cardAnalyticsService.nombrePromotion().subscribe((result: any) => {
+    console.log(result);
+  })
+
+}
+nombreStore(){
+  this._cardAnalyticsService.nombreStore().subscribe((result: any) => {
+    console.log(result);
+  })
+}
+nombreUser(){
+  this._cardAnalyticsService.nombreUser().subscribe((result: any) => {
+    console.log(result);
+  })
+}
+nombreStock(){
+  this._cardAnalyticsService.nombreStock().subscribe((result: any) => {
+    console.log(result);
+  })
+}
+nombreOrder(){
+  this._cardAnalyticsService.nombreOrder().subscribe((result: any) => {
+    console.log(result);
+  })
+
+}
+// getGouvernerat(){
+//   this._cardAnalyticsService.getGouvernerat().subscribe((result: any) => {
+//     console.log(result);
+//   })
+// }
+venduProduct(){
+  this._cardAnalyticsService.venduProduct().subscribe((result: any) => {
+    console.log(result);
+  })
+}
+dateOrder(){
+  this._cardAnalyticsService.dateOrder().subscribe((result: any) => {
+    console.log(result);
+  })
+}
+// percentageOrder(){
+//   this._cardAnalyticsService.percentageOrder().subscribe((result: any) => {
+//     console.log(result);
+//   })
+
+// }
+
+
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -822,6 +1085,21 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
     this._cardAnalyticsService.onCardAnalyticsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
       this.data = response;
     });
+    this.getProducts()
+    this.expensiveProduct();
+    this.getPacks();
+    this.expensivePack();
+    this.nombreProduct();
+    this.nombrePack();
+    this.nombrePromotion();
+    this.nombreStore();
+    this.nombreUser();
+    this.nombreStock();
+    this.nombreOrder();
+    //  this.getGouvernerat();
+    this.venduProduct();
+    this.dateOrder();
+    // this.percentageOrder();
 
     // Content Header
     this.contentHeader = {
@@ -875,6 +1153,7 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
           this.customerChartoptions.chart.width = this.customerChartoptionsRef?.nativeElement.offsetWidth;
           this.orderChartoptions.chart.width = this.orderChartoptionsRef?.nativeElement.offsetWidth;
           this.earningChartoptions.chart.width = this.earningChartoptionsRef?.nativeElement.offsetWidth;
+          this.statisticsBar.chart.width = this.statisticsBarChartRef?.nativeElement.offsetWidth;
         }, 500);
       }
     });

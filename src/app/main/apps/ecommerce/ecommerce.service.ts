@@ -103,6 +103,18 @@ deleteProduct(id){
   return this._httpClient.delete(`http://127.0.0.1:8000/api/product/deleteProduct/${id}`);
 
 }
+addpromotion(promotionForm){
+  console.log(promotionForm);
+  return this._httpClient.post('http://127.0.0.1:8000/api/promotion/add/',promotionForm);
+
+}
+getPromotionById(id){
+  return this._httpClient.get(`http://127.0.0.1:8000/api/promotion/get/${id}`);
+
+}
+getPromotions(){
+  return this._httpClient.get(`${this.baseUrl}/api/promotion/get`)
+}
 
 
 

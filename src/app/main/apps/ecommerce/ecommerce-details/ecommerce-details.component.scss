@@ -7,4 +7,26 @@
         width: 300px
       }
     }}
+    .ecommerce-application {
+      .app-ecommerce-details {
+        .item-selling {
+          color: #fb9739;
+          font-style: oblique;
+        }
+        
+      }}
+      .ecommerce-application {
+        .app-ecommerce-details {
+          .item-supplier {
+            color: hsl(142, 65%, 36%);
+            font-style: oblique;
+          }
+        }}
+        .ecommerce-application {
+          .app-ecommerce-details {
+            .item-price {
+              color: hsl(182, 68%, 45%);
+              font-style: oblique;
+            }
+          }}
     
