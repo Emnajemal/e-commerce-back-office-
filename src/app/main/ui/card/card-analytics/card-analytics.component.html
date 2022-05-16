@@ -255,14 +255,93 @@
     <!--/ Goal Overview Card -->
     
   </div>
+  <!-- transaction card section start  heya eli feha akther 5 moba3iin -->
+  <div class="row" >
+    <div class="col-lg-4 col-md-6 col-12">
+     <div class="card card-transaction">
+       <div class="card-header">
+         <h4 class="card-title">Top 5 Products ordered</h4>
+       </div>
+       <div class="card-body">
+         <div class="transaction-item">
+           <div class="media">
+             <div class="avatar bg-light-primary rounded">
+               <div class="avatar-content">
+                 <i data-feather="pocket" class="avatar-icon font-medium-3"></i>
+               </div>
+             </div>
+             <div class="media-body">
+               <h6 class="transaction-title">Wallet</h6>
+               <small>Starbucks</small>
+             </div>
+           </div>
+           <div class="font-weight-bolder text-danger">- $74</div>
+         </div>
+         <div class="transaction-item">
+           <div class="media">
+             <div class="avatar bg-light-success rounded">
+               <div class="avatar-content">
+                 <i data-feather="check" class="avatar-icon font-medium-3"></i>
+               </div>
+             </div>
+             <div class="media-body">
+               <h6 class="transaction-title">Bank Transfer</h6>
+               <small>Add Money</small>
+             </div>
+           </div>
+           <div class="font-weight-bolder text-success">+ $480</div>
+         </div>
+         <div class="transaction-item">
+           <div class="media">
+             <div class="avatar bg-light-danger rounded">
+               <div class="avatar-content">
+                 <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
+               </div>
+             </div>
+             <div class="media-body">
+               <h6 class="transaction-title">Paypal</h6>
+               <small>Add Money</small>
+             </div>
+           </div>
+           <div class="font-weight-bolder text-success">+ $590</div>
+         </div>
+         <div class="transaction-item">
+           <div class="media">
+             <div class="avatar bg-light-warning rounded">
+               <div class="avatar-content">
+                 <i data-feather="credit-card" class="avatar-icon font-medium-3"></i>
+               </div>
+             </div>
+             <div class="media-body">
+               <h6 class="transaction-title">Mastercard</h6>
+               <small>Ordered Food</small>
+             </div>
+           </div>
+           <div class="font-weight-bolder text-danger">- $23</div>
+         </div>
+         <div class="transaction-item">
+           <div class="media">
+             <div class="avatar bg-light-info rounded">
+               <div class="avatar-content">
+                 <i data-feather="trending-up" class="avatar-icon font-medium-3"></i>
+               </div>
+             </div>
+             <div class="media-body">
+               <h6 class="transaction-title">Transfer</h6>
+               <small>Refund</small>
+             </div>
+           </div>
+           <div class="font-weight-bolder text-success">+ $98</div>
+         </div>
+       </div>
+     </div>
+   </div>
+   <!-- hne toufa mtaa akther 5 products moba3iin -->
   <!-- Statistics Card -->
   <div class="col-xl-8 col-md-6 col-12">
     <div class="card card-statistics">
       <div class="card-header">
         <h4 class="card-title">Statistics</h4>
-        <div class="d-flex align-items-center">
-          <p class="card-text font-small-2 mr-25 mb-0">Updated 1 month ago</p>
-        </div>
       </div>
       <div class="card-body statistics-body">
         <div class="row">
@@ -270,12 +349,13 @@
             <div class="media">
               <div class="avatar bg-light-primary mr-2">
                 <div class="avatar-content">
-                  <i data-feather="trending-up" class="avatar-icon"></i>
+                  <i data-feather="user" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.sales }}</h4>
-                <p class="card-text font-small-3 mb-0">Sales</p>
+                <p class="card-text font-small-3 mb-0">Number of users
+                </p>
               </div>
             </div>
           </div>
@@ -283,12 +363,12 @@
             <div class="media">
               <div class="avatar bg-light-info mr-2">
                 <div class="avatar-content">
-                  <i data-feather="user" class="avatar-icon"></i>
+                  <i data-feather="ShoppingCartIcon" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.customers }}</h4>
-                <p class="card-text font-small-3 mb-0">Customers</p>
+                <p class="card-text font-small-3 mb-0">Number of stores </p>
               </div>
             </div>
           </div>
@@ -296,12 +376,12 @@
             <div class="media">
               <div class="avatar bg-light-danger mr-2">
                 <div class="avatar-content">
-                  <i data-feather="box" class="avatar-icon"></i>
+                  <i data-feather="ShoppingBagIcon" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.products }}</h4>
-                <p class="card-text font-small-3 mb-0">Products</p>
+                <p class="card-text font-small-3 mb-0">Number of products    </p>
               </div>
             </div>
           </div>
@@ -309,19 +389,64 @@
             <div class="media">
               <div class="avatar bg-light-success mr-2">
                 <div class="avatar-content">
-                  <i data-feather="dollar-sign" class="avatar-icon"></i>
+                  <i data-feather="credit-card" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Revenue</p>
+                <p class="card-text font-small-3 mb-0">Number of packs  </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="media">
+              <div class="avatar bg-light-success mr-2">
+                <div class="avatar-content">
+                  <i data-feather="credit-card" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
+                <p class="card-text font-small-3 mb-0">Number of orders  </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="media">
+              <div class="avatar bg-light-success mr-2">
+                <div class="avatar-content">
+                  <i data-feather="TruckIcon" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
+                <p class="card-text font-small-3 mb-0">Number of stocks </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="media">
+              <div class="avatar bg-light-success mr-2">
+                <div class="avatar-content">
+                  <i data-feather="credit-card" class="avatar-icon"></i>
+                </div>
+              </div>
+              <div class="media-body my-auto">
+                <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
+                <p class="card-text font-small-3 mb-0">Number of promotions </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
+    
   </div>
   <!--/ Statistics Card -->
+  
+ 
+  
   </div>
+  
 </div>

@@ -73,6 +73,7 @@ export interface ChartOptions2 {
   yaxis: ApexYAxis;
   grid: ApexGrid;
   states: ApexStates;
+  
 }
 
 @Component({
@@ -86,6 +87,7 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   //hedhi jebtha ena mel ecommerce teb3a ts eli jebto 
   @ViewChild('statisticsLineChartRef') statisticsLineChartRef: any;
   @ViewChild('statisticsBarChartRef') statisticsBarChartRef: any;
+  
 
   @ViewChild('supportChartoptionsRef') supportChartoptionsRef: any;
   @ViewChild('avgsessionChartoptionsRef') avgsessionChartoptionsRef: any;
@@ -999,12 +1001,14 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
 
   this._cardAnalyticsService.expensiveProduct().subscribe((result:any)=>{
     console.log(result);
+    
   })
 }
 getPacks(){
   this._PackService.getPacks().subscribe((data: any) => {
     this.pack=data;
     console.log('packs',this.pack);
+  
   })
 }
 expensivePack(){
@@ -1015,9 +1019,11 @@ expensivePack(){
 nombreProduct(){
   this._cardAnalyticsService.nombreProduct().subscribe((result: any) => {
     console.log(result);
+   
   })
 
 }
+
 nombrePack(){
   this._cardAnalyticsService.nombrePack().subscribe((result: any) => {
     console.log(result);
