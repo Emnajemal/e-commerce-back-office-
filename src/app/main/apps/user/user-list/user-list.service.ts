@@ -13,6 +13,7 @@ export class UserListService implements Resolve<any> {
   public rows: any;
   public onUserListChanged: BehaviorSubject<any>;
   onKBChanged: any;
+  
 
   /**
    * Constructor
