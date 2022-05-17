@@ -14,6 +14,8 @@ import {
   ApexResponsive,
   ApexStates,
   ApexStroke,
+  ApexTheme,
+  ApexTitleSubtitle,
   ApexTooltip,
   ApexXAxis,
   ApexYAxis
@@ -53,6 +55,24 @@ export interface ChartOptions {
   yaxis: ApexYAxis;
   states: ApexStates;
 }
+export interface ChartOptions3 {
+  series?: ApexAxisChartSeries;
+  chart?: ApexChart;
+  xaxis?: ApexXAxis;
+  dataLabels?: ApexDataLabels;
+  grid?: ApexGrid;
+  stroke?: ApexStroke;
+  legend?: ApexLegend;
+  title?: ApexTitleSubtitle;
+  colors?: string[];
+  tooltip?: ApexTooltip;
+  plotOptions?: ApexPlotOptions;
+  yaxis?: ApexYAxis;
+  fill?: ApexFill;
+  labels?: string[];
+  markers: ApexMarkers;
+  theme: ApexTheme;
+}
 
 // Interface Chartoptions2
 export interface ChartOptions2 {
@@ -87,6 +107,9 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   //hedhi jebtha ena mel ecommerce teb3a ts eli jebto 
   @ViewChild('statisticsLineChartRef') statisticsLineChartRef: any;
   @ViewChild('statisticsBarChartRef') statisticsBarChartRef: any;
+  @ViewChild('goalChartRef') goalChartRef: any;
+  @ViewChild('apexCandlestickChartRef') apexCandlestickChartRef: any;
+
   
 
   @ViewChild('supportChartoptionsRef') supportChartoptionsRef: any;
@@ -101,14 +124,29 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   @ViewChild('customerChartoptionsRef') customerChartoptionsRef: any;
   @ViewChild('orderChartoptionsRef') orderChartoptionsRef: any;
   @ViewChild('earningChartoptionsRef') earningChartoptionsRef: any;
+  @ViewChild('apexBarChartRef') apexBarChartRef: any;
 
   // Public
   public contentHeader: object;
   public data: any;
+  
 
   public products: Observable<any[]>;
+  public exProducts: Observable<any[]>;
+  public orderdProducts: Observable<any[]>;
   baseUrl: string = environment.apiUrl
   public pack: Pack[];
+  public nbrUser :number;
+  public nbrStore :number;
+  public nbrProduct :number;
+  public nbrPack :number;
+  public nbrStock :number;
+  public nbrOrdre :number;
+  public nbrPromotions :number;
+  public Exppack: Pack[];
+
+  public apexCandlestickChart: Partial<ChartOptions3>;
+  public apexBarChart: Partial<ChartOptions>;
 
   // Charts Of Interface Chartoptions
   public sessionChartoptions: Partial<ChartOptions>;
@@ -494,6 +532,42 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
       },
       colors: [colors.solid.primary, colors.solid.warning, colors.solid.danger]
     };
+    //  // Apex Bar Chart
+    //  this.apexBarChart = {
+    //   series: [
+    //     {
+    //       data: [700, 350, 480, 600, 210, 550, 150]
+    //     }
+    //   ],
+    //   chart: {
+    //     height: 400,
+    //     type: 'bar',
+    //     toolbar: {
+    //       show: false
+    //     }
+    //   },
+    //   plotOptions: {
+    //     bar: {
+    //       horizontal: true,
+    //       barHeight: '30%',
+    //       endingShape: 'rounded'
+    //     }
+    //   },
+    //   grid: {
+    //     xaxis: {
+    //       lines: {
+    //         show: false
+    //       }
+    //     }
+    //   },
+    //   colors: [colors.solid.info],
+    //   dataLabels: {
+    //     enabled: false
+    //   },
+    //   xaxis: {
+    //     categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23']
+    //   }
+    // };
 
     // Sales Chart
     this.salesChartoptions = {
@@ -626,9 +700,9 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
         dashArray: [0, 8],
         width: [4, 2]
       },
-      grid: {
-        borderColor: this.$label_color
-      },
+      // grid: {
+      //   borderColor: this.$label_color
+      // },
       legend: {
         show: false
       },
@@ -989,6 +1063,54 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
         }
       ]
     };
+    // Apex Candlestick Chart
+    this.apexCandlestickChart = {
+      series: [
+        {
+          data: [
+            {
+              x: new Date(1538778600000),
+              y: [150, 170, 50, 100]
+            },
+           
+          ]
+        }
+      ]
+      // chart: {
+      //   height: 400,
+      //   type: 'candlestick',
+      //   toolbar: {
+      //     show: false
+      //   }
+      // },
+      // plotOptions: {
+      //   candlestick: {
+      //     colors: {
+      //       upward: colors.solid.success,
+      //       downward: colors.solid.danger
+      //     }
+      //   },
+      //   bar: {
+      //     columnWidth: '40%'
+      //   }
+      // },
+      // grid: {
+      //   xaxis: {
+      //     lines: {
+      //       show: true
+      //     }
+      //   }
+      // },
+
+      // xaxis: {
+      //   type: 'datetime'
+      // },
+      // yaxis: {
+      //   tooltip: {
+      //     enabled: true
+      //   }
+      // }
+    };
   }
   getProducts() {
 
@@ -997,9 +1119,11 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
       console.log('products',this.products)
     })
  }
+
  expensiveProduct() {
 
   this._cardAnalyticsService.expensiveProduct().subscribe((result:any)=>{
+    this.exProducts = result;
     console.log(result);
     
   })
@@ -1013,11 +1137,13 @@ getPacks(){
 }
 expensivePack(){
   this._cardAnalyticsService.expensivePack().subscribe((result:any)=>{
+    this.Exppack=result;
     console.log(result);
   })
 }
 nombreProduct(){
   this._cardAnalyticsService.nombreProduct().subscribe((result: any) => {
+    this.nbrProduct=result;
     console.log(result);
    
   })
@@ -1026,33 +1152,39 @@ nombreProduct(){
 
 nombrePack(){
   this._cardAnalyticsService.nombrePack().subscribe((result: any) => {
+    this.nbrPack=result;
     console.log(result);
   })
 
 }
 nombrePromotion(){
   this._cardAnalyticsService.nombrePromotion().subscribe((result: any) => {
+    this.nbrPromotions=result;
     console.log(result);
   })
 
 }
 nombreStore(){
   this._cardAnalyticsService.nombreStore().subscribe((result: any) => {
+    this.nbrStore=result;
     console.log(result);
   })
 }
 nombreUser(){
   this._cardAnalyticsService.nombreUser().subscribe((result: any) => {
+    this.nbrUser=result;
     console.log(result);
   })
 }
 nombreStock(){
   this._cardAnalyticsService.nombreStock().subscribe((result: any) => {
+    this.nbrStock=result;
     console.log(result);
   })
 }
 nombreOrder(){
   this._cardAnalyticsService.nombreOrder().subscribe((result: any) => {
+    this.nbrOrdre=result;
     console.log(result);
   })
 
@@ -1064,7 +1196,8 @@ nombreOrder(){
 // }
 venduProduct(){
   this._cardAnalyticsService.venduProduct().subscribe((result: any) => {
-    console.log(result);
+    this.orderdProducts = result;
+    console.log("here",result);
   })
 }
 dateOrder(){
@@ -1131,6 +1264,7 @@ dateOrder(){
         ]
       }
     };
+
   }
 
   /**
@@ -1160,6 +1294,11 @@ dateOrder(){
           this.orderChartoptions.chart.width = this.orderChartoptionsRef?.nativeElement.offsetWidth;
           this.earningChartoptions.chart.width = this.earningChartoptionsRef?.nativeElement.offsetWidth;
           this.statisticsBar.chart.width = this.statisticsBarChartRef?.nativeElement.offsetWidth;
+          this.goalChartoptions.chart.width = this.goalChartRef?.nativeElement.offsetWidth;
+          this.apexCandlestickChart.chart.width = this.apexCandlestickChartRef?.nativeElement.offsetWidth;
+          this.apexBarChart.chart.width = this.apexBarChartRef?.nativeElement.offsetWidth;
+
+
         }, 500);
       }
     });

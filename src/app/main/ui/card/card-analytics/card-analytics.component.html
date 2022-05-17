@@ -9,97 +9,25 @@
       <div class="card card-transaction">
         <div class="card-header">
           <h4 class="card-title">Top 5 expensive Products</h4>
-          <!-- <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i> -->
-          <!-- <div ngbDropdown>
-            <a
-              ngbDropdownToggle
-              href="javascript:void(0);"
-              class="hide-arrow"
-              id="dropdownTransactions"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i data-feather="more-vertical" [size]="18" class="text-body cursor-pointer"></i>
-            </a>
-            <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="dropdownTransactions">
-              <a href="javascript:void(0)" ngbDropdownItem>Last 28 Days</a>
-              <a href="javascript:void(0)" ngbDropdownItem>Last Month</a>
-              <a href="javascript:void(0)" ngbDropdownItem>Last Year</a>
-            </div>
-          </div> -->
+          
         </div>
         <div class="card-body">
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-primary rounded">
-                <div class="avatar-content">
-                  <i data-feather="pocket" class="avatar-icon font-medium-3"></i>
+      
+            <div class="transaction-item" *ngFor="let item of exProducts"> <!-- for start-->
+              <div class="media">
+                <div class="avatar bg-light-primary rounded">
+                  <div class="avatar-content">
+                    <!-- <i data-feather="pocket" class="avatar-icon font-medium-3"></i> -->
+                    <img [src]="baseUrl+item.image" style="max-width: 40px;" alt="">
+                  </div>
+                </div>
+                <div class="media-body">
+                  <h6 class="transaction-title">{{item.name}}</h6>
+                  <small>{{item.reference}}</small>
                 </div>
               </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Wallet</h6>
-                <small>Starbucks</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-danger">- $74</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-success rounded">
-                <div class="avatar-content">
-                  <i data-feather="check" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Bank Transfer</h6>
-                <small>Add Money</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-success">+ $480</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-danger rounded">
-                <div class="avatar-content">
-                  <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Paypal</h6>
-                <small>Add Money</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-success">+ $590</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-warning rounded">
-                <div class="avatar-content">
-                  <i data-feather="credit-card" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Mastercard</h6>
-                <small>Ordered Food</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-danger">- $23</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-info rounded">
-                <div class="avatar-content">
-                  <i data-feather="trending-up" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Transfer</h6>
-                <small>Refund</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-success">+ $98</div>
-          </div>
+              <div class="font-weight-bolder text-success">TND {{item.pricesupplier}}</div>
+            </div> <!-- End For Here-->
         </div>
       </div>
     </div>
@@ -130,76 +58,21 @@
           </div> -->
         </div>
         <div class="card-body">
-          <div class="transaction-item">
+          <div class="transaction-item" *ngFor="let item of Exppack"> <!-- for start-->
             <div class="media">
               <div class="avatar bg-light-primary rounded">
                 <div class="avatar-content">
-                  <i data-feather="pocket" class="avatar-icon font-medium-3"></i>
+                  <!-- <i data-feather="pocket" class="avatar-icon font-medium-3"></i> -->
+                  <img [src]="baseUrl+item.image_pack" style="max-width: 40px;" alt="">
                 </div>
               </div>
               <div class="media-body">
-                <h6 class="transaction-title">Wallet</h6>
-                <small>Starbucks</small>
+                <h6 class="transaction-title">{{item.name_pack}}</h6>
+                <small>{{item.reference_pack}}</small>
               </div>
             </div>
-            <div class="font-weight-bolder text-danger">- $74</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-success rounded">
-                <div class="avatar-content">
-                  <i data-feather="check" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Bank Transfer</h6>
-                <small>Add Money</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-success">+ $480</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-danger rounded">
-                <div class="avatar-content">
-                  <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Paypal</h6>
-                <small>Add Money</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-success">+ $590</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-warning rounded">
-                <div class="avatar-content">
-                  <i data-feather="credit-card" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Mastercard</h6>
-                <small>Ordered Food</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-danger">- $23</div>
-          </div>
-          <div class="transaction-item">
-            <div class="media">
-              <div class="avatar bg-light-info rounded">
-                <div class="avatar-content">
-                  <i data-feather="trending-up" class="avatar-icon font-medium-3"></i>
-                </div>
-              </div>
-              <div class="media-body">
-                <h6 class="transaction-title">Transfer</h6>
-                <small>Refund</small>
-              </div>
-            </div>
-            <div class="font-weight-bolder text-success">+ $98</div>
-          </div>
+            <div class="font-weight-bolder text-success">TND {{item.price}}</div>
+          </div> <!-- End For Here-->
         </div>
       </div>
     </div>
@@ -208,13 +81,13 @@
     <div class="col-lg-4 col-md-6 col-12">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h4 class="card-title">Percentage of orders delivered <br> and orders canceled </h4>
-          
+          <h4 class="card-title">Goal Overview</h4>
+          <i data-feather="help-circle" class="font-medium-3 text-muted cursor-pointer"></i>
         </div>
         <div class="card-body p-0">
           <div id="goalChartoptions" class="mb-1 mt-1 pt-1" #goalChartRef>
             <!-- Apexchart component-->
-            <!-- <apx-chart
+            <apx-chart
               [chart]="{
                 height: 245,
                 width: isMenuToggled === false ? goalChartRef.offsetWidth : goalChartoptions.chart.width,
@@ -236,17 +109,17 @@
               [series]="data.goalOverview.series"
               [stroke]="goalChartoptions.stroke"
               [grid]="goalChartoptions.grid"
-            ></apx-chart> -->
+            ></apx-chart>
             <!-- / Apexchart component-->
           </div>
           <div class="row border-top text-center mx-0">
             <div class="col-6 border-right py-1">
               <p class="card-text text-muted mb-0">Completed</p>
-              <h3 class="font-weight-bolder mb-0">{{ data.goalOverview?.analyticsData.completed }}</h3>
+              <h3 class="font-weight-bolder mb-0">{{ data.goalOverview.analyticsData.completed }}</h3>
             </div>
             <div class="col-6 py-1">
               <p class="card-text text-muted mb-0">In Progress</p>
-              <h3 class="font-weight-bolder mb-0">{{ data.goalOverview?.analyticsData.inProgress }}</h3>
+              <h3 class="font-weight-bolder mb-0">{{ data.goalOverview.analyticsData.inProgress }}</h3>
             </div>
           </div>
         </div>
@@ -256,30 +129,32 @@
     
   </div>
   <!-- transaction card section start  heya eli feha akther 5 moba3iin -->
-  <div class="row" >
+  <div class="row" *ngIf="orderdProducts" >
     <div class="col-lg-4 col-md-6 col-12">
      <div class="card card-transaction">
        <div class="card-header">
          <h4 class="card-title">Top 5 Products ordered</h4>
        </div>
        <div class="card-body">
-         <div class="transaction-item">
+         <div class="transaction-item" *ngFor="let item of orderdProducts"> <!-- for start-->
            <div class="media">
              <div class="avatar bg-light-primary rounded">
                <div class="avatar-content">
-                 <i data-feather="pocket" class="avatar-icon font-medium-3"></i>
+                 <!-- <i data-feather="pocket" class="avatar-icon font-medium-3"></i> -->
+                 <img [src]="baseUrl+item.image" style="max-width: 40px;" alt="">
                </div>
              </div>
              <div class="media-body">
-               <h6 class="transaction-title">Wallet</h6>
-               <small>Starbucks</small>
+               <h6 class="transaction-title">{{item.name}}</h6>
+               <small>{{item.reference}}</small>
              </div>
            </div>
-           <div class="font-weight-bolder text-danger">- $74</div>
-         </div>
-         <div class="transaction-item">
+           <div class="font-weight-bolder text-success">TND {{item.pricesupplier}}</div>
+         </div> <!-- End For Here-->
+         <!-- <div class="transaction-item">
            <div class="media">
-             <div class="avatar bg-light-success rounded">
+          
+            <div class="avatar bg-light-success rounded">
                <div class="avatar-content">
                  <i data-feather="check" class="avatar-icon font-medium-3"></i>
                </div>
@@ -331,7 +206,7 @@
                <small>Refund</small>
              </div>
            </div>
-           <div class="font-weight-bolder text-success">+ $98</div>
+           <div class="font-weight-bolder text-success">+ $98</div> -->
          </div>
        </div>
      </div>
@@ -354,7 +229,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.sales }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of users
+                <p class="card-text font-small-3 mb-0">Number of users {{nbrUser}}
                 </p>
               </div>
             </div>
@@ -368,7 +243,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.customers }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of stores </p>
+                <p class="card-text font-small-3 mb-0">Number of stores  {{nbrStore}}</p>
               </div>
             </div>
           </div>
@@ -381,7 +256,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.products }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of products    </p>
+                <p class="card-text font-small-3 mb-0">Number of products {{nbrProduct}}  </p> 
               </div>
             </div>
           </div>
@@ -394,7 +269,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of packs  </p>
+                <p class="card-text font-small-3 mb-0">Number of packs {{nbrPack}} </p>
               </div>
             </div>
           </div>
@@ -407,7 +282,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of orders  </p>
+                <p class="card-text font-small-3 mb-0">Number of orders {{nbrOrdre}} </p>
               </div>
             </div>
           </div>
@@ -420,7 +295,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of stocks </p>
+                <p class="card-text font-small-3 mb-0">Number of stocks {{nbrStock}} </p>
               </div>
             </div>
           </div>
@@ -433,7 +308,7 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of promotions </p>
+                <p class="card-text font-small-3 mb-0">Number of promotions {{nbrPromotions}} </p>
               </div>
             </div>
           </div>
@@ -445,8 +320,6 @@
   </div>
   <!--/ Statistics Card -->
   
- 
-  
   </div>
-  
+ 
 </div>
