@@ -38,14 +38,14 @@ export class InvoiceFakeData {
     },
     {
       id: 4989,
-      issuedDate: '19 Oct 2019',
+      issuedDate: '17 May 2022',
       client: {
-        address: '5345 Robert Squares',
-        company: 'Leonard-Garcia and Sons',
-        companyEmail: 'smithtiffany@powers.com',
-        country: 'Denmark',
-        contact: '(955) 676-1076',
-        name: 'Tony Herrera'
+        address: 'Ariana',
+        company: '',
+        companyEmail: '+ (2016)20406602',
+        country: '',
+        contact: '+ (216) 20406603',
+        name: 'Ben Amor Narjes'
       },
       service: 'Unlimited Extended License',
       total: 3719,

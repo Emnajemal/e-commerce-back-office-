@@ -369,14 +369,14 @@ export const menu: CoreMenu[] = [
             icon: 'circle',
             url: 'apps/invoice/preview'
           },
-          {
-            id: 'invoiceEdit',
-            title: 'Edit',
-            translate: 'MENU.APPS.INVOICE.EDIT',
-            type: 'item',
-            icon: 'circle',
-            url: 'apps/invoice/edit'
-          },
+          // {
+          //   id: 'invoiceEdit',
+          //   title: 'Edit',
+          //   translate: 'MENU.APPS.INVOICE.EDIT',
+          //   type: 'item',
+          //   icon: 'circle',
+          //   url: 'apps/invoice/edit'
+          // },
           // {
           //   id: 'invoiceAdd',
           //   title: 'Add',
