@@ -99,7 +99,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     this._knowledgeBaseService.updateshop(this.update, formdata).subscribe({
       next: (data: any) => {
         console.log(data);
-        let store = this.stores.find(store => store.id == this.update);
+        let store = this.stores.find(store => store?.id == this.update);
         store.name = data.name;
         store.store_image = `http://localhost:8000${data.store_image}`
         //TO-DO  update  user localStorage 
@@ -130,13 +130,13 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
   }
   //nlawj aala boutique bel id mteeio o nfaskhouu
   findStore(id): Store {
-    return this.stores.find(store => store.id === id);
+    return this.stores.find(store => store?.id === id);
   }
   deleteshopSubmit(id) {
     let store = this.findStore(id)
 
     this._knowledgeBaseService.deletetData(id).subscribe(res => {
-      let index = this.stores.findIndex(store => store.id === id)
+      let index = this.stores.findIndex(store => store?.id === id)
       this.stores.splice(index, 1);
       console.log(res);
 
@@ -145,11 +145,11 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
   //njib les valeur mel back o nhothom besh nbadelhom
   editshopSubmit(data) {
 
-    this.update = data.id;
+    this.update = data?.id;
      this.store_image = data?.store_image;
    // let formdata = new FormData();
     console.log(this.update + " / ")
-    this.editForm?.patchValue(this.stores.find(a => a.id == data.id));
+    this.editForm?.patchValue(this.stores.find(a => a?.id == data?.id));
 
   }
   clearForm() {
@@ -170,12 +170,12 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
   //return response()->json($store,200)  this.stores.push(data) })
 
   /** delete store 
-   *  let index = this.stores.findIndex(store => store.id === id)
+   *  let index = this.stores.findIndex(store => store?.id === id)
    *  if(index >=0) this.stores.splice(index,1)
    */
 
   /**
-   * let store = this.stores.find(store => store.id === id)
+   * let store = this.stores.find(store => store?.id === id)
    * if(store)    this.store.name = name 
    */
 
@@ -232,7 +232,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Knowledge Base',
+      headerTitle: 'Shop',
       actionButton: true,
       breadcrumb: {
         type: '',
@@ -248,7 +248,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
             link: '/'
           },
           {
-            name: 'Knowledge Base',
+            name: 'Shop',
             isLink: false
           }
         ]
@@ -267,7 +267,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
-  modalOpenForm(modalForm, store) {
+  modalOpenForm(modalForm, store?:any) {
     this.editshopSubmit(store);
     this.modalService.open(modalForm);
   }
@@ -275,6 +275,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     this.storeDetails = store;
     this.modalService.open(modalForm);
   }
+
 }
 
 

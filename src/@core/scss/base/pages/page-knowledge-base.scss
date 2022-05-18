@@ -61,17 +61,17 @@ $svg-bg: #fcfcfc;
 
 // make jumbotron card body padding
 @include media-breakpoint-up(lg) {
-  .knowledge-base-bg {
-    .card-body {
-      padding: 8rem;
-    }
-  }
+  // .knowledge-base-bg {
+  //   .card-body {
+  //     padding: 8rem;
+  //   }
+  // }
 }
 // make jumbotron card body padding
 @include media-breakpoint-only(md) {
-  .knowledge-base-bg {
-    .card-body {
-      padding: 6rem;
-    }
-  }
+  // .knowledge-base-bg {
+  //   .card-body {
+  //     padding: 6rem;
+  //   }
+  // }
 }

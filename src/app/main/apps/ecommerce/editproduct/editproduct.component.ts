@@ -5,6 +5,7 @@ import Product from 'app/auth/models/product';
 import Store from 'app/auth/models/store';
 import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
 import { environment } from 'environments/environment';
+import Swal from 'sweetalert2';
 import { EcommerceService } from '../ecommerce.service';
 
 @Component({
@@ -84,6 +85,12 @@ export class EditproductComponent implements OnInit {
       this.onEditProduct.emit()
       console.log(data)
       this.modalService.dismissAll()
+      Swal.fire({
+        title: "Product Updated Successfully!",
+        icon:"success",
+       // imageUrl: result.value.avatar_url,
+        customClass: { confirmButton: 'btn btn-success' }
+      });
 
 
     },(error:any)=>{

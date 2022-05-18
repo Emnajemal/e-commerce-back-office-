@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { EcommerceService } from '../../ecommerce/ecommerce.service';
 import { PackService } from '../pack.service';
 
@@ -81,17 +82,17 @@ export class PackformComponent implements OnInit {
     console.log(this.selectedProducts);
     
     this._PackService.pack(this.formData).subscribe((data: any) => {
-     // this.toastrSuccess();
      this.toastrProgressBar();
-     
 
-      
-      console.log(data);
-      //data.image = `http://localhost:8000${data.image}`
-      // this.products.push(data)
       this.onGetPack.emit()
       this.success = true;
       this.modalService.dismissAll()
+      Swal.fire({
+        title: " Pack Added Successfully!",
+        icon:"success",
+       // imageUrl: result.value.avatar_url,
+        customClass: { confirmButton: 'btn btn-success' }
+      });
      
 
     }, (error: any) => {
@@ -122,12 +123,15 @@ export class PackformComponent implements OnInit {
        this._PackService.packEdit(this.formData,this.packId).subscribe((data: any) => {
         //data.image = `http://localhost:8000${data.image}`
          // this.products.push(data)
-        // this.onGetPack.emit()
-        console.log('hello')
-        console.log(this.packForm.value.selectedProducts)
-         console.log(data)
+         this.onGetPack.emit()
          this.success = true;
-         this.modalService.dismissAll()     
+         this.modalService.dismissAll()  
+         Swal.fire({
+          title: " Pack Updated Successfully!",
+          icon:"success",
+         // imageUrl: result.value.avatar_url,
+          customClass: { confirmButton: 'btn btn-success' }
+        });   
   
        }, (error: any) => {
          this.success = false

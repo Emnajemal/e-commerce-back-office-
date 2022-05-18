@@ -267,8 +267,8 @@ export class ApexComponent implements OnInit {
       },
       xaxis: {
         categories: [
-          '7/12',
-          '8/12',
+          'janvier',
+          '2/12',
           '9/12',
           '10/12',
           '11/12',

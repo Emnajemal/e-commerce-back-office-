@@ -55,6 +55,24 @@ export interface ChartOptions {
   yaxis: ApexYAxis;
   states: ApexStates;
 }
+export interface ChartOptions4 {
+  series?: ApexAxisChartSeries;
+  chart?: ApexChart;
+  xaxis?: ApexXAxis;
+  dataLabels?: ApexDataLabels;
+  grid?: ApexGrid;
+  stroke?: ApexStroke;
+  legend?: ApexLegend;
+  title?: ApexTitleSubtitle;
+  colors?: string[];
+  tooltip?: ApexTooltip;
+  plotOptions?: ApexPlotOptions;
+  yaxis?: ApexYAxis;
+  fill?: ApexFill;
+  labels?: string[];
+  markers: ApexMarkers;
+  theme: ApexTheme;
+}
 export interface ChartOptions3 {
   series?: ApexAxisChartSeries;
   chart?: ApexChart;
@@ -109,6 +127,7 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   @ViewChild('statisticsBarChartRef') statisticsBarChartRef: any;
   @ViewChild('goalChartRef') goalChartRef: any;
   @ViewChild('apexCandlestickChartRef') apexCandlestickChartRef: any;
+  @ViewChild('apexLineChartRef') apexLineChartRef: any;
 
   
 
@@ -134,6 +153,7 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   public products: Observable<any[]>;
   public exProducts: Observable<any[]>;
   public orderdProducts: Observable<any[]>;
+  public goalOrders:any[];
   baseUrl: string = environment.apiUrl
   public pack: Pack[];
   public nbrUser :number;
@@ -144,9 +164,11 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
   public nbrOrdre :number;
   public nbrPromotions :number;
   public Exppack: Pack[];
+  public nbrGouvernerat: string;
 
   public apexCandlestickChart: Partial<ChartOptions3>;
   public apexBarChart: Partial<ChartOptions>;
+  public apexLineChart: Partial<ChartOptions4>;
 
   // Charts Of Interface Chartoptions
   public sessionChartoptions: Partial<ChartOptions>;
@@ -532,42 +554,73 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
       },
       colors: [colors.solid.primary, colors.solid.warning, colors.solid.danger]
     };
-    //  // Apex Bar Chart
-    //  this.apexBarChart = {
-    //   series: [
-    //     {
-    //       data: [700, 350, 480, 600, 210, 550, 150]
-    //     }
-    //   ],
-    //   chart: {
-    //     height: 400,
-    //     type: 'bar',
-    //     toolbar: {
-    //       show: false
-    //     }
-    //   },
-    //   plotOptions: {
-    //     bar: {
-    //       horizontal: true,
-    //       barHeight: '30%',
-    //       endingShape: 'rounded'
-    //     }
-    //   },
-    //   grid: {
-    //     xaxis: {
-    //       lines: {
-    //         show: false
-    //       }
-    //     }
-    //   },
-    //   colors: [colors.solid.info],
-    //   dataLabels: {
-    //     enabled: false
-    //   },
-    //   xaxis: {
-    //     categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23']
-    //   }
-    // };
+
+     // Apex Line Area Chart
+     this.apexLineChart = {
+      series: [
+        {
+          data: [280, 200, 220, 180, 270, 250, 70, 90, 200, 150, 160, 100, 150, 100, 50]
+        }
+      ],
+      chart: {
+        height: 400,
+        type: 'line',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            show: true
+          }
+        }
+      },
+      markers: {
+        strokeWidth: 7,
+        strokeOpacity: 1,
+        strokeColors: [colors.solid.white],
+        colors: [colors.solid.warning]
+      },
+      colors: [colors.solid.warning],
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      xaxis: {
+        categories: [
+          'janvier',
+          'fevrier',
+          'mars',
+          'avril',
+          'mai',
+          'juin',
+          'juillet',
+          'aout',
+          'septembre',
+          'octobre',
+          'novembre',
+          'decembre'
+          
+        ]
+      },
+      tooltip: {
+        custom: function (data) {
+          return (
+            '<div class="px-1 py-50">' +
+            '<span>' +
+            data.series[data.seriesIndex][data.dataPointIndex] +
+            '%</span>' +
+            '</div>'
+          );
+        }
+      }
+    };
 
     // Sales Chart
     this.salesChartoptions = {
@@ -756,6 +809,7 @@ export class CardAnalyticsComponent implements OnInit, OnDestroy {
 
     // Goal Overview  Chart
     this.goalChartoptions = {
+      series:[0],
       chart: {
         height: 245,
         type: 'radialBar',
@@ -1189,11 +1243,12 @@ nombreOrder(){
   })
 
 }
-// getGouvernerat(){
-//   this._cardAnalyticsService.getGouvernerat().subscribe((result: any) => {
-//     console.log(result);
-//   })
-// }
+getGouvernerat(){
+  this._cardAnalyticsService.getGouvernerat().subscribe((result: any) => {
+    this.getGouvernerat=result;
+    console.log(result);
+  })
+}
 venduProduct(){
   this._cardAnalyticsService.venduProduct().subscribe((result: any) => {
     this.orderdProducts = result;
@@ -1202,15 +1257,24 @@ venduProduct(){
 }
 dateOrder(){
   this._cardAnalyticsService.dateOrder().subscribe((result: any) => {
-    console.log(result);
+    let labels=[];
+    let data=[];
+    result.map(item=>{
+      labels.push(item.delivery_date)
+      data.push(item.count)
+    })
+    this.apexLineChart.series=[{data:data}]
+this.apexLineChart.xaxis.categories=labels
   })
 }
-// percentageOrder(){
-//   this._cardAnalyticsService.percentageOrder().subscribe((result: any) => {
-//     console.log(result);
-//   })
+percentageOrder(){
+  this._cardAnalyticsService.percentageOrder().subscribe((result: any) => {
+    this.goalOrders=result;
+    this.goalChartoptions.series=[(this.goalOrders[1].count / ((this.goalOrders[1].count)+(this.goalOrders[0].count)))*100];
+    console.log(result);
+  })
 
-// }
+}
 
 
 
@@ -1221,9 +1285,9 @@ dateOrder(){
    * On init
    */
   ngOnInit() {
-    this._cardAnalyticsService.onCardAnalyticsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-      this.data = response;
-    });
+     this._cardAnalyticsService.onCardAnalyticsChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
+       this.data = response;
+     });
     this.getProducts()
     this.expensiveProduct();
     this.getPacks();
@@ -1235,10 +1299,13 @@ dateOrder(){
     this.nombreUser();
     this.nombreStock();
     this.nombreOrder();
-    //  this.getGouvernerat();
+   
+    this.percentageOrder();
     this.venduProduct();
     this.dateOrder();
-    // this.percentageOrder();
+    this.getGouvernerat();
+    this.dateOrder();
+    
 
     // Content Header
     this.contentHeader = {
@@ -1280,7 +1347,9 @@ dateOrder(){
       ) {
         setTimeout(() => {
           // Get Dynamic Width for Charts
+          
           this.isMenuToggled = true;
+          this.apexLineChart.chart.width = this.apexLineChartRef?.nativeElement.offsetWidth;
           this.supportChartoptions.chart.width = this.supportChartoptionsRef?.nativeElement.offsetWidth;
           this.avgsessionChartoptions.chart.width = this.avgsessionChartoptionsRef?.nativeElement.offsetWidth;
           this.revenueReportChartoptions.chart.width = this.revenueReportChartoptionsRef?.nativeElement.offsetWidth;
@@ -1297,6 +1366,8 @@ dateOrder(){
           this.goalChartoptions.chart.width = this.goalChartRef?.nativeElement.offsetWidth;
           this.apexCandlestickChart.chart.width = this.apexCandlestickChartRef?.nativeElement.offsetWidth;
           this.apexBarChart.chart.width = this.apexBarChartRef?.nativeElement.offsetWidth;
+          
+
 
 
         }, 500);

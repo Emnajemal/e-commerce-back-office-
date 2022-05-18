@@ -15,7 +15,7 @@
       
             <div class="transaction-item" *ngFor="let item of exProducts"> <!-- for start-->
               <div class="media">
-                <div class="avatar bg-light-primary rounded">
+                <div class="mr-2">
                   <div class="avatar-content">
                     <!-- <i data-feather="pocket" class="avatar-icon font-medium-3"></i> -->
                     <img [src]="baseUrl+item.image" style="max-width: 40px;" alt="">
@@ -26,7 +26,7 @@
                   <small>{{item.reference}}</small>
                 </div>
               </div>
-              <div class="font-weight-bolder text-success">TND {{item.pricesupplier}}</div>
+              <div class="font-weight-bolder text-success">TND {{item.sellingprice}}</div>
             </div> <!-- End For Here-->
         </div>
       </div>
@@ -60,7 +60,7 @@
         <div class="card-body">
           <div class="transaction-item" *ngFor="let item of Exppack"> <!-- for start-->
             <div class="media">
-              <div class="avatar bg-light-primary rounded">
+              <div class="mr-2" >
                 <div class="avatar-content">
                   <!-- <i data-feather="pocket" class="avatar-icon font-medium-3"></i> -->
                   <img [src]="baseUrl+item.image_pack" style="max-width: 40px;" alt="">
@@ -81,8 +81,8 @@
     <div class="col-lg-4 col-md-6 col-12">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h4 class="card-title">Goal Overview</h4>
-          <i data-feather="help-circle" class="font-medium-3 text-muted cursor-pointer"></i>
+          <h4 class="card-title">Order delivered and order canceled </h4>
+          <!-- <i data-feather="help-circle" class="font-medium-3 text-muted cursor-pointer"></i> -->
         </div>
         <div class="card-body p-0">
           <div id="goalChartoptions" class="mb-1 mt-1 pt-1" #goalChartRef>
@@ -106,20 +106,20 @@
               [colors]="goalChartoptions.colors"
               [plotOptions]="goalChartoptions.plotOptions"
               [fill]="goalChartoptions.fill"
-              [series]="data.goalOverview.series"
+              [series]="goalChartoptions.series"
               [stroke]="goalChartoptions.stroke"
               [grid]="goalChartoptions.grid"
             ></apx-chart>
             <!-- / Apexchart component-->
           </div>
-          <div class="row border-top text-center mx-0">
+          <div  *ngIf="goalOrders" class="row border-top text-center mx-0">
             <div class="col-6 border-right py-1">
-              <p class="card-text text-muted mb-0">Completed</p>
-              <h3 class="font-weight-bolder mb-0">{{ data.goalOverview.analyticsData.completed }}</h3>
+              <p class="card-text text-muted mb-0">Delivered</p>
+              <h3 class="font-weight-bolder mb-0">{{ goalOrders[1].count }}</h3>
             </div>
             <div class="col-6 py-1">
-              <p class="card-text text-muted mb-0">In Progress</p>
-              <h3 class="font-weight-bolder mb-0">{{ data.goalOverview.analyticsData.inProgress }}</h3>
+              <p class="card-text text-muted mb-0">Undelivered</p>
+              <h3 class="font-weight-bolder mb-0">{{ goalOrders[0].count }}</h3>
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@
                <small>{{item.reference}}</small>
              </div>
            </div>
-           <div class="font-weight-bolder text-success">TND {{item.pricesupplier}}</div>
+           <div class="font-weight-bolder text-success">TND {{item.total}}</div>
          </div> <!-- End For Here-->
          <!-- <div class="transaction-item">
            <div class="media">
@@ -210,9 +210,7 @@
          </div>
        </div>
      </div>
-   </div>
-   <!-- hne toufa mtaa akther 5 products moba3iin -->
-  <!-- Statistics Card -->
+      <!-- Statistics Card -->
   <div class="col-xl-8 col-md-6 col-12">
     <div class="card card-statistics">
       <div class="card-header">
@@ -220,11 +218,11 @@
       </div>
       <div class="card-body statistics-body">
         <div class="row">
-          <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+          <div class="col-sm-6 col-xl-3 mb-2 ">
             <div class="media">
               <div class="avatar bg-light-primary mr-2">
                 <div class="avatar-content">
-                  <i data-feather="user" class="avatar-icon"></i>
+                  <i data-feather="users" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -234,11 +232,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+          <div class="col-sm-6 col-xl-3 mb-2 ">
             <div class="media">
               <div class="avatar bg-light-info mr-2">
                 <div class="avatar-content">
-                  <i data-feather="ShoppingCartIcon" class="avatar-icon"></i>
+                  <i data-feather="shopping-bag" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -247,11 +245,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-xl-3 mb-2 mb-sm-0">
+          <div class="col-sm-6 col-xl-3 mb-2 ">
             <div class="media">
               <div class="avatar bg-light-danger mr-2">
                 <div class="avatar-content">
-                  <i data-feather="ShoppingBagIcon" class="avatar-icon"></i>
+                  <i data-feather="watch" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -260,11 +258,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-sm-6 col-xl-3 mb-2">
             <div class="media">
               <div class="avatar bg-light-success mr-2">
                 <div class="avatar-content">
-                  <i data-feather="credit-card" class="avatar-icon"></i>
+                  <i data-feather="codepen" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -273,11 +271,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-sm-6 col-xl-3 mb-2">
             <div class="media">
               <div class="avatar bg-light-success mr-2">
                 <div class="avatar-content">
-                  <i data-feather="credit-card" class="avatar-icon"></i>
+                  <i data-feather="truck" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -286,11 +284,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-sm-6 col-xl-3 mb-2">
             <div class="media">
               <div class="avatar bg-light-success mr-2">
                 <div class="avatar-content">
-                  <i data-feather="TruckIcon" class="avatar-icon"></i>
+                  <i data-feather="shopping-cart" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -299,11 +297,11 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-sm-6 col-xl-3 mb-2">
             <div class="media">
               <div class="avatar bg-light-success mr-2">
                 <div class="avatar-content">
-                  <i data-feather="credit-card" class="avatar-icon"></i>
+                  <i data-feather="dollar-sign" class="avatar-icon"></i>
                 </div>
               </div>
               <div class="media-body my-auto">
@@ -319,7 +317,53 @@
     
   </div>
   <!--/ Statistics Card -->
-  
+   </div>
+   <!-- hne toufa mtaa akther 5 products moba3iin -->
+   <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div
+          class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
+        >
+          <div>
+            <h4 class="card-title mb-25">Balance</h4>
+            <span class="card-subtitle text-muted">Commercial networks & enterprises</span>
+          </div>
+          <div class="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
+            <h5 class="font-weight-bolder mb-0 mr-1">$ 100,000</h5>
+            <div class="badge badge-light-secondary">
+              <i class="text-danger font-small-3" data-feather="arrow-down"></i>
+              <span class="align-middle">20%</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="line-chart" #apexLineChartRef>
+            <apx-chart
+              [series]="apexLineChart.series"
+              [chart]="{
+                height: 400,
+                width: isMenuToggled === false ? apexLineChartRef.offsetWidth : apexLineChart.chart.width,
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+                toolbar: {
+                  show: false
+                }
+              }"
+              [xaxis]="apexLineChart.xaxis"
+              [stroke]="apexLineChart.stroke"
+              [tooltip]="apexLineChart.tooltip"
+              [colors]="apexLineChart.colors"
+              [dataLabels]="apexLineChart.dataLabels"
+              [grid]="apexLineChart.grid"
+            ></apx-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
  
 </div>

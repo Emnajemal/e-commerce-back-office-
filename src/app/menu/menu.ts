@@ -192,7 +192,7 @@ export const menu: CoreMenu[] = [
           },
           {
             id: 'knowledgeBase',
-            title: 'Knowledge Base',
+            title: 'Shop',
             translate: 'MENU.PAGES.KB',
             type: 'item',
             icon: 'circle',

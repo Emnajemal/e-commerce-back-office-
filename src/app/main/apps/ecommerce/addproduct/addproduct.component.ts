@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Product from 'app/auth/models/product';
 import Store from 'app/auth/models/store';
 import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
+import Swal from 'sweetalert2';
 import { EcommerceService } from '../ecommerce.service';
 
 @Component({
@@ -102,6 +103,12 @@ export class AddproductComponent implements OnInit {
       console.log(data)
       this.success = true;
       this.modalService.dismissAll()
+      Swal.fire({
+        title: "Product Added Successfully!",
+        icon:"success",
+       // imageUrl: result.value.avatar_url,
+        customClass: { confirmButton: 'btn btn-success' }
+      });
 
     },(error:any)=>{
       this.success = false

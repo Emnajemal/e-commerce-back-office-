@@ -18,7 +18,7 @@
       </div> -->
     </div>
     <div class="item-cost">
-      <h6 class="item-price">TND {{ product.sellingprice }}</h6>
+      <h6 class="item-price">TND <s *ngIf="product.price_after_discount" class="text-danger">{{product.sellingprice}}</s> {{ product.price_after_discount ??  product.sellingprice }}</h6>
     </div>
   </div>
   <h6 class="item-name">

@@ -18,8 +18,8 @@
                 >reference :  <a href="javascript:void(0)" class="company-name"></a>{{ product?.reference }}</span
               >
               <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-                <h5 class="item-selling mr-1"> Selling price : </h5>
-                {{ product?.sellingprice }} TND
+                <h5 class="item-selling mr-1"> Selling price :  <s *ngIf="product.price_after_discount" class="text-danger">{{product.sellingprice}} TND</s> </h5>
+                 {{ product.price_after_discount ??  product.sellingprice }}
                 <br>
               </div>
               <div class="ecommerce-details-supplier d-flex flex-wrap mt-1">

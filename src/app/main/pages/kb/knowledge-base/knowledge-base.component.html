@@ -2,130 +2,146 @@
   <div class="content-body">
     <!-- content-header component -->
     <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="col-12">
+      <button type="button" (click)=modalOpenForm(modalForm) class="btn btn-warning" rippleEffect>
+      <span [data-feather]="'shopping-bag'" [class]="'mr-25'"></span>Add Store</button>
+    </div>
+    <!-- Modal -->
+    <ng-template #modalForm let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel1">Add new store</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-    <!-- Knowledge base Jumbotron -->
-    <section id="knowledge-base-search">
-      <div class="row">
-        <div class="col-12">
-          <div
-            class="card knowledge-base-bg text-center"
-            style="background-image: url('assets/images/banner/emna.jpg')"
-          >
-            <div class="card-body">
-              <h1 class="text-primary"> Add a new store </h1>
-              <p class="card-text mb-4">
-                <span></span><span class="font-weight-bolder"></span>
-              </p>
-              <div class="container-fluid">
-              <form class="form" [formGroup]="addForm" (ngSubmit)="addshopSubmit()">
-               
+      <div class="modal-body" tabindex="0" ngbAutofocus>
 
-                <div class="row mb-2" >
-                  <label for="first-name-column " class="col-sm-3 col-form-label">Insert your shop name :</label>
-                  <div class="col-sm-6">
-                    <input
-                        type="text"
-                        formControlName="name"
-                        class="form-control"
-                        placeholder="Shop name"
-                        />
-                  </div>
-                </div>
-                <div class="row mb-2">
-                  <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
-                  <div class="col-sm-6">
-                    <div class="custom-file">
-                      <input type="file" 
-                      #file              
-                       hidden
-                       class="custom-file-input"
-                       id="customFile" 
-                    
-                       (change)="uploadImage($event)" />
-                      <label class="custom-file-label" for="customFile">Choose picture</label>
-                    </div>
-                  </div>
-                  
-                </div>
-                
-                <div *ngIf="store_image && !update">
-                 
-                  <div class="col-12">
-                    <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
-                  </div>
-                  <br>
-                </div>
-                
-               <div class="container">
-                 <div class="row">
-                
-                   <div class="col"> <button type="submit" rippleEffect class="btn btn-info mr-1">Validate</button></div>
-                 </div>
-                 <br>
-                 <ngb-alert role="alert" class="alert  alert-success fade" [class]="{show : done}" ng-reflect-type="success" ng-reflect-dismissible="false">
-                   <h4 class="alert-heading">Success</h4>
-                   <div class="alert-body">
-                    
-                     </div>
-          
-               </ngb-alert>
-               </div>
-            
-              </form>
+
+        <form class="form" [formGroup]="addForm" (ngSubmit)="addshopSubmit()">
+
+
+          <div class="row mb-2">
+            <label for="first-name-column " class="col-sm-3 col-form-label">shop name :</label>
+            <div class="col-sm-7">
+              <input type="text" formControlName="name" class="form-control" placeholder="Shop name" />
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label for="basicInputFile" class="col-sm-3 col-form-label">shop image:</label>
+            <div class="col-sm-7">
+              <div class="custom-file">
+                <input type="file" #file hidden class="custom-file-input" id="customFile"
+                  (change)="uploadImage($event)" />
+                <label class="custom-file-label" for="customFile">Choose picture</label>
               </div>
-              
+            </div>
+
+          </div>
+
+          <div *ngIf="store_image && !update">
+
+            <div class="col-12">
+              <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
+            </div>
+            <br>
+          </div>
+
+          <div class="container">
+            <!-- <div class="row">
+
+              <div class="col"> <button type="submit" rippleEffect class="btn btn-info mr-1">Validate</button>
+              </div>
+            </div> -->
+            <br>
+            <ngb-alert role="alert" class="alert  alert-success fade" [class]="{show : done}" ng-reflect-type="success"
+              ng-reflect-dismissible="false">
+              <h4 class="alert-heading">Success</h4>
+              <div class="alert-body">
+
+              </div>
+
+            </ngb-alert>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="submit" rippleEffect class="btn btn-success mr-1">Add
+              Store</button>
+            <!-- <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button> -->
+          </div>
+       
+        </form>
+
+
+      </div>
+
+
+      <!-- </form> -->
+
+      <!-- <h1 class="text-primary"> Add a new store </h1> -->
+      <!-- <p class="card-text mb-4">
+                  <span></span><span class="font-weight-bolder"></span>
+                </p>
+                <div class="container-fluid">
+    
+                </div> -->
+
+      <!-- </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!--/ Knowledge base Jumbotron -->
+      </section> -->
+      <!--/ Knowledge base Jumbotron -->
+
+    </ng-template>
+
+    <!-- / Modal -->
+
     <!-- Knowledge base -->
     <section id="knowledge-base-content">
       <div class="row kb-search-content-info match-height">
-        <div
-          *ngFor="let store of stores | filter: searchText:'name'"
-          class="col-md-4 col-sm-6 col-12 kb-search-content"
-        >
+        <div *ngFor="let store of stores | filter: searchText:'name'"
+          class="col-md-4 col-sm-6 col-12 kb-search-content">
           <div class="card">
             <div ngbDropdown container="body">
               <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
                 <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
               </button>
               <div ngbDropdownMenu>
-                <button (click)="modalOpen(modalBasic, store)" ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow"
-                  rippleEffect>
-                  <a href="javascript:;" ngbDropdownItem>  
-                <span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details </a>
-                  </button><br>
+                <button (click)="modalOpen(modalBasic, store)" ngbDropdownToggle type="button"
+                  class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem>
+                    <span [data-feather]="'file-text'" [size]="16" [class]="'mr-50'"></span> Details </a>
+                </button><br>
 
-                  
-                 <!--<button (click)="editshopSubmit(store)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>--> 
 
-               <button (click)="modalOpenForm(modalForm, store)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
-                  <a href="javascript:;" ngbDropdownItem>                 
-                  <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit </a>
+                <!--<button (click)="editshopSubmit(store)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>-->
+
+                <button (click)="modalOpenForm(modalForm, store)" ngbDropdownToggle type="submit"
+                  class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                  <a href="javascript:;" ngbDropdownItem>
+                    <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit </a>
                 </button> <br>
-                  
-                  <button (click)="deleteshopSubmit(store.id)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow"
-                  rippleEffect>
+
+                <button (click)="deleteshopSubmit(store?.id)" ngbDropdownToggle type="submit"
+                  class="btn icon-btn btn-sm hide-arrow" rippleEffect>
                   <a href="javascript:;" ngbDropdownItem>
                     <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a>
-                 </button>                
+                </button>
               </div>
             </div>
-            
-              <img src="{{ store.store_image }}" class="card-img-top" [alt]="store.name" />
-              <div class="card-body text-center">
-                <h4>{{ store.name }}</h4>
-                <p class="text-body mt-1 mb-0"></p>
-              </div>
-                 <!-- houuuuuniiiii maa kol card  -->
-                
 
-                
+            <img src="{{ store.store_image }}" class="card-img-top" [alt]="store.name" />
+            <div class="card-body text-center">
+              <h4>{{ store.name }}</h4>
+              <p class="text-body mt-1 mb-0"></p>
+            </div>
+            <!-- houuuuuniiiii maa kol card  -->
+
+
+
           </div>
-          
+
         </div>
 
         <!-- no result -->
@@ -141,8 +157,8 @@
 
     <div class="edit-form">
       <!-- Button trigger modal -->
-     
-    
+
+
       <!-- Modal -->
       <ng-template #modalForm let-modal>
         <div class="modal-header">
@@ -152,57 +168,49 @@
           </button>
         </div>
         <form class="form" [formGroup]="editForm" (ngSubmit)="editShopSubmit()">
-        <div class="modal-body" tabindex="0" ngbAutofocus>
-         
-               
+          <div class="modal-body" tabindex="0" ngbAutofocus>
 
-            <div class="row mb-2" >
+
+
+            <div class="row mb-2">
               <label for="first-name-column " class="col-sm-3 col-form-label">Insert your shop name :</label>
               <div class="col-sm-6">
-                <input
-                    type="text"
-                    formControlName="name"
-                    class="form-control"
-                    placeholder="Shop name"
-                    />
+                <input type="text" formControlName="name" class="form-control" placeholder="Shop name" />
               </div>
             </div>
             <div class="row mb-2">
               <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
               <div class="col-sm-6">
                 <div class="custom-file">
-                  <input type="file"       
-                   hidden
-                   class="custom-file-input"
-                   id="customEditFile" 
-                
-                   (change)="editImage($event)" />
+                  <input type="file" hidden class="custom-file-input" id="customEditFile"
+                    (change)="editImage($event)" />
                   <label class="custom-file-label" for="customEditFile">Choose picture</label>
                 </div>
               </div>
-              
+
             </div>
-            
+
             <div *ngIf="store_image">
-             
+
               <div class="col-12">
                 <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
               </div>
               <br>
-            
-           
-            
-             
-        </div>
-     
-      </div>
-        <div class="modal-footer">
-          <button type="submit" (click)="modal.close('Accept click')" rippleEffect class="btn btn-info mr-1">Update</button>
-          <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button>
-        </div>
-      </form>
+
+
+
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" (click)="modal.close('Accept click')" rippleEffect
+              class="btn btn-info mr-1">Update</button>
+            <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button>
+          </div>
+        </form>
       </ng-template>
-      
+
       <!-- / Modal -->
     </div>
     <!-- Modal -->
@@ -214,11 +222,11 @@
         </button>
       </div>
       <div class="modal-body" tabindex="0" ngbAutofocus>
-       <img [src]="storeDetails.store_image" style="max-width: 100%;" alt="">
+        <img [src]="storeDetails.store_image" style="max-width: 100%;" alt="">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="modal.close()" rippleEffect>
-        Back
+          Back
         </button>
       </div>
     </ng-template>
