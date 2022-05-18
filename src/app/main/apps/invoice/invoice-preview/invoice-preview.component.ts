@@ -22,8 +22,8 @@ export class InvoicePreviewComponent implements OnInit, OnDestroy {
   public sidebarToggleRef = false;
   public paymentSidebarToggle = false;
   public paymentDetails = {
-    totalDue: '$12,110.55',
-    bankName: 'American Bank',
+    totalDue: '100 TND',
+    bankName: 'Unpaid',
     country: 'United States',
     iban: 'ETD95476213874685',
     swiftCode: 'BR91905'

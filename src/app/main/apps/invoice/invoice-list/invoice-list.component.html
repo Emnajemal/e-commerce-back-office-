@@ -26,23 +26,23 @@
 
          
           <ng-template #modalForm let-modal>
-            <div class="modal-header">
+            <!-- <div class="modal-header">
               <h4 class="modal-title" id="myModalLabel1"> Products Of The Order </h4>
               <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
-            <div class="modal-body" tabindex="0" ngbAutofocus>
-              <form  class="form" [formGroup]="OrderForm" (ngSubmit)="submit()" action="#">
+            </div> -->
+            <!-- <div class="modal-body" tabindex="0" ngbAutofocus> -->
+              <!-- <form  class="form" [formGroup]="OrderForm" (ngSubmit)="submit()" action="#"> -->
                
-                <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
+                <!-- <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
                   <h4 class="alert-heading">Order added successfully</h4>
                   
                 </ngb-alert>
                 <ngb-alert *ngIf="alert==false" [type]="'danger'" [dismissible]="false">
                   <h4 class="alert-heading">Error! Check your fields </h4>
                   
-                </ngb-alert>
+                </ngb-alert> -->
       
                 
       
@@ -149,35 +149,9 @@
 </div>
 </div> -->
   
-              </form>
-              <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Quantity Added</th>
-                        <th scope="col"> Date</th>
-                        
-              
-                        <th></th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let order of orders">
-                        <th scope="row">{{order.products_id}}</th>
-                        <!-- <td>{{stock.insert_date}}</td> -->
-                        <td> {{order.quantity_order}}</td>
-                        
-         
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-            <div class="modal-footer">
-             
-              <!-- <button type="submit" class="btn bg-light-primary mr-1" (click)="submit()" rippleEffect>Submit</button> -->
-              <button type="button" class="btn bg-light-danger" (click)="modal.close('Accept click')" rippleEffect>
-                Cancel
-              </button>
-            </div>
+            
+            
+            
           </ng-template>
 
 
@@ -232,10 +206,10 @@
           [scrollbarH]="true"
         >
           <ngx-datatable-column name="#Reference" prop="reference" [width]="45">
-            <ng-template let-id="value" ngx-datatable-cell-template>
-              <a routerLink="/apps/invoice/preview/{{ id }}" class="font-weight-bold">#{{ id }}</a>
+            <!-- <ng-template let-id="value" ngx-datatable-cell-template>
+              <a routerLink="/apps/invoice/preview/4989" class="font-weight-bold">#{{ id }}</a>
 
-            </ng-template>
+            </ng-template> -->
           </ngx-datatable-column>
 
           <!--7atitha fi commentaire-->
@@ -313,23 +287,26 @@
             <!-- </ng-template>
           </ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Client last name" prop="email" [width]="100"></ngx-datatable-column> -->
-          <ngx-datatable-column name="Client First Name" prop="client_name" [width]="82"></ngx-datatable-column>
-          <ngx-datatable-column name="Client Last Name" prop="client_lastname" [width]="75"></ngx-datatable-column>
-          <ngx-datatable-column name="Client Phone" prop="num_tel" [width]="50"></ngx-datatable-column>
+          <ngx-datatable-column name="Client Name" prop="client_name" [width]="82"></ngx-datatable-column>
+          <!-- <ngx-datatable-column name="Client Last Name" prop="client_lastname" [width]="75"></ngx-datatable-column> -->
+          <ngx-datatable-column name="Client Phone" prop="num_tel" [width]="60"></ngx-datatable-column>
        
+          
           <ngx-datatable-column name="Total " prop="total" [width]="30">
             <ng-template let-total="value" ngx-datatable-cell-template>
               <div>
-                $
+                
                 {{ total }}
+                TND
               </div>
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name=" Delivery man" prop="livreur" [width]="75"></ngx-datatable-column>
           <ngx-datatable-column name="Package reference" prop="colis_ref" [width]="100"></ngx-datatable-column>
 
-          <ngx-datatable-column class="badge badge-pill badge-light-primary mr-1" name="Package status" prop="colis_ref" [width]="100"></ngx-datatable-column>
-         
+          <ngx-datatable-column class="badge badge-pill badge-light-primary mr-1" name="Delivery status" prop="status_livraison" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column name="Payment Status" prop="status_paiment" [width]="100"></ngx-datatable-column>
+           <ngx-datatable-column name="Delivery Date" prop="delivery_date" [width]="75"></ngx-datatable-column>
           <!-- <ngx-datatable-column name="delivery Date" prop="delivery_date" [width]="100"> </ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Balance" prop="balance" [width]="40">
             <ng-template let-balance="value" ngx-datatable-cell-template>
@@ -344,15 +321,15 @@
                 <!-- Hedhi bech tabaath mail <a class="mr-1" href="javascript:void(0);" container="body" placement="top" ngbTooltip="Send Mail"
                   ><i size="18" data-feather="send"></i
                 ></a> -->
-                <a
+                <!-- <a
                   (click)="modalOpenForm(modalForm)" 
                   class="mr-1"
-                  routerLink="/apps/invoice/preview/{{ row.id }}"
+                  routerLink="apps/invoice/preview"
                   container="body"
                   placement="top"
                   ngbTooltip="Preview Invoice"
                   ><i size="18" data-feather="eye"></i
-                ></a>
+                ></a> -->
                 <div ngbDropdown container="body">
                   <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow px-0" rippleEffect>
                     <i data-feather="more-vertical" size="18" class="cursor-pointer"></i>
