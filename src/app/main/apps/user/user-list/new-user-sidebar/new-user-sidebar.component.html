@@ -18,45 +18,6 @@
           <h5 class="modal-title" id="exampleModalLabel">New User</h5>
         </div>
         <div class="modal-body flex-grow-1">
-         <!-- <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-            <input
-              type="text"
-              class="form-control dt-full-name"
-              id="basic-icon-default-fullname"
-              placeholder="John Doe"
-              name="user-fullname"
-              [(ngModel)]="fullname"
-              [class.error]="newUserForm.submitted && FNameRef.invalid"
-              #FNameRef="ngModel"
-              required
-              aria-label="John Doe"
-              aria-describedby="basic-icon-default-fullname2"
-            />
-            <span *ngIf="newUserForm.submitted && FNameRef.invalid" class="invalid-form">
-              <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
-            </span>
-          </div>-->
-         <!-- <div class="form-group">
-            <label class="form-label" for="basic-icon-default-uname">Username</label>
-            <input
-              type="text"
-              id="basic-icon-default-uname"
-              class="form-control dt-uname"
-              placeholder="Web Developer"
-              aria-label="jdoe1"
-              aria-describedby="basic-icon-default-uname2"
-              name="name"
-              [(ngModel)]="name"
-              formControlName="name"
-              [class.error]="newUserForm.submitted && FUserNameRef.invalid"
-              #FUserNameRef="ngModel"
-              required
-            />
-            <span *ngIf="newUserForm.submitted && FUserNameRef.invalid" class="invalid-form">
-              <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
-            </span>
-          </div>-->
          <ngb-alert *ngIf="alrt==true" [type]="'success'" [dismissible]="false">
             <h4 class="alert-heading">user added successfully</h4>
             
@@ -65,12 +26,7 @@
             <h4 class="alert-heading">Error! Check your fields </h4>
             
           </ngb-alert>
-          
-
-         <!-- <ngb-alert [type]="'success'" [dismissible]="false">
-            <h4 class="alert-heading"> user added successfully</h4>
-         
-          </ngb-alert>-->
+ 
           
           <div class="form-group" >
             <label for="register-username" class="form-label">Name</label>
@@ -95,38 +51,6 @@
             </div>
           </div>
 
-
-        
-         
-
-
-
-
-
-
-         <!-- <div class="form-group">
-            <label class="form-label" for="basic-icon-default-email">Email</label>
-            <input
-              type="text"
-              id="basic-icon-default-email"
-              class="form-control dt-email"
-              placeholder="john.doe@example.com"
-              aria-label="john.doe@example.com"
-              aria-describedby="basic-icon-default-email2"
-              name="email"
-              formControlemail="email"
-              [(ngModel)]="email"
-              [class.error]="newUserForm.submitted && FEmailRef.invalid"
-              #FEmailRef="ngModel"
-              required
-            />
-            <span *ngIf="newUserForm.submitted && FEmailRef.invalid" class="invalid-form">
-              <small class="form-text text-danger" *ngIf="FEmailRef.errors.required">This field is required!</small>
-            </span>
-            <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-          </div>-->
-
-
           <div class="form-group">
             <label for="register-email" class="form-label">Email</label>
             <input
@@ -144,134 +68,6 @@
               <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
             </div>
           </div>
-
-
-         
-        
-
-
-
-
-
-          <!--  <div class="form-group">
-              <label class="form-control-label" class="form-label">Password</label>
-              <input type="password"
-               name="password" 
-               class="form-control" 
-               placeholder="Your Password"
-                formControlpassword="password" 
-                required minlength="6"
-                pattern="(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password">
-              <div *ngIf="password.invalid && password.touched"
-                class="form-text text-muted danger">
-                <small *ngIf="password.errors.required"> Password is required. </small>
-
-              </div>
-            </div>
-         
-         
-            <div class="form-group">
-              <label class="form-control-label" class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" placeholder="Confirm Password" minlength="6"
-                name="password_confirmation" placeholder="Confirm Password" class="form-control" 
-                  formControlpassword_confirmation="password_confirmation" pattern="{{ password_confirmation.value }}"
-                id="password_confirmation">
-              <div *ngIf=" password_confirmation.invalid && password_confirmation.touched"
-                class="form-text text-muted danger">
-                <small *ngIf="password_confirmation.errors.required"> Confirm password is required. </small>
-                <small *ngIf="password_confirmation.errors.pattern"> Password & Confirm Password does not
-                  match.</small>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Phone</label>       
-              <div class="input-group">
-               
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="phone">+216</span>
-                </div>
-                <input type="text" class="form-control" formControlphone="phone" placeholder="(+216) 000 000 00" mask="(000) 000 00 00" />
-              </div>
-              </div>-->
-
-
-
-
-         <!-- <div class="form-group">
-            <label for="register-password" class="form-label">Password</label>
-
-            <div class="input-group input-group-merge form-password-toggle">
-              <input
-                [type]="passwordTextType ? 'text' : 'password'"
-                formControlName="password"
-                class="form-control form-control-merge"
-                placeholder="············"
-                aria-describedby="register-password"
-                tabindex="3"
-                [ngClass]="{ 'is-invalid error': submitted && f.password.errors }"
-              />
-              <div class="input-group-append">
-                <span class="input-group-text cursor-pointer"
-                  ><i
-                    class="feather font-small-4"
-                    [ngClass]="{
-                      'icon-eye-off': passwordTextType,
-                      'icon-eye': !passwordTextType
-                    }"
-                    (click)="togglePasswordTextType()"
-                  ></i
-                ></span>
-              </div>
-            </div>
-            <div
-              *ngIf="submitted && f.password.errors"
-              class="invalid-feedback"
-              [ngClass]="{ 'd-block': submitted && f.password.errors }"
-            >
-              <div *ngIf="f.password.errors.required">Password is required</div>
-            </div>
-          </div> 
-          
-
-          <div class="form-group">
-            <label for="register-password-confimation" class="form-label">Password Confirmation</label>
-
-            <div class="input-group input-group-merge form-password-toggle">
-              <input
-                [type]="passwordTextType ? 'text' : 'password'"
-                formControlName="password_confirmation"
-                class="form-control form-control-merge"
-                placeholder="············"
-                aria-describedby="register-password"
-                tabindex="3"
-                [ngClass]="{ 'is-invalid error': submitted && f.password.errors }"
-
-              />
-              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
-                <div *ngIf="f.password.errors.password"> Wrong password</div>
-              </div>
-              <div class="input-group-append">
-                <span class="input-group-text cursor-pointer"
-                  ><i
-                    class="feather font-small-4"
-                    [ngClass]="{
-                      'icon-eye-off': passwordTextType,
-                      'icon-eye': !passwordTextType
-                    }"
-                    (click)="togglePasswordTextTypeRetype()"
-                  ></i
-                ></span>
-              </div>
-            </div>
-            <div
-              *ngIf="submitted && f.password.errors"
-              class="invalid-feedback"
-              [ngClass]="{ 'd-block': submitted && f.password.errors }"
-            >
-              <div *ngIf="f.password.errors.required">Password is required</div>
-            </div>
-          </div>-->
           <div class="form-group">
             <label for="register-phone" class="form-label">Phone</label>
             
@@ -292,24 +88,20 @@
             </div>
           </div>
         
-          
-        
-
-         
-            
-
-  
-  
           <div class="form-group" >
              
             <label class="form-label" for="role"> Role</label>
-            <select id="user-role" class="form-control" formControlName="role">
+            <select id="user-role" class="form-control" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
               <option value="Community Manager"> Community Manager</option>
               
               <option value="Accountant">Accountant</option>
               <option value="Designer">Designer</option>
               
             </select>
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+              <div *ngIf="f.role.errors.required">Role is required</div>
+              
+            </div>
           </div>
 
 
@@ -319,24 +111,16 @@
               type="text"
               id="Adresse"
               class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.Adresse.errors }"
               formControlName="Adresse"
               name="Adresse"
               placeholder="Address"
             />
+            <div *ngIf="submitted && f.Adresse.errors" class="invalid-feedback">
+              <div *ngIf="f.Adresse.errors.required">Adresse is required</div>
+            </div>
           </div>
         
-
-       
-
-         <!--<div class="form-group mb-2">
-            <label class="form-label" for="user-plan">Select Plan</label>
-            <select id="user-plan" class="form-control">
-              <option value="basic">Basic</option>
-              <option value="enterprise">Enterprise</option>
-              <option value="company">Company</option>
-              <option value="team">Team</option>
-            </select>
-          </div>---> 
 
          <div class="form-group">
             <label for="basicInputFile">Import image</label>
@@ -348,71 +132,16 @@
                class="custom-file-input"
                 id="customFile" 
                 (change)="uploadImage($event)"
+                [ngClass]="{ 'is-invalid': submitted && f.profile_photo.errors }"
                 />
               <label class="custom-file-label" for="customFile">Choose image</label>
+              <div *ngIf="submitted && f.profile_photo.errors" class="invalid-feedback">
+                <div *ngIf="f.profile_photo.errors.required">image is required</div>
+              </div>
             </div>
           </div>
 
-<!-- 
-          
-            <div class="custom-control custom-control-info custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="colorCheck6" checked />
-              <label class="custom-control-label" for="colorCheck6"> </label>
-              -->
 
-          <!-- <div class="form-group row mb-2">
-            <label for="customSelect" class="col-sm-3 col-form-label"> Stores: </label>
-    
-          <div class="col-sm-6">
-            <select class="custom-select" formControlName="stores_id" >
-                <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
-            </select>
-          </div>
-         </div> -->
-          
-
-<!-- 
-    <div class="form-group row mb-2">
-            <label for="customSelect" class="col-sm-3 col-form-label"> Stores: </label>
-    
-          <div  class="custom-control custom-control-info custom-checkbox">
-            <input type="checkbox"  class="custom-control-input" formControlName="stores_id" id="colorCheck6" checked />
-          
-           
-            <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
-          
-          </div>
-         </div> -->
-
-      
-<!-- <div class="media">
-            <a href="javascript:void(0);" class="mr-25" >
-              <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
-            </a>
-            
-           
-            <div class="media-body mt-75 ml-1">
-              <button
-                (click)="file.click()"
-                for="account-upload"
-                class="btn btn-sm btn-info mb-75 mr-75"
-                rippleEffect
-              >
-                Upload
-              </button>
-              <input
-                type="file"
-                #file
-                id="account-upload"
-                hidden
-                accept="image/*"
-                (change)="uploadImage($event)"
-              />
-              <button class="btn btn-sm btn-outline-secondary mb-75" rippleEffect>Reset</button>
-              <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
-            </div>
-     
-          </div>-->
 
           <div class="form-group row mb-2">
             <label for="customSelect" class="col-sm-3 col-form-label"> Stores: </label>
@@ -425,12 +154,6 @@
           
             </div>
 
-          
-           <!-- <div class="col-sm-6" >
-            <select class="custom-select" formControlName="store_id" >
-                <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
-            </select>
-          </div> -->
          
          </div>
             <!--(click)="submit(newUserForm)"-->

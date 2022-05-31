@@ -5,8 +5,11 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Product from 'app/auth/models/product';
 import Promotion from 'app/auth/models/promotion';
+import Store from 'app/auth/models/store';
 
 import { EcommerceService } from 'app/main/apps/ecommerce/ecommerce.service';
+import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
+import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import Swal from 'sweetalert2';
@@ -19,6 +22,7 @@ import Swal from 'sweetalert2';
 })
 export class EcommerceShopComponent implements OnInit {
   // public
+  
   public contentHeader: object;
   public shopSidebarToggle = false;
   public shopSidebarReset = false;
@@ -37,6 +41,10 @@ export class EcommerceShopComponent implements OnInit {
   private _unsubscribeAll: Subject<any>;
   productId: number
   public promotion: Promotion[];
+  public stores: Store[];
+  selectedStore:any;
+  selectedStoreId:number
+  baseUrl= environment.apiUrl
   // nabaathha mel child lel parents out o l input l aakes
   @Output() onAddProduct = new EventEmitter()
   @Output() onAddPromtion = new EventEmitter()
@@ -48,7 +56,7 @@ export class EcommerceShopComponent implements OnInit {
    * @param {EcommerceService} _ecommerceService
    */
   constructor(private _coreSidebarService: CoreSidebarService, private fb: FormBuilder,
-    private _ecommerceService: EcommerceService, private modalService: NgbModal) {
+    private _ecommerceService: EcommerceService, private modalService: NgbModal, private _knowledgeBaseService:knowledgeBaseService) {
     this._unsubscribeAll = new Subject();
 
   }
@@ -116,6 +124,12 @@ modalOpenWarning(modalWarning) {
     windowClass: 'modal modal-warning'
   });
   }
+  getStores(){
+    this._knowledgeBaseService.getDataTableRows().then((data: any) => {
+      this.stores=data;
+      console.log(data)
+    })
+  }
   //toufaa houni delete
 
   // Lifecycle Hooks
@@ -126,7 +140,7 @@ modalOpenWarning(modalWarning) {
    */
   ngOnInit(): void {
     this.getProducts()
-   
+    this.getStores();
 
     // Subscribe to Wishlist change
     this._ecommerceService.onWishlistChange.subscribe(res => (this.wishlist = res));
@@ -197,5 +211,15 @@ modalOpenWarning(modalWarning) {
         customClass: { confirmButton: 'btn btn-success' }
       });
     })
+  }
+  filterByStore(event:any){
+    let selectValue = event.target.value
+    let productsPlaceholder = this.products
+   this.selectedStoreId = event.target.value
+    
+    // this.products.filter((ele:any)=>{
+    
+console.log(event.target.value)
+    // }),
   }
 }

@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import Promotion from 'app/auth/models/promotion';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { DateValidators } from '@core/validators/date-validators';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class PromotionComponent implements OnInit {
 
   addpromotionSubmit() {
     this.submitted = true;
+    console.log(this.promotionForm);
     if (this.promotionForm.invalid) {
       return;
     }
@@ -53,14 +55,7 @@ export class PromotionComponent implements OnInit {
     this._ecommerceService.addpromotion(this.formData).subscribe((data: any) => {
       console.log(this.promotionForm.value.customFooterDPdata);
 
-      // this.toastrSuccess();
       this.toastrProgressBar();
-
-
-
-      console.log(data);
-      //data.image = `http://localhost:8000${data.image}`
-      // this.products.push(data)
       this.onAddPromtion.emit()
       this.success = true;
       this.modalService.dismissAll()
@@ -97,9 +92,13 @@ export class PromotionComponent implements OnInit {
       amount: ['', Validators.required],
       end_date: ['', Validators.required],
       start_date: ['', [Validators.required]],
-      product_id: [],
-
-
+      product_id: []
+    }, {
+      validators:[
+        DateValidators.MinDateToday('start_date'),
+        // DateValidators.MaxDate('end_date','2022-6-1'),
+        DateValidators.ValidateTwoDates('start_date', 'end_date'),
+      ]
     })
     this.getProducts()
   }

@@ -139,11 +139,16 @@
                                       'icon-eye': !passwordTextTypeOld
                                     }" (click)="togglePasswordTextTypeOld()"></i></span>
                               </div>
-
-
-
+                            </div>
+                            <div *ngIf="submitted && !isCorrectPassword" class="text-danger">
+                              <div>Incorrect old password </div>
+                            </div>
+                            <div *ngIf="submitted && f.old_password.errors" class="invalid-feedback">
+                              <div *ngIf="f.old_password.errors.required">Password is required</div>
+                              <div *ngIf="f.old_password.errors.minlength">Password must be at least 6 characters</div>
 
                             </div>
+                            
                           </div>
                         </div>
                       </div>
@@ -161,7 +166,11 @@
                                       'icon-eye': !passwordTextTypeNew
                                     }" (click)="togglePasswordTextTypeNew()"></i></span>
                               </div>
-
+                              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+  
+                              </div>
 
                             </div>
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -187,7 +196,10 @@
                                     }" (click)="togglePasswordTextTypeRetype()"></i></span>
                               </div>
 
-
+                              <div *ngIf="submitted && f.password_confirmer.errors" class="invalid-feedback">
+                                <div *ngIf="f.password_confirmer.errors.required">Confirm Password is required</div>
+                                <div *ngIf="f.password_confirmer.errors.mustMatch">Passwords must match</div>
+                              </div>
 
 
                             </div>
@@ -226,7 +238,7 @@
                           </div>
                         </div>-->
                         <!-- ngb-alert component -->
-                        <ngb-alert *ngIf="tchek==false" [type]="'primary'">
+                        <ngb-alert *ngIf="tchek==false" [type]="'success'">
                           <div class="alert-body"><strong>Success !</strong> tchek your password</div>
                         </ngb-alert>
                         <!--/ ngb-alert component -->

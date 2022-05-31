@@ -1261,16 +1261,16 @@ dateOrder(){
     let data=[];
     result.map(item=>{
       labels.push(item.delivery_date)
-      data.push(item.count)
+      data.push(item?.count)
     })
     this.apexLineChart.series=[{data:data}]
-this.apexLineChart.xaxis.categories=labels
+this.apexLineChart.xaxis={categories:labels}
   })
 }
 percentageOrder(){
   this._cardAnalyticsService.percentageOrder().subscribe((result: any) => {
     this.goalOrders=result;
-    this.goalChartoptions.series=[(this.goalOrders[1].count / ((this.goalOrders[1].count)+(this.goalOrders[0].count)))*100];
+    this.goalChartoptions.series=[Math.round((this.goalOrders[1]?.count / ((this.goalOrders[1]?.count)+(this.goalOrders[0]?.count)))*100)];
     console.log(result);
   })
 
@@ -1309,7 +1309,7 @@ percentageOrder(){
 
     // Content Header
     this.contentHeader = {
-      headerTitle: 'Analytics Cards',
+      headerTitle: 'Statistics',
       actionButton: true,
       breadcrumb: {
         type: '',
@@ -1325,7 +1325,7 @@ percentageOrder(){
             link: '/'
           },
           {
-            name: 'Analytics Cards',
+            name: 'Statistics',
             isLink: false
           }
         ]

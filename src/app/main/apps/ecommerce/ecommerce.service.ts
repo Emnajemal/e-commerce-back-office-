@@ -81,7 +81,7 @@ export class EcommerceService implements Resolve<any> {
    * @param {RouterStateSnapshot} state
    * @returns {Observable<any> | Promise<any> | any}
    */
-   boutique(addForm){
+   addProduct(addForm){
     console.log(addForm);
     return this._httpClient.post('http://127.0.0.1:8000/api/product/addProduct/',addForm);
 

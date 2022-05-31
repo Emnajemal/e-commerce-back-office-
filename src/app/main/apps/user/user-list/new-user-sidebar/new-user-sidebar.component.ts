@@ -136,9 +136,9 @@ public registerForm: FormGroup;
     console.log(this.registerForm.value.name);
       this.UserListService.register(formdata).subscribe({
       next: (data: any) => {
-        // this.onAdduser.emit()
+        
         console.log(data)
-        // this.alert=true ; 
+    
        
         data.profile_photo = `http://localhost:8000${data.profile_photo}`
         this.alrt = true;
@@ -152,7 +152,7 @@ public registerForm: FormGroup;
       
        
     } )
-    // window.location.reload()
+   
   }
   
   clearForm() {
@@ -165,40 +165,7 @@ public registerForm: FormGroup;
     this.registerForm.get("email").setValue('');
     this.profile_photo = '';
   }
-//   submit() {
-//     console.log(this.registerForm.value.name)
-//   console.log("bonjour")
-//   console.log(this.registerForm.value.profile_photo)
-//     this.submitted=true;
-// //     const formdata = new FormData();
-// // //   //  if (this.registerForm.value.profile_photo) {
-// //       formdata.append('profile_photo', this.registerForm.value.profile_photo);
-// //    formdata.append('name',this.registerForm.value.name);
-// //       formdata.append('phone',this.registerForm.value.phone);
-// //       formdata.append('adresse',this.registerForm.value.adresse);
-// //      formdata.append('email',this.registerForm.value.email);
-// //      formdata.append('role',this.registerForm.value.email);
-// // console.log(this.registerForm.value.profile_photo);
-// // //  //   }
-//   //  this.UserListService.register(this.registerForm.value).subscribe(user => 
-//  // console.log(formdata)
-//  //this.registerForm.value.profile_photo=this.registerForm.value.profile_photo.name;
-//  this.registerForm.value.profile_photo=this.registerForm.value.profile_photo;
-//     this.UserListService.register(this.registerForm.value).subscribe(user => 
-//       {
-//         console.log(this.registerForm.value.profile_photo)
-//      this.alert=true ; 
-      
-//    //   this._router.navigate(['/login']);
-//     },
-    
-//         error => {
-//           this.error = error;
-//          this.alert=false;
-//         }
-//       );
 
-//     }
     closeAlert(){
       this.alert=false;
     }
@@ -211,70 +178,25 @@ public registerForm: FormGroup;
   
         reader.onload = (event: any) => {
           this.profile_photo = event.target.result;
-          // @ts-ignore
-        //  localStorage.setItem("pic", reader.result) ;
         };
   
         reader.readAsDataURL(event.target.files[0]);
       }
     }
-    /*   uploadImage(event: any) {
-      if (event.target.files && event.target.files[0]) {
-        this.selectedfile=<File> event.target.file[0];
-        console.log(this.selectedfile)
-        this.profile_photo=this.selectedfile.name;
-        console.log(this.profile_photo)
   
-        this.registerForm.get('profile_photo').setValue(event.target.files[0]);
-  
-        let reader = new FileReader();
-
-  
-        reader.onload = (event: any) => {
-          this.profile_photo = event.target.result;
-        };
-  
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    }
-*/
 //  ngOnInit(): void {}
 isEncoded(str:string) {
   return str.startsWith('data:image')
 }
 ngOnInit(): void {
-  // this.UserListService.getDataTableRows();
 
- /* if (this.user?.profile_photo) 
-  {
-    this.avatarImage = this.isEncoded(this.user.profile_photo) ? this.user.profile_photo :`http://localhost:8000${this.user.profile_photo}`
-  }*/
- 
-//   this.registerForm = this._formBuilder.group({
-//     name: new FormControl('', [Validators.required,Validators.minLength(3)]), 
-//     email: new FormControl('', [Validators.required,Validators.email]),
-//    // password: new FormControl('', [Validators.required]),
-//     //password_confirmation: new FormControl('', [Validators.required]),
-//     phone: new FormControl('', [Validators.required,Validators.minLength(😎,Validators.maxLength(8)]),
-//     Adresse: new FormControl('', [Validators.required]),
-//     role: new FormControl('', [Validators.required]),
-//    profile_photo: new FormControl(''),
-//   // profile_photo:   localStorage.getItem("pic") 
-//   })
 this.registerForm = this._formBuilder.group({
-  // name: ['', Validators.required],
-  // email: ['', Validators.required],
-  // phone: ['', Validators.required],
-  // Adresse: ['', Validators.required],
-  // role: ['', Validators.required],
-  // profile_photo: [null],
-  //    stores_id: ['', Validators.required],
       name: new FormControl('', [Validators.required,Validators.minLength(3)]), 
     email: new FormControl('', [Validators.required,Validators.email]),
     phone: new FormControl('', [Validators.required,Validators.minLength(8),Validators.maxLength(8)]),
         Adresse: new FormControl('', [Validators.required]),
     role: new FormControl('', [Validators.required]),
-   profile_photo: new FormControl(''),
+   profile_photo: new FormControl('', [Validators.required]),
    store_id:new FormControl('', [Validators.required]),
 })
 this.getStores();

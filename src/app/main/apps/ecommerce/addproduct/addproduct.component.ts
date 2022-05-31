@@ -96,7 +96,7 @@ export class AddproductComponent implements OnInit {
     //this.formData.append('status', this.addForm.value.status);
     this.formData.append('description', this.addForm.value.description);
     console.log(this.formData);
-    this._ecommerceService.boutique(this.formData).subscribe((data: any) => {
+    this._ecommerceService.addProduct(this.formData).subscribe((data: any) => {
        //data.image = `http://localhost:8000${data.image}`
       // this.products.push(data)
       this.onAddProduct.emit()

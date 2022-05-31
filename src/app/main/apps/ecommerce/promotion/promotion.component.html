@@ -19,7 +19,8 @@
             <input class="form-control" type="date" placeholder="01/02/2023"  formControlName="start_date"
             [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }" mask="00/00/0000" />
               <div *ngIf="submitted && f.start_date.errors" class="invalid-feedback">
-                  <div *ngIf="f.start_date.errors.required">reference is required</div>
+                  <div *ngIf="f.start_date.errors.required">start date is required</div>
+                  <div *ngIf="f.start_date.errors.minToday">start date must be atleast today</div>
               </div>
           </div>
         </div>
@@ -30,7 +31,10 @@
               <input class="form-control" type="date" placeholder="01/02/2023"  formControlName="end_date"
               [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }" mask="00/00/0000" />
                 <div *ngIf="submitted && f.end_date.errors" class="invalid-feedback">
-                    <div *ngIf="f.end_date.errors.required">reference is required</div>
+                    <div *ngIf="f.end_date.errors.required">final date is required</div>
+                    <div *ngIf="f.end_date.errors.lessThanStart">
+                      start date must be before end date
+                    </div>
                 </div>
             </div>
           </div>

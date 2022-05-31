@@ -33,7 +33,7 @@
               </button>
             </div>
             <div class="modal-body" tabindex="0" ngbAutofocus>
-              <form  class="form" [formGroup]="OrderForm" (ngSubmit)="submit()" action="#">
+              <form  class="form" [formGroup]="OrderForm"  (ngSubmit)="submit()" action="#">
                
                 <ngb-alert *ngIf="alert==true" [type]="'success'" [dismissible]="false">
                   <h4 class="alert-heading">Order added successfully</h4>
@@ -321,7 +321,7 @@
             <ng-template let-total="value" ngx-datatable-cell-template>
               <div>
                 $
-                {{ total }}
+                {{total}}
               </div>
             </ng-template>
           </ngx-datatable-column>

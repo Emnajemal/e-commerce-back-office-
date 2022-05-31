@@ -25,6 +25,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit, OnDestroy {
   public horizontalMenu: boolean;
   public hiddenMenu: boolean;
+  // public user=JSON.parse(localStorage.getItem('currentUser'));
 
   public coreConfig: any;
   public currentSkin: string;
@@ -81,7 +82,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _coreMediaService: CoreMediaService,
     private _coreSidebarService: CoreSidebarService,
     private _mediaObserver: MediaObserver,
-    public _translateService: TranslateService
+    public _translateService: TranslateService,
+
   ) {
     this._authenticationService.currentUser.subscribe(x => (this.currentUser = x));
 
@@ -176,8 +178,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
    * On init
    */
   ngOnInit(): void {
+    this._authenticationService.currentUser.subscribe(value=>{
+     this.currentUser=value;
+    })
     // get the currentUser details from localStorage
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
 
     // Subscribe to the config changes
     this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {

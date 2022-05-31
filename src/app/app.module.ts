@@ -32,6 +32,7 @@ import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/
 import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 const appRoutes: Routes = [
   {
     path: 'dashboard',
@@ -82,7 +83,7 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard/ecommerce',
+    redirectTo: '/ui/card/analytics',
     pathMatch: 'full'
   },
   {
@@ -97,7 +98,7 @@ const appRoutes: Routes = [
     ContextMenuComponent,
     BasicCustomContextMenuComponent,
     AnimatedCustomContextMenuComponent,
-    SubMenuCustomContextMenuComponent
+    SubMenuCustomContextMenuComponent,
   ],
   imports: [
     BrowserModule,

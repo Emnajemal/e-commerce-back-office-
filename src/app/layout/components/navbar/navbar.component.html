@@ -26,7 +26,7 @@
     <!--/ Menu Toggler -->
 
     <!-- Bookmark -->
-    <app-navbar-bookmark></app-navbar-bookmark>
+    <!-- <app-navbar-bookmark></app-navbar-bookmark> -->
     <!--/ Bookmark -->
   </div>
   <ul class="nav navbar-nav align-items-center ml-auto">
@@ -37,9 +37,11 @@
         ><span class="selected-language">{{ languageOptions[_translateService.currentLang].title }}</span></a
       >
       <div ngbDropdownMenu aria-labelledby="dropdown-flag">
-        <a *ngFor="let lang of _translateService.getLangs()" ngbDropdownItem (click)="setLanguage(lang)">
-          <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title }}
-        </a>
+        <ng-container *ngFor="let lang of _translateService.getLangs()">
+          <a *ngIf="lang=='en' || lang=='fr'" ngbDropdownItem (click)="setLanguage(lang)">
+            <i class="flag-icon flag-icon-{{ languageOptions[lang].flag }}"></i> {{ languageOptions[lang].title }}
+          </a>
+        </ng-container>
       </div>
     </li>
     <!--/ Language selection -->
@@ -84,7 +86,7 @@
           <span class="avatar"
             ><img
               class="round"
-              src="assets/images/portrait/small/inconnu.jpg"
+              [src]="'http://localhost:8000' + currentUser.profile_photo"
               alt="avatar"
               height="40"
               width="40" /><span class="avatar-status-online"></span
@@ -92,7 +94,7 @@
         </ng-container>
       </a>
       <div ngbDropdownMenu aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right">
-        <a ngbDropdownItem [routerLink]="['/pages/profile']"
+        <!--<a ngbDropdownItem [routerLink]="['/pages/profile']"
           ><span [data-feather]="'user'" [class]="'mr-50'"></span> Profile</a
         ><a ngbDropdownItem [routerLink]="['/apps/email']"
           ><span [data-feather]="'mail'" [class]="'mr-50'"></span> Inbox</a
@@ -100,15 +102,15 @@
           ><span [data-feather]="'check-square'" [class]="'mr-50'"></span> Task</a
         ><a ngbDropdownItem [routerLink]="['/apps/chat']"
           ><span [data-feather]="'message-square'" [class]="'mr-50'"></span> Chats</a
-        >
+        >-->
         <div class="dropdown-divider"></div>
         <a ngbDropdownItem [routerLink]="['/pages/account-settings']"
           ><span [data-feather]="'settings'" [class]="'mr-50'"></span> Settings</a
-        ><a ngbDropdownItem [routerLink]="['/pages/pricing']"
+        ><!--<a ngbDropdownItem [routerLink]="['/pages/pricing']"
           ><span [data-feather]="'credit-card'" [class]="'mr-50'"></span> Pricing</a
         ><a ngbDropdownItem [routerLink]="['/pages/faq']"
           ><span [data-feather]="'help-circle'" [class]="'mr-50'"></span> FAQ</a
-        ><a ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a>
+        >--><a ngbDropdownItem (click)="logout()"><span [data-feather]="'power'" [class]="'mr-50'"></span> Logout</a>
       </div>
     </li>
     <!--/ User Dropdown -->

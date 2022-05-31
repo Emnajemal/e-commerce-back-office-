@@ -1,13 +1,16 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <!-- content-header component -->
+
     <app-content-header [contentHeader]="contentHeader"></app-content-header>
-    <div class="col-12">
-      <button type="button" (click)=modalOpenForm(modalForm) class="btn btn-warning" rippleEffect>
-      <span [data-feather]="'shopping-bag'" [class]="'mr-25'"></span>Add Store</button>
+    <div class="row mb-3">
+      <div class="col-12 text-right">
+        <button type="button" (click)=modalOpenForm(addModalForm) class="btn btn-success px-4" rippleEffect>
+          <span [data-feather]="'shopping-bag'" [class]="'mr-25'"></span> Add Store </button>
+      </div>
     </div>
     <!-- Modal -->
-    <ng-template #modalForm let-modal>
+    <ng-template #addModalForm let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel1">Add new store</h4>
         <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
@@ -40,9 +43,9 @@
           </div>
 
           <div *ngIf="store_image && !update">
-
+<!--style="max-width: 200px;"-->
             <div class="col-12">
-              <img [src]="store_image" class="imagee" style="max-width: 400px;" alt="">
+              <img [src]="store_image" class="imagee"  alt="">
             </div>
             <br>
           </div>
@@ -63,13 +66,13 @@
 
             </ngb-alert>
           </div>
-          
+
           <div class="modal-footer">
             <button type="submit" rippleEffect class="btn btn-success mr-1">Add
               Store</button>
             <!-- <button (click)="onCancel();modal.close()" rippleEffect class="btn btn-danger mr-1">cancel</button> -->
           </div>
-       
+
         </form>
 
 
@@ -117,7 +120,7 @@
 
                 <!--<button (click)="editshopSubmit(store)" ngbDropdownToggle type="submit" class="btn icon-btn btn-sm hide-arrow" rippleEffect>-->
 
-                <button (click)="modalOpenForm(modalForm, store)" ngbDropdownToggle type="submit"
+                <button (click)="modalOpenForm(editModalForm, store)" ngbDropdownToggle type="submit"
                   class="btn icon-btn btn-sm hide-arrow" rippleEffect>
                   <a href="javascript:;" ngbDropdownItem>
                     <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit </a>
@@ -154,13 +157,13 @@
       </div>
     </section>
     <!-- Knowledge base ends -->
-
+    <!-- Edit Form -->
     <div class="edit-form">
       <!-- Button trigger modal -->
 
 
       <!-- Modal -->
-      <ng-template #modalForm let-modal>
+      <ng-template #editModalForm let-modal>
         <div class="modal-header">
           <h4 class="modal-title" id="myModalLabel1">Update Store {{update}}</h4>
           <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
@@ -173,13 +176,13 @@
 
 
             <div class="row mb-2">
-              <label for="first-name-column " class="col-sm-3 col-form-label">Insert your shop name :</label>
+              <label for="first-name-column " class="col-sm-3 col-form-label"> shop name :</label>
               <div class="col-sm-6">
                 <input type="text" formControlName="name" class="form-control" placeholder="Shop name" />
               </div>
             </div>
             <div class="row mb-2">
-              <label for="basicInputFile" class="col-sm-3 col-form-label"> Insert your shop image :</label>
+              <label for="basicInputFile" class="col-sm-3 col-form-label">  shop image :</label>
               <div class="col-sm-6">
                 <div class="custom-file">
                   <input type="file" hidden class="custom-file-input" id="customEditFile"
@@ -213,6 +216,8 @@
 
       <!-- / Modal -->
     </div>
+    <!-- ./Edit Form -->
+
     <!-- Modal -->
     <ng-template #modalBasic let-modal>
       <div class="modal-header">

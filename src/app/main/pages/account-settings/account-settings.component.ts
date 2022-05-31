@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angula
 import { MustMatch } from './mustmatch';
 import { ToastService } from 'app/main/components/toasts/toasts.service';
 import { User } from 'app/auth/models';
+import { AuthenticationService } from 'app/auth/service/authentication.service';
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
@@ -17,6 +18,7 @@ import { User } from 'app/auth/models';
 export class AccountSettingsComponent implements OnInit, OnDestroy {
   // public
   tchek: boolean = null;
+  isCorrectPassword:boolean = true;
   success: boolean = null;
   resetForm: FormGroup;
   uploadForm: FormGroup;
@@ -43,7 +45,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
    *
    * @param {AccountSettingsService} _accountSettingsService
    */
-  constructor(private _accountSettingsService: AccountSettingsService, private fb: FormBuilder, public toastService: ToastService) {
+  constructor(private _accountSettingsService: AccountSettingsService,private _AuthenticationService: AuthenticationService, private fb: FormBuilder, public toastService: ToastService) {
     this._unsubscribeAll = new Subject();
   }
 
@@ -98,6 +100,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     this._accountSettingsService.upload(formdata).subscribe({
       next: (data:any) => {
         console.log(data)
+        this._AuthenticationService.currentUserSubject.next(data.user)
         this.success = true
         this.user = { ...this.user,...data.user,  first_name: data.user.name }
 
@@ -113,9 +116,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   //Change password 
   onSubmit() {
     this.submitted = true;
-    //  const old_password = form.value.old_password;
-    //const password = form.value.password;
-    //const password_confirmer = form.value.password_confirmer; 
+   
     if (this.resetForm.invalid) {
       return;
     }
@@ -123,11 +124,16 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       console.log(this.resetForm.value)
       this._accountSettingsService
         .change(this.resetForm.value)
-        .subscribe({
-          next: () => this.tchek = false,
-
-
+        .subscribe((result:any)=>{
+          this.tchek = false
+          
+        },(error:any)=>{
+          console.log(error)
+          if(error=='ancien mdp incorrect'){
+            this.isCorrectPassword =false
+          }
         })
+      // this.tchek = false
     }
   }
 
