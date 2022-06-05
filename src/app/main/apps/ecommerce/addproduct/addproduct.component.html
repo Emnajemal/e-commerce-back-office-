@@ -35,6 +35,9 @@
                     placeholder="prix" />
                     <div *ngIf="submitted && f.pricesupplier.errors" class="invalid-feedback">
                         <div *ngIf="f.pricesupplier.errors.required">Supplier price is required</div>
+                        <div *ngIf="f.pricesupplier.errors.min">
+                            Supplier Price must be bigger than 0 .
+                        </div>
                     </div>
             </div>
         </div>
@@ -45,6 +48,12 @@
                  formControlName="sellingprice" placeholder="prix" />
                  <div *ngIf="submitted && f.sellingprice.errors" class="invalid-feedback">
                     <div *ngIf="f.sellingprice.errors.required">Selling price is required</div>
+                    <div *ngIf="f.sellingprice.errors.largeMustBeBigger">
+                        Selling Price must be bigger than supplier price.
+                    </div>
+                    <div *ngIf="f.sellingprice.errors.min">
+                        Selling Price must be bigger than 0 .
+                    </div>
                 </div>
             </div>
         </div>
