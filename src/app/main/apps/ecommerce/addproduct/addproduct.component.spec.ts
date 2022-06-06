@@ -1,35 +1,33 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AddproductComponent } from "app/main/apps/ecommerce/addproduct/addproduct.component";
+import { knowledgeBaseService } from './../../../pages/kb/knowledge-base/knowledge-base.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AddproductComponent } from './addproduct.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+describe('Component: AddProduct', () => {
 
-describe('Component: Addproduct', function (){
-
-    let component: AddproductComponent;
-    let fixture: ComponentFixture<AddproductComponent>;
-    beforeEach(() => {
-
+    beforeEach(() => { // 3
         TestBed.configureTestingModule({
-            declarations: [AddproductComponent],
-            imports: [ReactiveFormsModule, FormsModule],
-        });
+            imports: [
+                RouterTestingModule,
+                HttpClientTestingModule,
+                ReactiveFormsModule,
+                FormsModule,
+                
+            ],
+            providers:[knowledgeBaseService],
+            declarations: [
+                AddproductComponent
+            ],
+        }).compileComponents();
 
-        // create component and test fixture
-        fixture = TestBed.createComponent(AddproductComponent);
-
-        // get test component from the fixture
-        component = fixture.componentInstance;
-        component.ngOnInit();
     });
 
-    it('form invalid when empty', function () {
-        expect(component.addForm.valid).toBeFalsy();
+    it('Check title value (AddProduct)', () => {
+        const fixture = TestBed.createComponent(AddproductComponent);
+        const app = fixture.debugElement.componentInstance;
+        expect(app.title).toEqual('AddProduct');
     });
 
-    it('sellingprice field validity', function (){
-        let sellingprice = component.addForm.controls['sellingprice'];
-        expect(sellingprice.valid).toBeFalsy();
-        sellingprice.setValue(0.00000009)
-        expect(sellingprice.valid).toBeFalsy();
-    });
 });

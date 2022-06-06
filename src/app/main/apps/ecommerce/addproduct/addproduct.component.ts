@@ -13,6 +13,7 @@ import { EcommerceService } from '../ecommerce.service';
   styleUrls: ['./addproduct.component.scss']
 })
 export class AddproductComponent implements OnInit {
+  public title: String = 'AddProduct';
   addForm: FormGroup;
   image: string;
   success: boolean;
