@@ -3,8 +3,8 @@
 
 <div class="item-img text-center">
   <a [routerLink]="'/apps/e-commerce/details/' + product.id"  class="d-inline-block w-50 mx-auto">
-    <img class="img-fluid card-img-top" [src]="product.image" alt="img-placeholder" />
-  </a>
+    <img class="img-fluid card-img-top" [src]="product.image" alt="img-placeholder" (error)="$event.target.src = 'assets/images/erreur.jpg'" />
+  </a> 
 </div>
 <div class="card-body">
   <div class="item-wrapper">

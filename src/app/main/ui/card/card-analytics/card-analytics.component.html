@@ -115,11 +115,11 @@
           <div  *ngIf="goalOrders" class="row border-top text-center mx-0">
             <div class="col-6 border-right py-1">
               <p class="card-text text-muted mb-0">Delivered</p>
-              <h3 class="font-weight-bolder mb-0">{{ goalOrders[1].count }}</h3>
+              <h3 class="font-weight-bolder mb-0">{{ goalOrders[1]?.count }}</h3>
             </div>
             <div class="col-6 py-1">
               <p class="card-text text-muted mb-0">Undelivered</p>
-              <h3 class="font-weight-bolder mb-0">{{ goalOrders[0].count }}</h3>
+              <h3 class="font-weight-bolder mb-0">{{ goalOrders[0]?.count }}</h3>
             </div>
           </div>
         </div>
@@ -130,17 +130,17 @@
   </div>
   <!-- transaction card section start  heya eli feha akther 5 moba3iin -->
   <div class="row" *ngIf="orderdProducts" >
-    <div class="col-lg-4 col-md-6 col-12">
+    <!-- <div class="col-lg-4 col-md-6 col-12">
      <div class="card card-transaction">
        <div class="card-header">
          <h4 class="card-title">Top 5 Products ordered</h4>
        </div>
        <div class="card-body">
-         <div class="transaction-item" *ngFor="let item of orderdProducts"> <!-- for start-->
+         <div class="transaction-item" *ngFor="let item of orderdProducts"> 
            <div class="media">
              <div class="avatar bg-light-primary rounded">
                <div class="avatar-content">
-                 <!-- <i data-feather="pocket" class="avatar-icon font-medium-3"></i> -->
+                
                  <img [src]="baseUrl+item.image" style="max-width: 40px;" alt="">
                </div>
              </div>
@@ -150,68 +150,12 @@
              </div>
            </div>
            <div class="font-weight-bolder text-success">TND {{item.total}}</div>
-         </div> <!-- End For Here-->
-         <!-- <div class="transaction-item">
-           <div class="media">
-          
-            <div class="avatar bg-light-success rounded">
-               <div class="avatar-content">
-                 <i data-feather="check" class="avatar-icon font-medium-3"></i>
-               </div>
-             </div>
-             <div class="media-body">
-               <h6 class="transaction-title">Bank Transfer</h6>
-               <small>Add Money</small>
-             </div>
-           </div>
-           <div class="font-weight-bolder text-success">+ $480</div>
          </div>
-         <div class="transaction-item">
-           <div class="media">
-             <div class="avatar bg-light-danger rounded">
-               <div class="avatar-content">
-                 <i data-feather="dollar-sign" class="avatar-icon font-medium-3"></i>
-               </div>
-             </div>
-             <div class="media-body">
-               <h6 class="transaction-title">Paypal</h6>
-               <small>Add Money</small>
-             </div>
-           </div>
-           <div class="font-weight-bolder text-success">+ $590</div>
-         </div>
-         <div class="transaction-item">
-           <div class="media">
-             <div class="avatar bg-light-warning rounded">
-               <div class="avatar-content">
-                 <i data-feather="credit-card" class="avatar-icon font-medium-3"></i>
-               </div>
-             </div>
-             <div class="media-body">
-               <h6 class="transaction-title">Mastercard</h6>
-               <small>Ordered Food</small>
-             </div>
-           </div>
-           <div class="font-weight-bolder text-danger">- $23</div>
-         </div>
-         <div class="transaction-item">
-           <div class="media">
-             <div class="avatar bg-light-info rounded">
-               <div class="avatar-content">
-                 <i data-feather="trending-up" class="avatar-icon font-medium-3"></i>
-               </div>
-             </div>
-             <div class="media-body">
-               <h6 class="transaction-title">Transfer</h6>
-               <small>Refund</small>
-             </div>
-           </div>
-           <div class="font-weight-bolder text-success">+ $98</div> -->
          </div>
        </div>
-     </div>
-      <!-- Statistics Card -->
-  <div class="col-xl-8 col-md-6 col-12">
+     </div>  -->
+     
+  <div class="col-xl-12 col-md-6 col-12">
     <div class="card card-statistics">
       <div class="card-header">
         <h4 class="card-title">Statistics</h4>
@@ -227,7 +171,9 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.sales }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of users {{nbrUser}}
+                <p class="card-text font-small-3 mb-0">Number of users 
+                </p>
+                <p class="card-text font-small-3 mb-0"> {{nbrUser}}
                 </p>
               </div>
             </div>
@@ -241,7 +187,9 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.customers }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of stores  {{nbrStore}}</p>
+                <p class="card-text font-small-3 mb-0">Number of stores  </p>
+                <p class="card-text font-small-3 mb-0"> {{nbrStore}}</p>
+
               </div>
             </div>
           </div>
@@ -254,7 +202,9 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.products }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of products {{nbrProduct}}  </p> 
+                <p class="card-text font-small-3 mb-0">Number of products </p> 
+                <p class="card-text font-small-3 mb-0">{{nbrProduct}}  </p> 
+
               </div>
             </div>
           </div>
@@ -267,7 +217,9 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of packs {{nbrPack}} </p>
+                <p class="card-text font-small-3 mb-0">Number of packs </p>
+                <p class="card-text font-small-3 mb-0">{{nbrPack}} </p>
+
               </div>
             </div>
           </div>
@@ -280,7 +232,9 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of orders {{nbrOrdre}} </p>
+                <p class="card-text font-small-3 mb-0">Number of orders </p>
+                <p class="card-text font-small-3 mb-0">{{nbrOrdre}} </p>
+
               </div>
             </div>
           </div>
@@ -293,7 +247,9 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of stocks {{nbrStock}} </p>
+                <p class="card-text font-small-3 mb-0">Number of stocks </p>
+                <p class="card-text font-small-3 mb-0"> {{nbrStock}} </p>
+
               </div>
             </div>
           </div>
@@ -306,7 +262,8 @@
               </div>
               <div class="media-body my-auto">
                 <h4 class="font-weight-bolder mb-0">{{ data.statistics?.analyticsData.revenue }}</h4>
-                <p class="card-text font-small-3 mb-0">Number of promotions {{nbrPromotions}} </p>
+                <p class="card-text font-small-3 mb-0">Number of promotions²& </p>
+                <p class="card-text font-small-3 mb-0"> {{nbrPromotions}} </p>
               </div>
             </div>
           </div>
@@ -326,16 +283,16 @@
           class="card-header d-flex flex-sm-row flex-column justify-content-md-between align-items-start justify-content-start"
         >
           <div>
-            <h4 class="card-title mb-25">Balance</h4>
-            <span class="card-subtitle text-muted">Commercial networks & enterprises</span>
+            <h4 class="card-title mb-25">Evolution of orders</h4>
+            <!-- <span class="card-subtitle text-muted">Commercial networks & enterprises</span> -->
           </div>
-          <div class="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
+          <!-- <div class="d-flex align-items-center flex-wrap mt-sm-0 mt-1">
             <h5 class="font-weight-bolder mb-0 mr-1">$ 100,000</h5>
             <div class="badge badge-light-secondary">
               <i class="text-danger font-small-3" data-feather="arrow-down"></i>
               <span class="align-middle">20%</span>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="card-body">
           <div id="line-chart" #apexLineChartRef>

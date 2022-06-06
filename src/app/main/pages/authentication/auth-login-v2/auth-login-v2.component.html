@@ -47,15 +47,16 @@
           </div>
         </ngb-alert>
 
-        <form class="auth-login-form mt-2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form class="auth-login-form mt-2"  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label class="form-label" for="login-email">Email</label>
             <input
+              autocomplete="on"
               type="text"
               formControlName="email"
               class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-              placeholder="admin@demo.com"
+              placeholder="admin@gmail.com"
               aria-describedby="login-email"
               autofocus=""
               tabindex="1"
@@ -72,6 +73,7 @@
             </div>
             <div class="input-group input-group-merge form-password-toggle">
               <input
+                autocomplete="on"
                 [type]="passwordTextType ? 'text' : 'password'"
                 formControlName="password"
                 class="form-control form-control-merge"
@@ -103,7 +105,7 @@
           </div>
           <div class="form-group">
             <div class="custom-control custom-control-info custom-checkbox">
-              <input class="custom-control-input " id="remember-me" type="checkbox" tabindex="3" />
+              <input class="custom-control-input " id="remember-me" type="checkbox" [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}"  tabindex="3" />
               <label class="custom-control-label"  for="remember-me" > Remember Me</label>
             </div>
           </div>
@@ -115,19 +117,19 @@
           <span>New on our platform?</span
           ><a routerLink="/pages/authentication/register-v2"><span>&nbsp;Create an account</span></a>
         </p>-->
-        <div class="divider my-2">
-          <div class="divider-text">or</div>
-        </div>
-        <div class="auth-footer-btn d-flex justify-content-center">
+        <!-- <div class="divider my-2">
+          <!-- <div class="divider-text">or</div> -->
+        <!-- </div>  -->
+        <!-- <div class="auth-footer-btn d-flex justify-content-center">
           <a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a
           >
-          <!---<a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a
-          >--><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a
+          <a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a
+          ><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a
           >
-          <!--<a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a>-->
-          <a class="btn btn-linkedin" href="javascript:void(0)"><i data-feather="linkedin"></i></a
+          <a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a>-->
+          <!-- <a class="btn btn-linkedin" href="javascript:void(0)"><i data-feather="linkedin"></i></a
             >
-        </div>
+        </div>  -->
       </div>
     </div>
     <!-- /Login-->

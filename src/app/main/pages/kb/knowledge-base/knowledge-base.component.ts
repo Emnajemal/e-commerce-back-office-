@@ -9,6 +9,7 @@ import Store from 'app/auth/models/store';
 import store from 'app/auth/models/store';
 import { id } from '@swimlane/ngx-datatable';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-knowledge-base',
   templateUrl: './knowledge-base.component.html',
@@ -69,6 +70,13 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     console.log(this.addForm.value.name);
     this._knowledgeBaseService.boutique(formdata).subscribe({
       next: (data: any) => {
+        Swal.fire({
+          title: "Shop Added Succefully!",
+          icon:"success",
+         // imageUrl: result.value.avatar_url,
+          customClass: { confirmButton: 'btn btn-success' }
+        });
+        this.modalService.dismissAll()
         data.store_image = `http://localhost:8000${data.store_image}`
         this.stores.push(data)
         console.log(data)
@@ -98,6 +106,12 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
 
     this._knowledgeBaseService.updateshop(this.update, formdata).subscribe({
       next: (data: any) => {
+        Swal.fire({
+          title: " Shop Updated Succefully!",
+          icon:"success",
+         // imageUrl: result.value.avatar_url,
+          customClass: { confirmButton: 'btn btn-success' }
+        });
         console.log(data);
         let store = this.stores.find(store => store?.id == this.update);
         store.name = data.name;
@@ -136,6 +150,12 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
     let store = this.findStore(id)
 
     this._knowledgeBaseService.deletetData(id).subscribe(res => {
+      Swal.fire({
+        title: "Deleted!",
+        icon:"success",
+       // imageUrl: result.value.avatar_url,
+        customClass: { confirmButton: 'btn btn-success' }
+      });
       let index = this.stores.findIndex(store => store?.id === id)
       this.stores.splice(index, 1);
       console.log(res);

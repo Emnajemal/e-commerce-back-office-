@@ -15,6 +15,8 @@ import { EcommerceService } from '../ecommerce.service';
 })
 export class EditproductComponent implements OnInit {
   editForm: FormGroup;
+  submitted = false;
+  success: boolean;
   image: string;
   baseUrl:string = environment.apiUrl
   public stores: Store[];
@@ -25,16 +27,16 @@ export class EditproductComponent implements OnInit {
 
   ngOnInit(): void {
     this.editForm = this.fb.group({
-      name: [null],
-      reference: [null],
-      status: [null],
-      pricesupplier:[null],
-      sellingprice: [null],
-      gain:[null],
-      description:[null],
-      stores_id:[null],
-      quantity:[null],
-      image: [null]
+      name:['', Validators.required],
+      reference: ['', Validators.required],
+      status: ['', Validators.required],
+      pricesupplier:['', Validators.required],
+      sellingprice: ['', Validators.required],
+      gain:['', Validators.required],
+      description:['', Validators.required],
+      stores_id:['', Validators.required],
+      quantity:['', Validators.required],
+      image: ['', Validators.required]
     })
     console.log(this.productId)
     //getproductbyid heya eli tkhadem function eli louta besh tabaa3 l inputs fehom
@@ -61,7 +63,7 @@ export class EditproductComponent implements OnInit {
   }
   editproductSubmit() {
    console.log(this.editForm.value.name) 
-    // this.submitted = true;
+     this.submitted = true;
     if (this.editForm.invalid) {
       return;
     }
@@ -84,6 +86,7 @@ export class EditproductComponent implements OnInit {
       //oneditproduct kif l event kidhabet lezem nenzel aaleha besh tekhdem hadheka aaleh ena lezem naamel emit iibara nzel aaleha 
       this.onEditProduct.emit()
       console.log(data)
+      this.success = true;
       this.modalService.dismissAll()
       Swal.fire({
         title: "Product Updated Successfully!",
@@ -98,6 +101,7 @@ export class EditproductComponent implements OnInit {
     }
     )
   }
+  get f() { return this.editForm.controls; }
 
   //heya eli tjibli l product mel base bel id o thothom fel inputs
   getProductById(id:number){

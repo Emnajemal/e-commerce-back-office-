@@ -276,7 +276,33 @@
 
                   <div class="form-group col-md-6">
                     <label class="form-label" for="register-phone">Governorate</label>
-                    <input
+                    <select class="form-control" id="num_tel" formControlName="gouvernerat" name="num_tel" placeholder="Governorate" required>
+                      <option>Ariana</option>
+                      <option>Ben Arous</option>
+                      <option>Béja</option>
+                      <option>Bizerte</option>
+                      <option>Gafsa</option>
+                      <option>Jendouba</option>
+                      <option>Kairouan</option>
+                      <option>Kasserine</option>
+                      <option>Kebili</option>
+                      <option>Kef</option>
+                      <option>Mahdia</option>
+                      <option>Manouba</option>
+                      <option>Medenine</option>
+                      <option>Monastir</option>
+                      <option>Nabeul</option>
+                      <option>Sfax</option>
+                      <option>Sidi Bouzid</option>
+                      <option>Siliana</option>
+                      <option>Sousse</option>
+                      <option>Tataouine</option>
+                      <option>Tozeur</option>
+                      <option>Tunis</option>
+                      <option>Zaghouan</option>
+                      <option>Gabès</option>
+                    </select>
+                    <!-- <input
                      formControlName="gouvernerat"
                       required
                       type="text"
@@ -285,7 +311,7 @@
                       class="form-control"
                      
                       placeholder="Governorate"
-                    />
+                    /> -->
                     <!-- <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
                       
                       <div *ngIf="f.phone.errors.required">Governorate is required</div>
@@ -336,7 +362,7 @@
                       <div class="col-md-4 col-12">
                         <div class="form-group">
                           <label for="itemName{{ i }}">Product Name</label>
-                          <select class="custom-select" formControlName="products_id" >
+                          <select class="custom-select" (ngModelChange)="productChaned($event)" formControlName="products_id" >
                             <option ngbDropdownItem href="javascript:void(0)" *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
                         </select>
                         </div>
@@ -357,10 +383,22 @@
                             placeholder="1"
                           />
                         </div>
+                       
+                      </div>
+                      <div class="col-12"></div>
+                      <div class="col-md-4"></div>
+                      <div class="col-md-2">
+                        <div *ngIf="registerForm.controls.quantity_order.touched && registerForm.controls.quantity_order.invalid">
+                          <p *ngIf="registerForm.controls.quantity_order.errors.max">
+                            Max is {{ registerForm.controls.quantity_order.errors.max.max }}
+                          </p>
+                          <p *ngIf="registerForm.controls.quantity_order.errors.min">
+                            Min is {{ registerForm.controls.quantity_order.errors.min.min }}
+                          </p>
+                        </div>
                       </div>
                 
-                
-                      <div class="col-md-2 col-12 mb-50">
+                      <!-- <div class="col-md-2 col-12 mb-50">
                         <div class="form-group">
                           <button class="btn btn-outline-danger text-nowrap px-1" (click)="deleteItem(i)" rippleEffect>
                             <i data-feather="x" class="mr-25"></i>
@@ -373,7 +411,7 @@
                           <i data-feather="plus" class="mr-25"></i>
                           <span>Add New</span>
                         </button>
-                      </div>
+                      </div> -->
                     </div>
                     <hr />
                   </div>
@@ -393,7 +431,9 @@
                     <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
                     <span class="align-middle d-sm-inline-block d-none">Previous</span>
                   </button>
-                  <button class="btn btn-success btn-submit" rippleEffect (click)="onSubmit()">Submit</button>
+                  <button class="btn btn-success btn-submit"
+                  [disabled]="registerForm.invalid"
+                  rippleEffect (click)="onSubmit()">Submit</button>
                  
                 </div> 
              

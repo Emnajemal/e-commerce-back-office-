@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import  Order  from 'app/auth/models/order';
 import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
 import { StoreService } from 'Serv/store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-wizard',
@@ -71,6 +72,12 @@ submitted = false;
   
   public selectedProducts :any = []
 
+  constructor(
+    private OrderService:OrderService,
+    private StoreServices:  StoreService,
+    private _formBuilder: FormBuilder,
+    private router:Router,
+  ) {}
   
 
   /**
@@ -183,7 +190,10 @@ submitted = false;
   }
   
   onSubmit () {
-    console.log(this.registerForm)
+    console.log(this.registerForm);
+    this.registerForm.markAllAsTouched();
+    if(this.registerForm.invalid) return;
+
     this.submitted = true;
 
     this.command.push({
@@ -191,54 +201,26 @@ submitted = false;
       quantity_order:this.registerForm.value.quantity_order ,
     });
     // alert('ok');
+    
+    let value = {...this.registerForm.value};
+
     console.log(this.command);
-    this.registerForm.value.commande=this.command;
-    this.registerForm.value.products_id= '';
-    this.registerForm.value.quantity_order= '';
-    this.registerForm.value.delivery_date=this.registerForm.value.delivery_date.year+'/'+this.registerForm.value.delivery_date.month+'/'+this.registerForm.value.delivery_date.day;
+    value.commande = this.command;
+    value.products_id= '';
+    value.quantity_order= '';
+    value.delivery_date=this.registerForm.value.delivery_date.year+'/'+this.registerForm.value.delivery_date.month+'/'+this.registerForm.value.delivery_date.day;
 console.log(this.registerForm.value);
 
-    // if (this.registerForm.invalid) {
-    //   this.alert=true;
-    //   setTimeout(() => {
-    //     this.alert = false;
-       
-    //   }, 2000) 
-    //   return;
-    // }
-    // let formdata = new FormData();
-    // data: Order;
-    // console.log('hy')
-  //   formdata.append('client_name', this.registerForm.value.client_name);
-   
-  //  formdata.append('client_lastname',this.registerForm.value.client_lastname);
-  //     formdata.append('num_tel',this.registerForm.value.num_tel);
-  //     formdata.append('livreur',this.registerForm.value.livreur);
-  //    formdata.append('colis_ref',this.registerForm.value.colis_ref);
-  //    formdata.append('products_id',this.registerForm.value.products_id);
-  //    formdata.append('quantity_order',this.registerForm.value.quantity_order);
+    
    console.log(this.registerForm.value.livreur)
     
 
     console.log(this.registerForm.value.quantity_order);
   
-      this.OrderService.register(this.registerForm.value).subscribe({
-      next: (data: any) => {
-      
-        console.log(data)
-        // this.alert=true ; 
-      
-        // this.alrt = true;
-        // setTimeout(() => {
-        //   this.alrt = false;
-        
-        // }, 4000) 
- 
-      //  this.StoreServices.getOrders();
-      },
-      
-       
-    } )
+      this.OrderService.register(value).subscribe( () => {
+        console.log(value)
+        this.router.navigate(['/apps/invoice/list'])
+      } )
   }
 
   /**
@@ -258,7 +240,7 @@ console.log(this.registerForm.value);
 
   
 
-  constructor(private OrderService:OrderService, private StoreServices:  StoreService,private _formBuilder: FormBuilder,) {}
+  
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -365,6 +347,24 @@ console.log(this.registerForm.value);
     //   animation: true
     // });
     // console.log(this.bsStepper)
+
+  }
+
+
+  productChaned(product_id) {
+    console.log(product_id);
+    console.log(this.products);
+    console.log(this.products.filter(p => p.id == product_id)[0]);
+    this.registerForm.controls.quantity_order.setValidators([
+      
+      //njib l produit bel id mteeio o njib l quantité mteeio o nhotha heya l max o l + trajaahouli number
+      // +"55"  => 55
+
+      Validators.max(+this.products.filter(p => p.id == product_id)[0]['quantity']),
+      Validators.min(1)
+    ]);
+    this.registerForm.controls.quantity_order.updateValueAndValidity();
+    console.log(this.registerForm);
 
   }
 }

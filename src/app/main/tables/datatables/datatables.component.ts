@@ -55,7 +55,7 @@ export class DatatablesComponent implements OnInit {
   public x :number ;
   public products: Product[];
 //  stock=new Stock;
- public stockDetails: Stock;
+ public stockDetails: any;
  public stocks: Stock[];
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
@@ -107,7 +107,7 @@ export class DatatablesComponent implements OnInit {
    * @param rowIndex
    */
    transformDate(date){
- return new Date(date).toLocaleDateString()
+ return new Date(date).toLocaleString()
   }
   inlineEditingUpdateSalary(event, cell, rowIndex) {
     this.editingSalary[rowIndex + '-' + cell] = false;
@@ -210,9 +210,12 @@ export class DatatablesComponent implements OnInit {
 
 
   modalOpen(modalBasic, stock) {
-    this.stockDetails = stock;
-    console.log('cc')
-    console.log(stock)
+
+    this.stockDetails =  {
+      insertedProduct: this.stocks.filter(x => stock.id == x['products'][0].id),
+      stock
+    };
+    console.log( this.stockDetails);
     this.modalService.open(modalBasic);
   }
  
@@ -223,36 +226,7 @@ export class DatatablesComponent implements OnInit {
   /**
    * On init
    */
-  //  addstockSubmit() {
-  //   // this.submitted = true;
-  //   if (this.addForm.invalid) {
-  //     return;
-  //   }
-  
-  //   data: Stock;
-
-  
-  //   this.formData.append('name', this.addForm.value.name);
-  //   console.log(this.addForm.value.name);
-  //   this.formData.append('reference', this.addForm.value.reference);
-  //   this.formData.append('pricesupplier', this.addForm.value.pricesupplier);
-  //   this.formData.append('sellingprice', this.addForm.value.sellingprice);
-
-  //   this.formData.append('stores_id', this.addForm.value.stores_id);
-  //   this.formData.append('quantity', this.addForm.value.quantity);
-  //   this.formData.append('status', this.addForm.value.status);
-  //   this.formData.append('description', this.addForm.value.description);
-  //   this._ecommerceService.boutique(this.formData).subscribe((data: any) => {
-  //      //data.image = `http://localhost:8000${data.image}`
-  //     // this.products.push(data)
-  //     this.onAddstock.emit()
-  //     console.log(data)
-
-  //   },(error:any)=>{
-  //     console.log(error)
-  //   }
-  //   )
-  // }
+ 
   getproducts(){
     this.StoreServices.getProducts().then((data: any) => {
       this.products=data;
@@ -277,15 +251,22 @@ export class DatatablesComponent implements OnInit {
     // }
     let formdata = new FormData();
     data: Stock;
-    
-   formdata.append('products_id',this.stockForm.value.products_id);
+    console.log(this.stockForm)
+      formdata.append('products_id',this.stockForm.value.products_id);
       formdata.append('insert_quantity',this.stockForm.value.insert_quantity);
+    
       formdata.append('quantity',this.stockForm.value.quantity);
-   
-    console.log(this.stockForm.value.products_id);
+      formdata.append('insert_date', this.stockForm.value.insert_date);
+      // try{
+      // }catch(i){
+      //   console.log(i)
+      // }
+      console.log(this.stockForm.value.insert_date);
       this._datatablesService.addstock(formdata).subscribe((data: any) => {
-       
+        console.log(data);
+       console.log("hey");
        this.alert=true;
+       this.modalService.dismissAll()
     
       // this.onAddstock.emit()
        console.log(data) ;
@@ -308,20 +289,12 @@ export class DatatablesComponent implements OnInit {
      )
 
   }
-  // modal Open Success
-  // modalOpenSuccess(modalSuccess ) {
-  //   if (this.alert==true){
    
-  //   this.modalService.open(modalSuccess, {
-  //     centered: true,
-  //     windowClass: 'modal modal-success'
-      
-  //   });}
-  // }  
 
   clearForm() {
     this.stockForm.get("insert_quantity").setValue('');
     this.stockForm.get("products_id").setValue('');
+    this.stockForm.get("insert_date").setValue('');
     
   }
 
@@ -333,6 +306,7 @@ export class DatatablesComponent implements OnInit {
           
       insert_quantity: ['', Validators.required],
       products_id: ['', Validators.required],
+      insert_date: ['', [Validators.required]],
       quantity: [''] ,
      
     }  );

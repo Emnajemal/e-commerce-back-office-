@@ -22,6 +22,7 @@ export class AuthLoginV2Component implements OnInit {
   public returnUrl: string;
   public error = '';
   public passwordTextType: boolean;
+  public rememberMe:boolean=false;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -91,7 +92,9 @@ export class AuthLoginV2Component implements OnInit {
       .subscribe(
         data => {
           this._router.navigate([this.returnUrl]);
-
+          localStorage.setItem('remember',this.rememberMe+'')
+          localStorage.setItem('userEmail',this.f.email.value)
+          
         },
         error => {
           this.error = error;
@@ -99,6 +102,10 @@ export class AuthLoginV2Component implements OnInit {
         }
       );
   }
+  // rememberChange($event){
+  //   localStorage.setItem('remember',$event)
+  //   console.log($event);
+  // }
 
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
@@ -111,7 +118,15 @@ export class AuthLoginV2Component implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    const remember=localStorage.getItem('remember');
+    if(remember=='true'){
+      this.f.email.setValue(localStorage.getItem('userEmail'))
+      this.rememberMe=true
 
+    }
+    else{
+      this.rememberMe=false
+    }
     // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 

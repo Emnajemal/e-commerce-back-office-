@@ -13,6 +13,7 @@ import { EcommerceService } from '../ecommerce.service';
   styleUrls: ['./addproduct.component.scss']
 })
 export class AddproductComponent implements OnInit {
+  public title: String = 'AddProduct';
   addForm: FormGroup;
   image: string;
   success: boolean;
@@ -30,13 +31,17 @@ export class AddproductComponent implements OnInit {
       name: ['', Validators.required],
       reference: ['', Validators.required],
     //    status: ['', Validators.required],
-      sellingprice: ['', Validators.required],
-      pricesupplier: ['', Validators.required],
+      sellingprice: ['', [Validators.required, Validators.min(0.0000001)]],
+      pricesupplier: ['', [Validators.required, Validators.min(0.0000001)]],
      // gain: ['', Validators.required],
       stores_id: ['', Validators.required],
       description: ['', Validators.required],
       quantity: ['', Validators.required],
       image: [null, Validators.required],
+    }, {
+      validators: [
+        ValidateTwoNumbers('pricesupplier','sellingprice')
+      ]
     })
     this.getStores();
   }
@@ -85,7 +90,7 @@ export class AddproductComponent implements OnInit {
     //  console.log(this.addForm.value.image);
    // }
     this.formData.append('name', this.addForm.value.name);
-    console.log(this.addForm.value.name);
+    console.log("hey");
     //console.log(this.addForm);
     this.formData.append('reference', this.addForm.value.reference);
     this.formData.append('pricesupplier', this.addForm.value.pricesupplier);
@@ -95,8 +100,14 @@ export class AddproductComponent implements OnInit {
     this.formData.append('quantity', this.addForm.value.quantity);
     //this.formData.append('status', this.addForm.value.status);
     this.formData.append('description', this.addForm.value.description);
-    console.log(this.formData);
-    this._ecommerceService.boutique(this.formData).subscribe((data: any) => {
+   // console.log(this.formData);
+
+    let time=+new Date()
+    this._ecommerceService.addProduct(this.formData).subscribe((data: any) => {
+      let dff=+new Date()-time;
+      console.log("temps de reponse de 1000 produits")
+      console.log(dff);
+
        //data.image = `http://localhost:8000${data.image}`
       // this.products.push(data)
       this.onAddProduct.emit()
@@ -118,4 +129,23 @@ export class AddproductComponent implements OnInit {
   }
  
 
+}
+
+
+export function ValidateTwoNumbers(small, large) : any {
+  return (form:FormGroup) => {
+    if(
+      form.controls[small] &&
+      form.controls[large] &&
+      form.controls[small].value >= form.controls[large].value
+    ) {    
+      form.controls[large].setErrors({
+        largeMustBeBigger: true
+      })
+    } else {
+      let errors = {...form.controls[large].errors};
+      delete errors['largeMustBeBigger'];
+      form.controls[large].setErrors( Object.assign(errors).length > 0 ? errors : null);
+    }
+  }
 }

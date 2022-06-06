@@ -20,7 +20,7 @@ export class AuthenticationService {
   public currentUser: Observable<User>;
 
   //private
-  private currentUserSubject: BehaviorSubject<User>;
+  public currentUserSubject: BehaviorSubject<User>;
 
   /**
    *
@@ -76,10 +76,10 @@ export class AuthenticationService {
             // Display welcome toast!
             setTimeout(() => {
               this._toastrService.success(
-                'You have successfully logged in as an ' +
-                user.role +
-                ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.firstName + '!',
+                'You have successfully logged in ' +
+                '' +
+                ' OSAS 👋 . Now you can start to explore. Enjoy! 🎉',
+                '👋 Welcome to OSAS ' ,
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );
             }, 2500);

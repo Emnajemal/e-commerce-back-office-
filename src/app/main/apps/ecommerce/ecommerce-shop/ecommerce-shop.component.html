@@ -40,10 +40,26 @@
                 
                 <button type="button"  (click)=modalOpenWarning(modalWarning) class="btn btn-warning" rippleEffect>
                   <span [data-feather]="'star'" [class]="'mr-25'"></span>Promotion</button>
-                
+                  <!-- <select (change)="filterByStore($event)">
+                    <option [value]="store.id" *ngFor="let store of stores">{{store.name}}</option>
+                  </select> -->
+                  
               </div>
               
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="col-sm-12">
+                <select class="custom-select" (change)="filterByStore($event)" >
+                 <option value="" selected disabled> Choose Store</option>
+                 <!-- <option disabled selected> Store</option> -->
+                 <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
+                 </select>
+             
+               </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -65,6 +81,7 @@
         </ng-template>
         
         <!-- / Modal -->
+      
 
       </div>
       <!-- men hnee tebda mtaa promotion  -->
@@ -80,7 +97,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <app-promotion (onAddPromtion)="getPromotions()" > </app-promotion>
+          <app-promotion (onAddPromtion)="getProducts()" > </app-promotion>
           
         </ng-template>
         <!-- / Modal de la promotion  -->
@@ -157,6 +174,7 @@
           *ngFor="
             let product of products
               | filter: searchText:'name'
+              | filter: selectedStoreId:'stores_id'
               | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
           "
         ></app-ecommerce-item>
