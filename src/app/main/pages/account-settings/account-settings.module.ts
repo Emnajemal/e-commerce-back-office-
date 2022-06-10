@@ -16,10 +16,10 @@ const routes: Routes = [
   {
     path: 'account-settings',
     component: AccountSettingsComponent,
-    canActivate: [AuthGuard],
-    resolve: {
-      accountSetting: AccountSettingsService
-    },
+    // canActivate: [AuthGuard],
+    // resolve: {
+    //   accountSetting: AccountSettingsService
+    // },
     data: { animation: 'account-settings' }
   }
 ];

@@ -12,8 +12,8 @@ export class AccountSettingsService implements Resolve<any> {
   public userdata:any =JSON.parse(localStorage.getItem('currentUser'));
 
   onSettingsChanged: BehaviorSubject<any>;
-  private ChangeUrl = 'http://127.0.0.1:8000/api/auth/change_password/'+ this.userdata.id;
-  private uploadUrl='http://127.0.0.1:8000/api/auth/update/user/'+ this.userdata.id;
+  private ChangeUrl = 'http://127.0.0.1:8000/api/auth/change_password/'+ this.userdata?.id;
+  private uploadUrl='http://127.0.0.1:8000/api/auth/update/user/'+ this.userdata?.id;
   
 
   /**

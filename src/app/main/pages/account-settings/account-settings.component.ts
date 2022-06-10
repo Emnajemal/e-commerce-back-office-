@@ -162,6 +162,9 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
      get f() {
     return this.uploadForm.controls;
     }
+     get fReset() {
+    return this.resetForm.controls;
+    }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -176,11 +179,11 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       this.avatarImage = this.isEncoded(this.user.profile_photo) ? this.user.profile_photo : `http://localhost:8000${this.user.profile_photo}`
     }
     this.uploadForm = this.fb.group({
-      name: [this.user.name, Validators.required],
+      name: [this.user?.name, Validators.required],
     //  name: [this.user.name],
-      email: [this.user.email, [Validators.required,Validators.email]],
-      Adresse: [this.user.Adresse, Validators.required],
-      phone: [this.user.phone, Validators.required],
+      email: [this.user?.email, [Validators.required,Validators.email]],
+      Adresse: [this.user?.Adresse, Validators.required],
+      phone: [this.user?.phone, Validators.required],
       profile_photo: [null]
     })
 
@@ -188,7 +191,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       old_password: ['', Validators.required],
       password: ['', Validators.required],
       password_confirmer: ['', Validators.required],
-      id: [this.user.id]
+      id: [this.user?.id]
     }, {
       validator: MustMatch('password', 'password_confirmer')
     })

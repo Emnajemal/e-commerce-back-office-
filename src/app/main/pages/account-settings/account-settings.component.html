@@ -152,7 +152,7 @@
                               <input formControlName="old_password" class="form-control"
                                 [type]="passwordTextTypeOld ? 'text' : 'password'" id="account-old-password"
                                 placeholder="Old Password"
-                                [ngClass]="{ 'is-invalid': submitted && f.old_password?.errors }" />
+                                [ngClass]="{ 'is-invalid': submitted && fReset.old_password?.errors }" />
                               <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
                                       'icon-eye-off':passwordTextTypeOld,
@@ -163,9 +163,9 @@
                             <div *ngIf="submitted && !isCorrectPassword" class="text-danger">
                               <div>Incorrect old password </div>
                             </div>
-                            <div *ngIf="submitted && f.old_password?.errors" class="invalid-feedback">
-                              <div *ngIf="f.old_password?.errors.required">Password is required</div>
-                              <div *ngIf="f.old_password?.errors.minlength">Password must be at least 6 characters</div>
+                            <div *ngIf="submitted && fReset.old_password?.errors" class="invalid-feedback">
+                              <div *ngIf="fReset.old_password?.errors.required">Password is required</div>
+                              <div *ngIf="fReset.old_password?.errors.minlength">Password must be at least 6 characters</div>
 
                             </div>
                             
@@ -178,7 +178,7 @@
                             <label for="account-new-password">New Password</label>
                             <div class="input-group form-password-toggle input-group-merge">
                               <input formControlName="password" [type]="passwordTextTypeNew ? 'text' : 'password'"
-                                id="account-new-password" [ngClass]="{ 'is-invalid': submitted && f.password?.errors }"
+                                id="account-new-password" [ngClass]="{ 'is-invalid': submitted && fReset.password?.errors }"
                                 class="form-control" placeholder="New Password" />
                               <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
@@ -186,16 +186,16 @@
                                       'icon-eye': !passwordTextTypeNew
                                     }" (click)="togglePasswordTextTypeNew()"></i></span>
                               </div>
-                              <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
-                                <div *ngIf="f.password?.errors.required">Password is required</div>
-                                <div *ngIf="f.password?.errors.minlength">Password must be at least 6 characters</div>
+                              <div *ngIf="submitted && fReset.password?.errors" class="invalid-feedback">
+                                <div *ngIf="fReset.password?.errors.required">Password is required</div>
+                                <div *ngIf="fReset.password?.errors.minlength">Password must be at least 6 characters</div>
   
                               </div>
 
                             </div>
-                            <div *ngIf="submitted && f.password?.errors" class="invalid-feedback">
-                              <div *ngIf="f.password?.errors.required">Password is required</div>
-                              <div *ngIf="f.password?.errors.minlength">Password must be at least 6 characters</div>
+                            <div *ngIf="submitted && fReset.password?.errors" class="invalid-feedback">
+                              <div *ngIf="fReset.password?.errors.required">Password is required</div>
+                              <div *ngIf="fReset.password?.errors.minlength">Password must be at least 6 characters</div>
 
                             </div>
                           </div>
@@ -208,7 +208,7 @@
                               <input formControlName="password_confirmer"
                                 [type]="passwordTextTypeRetype ? 'text' : 'password'" class="form-control"
                                 id="account-retype-new-password" placeholder="New Password" name="contact-icon"
-                                [ngClass]="{ 'is-invalid': submitted && f.password_confirmer?.errors }" tabindex="2" />
+                                [ngClass]="{ 'is-invalid': submitted && fReset.password_confirmer?.errors }" tabindex="2" />
                               <div class="input-group-append">
                                 <span class="input-group-text cursor-pointer"><i class="feather font-small-4" [ngClass]="{
                                       'icon-eye-off': passwordTextTypeRetype,
@@ -216,9 +216,9 @@
                                     }" (click)="togglePasswordTextTypeRetype()"></i></span>
                               </div>
 
-                              <div *ngIf="submitted && f.password_confirmer?.errors" class="invalid-feedback">
-                                <div *ngIf="f.password_confirmer?.errors.required">Confirm Password is required</div>
-                                <div *ngIf="f.password_confirmer?.errors.mustMatch">Passwords must match</div>
+                              <div *ngIf="submitted && fReset.password_confirmer?.errors" class="invalid-feedback">
+                                <div *ngIf="fReset.password_confirmer?.errors.required">Confirm Password is required</div>
+                                <div *ngIf="fReset.password_confirmer?.errors.mustMatch">Passwords must match</div>
                               </div>
 
 
