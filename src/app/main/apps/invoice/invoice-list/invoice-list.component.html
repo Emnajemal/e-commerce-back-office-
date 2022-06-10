@@ -320,15 +320,15 @@
           <ngx-datatable-column name="Total " prop="total" [width]="30">
             <ng-template let-total="value" ngx-datatable-cell-template>
               <div>
-                TND
-                {{total}}
+               
+                {{total}} TND
               </div>
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name=" Delivery man" prop="livreur" [width]="75"></ngx-datatable-column>
           <ngx-datatable-column name="Package reference" prop="colis_ref" [width]="100"></ngx-datatable-column>
 
-          <ngx-datatable-column class="badge badge-pill badge-light-primary mr-1" name="Package status" prop="colis_ref" [width]="100"></ngx-datatable-column>
+          <ngx-datatable-column class="badge badge-pill badge-light-primary mr-1" name="Package status" prop="status_paiment" [width]="100"></ngx-datatable-column>
          
           <!-- <ngx-datatable-column name="delivery Date" prop="delivery_date" [width]="100"> </ngx-datatable-column> -->
           <!-- <ngx-datatable-column name="Balance" prop="balance" [width]="40">

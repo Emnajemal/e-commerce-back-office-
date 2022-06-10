@@ -76,7 +76,7 @@
                      
                       
                       required
-                      type="text"
+                      type="number"
                       name="colis_ref"
                       id="colis_ref"
                       class="form-control"
@@ -230,7 +230,7 @@
                     <input
                      
                       required
-                      type="text"
+                      type="number"
                       id="num_tel"
                       name="num_tel"
                       class="form-control"
@@ -252,7 +252,7 @@
                     <input
                      
                       required
-                      type="text"
+                      type="number"
                       id="num_tel"
                       name="num_tel"
                       formControlName="num_tel2"
@@ -357,47 +357,58 @@
 
 
                 <!-- @heightIn -->
-                  <div *ngFor="let item of items; let i = index" >
+                  <div *ngFor="let item of registerForm.controls.items['controls']; let i = index;let last=last;let First=First" >
                     <div class="row d-flex align-items-end">
                       <div class="col-md-4 col-12">
                         <div class="form-group">
                           <label for="itemName{{ i }}">Product Name</label>
-                          <select class="custom-select" (ngModelChange)="productChaned($event)" formControlName="products_id" >
+                          <select class="custom-select" (ngModelChange)="productChanedItem($event,item.controls.quantity_order)" [formControl]="item.controls.products_id" >
                             <option ngbDropdownItem href="javascript:void(0)" *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+                          
                         </select>
+                        
                         </div>
                       </div>
-                
-                     
-                
+   
                       <div class="col-md-2 col-12">
                         <div class="form-group">
                           <label for="itemQuantity{{ i }}">Quantity</label>
                           <input
-                          formControlName="quantity_order"
+                          [formControl]="item.controls.quantity_order"
                             type="number"
                             class="form-control"
                             id="itemQuantity{{ i }}"
                             name="itemQuantity{{ i }}"
-                            [(ngModel)]="item.itemQuantity"
                             placeholder="1"
                           />
-                        </div>
-                       
-                      </div>
-                      <div class="col-12"></div>
-                      <div class="col-md-4"></div>
-                      <div class="col-md-2">
-                        <div *ngIf="registerForm.controls.quantity_order.touched && registerForm.controls.quantity_order.invalid">
-                          <p *ngIf="registerForm.controls.quantity_order.errors.max">
-                            Max is {{ registerForm.controls.quantity_order.errors.max.max }}
-                          </p>
-                          <p *ngIf="registerForm.controls.quantity_order.errors.min">
-                            Min is {{ registerForm.controls.quantity_order.errors.min.min }}
-                          </p>
+                          
                         </div>
                       </div>
-                
+                      <div class="col-md-4 col-12">
+                       <button class="btn btn-danger" *ngIf= "registerForm.controls.items['controls'].length>1" type="button" style="margin: 5px;" (click)="removeItem(i)"> delete</button>
+                        <button class="btn btn-success btn-submit" *ngIf="last" type="button" style="margin: 5px;" (click)="addItem()"> add</button>
+                      </div>
+                     <div class="col-12">
+                        </div>
+                        <div class="col-md-4 col-12">
+                          <div *ngIf="item.controls.products_id.touched&&item.controls.products_id.invalid">
+                            product is required
+                          </div>
+                        </div>
+                        <div class="col-md-2 col-12">
+                          <div *ngIf="item.controls.quantity_order.touched&&item.controls.quantity_order.invalid"> 
+                            <div *ngIf="item.controls.quantity_order.errors.required">
+                             quantity order is required
+                            </div>
+                            <p *ngIf="item.controls.quantity_order.errors.max">
+                              Max is {{ item.controls.quantity_order.errors.max.max }}
+                            </p>
+                            <p *ngIf="item.controls.quantity_order.errors.min">
+                              Min is {{ item.controls.quantity_order.errors.min.min }}
+                            </p>
+                          </div>
+                        </div>
+              
                       <!-- <div class="col-md-2 col-12 mb-50">
                         <div class="form-group">
                           <button class="btn btn-outline-danger text-nowrap px-1" (click)="deleteItem(i)" rippleEffect>

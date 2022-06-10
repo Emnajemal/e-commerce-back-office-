@@ -13,8 +13,7 @@ describe('Component: AddProduct', () => {
                 RouterTestingModule,
                 HttpClientTestingModule,
                 ReactiveFormsModule,
-                FormsModule,
-                
+                FormsModule,   
             ],
             providers:[knowledgeBaseService],
             declarations: [
@@ -29,5 +28,7 @@ describe('Component: AddProduct', () => {
         const app = fixture.debugElement.componentInstance;
         expect(app.title).toEqual('AddProduct');
     });
-
 });
+
+
+

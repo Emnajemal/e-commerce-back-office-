@@ -88,6 +88,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
       }
     })
   }
+  get f() { return this.addForm.controls; }
 
   editShopSubmit() {
     this.submitted = true;
@@ -241,7 +242,7 @@ export class KnowledgeBaseComponent implements OnInit, OnDestroy {
 
     this.addForm = this.fb.group({
       name: ['', Validators.required],
-      store_image: [null],
+      store_image: [null,Validators.required],
     })
     this.editForm = this.fb.group({
       name: ['', Validators.required],

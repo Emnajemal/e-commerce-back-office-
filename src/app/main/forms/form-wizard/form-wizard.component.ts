@@ -4,11 +4,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Product from 'app/auth/models/store'
 import Stepper from 'bs-stepper';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import  Order  from 'app/auth/models/order';
 import { InvoiceListService } from 'app/main/apps/invoice/invoice-list/invoice-list.service';
 import { StoreService } from 'Serv/store.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-wizard',
@@ -77,6 +79,7 @@ submitted = false;
     private StoreServices:  StoreService,
     private _formBuilder: FormBuilder,
     private router:Router,
+    private _toastrService: ToastrService
   ) {}
   
 
@@ -164,23 +167,23 @@ submitted = false;
   /**
    * Add Item
    */
-  addItem() {
-    this.items.push({
+//   addItem() {
+//     this.items.push({
      
-      itemName:'',
-      itemQuantity:'' ,
+//       itemName:'',
+//       itemQuantity:'' ,
      
-    });
-    this.command.push({
+//     });
+//     this.command.push({
      
-      products_id:this.registerForm.value.products_id,
-      quantity_order:this.registerForm.value.quantity_order ,
+//       products_id:this.registerForm.value.products_id,
+//       quantity_order:this.registerForm.value.quantity_order ,
      
-    });
-// console.log(this.registerForm.value);
-//     console.log(this.item);
-//     alert(this.item);
-  }
+//     });
+// // console.log(this.registerForm.value);
+// //     console.log(this.item);
+// //     alert(this.item);
+//   }
 
   getproducts(){
     this.StoreServices.getProducts().then((data: any) => {
@@ -206,11 +209,10 @@ submitted = false;
 
     console.log(this.command);
     value.commande = this.command;
-    value.products_id= '';
-    value.quantity_order= '';
+    // value.products_id= '';
+    // value.quantity_order= '';
     value.delivery_date=this.registerForm.value.delivery_date.year+'/'+this.registerForm.value.delivery_date.month+'/'+this.registerForm.value.delivery_date.day;
-console.log(this.registerForm.value);
-
+      console.log(this.registerForm.value);
     
    console.log(this.registerForm.value.livreur)
     
@@ -221,6 +223,15 @@ console.log(this.registerForm.value);
         console.log(value)
         this.router.navigate(['/apps/invoice/list'])
       } )
+      setTimeout(() => {
+        this._toastrService.success(
+          'your order has been placed successfully ' +
+          '' +
+          ' 👋 . Now you can check your stock.! ',
+          '' ,
+          { toastClass: 'toast ngx-toastr', closeButton: true }
+        );
+      }, 2500);
   }
 
   /**
@@ -248,19 +259,6 @@ console.log(this.registerForm.value);
   /**
    * On Init
    */
-//    ngOnInit(): void {
-   
-//     this.registerForm = this._formBuilder.group({
-      
-//   insert_quantity: ['', Validators.required],
-//   products_id: ['', Validators.required],
-//   quantity: [''] ,
- 
-// }  );
-// // this.getproducts();
-// // this.getstocks();
-
-// }
   ngOnInit() {
 
     this.registerForm = this._formBuilder.group({
@@ -271,38 +269,24 @@ console.log(this.registerForm.value);
       num_tel2:  ['', []],
       livreur: ['', []],
       colis_ref: ['', []],
-      products_id: ['',[]],
-      quantity_order: ['',[]],
+      // products_id: ['',[]],
+      // quantity_order: ['',[]],
       delivery_date: ['', []],   
       status_livraison: ['', []],  
       status_paiment: ['', []],  
       gouvernerat: ['', []],  
       commande:[, []],
+      items:this._formBuilder.array([],Validators.required )
     });
+   this.addItem(); 
+   
+
   this.getproducts();
   
-    // this.horizontalWizardStepper = new Stepper(document.querySelector('#stepper1'), {});
-
-    // this.verticalWizardStepper = new Stepper(document.querySelector('#stepper2'), {
-    //   linear: false,
-    //   animation: true
-    // });
-
-    // this.modernWizardStepper = new Stepper(document.querySelector('#stepper3'), {
-    //   linear: false,
-    //   animation: true
-    // });
-
-    // this.modernVerticalWizardStepper = new Stepper(document.querySelector('#stepper4'), {
-    //   linear: false,
-    //   animation: true
-    // });
-
-    // this.bsStepper = document.querySelectorAll('.bs-stepper');
 
     // content header
     this.contentHeader = {
-      headerTitle: 'Form Wizard',
+      headerTitle: 'Order',
       actionButton: true,
       breadcrumb: {
         type: '',
@@ -318,7 +302,7 @@ console.log(this.registerForm.value);
             link: '/'
           },
           {
-            name: 'Form Wizard',
+            name: 'Order',
             isLink: false
           }
         ]
@@ -331,23 +315,6 @@ console.log(this.registerForm.value);
   }
 
   ngAfterViewInit(){
-   
-    // this.verticalWizardStepper = new Stepper(document.querySelector('div.stepper2'), {
-    //   linear: false,
-    //   animation: true
-    // });
-    // console.log(this.bsStepper)
-    // this.modernWizardStepper = new Stepper(document.querySelector('#stepper3'), {
-    //   linear: false,
-    //   animation: true
-    // });
-    // console.log(this.bsStepper)
-    // this.modernVerticalWizardStepper = new Stepper(document.querySelector('#stepper4'), {
-    //   linear: false,
-    //   animation: true
-    // });
-    // console.log(this.bsStepper)
-
   }
 
 
@@ -367,4 +334,25 @@ console.log(this.registerForm.value);
     console.log(this.registerForm);
 
   }
+  productChanedItem(product_id,quantity_order){
+    quantity_order.setValidators([
+      Validators.max(+this.products.filter(p => p.id == product_id)[0]['quantity']),
+      Validators.min(1)
+    ])
+   quantity_order.updateValueAndValidity();
+   console.log(product_id)
+   console.log(quantity_order)
+  }
+  removeItem(i){
+    (this.registerForm.controls.items as FormArray).removeAt(i)
+  }
+
+  addItem(){
+    (this.registerForm.controls.items as FormArray).push(
+      this._formBuilder.group({
+        products_id: [null, [Validators.required]],
+        quantity_order: [null, [Validators.required]],
+      })
+    )
+    }
 }

@@ -76,9 +76,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   get f1() {
     return this.uploadForm.controls;
   }
-  get f() {
-    return this.resetForm.controls;
-  }
+ 
 
   //Edit User
   edituserSubmit() {
@@ -115,16 +113,18 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
 
   //Change password 
   onSubmit() {
+    //console.log("hello")
     this.submitted = true;
-   
+   console.log(this.resetForm)
     if (this.resetForm.invalid) {
       return;
     }
-    else {
-      console.log(this.resetForm.value)
+   
+      console.log("hhhhhhhhhhhhhhhh")
       this._accountSettingsService
         .change(this.resetForm.value)
         .subscribe((result:any)=>{
+          console.log(result)
           this.tchek = false
           
         },(error:any)=>{
@@ -134,7 +134,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
           }
         })
       // this.tchek = false
-    }
+   
   }
 
 
@@ -159,7 +159,9 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       reader.readAsDataURL(event.target.files[0]);
     }
   }
-
+     get f() {
+    return this.uploadForm.controls;
+    }
   // Lifecycle Hooks
   // -----------------------------------------------------------------------------------------------------
 
@@ -174,10 +176,11 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       this.avatarImage = this.isEncoded(this.user.profile_photo) ? this.user.profile_photo : `http://localhost:8000${this.user.profile_photo}`
     }
     this.uploadForm = this.fb.group({
-      name: [this.user.name],
-      email: [this.user.email],
-      Adresse: [this.user.Adresse],
-      phone: [this.user.phone],
+      name: [this.user.name, Validators.required],
+    //  name: [this.user.name],
+      email: [this.user.email, [Validators.required,Validators.email]],
+      Adresse: [this.user.Adresse, Validators.required],
+      phone: [this.user.phone, Validators.required],
       profile_photo: [null]
     })
 

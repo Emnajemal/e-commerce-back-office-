@@ -27,7 +27,10 @@
           <div class="row mb-2">
             <label for="first-name-column " class="col-sm-3 col-form-label">shop name :</label>
             <div class="col-sm-7">
-              <input type="text" formControlName="name" class="form-control" placeholder="Shop name" />
+              <input type="text" formControlName="name" class="form-control" placeholder="Shop name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">name is required</div>
+            </div>
             </div>
           </div>
           <div class="row mb-2">
@@ -35,8 +38,12 @@
             <div class="col-sm-7">
               <div class="custom-file">
                 <input type="file" #file hidden class="custom-file-input" id="customFile"
-                  (change)="uploadImage($event)" />
+                  (change)="uploadImage($event)" [ngClass]="{ 'is-invalid': submitted && f.store_image.errors }"/>
                 <label class="custom-file-label" for="customFile">Choose picture</label>
+               
+              </div>
+              <div *ngIf="submitted && f.store_image.errors" class="invalid-feedback">
+                <div *ngIf="f.store_image.errors.required">image store is required</div>
               </div>
             </div>
 

@@ -35,7 +35,7 @@
           <div *ngIf="f.price.errors.required">Supplier price is required</div>
         </div>
         <div *ngIf="submitted && f.price.errors?.min" class="invalid-feedback">
-          <div>Selling price bigger then total supplier price</div>
+          <div>Selling price bigger then total of products</div>
         </div>
       </div>
     </div>

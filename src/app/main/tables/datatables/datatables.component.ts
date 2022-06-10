@@ -210,9 +210,13 @@ export class DatatablesComponent implements OnInit {
 
 
   modalOpen(modalBasic, stock) {
-
+console.log(this.stocks)
+console.log(stock)
     this.stockDetails =  {
-      insertedProduct: this.stocks.filter(x => stock.id == x['products'][0].id),
+      insertedProduct: this.stocks.filter(x => {
+        console.log(x)
+        return stock.id == (x['products'][0]&&x['products'][0].id);
+      }),
       stock
     };
     console.log( this.stockDetails);
